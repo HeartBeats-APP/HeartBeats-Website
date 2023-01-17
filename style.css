@@ -6,6 +6,28 @@ body {
         font-family: Arial, sans-serif;
 }
 
+#boite {
+       /* display:inline;
+        margin-left: 150px;*/   
+    border-top-left-radius: 100px;
+    border-top-right-radius: 500px;
+    border-bottom-left-radius: 500px;
+    border-bottom-right-radius: 100px;
+}
+
+#button {
+        display: flex;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    padding: 5px;
+    margin: 10px;
+}
+#label {
+    display:flex;
+}
+
 header {
         background-color: #333;
         color: white;

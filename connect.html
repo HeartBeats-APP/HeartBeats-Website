@@ -4,6 +4,7 @@
                 <meta charset="utf-8">
                 <title>MON SITE</title>
                 <link rel="stylesheet" href="style.css">
+
         </head>
 
         <body>
@@ -19,8 +20,16 @@
                                 </nav>
                 </header>
                 <main>
-                        <h2>Bienvenue sur mon site</h2>
-                        <img src="gvim.png" alt="Image d'illustration">
+                        
+                        <form action = "admin.php" method= "post">
+                         <label id="label"for="username">Numero d'adherent :</label>
+                         <input id="boite" type="text" id="username" name="username">
+                         <label id="label"for="username">la taille de ta bite :</label>
+                         <input id="boite" type="text" id="username" name="username">
+                         <label id="label" for="password">Mot de passe :</label>
+                        <input id="boite" type="password" id="password" name="password">
+                        <input id="button" type="submit" value="Se connecter">
+                      </form>
                 </main>
 
         </body>
