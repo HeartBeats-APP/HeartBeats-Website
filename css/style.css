@@ -19,27 +19,30 @@ body {
   }
   
   .header-text {
-    position: absolute;
-    width: 80vw;
-    height: 22.2vh;
     z-index: 2;
-    left: 10vw;
-    top: 16.7vh;
-    text-align: ce;
+    position: absolute;
+    width: 100vw;
+    height: 75vh;
+    left: 0vw;
+    top: 0vh;
     display: flex;
-    align-items: ce;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  .header-text h2 {
+    font-weight: 400;
+    font-size: 2.5vw;
+    line-height: 10vh;
   }
 
   .header-text h1 {
     font-weight: 700;
     font-size: 7.5vw;
     line-height: 10.8vh;
-  }
-
-  .header-text h2 {
-    font-weight: 400;
-    font-size: 2.5vw;
-    line-height: 3.9vh;
   }
   
   .email-icon {
@@ -69,10 +72,10 @@ body {
     z-index: 0;
     left: -60vw;
     top: 46.5vh;
-    background: linear-gradient(97.27deg, #F7C23B 0%, #E93D57 51.07%, #A423BA 100%);
+    background: linear-gradient(100deg, #F7C23B 0%, #E93D57 51.07%, #A423BA 100%);
     opacity: 0.5;
     filter: blur(100px);
-    transform: rotate(-17deg);
+    transform: rotate(-15deg);
   }
 
   .spaceship {
