@@ -20,16 +20,11 @@ body {
   
   .header-text {
     z-index: 2;
-    position: absolute;
+    position: relative;
     width: 100vw;
-    height: 75vh;
+    height: 10vh;
     left: 0vw;
-    top: 0vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+    top: 10vh;
 
   }
 
@@ -42,7 +37,7 @@ body {
   .header-text h1 {
     font-weight: 700;
     font-size: 7.5vw;
-    line-height: 10.8vh;
+    line-height: 25vh;
   }
   
   .email-icon {
