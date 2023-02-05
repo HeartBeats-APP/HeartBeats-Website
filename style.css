@@ -9,7 +9,7 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
   }
-  
+
   .logo {
     position: absolute;
     z-index: 10;
@@ -17,7 +17,69 @@ body {
     height: 20vw;
     margin-left: 39.5vw;
   }
-  
+
+  .success {
+
+    position: absolute;
+    width: 50vw;
+    height: 30vw;
+    margin-left: 23vw;
+    margin-top: 9vw;
+
+  }
+
+  .staytuned {
+
+    position: absolute;
+    width: 50vw;
+    height: 20vw;
+    margin-left: 17vw;
+    margin-top: 9vw;
+
+  }
+
+  .oops {
+
+    position: absolute;
+    font-weight: 400;
+    font-size: 2.5vw;
+    left: 15vw;
+    top: 31.5vw;
+    line-height: 1.5;
+    height: auto;
+    width: 70vw;
+    z-index: 2;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+
+  }
+
+
+  .samewe {
+
+    position: absolute;
+    z-index: 10;
+    width: 20vw;
+    height: 20vw;
+    margin-left: 32.5vw;
+    margin-top: 17vw;
+  }
+
+  .header-text-WTFBRO {
+
+      position: absolute;
+      font-weight: 400;
+      font-size: 2.5vw;
+      left: 20vw;
+      margin-top: 15vw;
+      height: 22.2vh;
+      z-index: 2;
+      display: flex;
+
+    }
+
   .header-text {
     position: absolute;
     width: 80vw;
@@ -42,7 +104,7 @@ body {
       margin-left: 50px;
       line-height: 35vh;
     }
-  
+
   .email-input {
       position: absolute;
       width: 44.3vw;
@@ -66,7 +128,7 @@ body {
       left: -10%;
       right: 0%;
       top: 0vh;
-      
+
       background: #FFFFFF;
       border-radius: 4.7vw;
     }
@@ -146,6 +208,28 @@ body {
     top: 0.03%;
     bottom: 0.02%;
     z-index: 1;
-    
+
     transform: rotate(10deg);
   }
+
+  .subscribe-button {
+  background: linear-gradient(97.27deg, #F7C23B 0%, #E93D57 51.07%, #A423BA 100%);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-family: 'Marianne', sans-serif;
+  height: 30%;
+  width: 20%;
+  margin-left: 31.5vw;
+  margin-top: 36vw;
+  transition: opacity 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+}
+
+.subscribe-button:active {
+  opacity: 0.5;
+}
+
+.subscribe-button:hover {
+  transform: scale(1.1);
+}
