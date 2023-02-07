@@ -3,6 +3,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 body {
   background: #1C1A1A;
 }
@@ -10,47 +11,83 @@ body {
 .buttons {
   margin: 10%;
   text-align: center;
+
 }
 
-/* Main Button/ gradient button */
-.main-button {
+/* Buttons set up */
+.main-button, .second-button, .button-animated-gradient, .button-animated-gradient2, input + .slider, button {
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   font-family: "Marianne";
   font-style: normal;
+  font-weight: 450;
   font-size: 1.25em;
-  font-weight: 500;
   text-align: center;
-  background: linear-gradient(100deg, #E93D57 10%, #A423BA 100%);
+  padding: 0.5em 1.25em;
   border-radius: 100px;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  transition: all 0.4s ease-in-out;
+  color: #ffffff;
 }
 
-/* gradient 1 */
-.main-button.orange-purple-gradient {
-  background: linear-gradient(100deg, #E93D57 10%, #A423BA 100%);
-}
-
-/* gradient 2 */
-.main-button.yellow-orange-purple-gradient {
-  background: linear-gradient(100deg, #F7C23B 0%, #E93D57 50%, #A423BA 100%);
-}
-
-.main-button:hover, .button-animated-gradient:hover {
-  transform: scale(1.1);
+/* Buttons animations on hover */
+.main-button:hover, .second-button:hover, .button-animated-gradient:hover, .button-animated-gradient2:hover  {
+  transition: all 0.5s cubic-bezier(0.075, 0.80, 0.165, 1);
+  transform: scale(1.125); 
   cursor: pointer;
 }
 
-.main-button.orange-purple-gradient:hover {
-  box-shadow: 0 0 40px -10px #E93D57, 0 0 40px -15px #A423BA;
+
+/* Main Button ------------------------------------------------------------------------------------------------------------------ */
+.main-button {
+  color: white;
+  border: none;
 }
 
-.main-button.yellow-orange-purple-gradient:hover {
-  box-shadow: 0 0 40px -10px #F7C23B, 0 0 40px -15px #E93D57, 0 0 40px -15px #A423BA;
+  /* gradient 1 */
+.main-button.orange-purple{
+  background: linear-gradient(100deg, #E93D57 10%, #A423BA 100%);
 }
 
-/* Animated gradient button */
+  /* gradient 2 */
+.main-button.yellow-orange-purple{
+  background: linear-gradient(100deg, #F7C23B 0%, #E93D57 50%, #A423BA 100%);
+}
+
+.main-button.orange-purple:hover{
+  box-shadow: 0 0 40px -5px #E93D57, 0 0 40px -5px #A423BA;
+}
+
+.main-button.yellow-orange-purple:hover{
+  box-shadow: 0 0 40px -5px #F7C23B, 0 0 40px -5px #E93D57, 0 0 40px -5px #A423BA;
+}
+
+
+/* Second Button ---------------------------------------------------------------------------------------------------------------- */
+.second-button {
+  border: 0.2em;
+  border-style: solid;
+}
+
+  /* gradient 1 */
+.second-button.orange {
+  border-color: #E93D57;
+  color: #E93D57;
+}
+
+  /* gradient 2 */
+.second-button.purple {
+  border-color: #A423BA;
+  color: #A423BA;
+}
+
+.second-button.orange:hover {
+  box-shadow: 0 0 40px -5px #E93D57;
+}
+
+.second-button.purple:hover {
+  box-shadow: 0 0 40px -5px #A423BA;
+}
+
+
+/* Animated gradient button ----------------------------------------------------------------------------------------------------- */
 .button-animated-gradient-body {
   display: flex;
   justify-content: center;
@@ -58,41 +95,18 @@ body {
 }
 
 .button-animated-gradient, .button-animated-gradient2 {
-  position: relative;
-  font-family: "Marianne";
-  font-style: normal;
-  font-size: 1.25em;
-  font-weight: 500;
-  text-align: center;
-  padding: 15px 30px;
-  color: rgba(255, 255, 255, 0.9);
-  border-radius: 100px;
   background: linear-gradient(-45deg, #F7C23B, #E93D57, #3361DA, #92E9FE);
-  background-size: 600%;
-  -webkit-animation: anime 10s ease-in-out infinite;
-          animation: anime 10s ease-in-out infinite;
+  background-size: 1000%;
+  -webkit-animation: anime 12s ease-in-out infinite;
+          animation: anime 12s ease-in-out infinite;
   border: none;
-  margin: 0;
-  transition: all 0.4s ease-in-out;
 }
 
 .button-animated-gradient2 {
   position: absolute;
   z-index: -1;
-  filter: blur(30px);
+  filter: blur(35px);
   opacity: 1;
-}
-
-@-webkit-keyframes anime {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 @keyframes anime {
@@ -107,8 +121,8 @@ body {
   }
 }
 
-/* Sending button */
 
+/* Sending button --------------------------------------------------------------------------------------------------------------- */
 button {
   position: relative;
   display: inline-block;
@@ -122,10 +136,12 @@ button {
   font-size: inherit;
   font-family: Marianne;
 }
+
 button.learn-more {
   width: 10rem;
   height: auto;
 }
+
 button.learn-more .circle {
   transition: all 0.6s cubic-bezier(0.60, 0, 0.080, 1);
   position: relative;
@@ -136,6 +152,7 @@ button.learn-more .circle {
   background: linear-gradient(100deg, #E93D57 10%, #A423BA 100%);
   border-radius: 1.625rem;
 }
+
 button.learn-more .circle .icon {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
@@ -144,6 +161,7 @@ button.learn-more .circle .icon {
   margin: auto;
   background: #fff;
 }
+
 button.learn-more .circle .icon.arrow {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   left: 0.625rem;
@@ -151,6 +169,7 @@ button.learn-more .circle .icon.arrow {
   height: 0.125rem;
   background: none;
 }
+
 button.learn-more .circle .icon.arrow::before {
   position: absolute;
   content: '';
@@ -204,7 +223,7 @@ button:hover .button-text {
 }
 
 
-/* Switch */
+/* Switch ----------------------------------------------------------------------------------------------------------------------- */
 .switch {
   position: relative;
   display: inline-block;
@@ -267,7 +286,7 @@ input:checked + .slider:before {
 }
 
 
-/* three state toggle switch */
+/* Three state toggle switch ----------------------------------------------------------------------------------------------------*/
 input[type="radio"] {
   display: none;
 }
