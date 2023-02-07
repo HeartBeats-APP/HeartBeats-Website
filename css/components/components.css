@@ -2,6 +2,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  z-index: 99;
 }
 
 body {
@@ -11,7 +12,6 @@ body {
 .buttons {
   margin: 10%;
   text-align: center;
-
 }
 
 /* Buttons set up */
@@ -124,7 +124,7 @@ body {
 
 /* Sending button --------------------------------------------------------------------------------------------------------------- */
 button {
-  position: relative;
+  position: absolute;
   display: inline-block;
   cursor: pointer;
   outline: none;
@@ -144,7 +144,7 @@ button.learn-more {
 
 button.learn-more .circle {
   transition: all 0.6s cubic-bezier(0.60, 0, 0.080, 1);
-  position: relative;
+  position: absolute;
   display: block;
   margin: 0;
   width: 3rem;
