@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  transition: all 1.5s cubic-bezier(0.075, 0.80, 0.165, 1);
+
+  --main-gradient: linear-gradient(100deg, #E93D57 10%, #A423BA 100%);
+  --second-gradient: linear-gradient(100deg, #F7C23B 0%, #E93D57 50%, #A423BA 100%);
+  --black: #1C1A1A;
+}
+
+@font-face {
+  font-family: 'Marianne';
+  src: url(assets/fonts/Marianne-Regular.woff2) format('woff2')
+}
+
+
+/* Style the body */
+body {
+    font-family: Marianne;
+    margin: 0;
+    background: var(--black);
+}
+
+
+/* Header section --------------------------------------------------------------------------------------------------------------- */
+.header {
+    display: flex;
+    background-color: var(--black);
+    padding: 0.5em 5% 0.5em 5%;
+
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.header-left{
+    display: flex;
+
+}
+
+
+.header-right{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    height: fit-content;
+}
+
+.header a {
+    font-style: medium;
+    color: white;
+    padding: 1.25vh 2vw;
+    text-decoration: none;
+    text-align: center;  
+    font-size: .9em;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+}
+
+.header a:hover {
+  background: white;
+  border-radius: 100px;
+  color: var(--black);
+}
+
+.header img{
+    height: 2.75em;
+    padding-right: 1vw;
+    justify-content: center;
+}
+
+.header img:hover{
+    transform: scale(1.20);
+}
+
+.header-right button {
+    scale: .50vw;
+    height: fit-content;
+    width: fit-content;
+}
+
+
+/* Flexbox section -------------------------------------------------------------------------------------------------------------- */
+
+h1 {
+    text-align: center;
+    font-size: 6vw;
+    font-weight: 700;
+    color: white;
+}
+
+h5 {
+    text-align: center;
+    font-size: 2vw;
+    font-weight: 700;
+    color: white;
+    margin-top: -3vw;
+}
+
+/* Main column */
+.main {
+    flex: 100%;
+    padding: 5%
+}
+
+
+.row {  
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row, .header {   
+    flex-direction: column;
+  }
+}
