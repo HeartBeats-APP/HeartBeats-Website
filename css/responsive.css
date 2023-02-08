@@ -12,49 +12,45 @@
   src: url(assets/fonts/Marianne-Regular.woff2) format('woff2')
 }
 
-
 /* Style the body */
 body {
-    font-family: Marianne;
-    margin: 0;
-    background: var(--black);
+  font-family: Marianne;
+  margin: 0;
+  background: var(--black);
 }
-
 
 /* Header section --------------------------------------------------------------------------------------------------------------- */
 .header {
-    display: flex;
-    background-color: var(--black);
-    padding: 0.5em 5% 0.5em 5%;
+  display: flex;
+  background-color: var(--black);
+  padding: 0.5em 5% 0.5em 5%;
 
-    position: sticky;
-    top: 0;
-    z-index: 999;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .header-left{
-    display: flex;
-
+  display: flex;
 }
 
-
 .header-right{
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    height: fit-content;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  height: fit-content;
 }
 
 .header a {
-    font-style: medium;
-    color: white;
-    padding: 1.25vh 2vw;
-    text-decoration: none;
-    text-align: center;  
-    font-size: .9em;
-    justify-content: center;
-    height: fit-content;
-    width: fit-content;
+  font-style: medium;
+  color: white;
+  padding: 1.25vh 2vw;
+  text-decoration: none;
+  text-align: center;  
+  font-size: 1em;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
 }
 
 .header a:hover {
@@ -64,49 +60,46 @@ body {
 }
 
 .header img{
-    height: 2.75em;
-    padding-right: 1vw;
-    justify-content: center;
+  height: 2.75em;
+  padding-right: 1vw;
+  justify-content: center;
 }
 
 .header img:hover{
-    transform: scale(1.20);
+  transform: scale(1.20);
 }
 
 .header-right button {
-    scale: .50vw;
-    height: fit-content;
-    width: fit-content;
+  scale: .95;
 }
-
 
 /* Flexbox section -------------------------------------------------------------------------------------------------------------- */
 
 h1 {
-    text-align: center;
-    font-size: 6vw;
-    font-weight: 700;
-    color: white;
+  text-align: center;
+  font-size: 6vw;
+  font-weight: 700;
+  color: white;
 }
 
 h5 {
-    text-align: center;
-    font-size: 2vw;
-    font-weight: 700;
-    color: white;
-    margin-top: -3vw;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: 700;
+  color: white;
+  margin-top: -3vw;
 }
 
 /* Main column */
 .main {
-    flex: 100%;
-    padding: 5%
+  flex: 100%;
+  padding: 5%
 }
 
 
 .row {  
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
@@ -124,9 +117,29 @@ h5 {
   background: #ddd;
 }
 
-/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 700px) {
-  .row, .header {   
+/* Responsive layout - when the screen is less than 500px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+  .row {   
     flex-direction: column;
   }
+
+
+  .header a {
+    font-size: 0.75em;
+    padding: 1.1vh 2.5vw;
+  }
+
+  .header img {
+    height: 2.25em;
+    padding: auto;
+    margin-right: 0.5vw;
+  }
+
+  .header-right button {
+    font-size: 1.25vh;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 1.3% ;
+  }
+  
 }

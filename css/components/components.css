@@ -12,7 +12,7 @@ body {
 .buttons {
   display: flex;
   justify-content: space-between;
-  height: 1000px;
+  height: 10px;
   flex-direction: column;
   padding: 5%;
   text-align: left;
