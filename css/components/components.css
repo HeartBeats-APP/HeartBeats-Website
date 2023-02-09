@@ -2,6 +2,12 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  z-index: 99;
+}
+
+@font-face {
+  font-family: 'Marianne';
+  src: url(assets/fonts/Marianne-Regular.woff2) format('woff2')
 }
 
 body {
@@ -9,18 +15,21 @@ body {
 }
 
 .buttons {
-  margin: 10%;
-  text-align: center;
-
+  display: flex;
+  justify-content: space-between;
+  height: 10px;
+  flex-direction: column;
+  padding: 5%;
+  text-align: left;
 }
 
 /* Buttons set up */
-.main-button, .second-button, .button-animated-gradient, .button-animated-gradient2, input + .slider, button {
+.main-button, .second-button, .button-animated-gradient, .button-animated-gradient2, input + .slider, button, .language-button {
   transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   font-family: "Marianne";
   font-style: normal;
   font-weight: 450;
-  font-size: 1.25em;
+  font-size: 1em;
   text-align: center;
   padding: 0.5em 1.25em;
   border-radius: 100px;
@@ -28,7 +37,7 @@ body {
 }
 
 /* Buttons animations on hover */
-.main-button:hover, .second-button:hover, .button-animated-gradient:hover, .button-animated-gradient2:hover  {
+.main-button:hover, .second-button:hover, .button-animated-gradient:hover, .button-animated-gradient2:hover, .language-button:hover  {
   transition: all 0.5s cubic-bezier(0.075, 0.80, 0.165, 1);
   transform: scale(1.125); 
   cursor: pointer;
@@ -124,7 +133,7 @@ body {
 
 /* Sending button --------------------------------------------------------------------------------------------------------------- */
 button {
-  position: relative;
+  position: absolute;
   display: inline-block;
   cursor: pointer;
   outline: none;
@@ -144,7 +153,7 @@ button.learn-more {
 
 button.learn-more .circle {
   transition: all 0.6s cubic-bezier(0.60, 0, 0.080, 1);
-  position: relative;
+  position: absolute;
   display: block;
   margin: 0;
   width: 3rem;
@@ -205,21 +214,6 @@ button:hover .circle .icon.arrow {
 }
 button:hover .button-text {
   color: #fff;
-}
-
-@supports (display: grid) {
-  body {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 0.625rem;
-    grid-template-areas: ". main main ." ". main main .";
-  }
-
-  #container {
-    grid-area: main;
-    align-self: center;
-    justify-self: center;
-  }
 }
 
 
@@ -350,4 +344,16 @@ input[type="radio"]:checked + label {
   to {
     background-color: linear-gradient(100deg, #E93D57 10%, #A423BA 100%);
   }
+}
+
+/* Language button --------------------------------------------------------------------------------------------------------------*/
+.language-button {
+  background-color: white;
+  border-radius: 100px;
+  color: #E93D57;
+  padding-top: .7em;
+  padding-bottom: .7em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-right: 6em;
 }
