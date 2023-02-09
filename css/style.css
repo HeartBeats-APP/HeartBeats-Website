@@ -1,5 +1,16 @@
 * {
     font-family: "Marianne", sans-serif;
+    box-sizing: border-box;
+    transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+    
+    --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+    --second-gradient: linear-gradient(
+      100deg,
+      #f7c23b 0%,
+      #e93d57 50%,
+      #a423ba 100%
+    );
+    --black: #1c1a1a;
 }
 body {
     background-color: #1c1a1a;
@@ -9,11 +20,13 @@ body {
     background-position: right;
     color: #ffffff;
     height: 90vh;
+
+    overflow: hidden;
+    overflow-y: hidden;
 }
 .logo {
     width: 20vw;
     height: 20vw;
-    padding-left: 10%;
 }
 .header-text {
     display: flex;
@@ -30,7 +43,7 @@ body {
 }
 .img-div {
     padding-top: 10vh;
-    width: 90vw;
+    width: 99vw;
     text-align: center;
 }
 .center {
@@ -55,12 +68,11 @@ body {
 .button {
     border: none;
     font-weight: 500;
-    font-size: 2em;
+    font-size: 1.5em;
     color: white;
     border-radius: 40px;
-    height: 60px;
+    height: 50px;
     width: 190px;
-    margin-top: 2.5px;
 
     background: linear-gradient(90deg, #e93d57, #a423ba);
 }
@@ -69,18 +81,20 @@ form {
     flex-direction: row;
     margin-top: 10vh;
     justify-content: center;
+
+    align-items: center;
 }
 input[type="text"] {
-    padding-right: 195px;
+    padding-right: 204px;
 }
 input[type="button"] {
-    margin-left: -195px;
+    margin-left: -204px;
 }
 input[type="button"]:active {
     opacity: 0.9;
 }
 input[type="button"]:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 input[value="Home"] {
     margin-left: 0px;
