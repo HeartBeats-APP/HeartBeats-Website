@@ -1,0 +1,131 @@
+/* Setup ------------------------------------------------------------------------------------------------------------------------*/
+* {
+  box-sizing: border-box;
+  transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+
+  --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+  --second-gradient: linear-gradient(
+    100deg,
+    #f7c23b 0%,
+    #e93d57 50%,
+    #a423ba 100%
+  );
+  --black: #1c1a1a;
+}
+
+@font-face {
+  font-family: "Marianne";
+  src: url(assets/fonts/Marianne-Regular.woff2) format("woff2");
+}
+
+details:hover {
+  transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+  transform: scale(1.03);
+  cursor: pointer;
+  box-shadow: 0 0 100px -25px white;
+}
+
+/* Components -------------------------------------------------------------------------------------------------------------------*/
+
+body {
+  font-family: Marianne;
+  margin: 0 5% 0;
+  background: var(--black);
+}
+
+h2 {
+  margin: 5%;
+  font-size: 3em;
+  font-weight: 500;
+  text-align: center;
+  color: white;
+}
+
+details {
+  width: 75%;
+  min-height: 70px;
+  max-height: fit-content;
+  max-width: 75%;
+  padding: 2%;
+  margin: 0 auto;
+  position: relative;
+  font-size: 1.25em;
+  border-radius: 15px;
+  box-sizing: border-box;
+  background: white
+}
+
+/* padding between questions */
+details + details {
+  margin-top: 5vh;
+}
+
+details p {
+  display: flex;
+  color: var(--black);
+  font-weight: 300;
+  font-size: 1em;
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.control-icon {
+  pointer-events: none;
+  transform: scale(0.8);
+}
+
+.control-icon-close {
+  rotate: 180deg;
+  display: none;
+}
+
+details[open] .control-icon-close {
+  display: initial;
+}
+
+details[open] .control-icon-expand {
+  display: none;
+}
+
+/* responsive -------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 600px) {
+
+  h2 {
+    font-size: 1.35em;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+
+  summary {
+    font-size: 0.7em;
+  }
+  details p {
+    font-size: 0.55em;
+  }
+
+  details {
+    width: 100%;
+    max-width: 100%;
+    padding: 5%;
+    margin: 0 auto;
+    position: relative;
+    font-size: 1.25em;
+    border-radius: 15px;
+    box-sizing: border-box;
+    background: white;
+  }
+
+  .control-icon {
+    transform: scale(0.6);
+  }
+
+  details + details {
+    margin-top: 5%;
+  }
+}
