@@ -3,11 +3,12 @@
 }
 body {
     background-color: #1c1a1a;
+    background-image: url(/images/SpaceShip.png);
+    backdrop-filter: blur(10px);
 
     background-position: right;
     color: #ffffff;
     height: 90vh;
-    background-image: url(/images/SpaceShip.png);
 }
 .logo {
     width: 20vw;
