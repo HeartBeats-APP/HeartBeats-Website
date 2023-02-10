@@ -1,78 +1,79 @@
 * {
-    box-sizing: border-box;
-    transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
-  
-    --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
-    --second-gradient: linear-gradient(
-      100deg,
-      #f7c23b 0%,
-      #e93d57 50%,
-      #a423ba 100%
-    );
-    --black: #1c1a1a;
-  }
-  
-  @font-face {
-    font-family: "Marianne";
-    src: url(assets/fonts/Marianne-Regular.woff2) format("woff2");
-  }
-  
-  /* Style the body */
-  body {
-    font-family: Marianne;
-    background: var(--black);
-  }
+  box-sizing: border-box;
+  transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+
+  --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+  --second-gradient: linear-gradient(
+    100deg,
+    #f7c23b 0%,
+    #e93d57 50%,
+    #a423ba 100%
+  );
+  --black: #1c1a1a;
+}
+
+@font-face {
+  font-family: "Marianne";
+  src: url(assets/fonts/Marianne-Regular.woff2) format("woff2");
+}
+
+/* Style the body */
+body {
+  font-family: Marianne;
+}
 
 .header {
-    display: flex;
-    background-color: var(--black);
-    padding: 0.5em 0 0.5em 0;
-  
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
-  
-  .header-left {
-    display: flex;
-  }
-  
-  .header-right {
-    display: flex;
-    width: 100%;
-    flex-direction: row-reverse;
-  }
-  
-  .header a {
-    font-style: medium;
-    color: white;
-    padding: 1.25vh 2vw;
-    text-decoration: none;
-    text-align: center;
-    font-size: 1em;
-    justify-content: center;
-    height: fit-content;
-    width: fit-content;
-  }
-  
-  .header a:hover {
-    background: white;
-    border-radius: 100px;
-    color: var(--black);
-  }
-  
-  .header img {
-    height: 2.75em;
-    padding-right: 1vw;
-    justify-content: center;
-  }
-  
-  .header img:hover {
-    transform: scale(1.2);
-  }
-  
-  .header-right button {
-    scale: 0.95;
-    height: fit-content;
-    width: fit-content;
-  }
+  display: flex;
+  background-color: var(--black);
+  padding: 0.5em;
+  border-radius: 100px;
+
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.header-left {
+  display: flex;
+}
+
+.header-right {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.header a {
+  font-style: medium;
+  color: white;
+  padding: 1.25vh 2vw;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1em;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+}
+
+.header a:hover {
+  background: white;
+  border-radius: 100px;
+  color: var(--black);
+}
+
+.header img {
+  height: 2.75em;
+  padding-right: 1vw;
+  justify-content: center;
+}
+
+.header img:hover {
+  transform: scale(1.125);
+}
+
+.header-right button {
+  scale: 0.95;
+  height: fit-content;
+  width: fit-content;
+  justify-content: center;
+}

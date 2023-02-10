@@ -10,6 +10,7 @@
   </head>
 
   <body>
+
     <div class="wrapper">
 
       <!-- Header -->
@@ -25,15 +26,15 @@
             class="control-icon control-icon-expand"
             src="images/arrow.svg"
             alt="up-arrow"
-            width="30"
-            height="30"
+            width="25"
+            height="25"
           />
           <img
             class="control-icon control-icon-close"
             src="images/arrow.svg"
             alt="down-arrow"
-            width="30"
-            height="30"
+            width="25"
+            height="25"
           />
         </summary>
         <p>
@@ -52,15 +53,15 @@
             class="control-icon control-icon-expand"
             src="images/arrow.svg"
             alt="up-arrow"
-            width="30"
-            height="30"
+            width="25"
+            height="25"
           />
           <img
             class="control-icon control-icon-close"
             src="images/arrow.svg"
             alt="down-arrow"
-            width="30"
-            height="30"
+            width="25"
+            height="25"
           />
         </summary>
         <p>Of course you can, we won't stop you.</p>
@@ -73,19 +74,33 @@
             class="control-icon control-icon-expand"
             src="images/arrow.svg"
             alt="up-arrow"
-            width="30"
-            height="30"
+            width="25"
+            height="25"
           />
           <img
             class="control-icon control-icon-close"
             src="images/arrow.svg"
             alt="down-arrow"
-            width="30"
-            height="30"
+            width="25"
+            height="25"
           />
         </summary>
         <p>Only your imagination my friend. Go forth!</p>
       </details>
+
+      <!-- Js code that allows details to be closed by clicking on it (instead of just clicking the summary) -->
+      <script>
+        const detailsEls = document.querySelectorAll('details');
+      
+        detailsEls.forEach(function(detailsEl) {
+          const ulEl = detailsEl.querySelector('p');
+      
+          ulEl.addEventListener('click', function() {
+            detailsEl.open = false;
+          });
+        });
+      </script>
+
     </div>
   </body>
 </html>

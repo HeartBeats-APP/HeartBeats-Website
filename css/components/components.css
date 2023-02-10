@@ -10,10 +10,6 @@
   src: url(assets/fonts/Marianne-Regular.woff2) format('woff2')
 }
 
-body {
-  background: #1C1A1A;
-}
-
 .buttons {
   display: flex;
   justify-content: space-between;

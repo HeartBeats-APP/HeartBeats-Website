@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+  transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+
+  --cubic-bezier: cubic-bezier(0.075, 0.8, 0.165, 1);
+  --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+  --second-gradient: linear-gradient(
+    100deg,
+    #f7c23b 0%,
+    #e93d57 50%,
+    #a423ba 100%
+  );
+  --black: #1c1a1a;
+  --yellow: #f7c23b;
+  --red: #e93d57;
+  --purple: #a423ba;
+}
+
+@font-face {
+  font-family: "Marianne";
+  src: url(assets/fonts/Marianne-Regular.woff2) format("woff2");
+}
+
+body {
+  overflow-x: hidden;
+  height: 100%;
+  text-overflow: clip;
+}
+
+.wave-background {
+  background-color: transparent;
+  overflow: hidden;
+  height: 100px;
+}
+
+.wave-background,
+.wave-background::before,
+.wave-background::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 225vw;
+  height: 225vw;
+  margin-left: -125vw;
+  transform-origin: 50% 50%;
+  background: var(--main-gradient);
+  border-radius: 50% 75%;
+  animation: spin 25s infinite linear;
+  filter: blur(100px);
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
