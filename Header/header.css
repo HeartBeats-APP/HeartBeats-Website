@@ -60,6 +60,7 @@ body {
    display: flex;
    flex-direction: row-reverse;
    align-items: center;
+
 }
 
 .header a {
@@ -92,7 +93,7 @@ body {
 
 .header-right button {
    scale: 0.95;
-
+   margin-left: 1vw;
 }
 
 /* responsive */
@@ -122,8 +123,8 @@ body {
 
    .header {
       height: 3em;
-      width: 87.5%;
-      margin-right: 0.4em;
+      width: 84%;
+      margin-right: 0.3em;
       margin-left: 1em;
    }
 
@@ -143,10 +144,11 @@ body {
 }
 
 @media screen and (max-width: 600px) {
+
    .header {
       height: 2.5em;
-      width: 87%;
-      padding-right: 0.2em;
+      width: 83%;
+      margin-right: 0.2em;
       margin-left: 0.5em;
    }
 
@@ -165,6 +167,7 @@ body {
    .header button {
       height: 2em;
       padding: 0.10em 0.75em;
+      margin-right: -0.5em;
    }
 
 }
