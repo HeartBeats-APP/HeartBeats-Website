@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
   transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
@@ -14,11 +15,8 @@
   --yellow: #f7c23b;
   --red: #e93d57;
   --purple: #a423ba;
-}
 
-@font-face {
-  font-family: "Marianne";
-  src: url(assets/fonts/Marianne-Regular.woff2) format("woff2");
+  --main-font: 'Poppins', sans-serif;
 }
 
 body {

@@ -1,13 +1,9 @@
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  z-index: 99;
-}
-
-@font-face {
-  font-family: 'Marianne';
-  src: url(assets/fonts/Marianne-Regular.woff2) format('woff2')
+  z-index: 10;
 }
 
 .buttons {
@@ -21,12 +17,13 @@
 
 /* Buttons set up */
 .main-button, .second-button, .button-animated-gradient, .button-animated-gradient2, input + .slider, button, .language-button {
+  position: relative;
   transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-  font-family: "Marianne";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 450;
   font-size: 1em;
-  text-align: center;
+  justify-content: center;
   padding: 0.5em 1.25em;
   border-radius: 100px;
   color: #ffffff;
@@ -69,6 +66,7 @@
 .second-button {
   border: 0.2em;
   border-style: solid;
+  text-align: center;
 }
 
   /* gradient 1 */
@@ -344,12 +342,11 @@ input[type="radio"]:checked + label {
 
 /* Language button --------------------------------------------------------------------------------------------------------------*/
 .language-button {
+  height: auto;
+  width: auto;
   background-color: white;
   border-radius: 100px;
   color: #E93D57;
-  padding-top: .7em;
-  padding-bottom: .7em;
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-right: 6em;
+  align-items: center;
+  text-align: center;
 }

@@ -1,4 +1,5 @@
 /* Setup ------------------------------------------------------------------------------------------------------------------------*/
+
 * {
   box-sizing: border-box;
   transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
@@ -14,21 +15,12 @@
   --black: #1c1a1a;
 }
 
-@font-face {
-  font-family: "Marianne";
-  src: url(assets/fonts/Marianne-Regular.woff2) format("woff2");
-}
-
 details:hover {
   transition: all 0.5s var(--cubic-bezier);
   transform: scale(1.03);
   cursor: pointer;
   box-shadow: 0 0 100px -25px white;
 }
-
-body {
-  font-family: Marianne;
-} 
 
 .background {
   position: fixed;
