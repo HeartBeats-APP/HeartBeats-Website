@@ -12,7 +12,7 @@ document.write(`
         <a href="contact.html">Contact</a>
     </div>
     <div class="header-right">
-        <button onclick="login.html" class="second-button orange">Login</button>
+        <button onclick="window.location.href='login.html'" class="second-button orange">Login</button>
         <button class="language-button">En</button>
     </div>
 </div>

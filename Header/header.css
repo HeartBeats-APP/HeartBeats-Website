@@ -30,7 +30,7 @@ body {
    top: 0;
    z-index: 999;
 
-   backdrop-filter: blur(15px);
+   backdrop-filter: blur(10px);
    border: none;
    border-radius: 100px;
 
