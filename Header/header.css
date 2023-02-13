@@ -8,6 +8,9 @@
          #e93d57 50%,
          #a423ba 100%);
    --black: #1c1a1a;
+   --yellow: #f7c23b;
+   --red: #e93d57;
+   --purple: #a423ba;
 }
 
 /* Style the body */
@@ -109,7 +112,7 @@ body {
    }
 
    .header img {
-      height: 2.5em;
+      height: 3em;
    }
 
    .header button {
@@ -133,7 +136,7 @@ body {
    }
 
    .header img {
-      height: 2.25em;
+      height: 2.5em;
    }
 
    .header button {
@@ -157,7 +160,7 @@ body {
    }
 
    .header img {
-      height: 2em;
+      height: 2.25em;
    }
 
    .header button {
