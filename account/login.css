@@ -112,7 +112,7 @@ body {
 
 .login-field input:focus {
   padding-left: 40px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.65);
 }
 
 .login-field input:focus::placeholder {
@@ -121,6 +121,13 @@ body {
 
 .login-field input:hover {
   scale: 1.05;
+}
+
+.incorrect-password {
+  height: fit-content;
+  color: var(--red);
+  font-size: 0.8em;
+  margin-top: -1vh;
 }
 
 /* Stay connected row ----------------------------------------------------------------------------------------------------------- */
