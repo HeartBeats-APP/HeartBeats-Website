@@ -2,6 +2,7 @@
   box-sizing: border-box;
   transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
 
+  --transition: cubic-bezier(0.075, 0.8, 0.165, 1);
   --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
   --second-gradient: linear-gradient(
     100deg,
@@ -15,7 +16,6 @@
   --purple: #a423ba;
 }
 
-/* Style the body */
 body {
   font-family: "Poppins";
   justify-content: center;
@@ -23,14 +23,23 @@ body {
   overflow: hidden;
 }
 
+/* Card body -------------------------------------------------------------------------------------------------------------------- */
+
+.wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
 .login-background {
-  background-image: url("/images/login-background.svg");
-  height: 100%;
-  width: 100%;
   position: absolute;
   background-repeat: no-repeat;
-  margin-left: 20%;
-  margin-top: 7.5%;
+  background-image: url("/images/login-background.svg");
+
+  height: 100vh;
+  width: 100vw;
+  margin-left: 18%;
+  margin-top: 8%;
+
   z-index: -1;
   filter: blur(200px);
 }
@@ -41,21 +50,18 @@ body {
 
   height: fit-content;
   width: fit-content;
-  margin-top: 12.5%;
-  margin-left: 30%;
 
-  background-color: var(--black);
+  background: rgb(28, 26, 26, 0.5);
   border-radius: 15px;
-  opacity: 0.75;
 }
 
 .login-wrapper {
   display: flex;
   flex-direction: column;
   margin: 5em;
-  gap: 0.5em;
 }
 
+/* Header text ------------------------------------------------------------------------------------------------------------------ */
 .login-text {
   color: white;
   margin-top: -4vh;
@@ -73,11 +79,12 @@ body {
   height: 5%;
 }
 
+/* Password & Mail -------------------------------------------------------------------------------------------------------------- */
 .login-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
-  margin-bottom: 1rem;
+  gap: 0.5vh;
+  margin-bottom: 2vh;
 }
 
 .login-field label {
@@ -89,7 +96,7 @@ body {
 .login-field input {
   font-size: 1rem;
   line-height: 3em;
-  max-width: 25vw;
+  max-width: 30rem;
   border-radius: 50px;
   padding-left: 20px;
   outline: none;
@@ -105,23 +112,260 @@ body {
 
 .login-field input:focus {
   padding-left: 40px;
-  background: rgba(255, 255, 255, 0.50);
-
+  background: rgba(255, 255, 255, 0.75);
 }
 
-/* Switch implementation -------------------------------------------------------------------------------------------------------- */
-input[type="checkbox"] + label {
-  scale: 0.25;
-  margin-left: -3.5vw;
-  margin-top: -4vh; 
+.login-field input:focus::placeholder {
+  opacity: 0;
+}
+
+.login-field input:hover {
+  scale: 1.05;
+}
+
+/* Stay connected row ----------------------------------------------------------------------------------------------------------- */
+.stay-connected {
+  width: 100%;
+  margin-top: -1vh;
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  align-items: center;
 }
 
 input[type="checkbox"] {
   justify-content: left;
+}
 
+input[type="checkbox"] + label {
+  scale: 0.75;
+  margin-left: -0.5vw;
 }
 
 input[type="checkbox"]:hover + label {
-  scale: 0.3;
+  scale: 1;
+}
+
+.connected-text {
+  position: relative;
+  color: white;
+  margin-left: 0.5vw;
+}
+
+a {
+  font-weight: 500;
+  color: var(--red);
+  margin-left: 7.75vw;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons ---------------------------------------------------------------------------------------------------------------------- */
+
+.buttons-area {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+  margin-top: 3vh;
+  gap: 1vw;
+  margin-bottom: -2vh;
+}
+
+.buttons-area .second-button {
+  background: white;
+  border: none;
+}
+
+/* Responsive ------------------------------------------------------------------------------------------------------------------- */
+
+@media screen and (max-width: 800px) {
+  .login-background {
+    margin-left: 0;
+    margin-top: 2.5%;
+  }
+
+  .login-wrapper {
+    margin: 4em;
+  }
+
+  .login-text h1 {
+    font-size: 1.75em;
+  }
+
+  .login-text p {
+    font-size: 1em;
+  }
+
+  .login-field label {
+    font-size: 0.9rem;
+  }
+
+  .login-field input {
+    font-size: 0.9rem;
+    line-height: 2.75em;
+  }
+
+  .connected-text {
+    margin-left: 0.5vw;
+  }
+
+  .connected-text {
+    font-size: 0.8em;
+  }
+
+  a {
+    font-size: 0.8em;
+  }
+
+  .buttons-area {
+    margin-top: 3vh;
+    gap: 1.5vw;
+  }
+
+  .buttons-area .main-button {
+    width: 5.25em;
+    height: 2.5em;
+  }
+
+  .buttons-area .second-button {
+    width: 12em;
+    height: 2.5em;
+    background: white;
+    border: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .login-background {
+    margin-left: 2;
+    margin-top: 0;
+  }
+
+  .login-wrapper {
+    margin: 3em;
+  }
+
+  .login-text h1 {
+    font-size: 1.5em;
+  }
+
+  .login-text p {
+    font-size: .85em;
+  }
+
+  .login-field label {
+    font-size: 0.85rem;
+  }
+
+  .login-field input {
+    font-size: 0.8rem;
+    line-height: 2.5em;
+  }
+
+  .connected-text {
+    margin-left: 0.4vw;
+  }
+
+  .connected-text {
+    font-size: 0.7em;
+  }
+
+  a {
+    font-size: 0.7em;
+  }
+
+  input[type="checkbox"] + label {
+    scale: 0.55;
+    margin-left: -3vw;
+  }
+
+  input[type="checkbox"]:hover + label {
+    scale: 0.7;
+  }
+
+
+  .buttons-area {
+    margin-top: 2.75vh;
+    gap: 2.5vw;
+  }
+
+  .buttons-area .main-button {
+    width: 5em;
+    height: 2.25em;
+  }
+
+  .buttons-area .second-button {
+    width: 11em;
+    height: 2.25em;
+    background: white;
+    border: none;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+
+  .login-background {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .login-wrapper {
+    margin: 3em;
+  }
+
+  .login-text h1 {
+    font-size: 1.25em;
+  }
+
+  .login-text p {
+    font-size: .75em;
+  }
+
+  .login-field label {
+    font-size: .75rem;
+  }
+
+  .login-field input {
+    font-size: 0.75rem;
+    line-height: 2em;
+  }
+
+  .connected-text {
+    margin-left: 0.4vw;
+  }
+
+  .connected-text {
+    font-size: 0.7em;
+  }
+
+  a {
+    font-size: 0.7em;
+  }
+
+  input[type="checkbox"] + label {
+    scale: 0.55;
+    margin-left: -4.5vw;
+  }
+
+  input[type="checkbox"]:hover + label {
+    scale: 0.7;
+  }
+
+  .buttons-area {
+    margin-top: 2.75vh;
+    gap: 2.5vw;
+  }
+
+  .buttons-area .main-button {
+    scale: .9;
+  }
+
+  .buttons-area .second-button {
+    scale: .9;
+  }
 }
 

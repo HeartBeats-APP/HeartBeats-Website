@@ -11,9 +11,10 @@
 </head>
 
 <body>
-  <div class="login-background"></div>
-  <div class="wrapper">
+  <div class="login-background"></div>*
 
+  <div class="wrapper">
+    
     <!-- Header -->
     <script src="/header/header.js"></script>
 
@@ -22,7 +23,7 @@
 
         <div class="login-text">
           <h1>Login to your account</h1>
-          <p>Let's jump in</p>
+          <p>Let's jump in.</p>
         </div>
 
         <div class="login-field">
@@ -35,7 +36,16 @@
           <input type="password" placeholder="**********">
         </div>
 
-        <input type="checkbox" id="switch"/><label for="switch">Toggle</label>
+        <div class="stay-connected">
+          <input type="checkbox" id="switch" /><label for="switch"></label>
+          <p class="connected-text">Stay connected</p>
+          <a href="#0">Forgot password?</a>
+        </div>
+
+        <div class="buttons-area">
+          <div class="main-button orange-purple">Login</div>
+          <div class="second-button orange">Register instead</div>
+        </div>
 
       </div>
 
