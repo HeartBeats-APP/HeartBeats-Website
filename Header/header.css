@@ -24,7 +24,7 @@ body {
    width: 89.4%;
    margin-top: 10px;
    padding-left: 1.5em;
-   padding-right: 0.6em;
+   padding-right: .425em;
 
    display: flex;
    align-items: center;
@@ -95,8 +95,12 @@ body {
 }
 
 .header-right button {
-   scale: 0.95;
+   scale: .95;
    margin-left: 1vw;
+}
+
+.header-right .second-button {
+   scale: .9;
 }
 
 /* responsive */
