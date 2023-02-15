@@ -215,6 +215,10 @@ a:hover {
     line-height: 2.75em;
   }
 
+  input[type="checkbox"] + label {
+    margin-left: -1.5vw;
+  }
+
   .connected-text {
     margin-left: 0.5vw;
   }
@@ -246,13 +250,16 @@ a:hover {
 }
 
 @media screen and (max-width: 600px) {
+  
   .login-background {
-    margin-left: 2;
-    margin-top: 0;
+    margin-left: -5vw;
+    margin-top: 10vh;
   }
 
   .login-wrapper {
     margin: 3em;
+    margin-left: 2.5em;
+    margin-right: 2.5em;
   }
 
   .login-text h1 {
@@ -316,12 +323,14 @@ a:hover {
 @media screen and (max-width: 450px) {
 
   .login-background {
-    margin-left: 0;
-    margin-top: 0;
+    margin-left: -5vw;
+    margin-top: 5vh;
   }
 
   .login-wrapper {
     margin: 3em;
+    margin-left: 2em;
+    margin-right: 2em;
   }
 
   .login-text h1 {
@@ -364,15 +373,18 @@ a:hover {
 
   .buttons-area {
     margin-top: 2.75vh;
-    gap: 2.5vw;
+    justify-content: right ;
   }
 
   .buttons-area .main-button {
-    scale: .9;
+    scale: .75;
+    width: 5em;
+    margin-left: -1.5em;
   }
 
   .buttons-area .second-button {
-    scale: .9;
+    scale: .75;
+    width: 11em;
   }
 }
 
