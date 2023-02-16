@@ -6,12 +6,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/css/responsive.css" />
-  <link rel="stylesheet" href="/css/components/components.css" />
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="/css/components/componentsV2.css" />
+  <link rel="stylesheet" href="register.css" />
 </head>
 
 <body>
-  <div class="login-background"></div>*
+  <div class="login-background"></div>
 
   <div class="wrapper">
     
@@ -23,42 +23,57 @@
 
         <div class="login-text">
           <h1>Create an account</h1>
-          <p> Discover our groundbreaking product 🤯</p>
+          <p>Welcome aboard.</p>
         </div>
 
-        <div class="login-field">
-          <label for="">Name</label>
-          <input type="text" placeholder="Perry">
-        </div>
+        <form action="">
 
-        <div class="login-field">
-          <label for="">Email</label>
-          <input type="email" placeholder="admin@heart-beats.fr">
-        </div>
+          <div class="login-field">
+            <label for="">Name</label>
+            <input type="text" id="name" placeholder="Marie-Soline">
+            <a id="name-warning-message" class="warning-message"></a>
+          </div>
+  
+          <div class="login-field">
+            <label for="">Email</label>
+            <input type="email" id="email" placeholder="guest@heart-beats.fr">
+            <a id="email-warning-message" class="warning-message"></a>
+          </div>
+  
+          <div class="login-field">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="**********" >
+            <a id="password-warning-message" class="warning-message"></a>
+          </div>
 
-        <div class="login-field">
-          <label for="">Password</label>
-          <input type="password" placeholder="**********">
-        </div>
+          <!-- Password strength indicator -->
+          <div class="strength-indicator">
+            <meter max="4" id="password-strength-meter"></meter>
+            <p id="password-strength-text"></p>
+          </div>
+  
+          <div class="login-field" id="confirm-password">
+            <label for="">Confirm password</label>
+            <input type="password" id="password-confirm" placeholder="**********">
+            <a id="passwordConfirm-warning-message" class="warning-message"></a>
+          </div>
 
-        <div class="login-field">
-          <label for="">Reapeat your password</label>
-          <input type="password" placeholder="**********">
-        </div>
-        
-        <div class="incorrect-password">
-          <a></a>
-        </div>
+        </form>
 
         <div class="buttons-area">
-          <div class="main-button orange-purple">Create</div>
-          <div onclick="window.location.href='login.html'" class="second-button orange">Login instead</div>
+          <button class="main-button" id="submit-button">Create</button>
+          <button onclick="window.location.href='login.html'" class="secondary-button">Login instead</button>
         </div>
 
       </div>
 
     </div>
   </div>
+  
+  <script src="account-info-checker.js"></script>
+  <script src="zxcvbn.js"></script>
+  <script src="password-strength.js"></script>
+
 </body>
 
 </html>

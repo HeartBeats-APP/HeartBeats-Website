@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+    transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+    --transition: cubic-bezier(0.075, 0.8, 0.165, 1);
+
+    --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+    --second-gradient: linear-gradient(100deg, #f7c23b 0%, #e93d57 50%, #a423ba 100%);
+    --blue-gradient: linear-gradient(130deg, #BDEDF9 0.50%, #92E9FE 25%, #3361DA 90%);
+
+    --black: #1c1a1a;
+    --yellow: #f7c23b;
+    --red: #e93d57;
+    --purple: #a423ba;
+}
+
+.main-button,
+.secondary-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: fit-content;
+    width: fit-content;
+
+    font-size: 1.1em;
+    font-weight: 400;
+
+    padding: 9px 20px 8px 20px;
+    border-radius: 100px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-button:hover,
+.secondary-button:hover {
+    transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+    transform: scale(1.125);
+}
+
+/* Main Button -------------------------------------------------------------------------------------------------------------------------------------- */
+.main-button {
+    background: var(--main-gradient);
+    color: white;
+}
+
+.main-button:hover {
+    box-shadow: 0 0 35px -10px #e93d57, 0 0 30px -10px #a423ba;
+}
+
+/* Secondary Button --------------------------------------------------------------------------------------------------------------------------------- */
+.secondary-button {
+    background: white;
+    color: var(--red);
+}
+
+.secondary-button:hover {
+    box-shadow: 0 0 35px -10px #ffffff;
+}
