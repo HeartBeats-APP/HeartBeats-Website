@@ -4,12 +4,11 @@
 
   --transition: cubic-bezier(0.075, 0.8, 0.165, 1);
   --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
-  --second-gradient: linear-gradient(
-    100deg,
-    #f7c23b 0%,
-    #e93d57 50%,
-    #a423ba 100%
-  );
+  --second-gradient: linear-gradient(100deg,
+      #f7c23b 0%,
+      #e93d57 50%,
+      #a423ba 100%);
+  --blue-gradient: linear-gradient(130deg, #BDEDF9 0.50%, #92E9FE 25%, #3361DA 90%);
   --black: #1c1a1a;
   --yellow: #f7c23b;
   --red: #e93d57;
@@ -23,7 +22,7 @@ body {
   overflow: hidden;
 }
 
-/* Card body -------------------------------------------------------------------------------------------------------------------- */
+/* Card body ---------------------------------------------------------------------------------------------------------------------------------------- */
 
 .wrapper {
   justify-content: center;
@@ -38,7 +37,7 @@ body {
   height: 100vh;
   width: 100vw;
   margin-left: 18%;
-  margin-top: 8%;
+  margin-top: 10%;
 
   z-index: -1;
   filter: blur(200px);
@@ -53,6 +52,7 @@ body {
 
   background: rgb(28, 26, 26, 0.5);
   border-radius: 15px;
+  margin-top: 7vh;
 }
 
 .login-wrapper {
@@ -61,10 +61,12 @@ body {
   margin: 5em;
 }
 
-/* Header text ------------------------------------------------------------------------------------------------------------------ */
+/* Header text -------------------------------------------------------------------------------------------------------------------------------------- */
 .login-text {
   color: white;
-  margin-top: -4vh;
+  margin-top: -5vh;
+  margin-bottom: 1vh;
+  gap: .5em;
 }
 
 .login-text h1 {
@@ -74,16 +76,18 @@ body {
 }
 
 .login-text p {
-  font-size: 1em;
+  font-size: 1.25em;
   text-align: left;
-  height: 5%;
+  height: 2.5vh;
+  margin-bottom: -0.5vh;
+  margin-left: 0.1em;
 }
 
-/* Password & Mail -------------------------------------------------------------------------------------------------------------- */
+/* Password & Mail ---------------------------------------------------------------------------------------------------------------------------------- */
 .login-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5vh;
+  gap: .5vh;
 }
 
 .login-field label {
@@ -94,7 +98,7 @@ body {
 
 .login-field input {
   font-size: 1rem;
-  line-height: 3em;
+  line-height: 2.5em;
   max-width: 30rem;
   border-radius: 50px;
   padding-left: 20px;
@@ -102,6 +106,8 @@ body {
   border: solid 3px;
   border-color: white;
   background: white;
+  margin-bottom: 2vh;
+  width: 25em;
 }
 
 .login-field input::placeholder {
@@ -122,14 +128,81 @@ body {
   scale: 1.05;
 }
 
-.incorrect-password {
-  height: fit-content;
-  color: var(--red);
-  font-size: 0.8em;
-  margin-top: -1vh;
+#confirm-password {
+  margin-top: -.65em;
 }
 
-/* Buttons ---------------------------------------------------------------------------------------------------------------------- */
+.warning-message {
+  color: var(--red);
+  font-size: 0.85em;
+  margin-left: 1.5em;
+  margin-top: -1.5em;
+  margin-bottom: .5em;
+}
+
+/* Password strength indicator ----------------------------------------------------------------------------------------------------------------------*/
+.strength-indicator{
+  margin-top: -2em;
+}
+
+meter {
+  margin-top: 1.5em;
+  margin-left: 1.25em;
+  width: 90%;
+  height: 1em;
+  border-radius: 100px;
+  border: none;
+  background: rgba(0, 0, 0, 0);
+}
+
+meter::-webkit-meter-bar {
+  background: rgba(0, 0, 0, 0);
+  border-radius: 100px;
+}
+
+meter[value="0"]::-webkit-meter-optimum-value,
+meter[value="1"]::-webkit-meter-optimum-value,
+meter[value="2"]::-webkit-meter-optimum-value {
+  background: var(--main-gradient);
+}
+
+meter[value="3"]::-webkit-meter-optimum-value,
+meter[value="4"]::-webkit-meter-optimum-value {
+  background: var(--blue-gradient);
+}
+
+meter[value="0"]::-moz-meter-bar,
+meter[value="1"]::-moz-meter-bar,
+meter[value="2"]::-moz-meter-bar {
+  background: var(--main-gradient);
+}
+
+meter[value="3"]::-moz-meter-bar,
+meter[value="4"]::-moz-meter-bar  {
+  background: var(--blue-gradient);
+}
+
+p {
+  color: white;
+  font-size: .85em;
+  font-weight: 300;
+  margin-left: 2em;
+  margin-top: -0.25em;
+  margin-bottom: 2em;
+}
+
+.feedback {
+  color: white;
+  font-size: 1em;
+  padding: 0 .25em;
+  margin-top: 1em;
+}
+
+meter::-webkit-meter-optimum-value {
+  transition: width .4s ease-out; 
+}
+
+/* Buttons ------------------------------------------------------------------------------------------------------------------------------------------ */
 
 .buttons-area {
   display: flex;
@@ -138,15 +211,16 @@ body {
   margin-top: 3vh;
   gap: 1vw;
   margin-bottom: -2vh;
+  text-align: center;
 }
 
-.buttons-area .second-button {
+.buttons-area .secondary-button {
   background: white;
   border: none;
+  text-align: center;
 }
 
-/* Responsive ------------------------------------------------------------------------------------------------------------------- */
-
+/* Responsive --------------------------------------------------------------------------------------------------------------------------------------- */
 @media screen and (max-width: 800px) {
   .login-background {
     margin-left: 0;
@@ -174,49 +248,31 @@ body {
     line-height: 2.75em;
   }
 
-  input[type="checkbox"] + label {
-    margin-left: -1.5vw;
-  }
-
-  .connected-text {
-    margin-left: 0.5vw;
-  }
-
-  .connected-text {
-    font-size: 0.8em;
-  }
-
-  a {
-    font-size: 0.8em;
-  }
-
   .buttons-area {
     margin-top: 3vh;
     gap: 1.5vw;
   }
 
   .buttons-area .main-button {
-    width: 5.25em;
     height: 2.5em;
+    width: 6em;
   }
 
-  .buttons-area .second-button {
-    width: 12em;
+  .buttons-area .secondary-button {
     height: 2.5em;
-    background: white;
-    border: none;
+    width: 9.5em;
   }
 }
 
 @media screen and (max-width: 600px) {
-  
+
   .login-background {
     margin-left: -5vw;
     margin-top: 10vh;
   }
 
   .login-wrapper {
-    margin: 3em;
+    margin: 4em;
     margin-left: 2.5em;
     margin-right: 2.5em;
   }
@@ -238,44 +294,28 @@ body {
     line-height: 2.5em;
   }
 
-  .connected-text {
-    margin-left: 0.4vw;
-  }
-
-  .connected-text {
-    font-size: 0.7em;
-  }
-
-  a {
-    font-size: 0.7em;
-  }
-
-  input[type="checkbox"] + label {
-    scale: 0.55;
-    margin-left: -3vw;
-  }
-
-  input[type="checkbox"]:hover + label {
-    scale: 0.7;
-  }
-
-
   .buttons-area {
-    margin-top: 2.75vh;
-    gap: 2.5vw;
+    display: flex;
+    flex-direction: column-reverse;
+
+    margin-top: 1vh;
+    justify-content: center;
   }
 
   .buttons-area .main-button {
-    width: 5em;
-    height: 2.25em;
+    font-size: .75em;
+    height: 2.5em;
+    width: 100%;
   }
 
-  .buttons-area .second-button {
-    width: 11em;
-    height: 2.25em;
-    background: white;
-    border: none;
-    text-align: center;
+  .buttons-area .secondary-button {
+    font-size: .75em;
+    height: 2.5em;
+    width: 100%;
+  }
+
+  .main-button:hover, .second-button:hover {
+    scale: .95;
   }
 }
 
@@ -309,41 +349,7 @@ body {
     line-height: 2em;
   }
 
-  .connected-text {
-    margin-left: 0.4vw;
-  }
-
-  .connected-text {
-    font-size: 0.7em;
-  }
-
-  a {
-    font-size: 0.7em;
-  }
-
-  input[type="checkbox"] + label {
-    scale: 0.55;
-    margin-left: -4.5vw;
-  }
-
-  input[type="checkbox"]:hover + label {
-    scale: 0.7;
-  }
-
   .buttons-area {
-    margin-top: 2.75vh;
-    justify-content: right ;
-  }
-
-  .buttons-area .main-button {
-    scale: .75;
-    width: 5em;
-    margin-left: -1.5em;
-  }
-
-  .buttons-area .second-button {
-    scale: .75;
-    width: 11em;
+    margin-top: 2vh;
   }
 }
-
