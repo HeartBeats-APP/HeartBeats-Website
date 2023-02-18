@@ -65,6 +65,7 @@ body {
 .login-text {
   color: white;
   margin-top: -4vh;
+  margin-bottom: -1vh;
 }
 
 .login-text h1 {
@@ -74,7 +75,7 @@ body {
 }
 
 .login-text p {
-  font-size: 1.5em;
+  font-size: 1.25em;
   text-align: left;
   height: 5%;
 }
@@ -95,7 +96,7 @@ body {
 
 .login-field input {
   font-size: 1rem;
-  line-height: 3em;
+  line-height: 2.5em;
   max-width: 30rem;
   border-radius: 50px;
   padding-left: 20px;
@@ -146,7 +147,8 @@ input[type="checkbox"] {
 
 input[type="checkbox"] + label {
   scale: 0.75;
-  margin-left: -0.5vw;
+  width: 3em;
+  margin-left: -.75em;
 }
 
 input[type="checkbox"]:hover + label {
@@ -156,13 +158,12 @@ input[type="checkbox"]:hover + label {
 .connected-text {
   position: relative;
   color: white;
-  margin-left: 0.5vw;
 }
 
 a {
   font-weight: 500;
   color: var(--red);
-  margin-left: 7.75vw;
+  margin-left: 8em;
   text-decoration: none;
 }
 
@@ -355,11 +356,12 @@ a:hover {
   }
 
   .connected-text {
-    font-size: 0.7em;
+    font-size: 0.6em;
   }
 
   a {
-    font-size: 0.7em;
+    font-size: 0.6em;
+    margin-left: 4em;
   }
 
   input[type="checkbox"] + label {
@@ -379,12 +381,13 @@ a:hover {
   .buttons-area .main-button {
     scale: .75;
     width: 5em;
-    margin-left: -1.5em;
+    margin-right: -.5em;
   }
 
   .buttons-area .second-button {
     scale: .75;
     width: 11em;
+    margin-right: -2em;
   }
 }
 

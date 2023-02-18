@@ -4,6 +4,7 @@ document.write(`
 
 <link rel="stylesheet" href="/header/header.css"/>
 <link rel="stylesheet" href="header/header.css"/>
+<link rel="stylesheet" href="/css/components/components.css"/>
 
 <div class="header">
     <div class="header-left">
