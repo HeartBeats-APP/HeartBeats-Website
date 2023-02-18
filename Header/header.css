@@ -161,19 +161,21 @@ body {
 
    .header a {
       font-size: .8em;
+      padding: .4em .5em;
    }
 
    .header img {
       height: 2.25em;
+      margin-left: -.75em;
    }
 
    .header button {
-      scale: .65;
+      scale: .75;
    }
 
    .header button {
       height: 2em;
-      padding: 0.10em 0.75em;
+      padding: 0.10em 0.65em;
       margin-right: -0.5em;
    }
 
