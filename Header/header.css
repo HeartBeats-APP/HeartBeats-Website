@@ -13,15 +13,9 @@
    --purple: #a423ba;
 }
 
-/* Style the body */
-body {
-   font-family: 'Poppins';
-   justify-content: center;
-}
-
 .header {
    height: 4em;
-   width: 89.4%;
+   width: 90%;
    margin-top: 10px;
    padding-left: 1.5em;
    padding-right: .425em;
@@ -36,7 +30,6 @@ body {
    backdrop-filter: blur(10px);
    border: none;
    border-radius: 100px;
-
 }
 
 /* Header background */

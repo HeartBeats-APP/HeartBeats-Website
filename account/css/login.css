@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+  transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+
+  --transition: cubic-bezier(0.075, 0.8, 0.165, 1);
+  --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+  --second-gradient: linear-gradient(100deg,
+      #f7c23b 0%,
+      #e93d57 50%,
+      #a423ba 100%);
+  --black: #1c1a1a;
+  --yellow: #f7c23b;
+  --red: #e93d57;
+  --purple: #a423ba;
+}
+
+
+/* Stay connected row ----------------------------------------------------------------------------------------------------------- */
+.stay-connected {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  align-items: center;
+  width: 23em;
+}
+
+input[type="checkbox"] {
+  justify-content: left;
+}
+
+input[type="checkbox"]+label {
+  scale: 0.70;
+  width: 3em;
+  margin-left: -.75em;
+  margin-top: -.1em;
+}
+
+input[type="checkbox"]:hover+label {
+  scale: .9;
+}
+
+.connected-text {
+  color: white;
+  font-size: 0.85em;
+  margin-left: .5em;
+}
+
+.stay-connected a {
+  font-weight: 500;
+  color: var(--red);
+  text-decoration: none;
+  font-size: .85em;
+  margin-left: 6em;
+}
+
+.stay-connected a:hover {
+  text-decoration: underline;
+}
+

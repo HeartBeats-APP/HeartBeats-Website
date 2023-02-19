@@ -5,13 +5,12 @@
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/css/responsive.css" />
-  <link rel="stylesheet" href="/css/components/components.css" />
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="/css/components/componentsV2.css" />
+  <link rel="stylesheet" href="css/form-card.css" />
+  <link rel="stylesheet" href="css/login.css" />
 </head>
 
 <body>
-  <div class="login-background"></div>*
 
   <div class="wrapper">
     
@@ -28,16 +27,14 @@
 
         <div class="login-field">
           <label for="">Email</label>
-          <input type="email" placeholder="guest@heart-beats.fr">
+          <input id="email" type="email" placeholder="guest@heart-beats.fr">
+          <a id="email-warning-message" class="warning-message"></a>
         </div>
 
         <div class="login-field">
           <label for="">Password</label>
-          <input type="password" placeholder="**********">
-        </div>
-        
-        <div class="incorrect-password">
-          <a></a>
+          <input  id="password" type="password" placeholder="**********">
+          <a id="password-warning-message" class="warning-message"></a>
         </div>
 
         <div class="stay-connected">
@@ -47,14 +44,16 @@
         </div>
 
         <div class="buttons-area">
-          <div class="main-button orange-purple">Login</div>
-          <div onclick="window.location.href='register.html'" class="second-button orange">Register instead</div>
+          <button onclick="login()" class="main-button">Login</button>
+          <button onclick="window.location.href='register.html'" class="secondary-button">Register instead</button>
         </div>
 
       </div>
 
     </div>
   </div>
+
+  <script src="js/entries-checker.js"></script>
 </body>
 
 </html>

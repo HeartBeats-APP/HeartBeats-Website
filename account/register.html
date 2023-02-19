@@ -5,9 +5,9 @@
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/css/responsive.css" />
   <link rel="stylesheet" href="/css/components/componentsV2.css" />
-  <link rel="stylesheet" href="register.css" />
+  <link rel="stylesheet" href="css/form-card.css" />
+  <link rel="stylesheet" href="css/register.css" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
           <div class="login-field">
             <label for="">Name</label>
-            <input type="text" id="name" placeholder="Ivan">
+            <input type="text" id="name" placeholder="Matthew">
             <a id="name-warning-message" class="warning-message"></a>
           </div>
   
@@ -54,14 +54,14 @@
   
           <div class="login-field" id="confirm-password">
             <label for="">Confirm password</label>
-            <input type="password" id="password-confirm" placeholder="**********">
+            <input type="password" id="password-confirmation" placeholder="**********">
             <a id="passwordConfirm-warning-message" class="warning-message"></a>
           </div>
 
         </form>
 
         <div class="buttons-area">
-          <button class="main-button" id="submit-button">Create</button>
+          <button onclick="createAccount()" class="main-button" id="submit-button">Create</button>
           <button onclick="window.location.href='login.html'" class="secondary-button">Login instead</button>
         </div>
 
@@ -70,9 +70,9 @@
     </div>
   </div>
   
-  <script src="account-info-checker.js"></script>
-  <script src="zxcvbn.js"></script>
-  <script src="password-strength.js"></script>
+  <script src="js/entries-checker.js"></script>
+  <script src="js/zxcvbn.js"></script>
+  <script src="js/password-strength-checker.js"></script>
 
 </body>
 
