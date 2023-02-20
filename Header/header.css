@@ -46,6 +46,7 @@
    opacity: .5;
 }
 
+/* Left Part ------------------------------------------------------------------------------------------------------------------- */
 .header-left {
    display: flex;
    align-items: center;
@@ -58,7 +59,7 @@
    justify-content: center;
 }
 
-.tab-logo  {
+.tab-logo {
    height: 3em;
    padding-right: 1vw;
 }
@@ -96,18 +97,20 @@
 .header-tab:hover {
    background: rgba(255, 255, 255, .25);
    border-radius: 100px;
-   transform: var(--black);
+   transform: scale(1.070);
+   box-shadow: 0 0 25px -10px rgba(0, 0, 0, .5);
+   
 }
 
 .header-tab:hover .header a {
    color: var(--black);
- }
- 
- .header-tab:hover .tab-icon {
+}
+
+.header-tab:hover .tab-icon {
    fill: var(--black)
- }
+}
 
-
+/* Right Part ------------------------------------------------------------------------------------------------------------------- */
 .header-right {
    width: 100%;
    display: flex;
@@ -121,6 +124,11 @@
    scale: .95;
    margin-left: 1vw;
 }
+
+.header-right button:hover {
+   transform: scale(1.1);
+}
+
 
 .header-right .second-button {
    scale: .9;
