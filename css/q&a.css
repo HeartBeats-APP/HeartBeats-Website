@@ -15,21 +15,29 @@
   --black: #1c1a1a;
 }
 
+body{
+  background-color: var(--black);
+  background-image: url("/images/login-background.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 85% ;
+  backdrop-filter: blur(150px);
+  margin: 0px;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+body .rect {
+  height: 2000px;
+}
+
 details:hover {
   transition: all 0.5s var(--cubic-bezier);
   transform: scale(1.03);
   cursor: pointer;
-  box-shadow: 0 0 100px -25px white;
+  box-shadow: 0 0 100px -25px var(--black);
 }
 
-.background {
-  position: fixed;
-  background-position: center;
-  top: 7%;
-  z-index: 1;
-  width: 100%;
-  filter: opacity(.6);
-}
 
 /* Components -------------------------------------------------------------------------------------------------------------------*/
 
@@ -50,7 +58,8 @@ details {
   font-size: 1.25em;
   border-radius: 15px;
   box-sizing: border-box;
-  background: white;
+  background: rgb(0, 0, 0, .5);
+  color: white;
   padding: 1%;
 }
 
@@ -61,7 +70,7 @@ details + details {
 
 details p {
   display: flex;
-  color: var(--black);
+  color: white;
   font-weight: 300;
   margin: 0 2% 2% 2%;
 }
