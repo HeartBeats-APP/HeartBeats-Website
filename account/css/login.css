@@ -21,7 +21,7 @@
   justify-content: left;
   flex-direction: row;
   align-items: center;
-  width: 23em;
+  width: 100%;
 }
 
 input[type="checkbox"] {
@@ -31,6 +31,7 @@ input[type="checkbox"] {
 input[type="checkbox"]+label {
   scale: 0.70;
   width: 3em;
+  min-width: 3em;
   margin-left: -.75em;
   margin-top: -.1em;
 }

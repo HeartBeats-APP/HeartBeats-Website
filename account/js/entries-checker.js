@@ -17,8 +17,7 @@ function login() {
 
 }
 
-
-function createAccount() {
+function createAccount(token) {
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -30,7 +29,7 @@ function createAccount() {
     var passwordConfirmationIsCorrect = checkPasswordConfirmation(password, passwordConfirmation);
 
     if (nameIsCorrect && emailIsCorrect && passwordIsCorrect && passwordConfirmationIsCorrect) {
-        // Then we can create the account
+        document.getElementById("register-form").submit();
         document.location.href = "/dashboard.html";
     } else {
         // We can't create the account
@@ -60,7 +59,6 @@ function recoverPassword() {
     }
 
 }
-
 
 
 function checkName(name) {
