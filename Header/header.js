@@ -3,20 +3,19 @@
 document.write(`
 
 <link rel="stylesheet" href="/Header/header.css"/>
-<link rel="stylesheet" href="Header/header.css"/>
-<link rel="stylesheet" href="/css/components/components.css"/>
+<link rel="stylesheet" href="/css/components/componentsV2.css"/>
 
 
 <div class="header">
     <div class="header-left">
 
         <div class="header-logo">
-            <img class="tab-logo" onclick="window.location.href='/index.html'" src="/images/Logo.svg"
+            <img class="tab-logo" onclick="window.location.href='/index.html'" src="/Header/svg/Logo.svg"
                 alt="HeartBeats Logo" />
         </div>
 
         <div class="header-tab" onclick="window.location.href='/dashboard.html'">
-            <img class="tab-icon" src="/Header//svg/Dashboard.svg" width="50" height="50" alt="" />
+            <img class="tab-icon" src="/Header/svg/Dashboard.svg" width="50" height="50" alt="" />
             <a>Dashboard</a>
         </div>
 
@@ -33,7 +32,7 @@ document.write(`
 
     </div>
     <div class="header-right">
-        <button onclick="window.location.href='/account/login.html'" class="second-button orange">Account</button>
+        <button onclick="window.location.href='/account/login.html'" class="third-button">Account</button>
         <button class="language-button">En</button>
     </div>
 </div>

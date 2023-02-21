@@ -14,7 +14,7 @@
 body {
     font-family: "Poppins";
     background-color: var(--black);
-    background-image: url("/images/login-background.svg");
+    background-image: url("../svg/login-background.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 80% 80%;

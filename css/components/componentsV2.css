@@ -59,6 +59,21 @@
     box-shadow: 0 0 35px -10px #ffffff;
 }
 
+/* Third Button ------------------------------------------------------------------------------------------------------------------------------------- */
+.third-button {
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+
+    background: transparent;
+    border: var(--red) 3px solid;
+    color: var(--red);
+
+}
+
+
+
 
 
 
