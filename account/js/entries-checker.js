@@ -153,15 +153,18 @@ function checkPasswordConfirmation(password, passwordConfirmation) {
 
     // Check if the password confirmation is not empty
     if (isFieldEmpty(passwordConfirmation)) {
-        document.getElementById("passwordConfirm-warning-message").innerHTML = "This field can't be empty";
+        document.getElementById("password-confirmation-warning-message").innerHTML = "This field can't be empty";
         return false;
     }
 
-    // Check if the password confirmation match with the password
-    if (password != passwordConfirmation) {
-        document.getElementById("passwordConfirm-warning-message").innerHTML = "Passwords doesn't match";
+    // Check if the password confirmation matches the password
+    if (password !== passwordConfirmation) {
+        document.getElementById("password-confirmation-warning-message").innerHTML = "Passwords doesn't match";
         return false;
     }
+
+    document.getElementById("password-confirmation-warning-message").innerHTML = "";
+    return true;
 }
 
 function isFieldEmpty(field) {
