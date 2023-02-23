@@ -8,8 +8,8 @@ function login() {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            if (this.responseText) {
-                window.location.href = "dashboard.html";
+            if (this.responseText == true) {    
+                window.location.href = "/dashboard.html";
             } 
             else {
                 try {
@@ -38,23 +38,20 @@ function createAccount() {
 function recoverPassword() {
     var email = document.getElementById("email").value;
 
+    // update login text
+    document.getElementById("title").innerHTML = "Check your inbox";
+    document.getElementById("subtitle").innerHTML = "We've sent you an email with a new password inside";
 
-    if (checkEmailAdress(email)) {
-
-        // update login text
-        document.getElementById("title").innerHTML = "Check your inbox";
-        document.getElementById("subtitle").innerHTML = "We've sent you an email with a new password inside";
-
-        document.getElementById("login-field").remove();
-        document.getElementById("email-animation").style.display = "block";
+    document.getElementById("login-field").remove();
+    document.getElementById("email-animation").style.display = "block";
 
 
-        // change button text
-        document.getElementById("submit-button-passwordRecovery").innerHTML = "Back to login";
-        document.getElementById("submit-button-passwordRecovery").addEventListener("click", function () {
-            window.location.href = "login.html";
-        }
-        );
+    // change button text
+    document.getElementById("submit-button-passwordRecovery").innerHTML = "Back to login";
+    document.getElementById("submit-button-passwordRecovery").addEventListener("click", function () {
+        window.location.href = "login.html";
     }
+    );
+
 
 }

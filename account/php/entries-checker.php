@@ -70,7 +70,7 @@ function checkName($name) {
 function checkEmailAdress($email) {
    
     // Check if the email is not empty
-    if (empty($email)) {
+    if (isFieldEmpty($email)) {
         return "This field can't be empty";
     }
 
