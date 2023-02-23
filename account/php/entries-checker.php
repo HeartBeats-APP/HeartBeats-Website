@@ -3,25 +3,7 @@
 $forbiddenCharacters = array("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", ";", ":", "'", ",", ".", "<", ">", "/", "?", "~", "`", "|", "\\", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "É", "È", "Ê", "Ë", "À", "Â", "Ä", "Ù", "Û", "Ü", "Î", "Ï", "Ô", "Ö", "Ç", "œ", "æ", "Œ", "Æ", "€", "£", "¥", "¤", "§", "°", "²", "³", "µ", "¶", "¹", "¼", "½", "¾", "¿", "¡", "«", "»");
 $forbiddenNames = array("admin", "root", "administrator", "moderator", "mod", "moderateur", "fdp", "connard", "con", "connasse", "pute", "salope", "administrateur", "administratrice", "marie-soline", "marie soline", "marie solin", "marie-solin", "superadmin", "super-admin", "super admin", "super-administrator", "super administrator", "super-administrateur", "super administrateur", "super-administratrice", "super administratrice", "super-mod", "super mod", "super-moderator", "super moderator", "super-moderateur", "super moderateur", "super-moderatrice", "super moderatrice", "super-modérateur", "super modérateur", "super-modératrice", "super modératrice", "super-modérateur", "super modérateur", "sup", "moderateur", "mod");
 
-function login() {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    if (checkEmailAdress($email) && checkPassword($email, $password)) {
-        // Then we can log the user in
-        header("Location: /dashboard.html");
-        exit;
-    } else {
-        // We can't log the user in
-        //TODO
-    }
-}
-
-function createAccount($token) {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $passwordConfirmation = $_POST["password-confirmation"];
+function createAccount($name, $email, $password, $passwordConfirmation) {
 
     $nameIsCorrect = checkName($name);
     $emailIsCorrect = checkEmailAdress($email);
@@ -86,38 +68,34 @@ function checkName($name) {
 }
 
 function checkEmailAdress($email) {
-    $emailReg = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-
+   
     // Check if the email is not empty
     if (empty($email)) {
-        echo "This field can't be empty";
-        return false;
+        return "This field can't be empty";
     }
 
-    if (!preg_match($emailReg, $email)) {
-        echo "Please enter a valid email address";
-        return false;
+    // Check if the email is valid
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "This email is not valid";
     }
 
     //check if email exist in database
     //TODO
 
-    return true;
+    return "";
 }
 
 function checkPassword($email, $password) {
 
     // Check if the password is not empty
     if (isFieldEmpty($password)) {
-        echo "This field can't be empty";
-        return false;
+        return "This field can't be empty";
     }
 
     //check if password match with the one in database
     //TODO
 
-    echo "";
-    return true;
+    return "";
 }
 
 function checkPasswordCreation($password) {
@@ -163,3 +141,4 @@ function isFieldEmpty($field) {
     return false;
 }
 
+?> 
