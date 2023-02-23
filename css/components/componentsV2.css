@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     box-sizing: border-box;
     transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
@@ -13,8 +15,7 @@
     --purple: #a423ba;
 }
 
-.main-button,
-.secondary-button {
+.main-button, .secondary-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,10 +23,10 @@
     height: fit-content;
     width: fit-content;
 
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 400;
 
-    padding: 9px 20px 8px 20px;
+    padding: 8px 20px 7px 20px;
     border-radius: 100px;
     border: none;
     outline: none;
@@ -35,7 +36,7 @@
 .main-button:hover,
 .secondary-button:hover {
     transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
-    transform: scale(1.125);
+    transform: scale(1.1);
 }
 
 /* Main Button -------------------------------------------------------------------------------------------------------------------------------------- */
@@ -57,3 +58,22 @@
 .secondary-button:hover {
     box-shadow: 0 0 35px -10px #ffffff;
 }
+
+/* Third Button ------------------------------------------------------------------------------------------------------------------------------------- */
+.third-button {
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+
+    background: transparent;
+    border: var(--red) 3px solid;
+    color: var(--red);
+
+}
+
+
+
+
+
+

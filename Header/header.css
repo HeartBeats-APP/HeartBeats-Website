@@ -13,15 +13,9 @@
    --purple: #a423ba;
 }
 
-/* Style the body */
-body {
-   font-family: 'Poppins';
-   justify-content: center;
-}
-
 .header {
    height: 4em;
-   width: 89.4%;
+   width: 90%;
    margin-top: 10px;
    padding-left: 1.5em;
    padding-right: .425em;
@@ -36,7 +30,6 @@ body {
    backdrop-filter: blur(10px);
    border: none;
    border-radius: 100px;
-
 }
 
 /* Header background */
@@ -53,11 +46,70 @@ body {
    opacity: .5;
 }
 
+/* Left Part ------------------------------------------------------------------------------------------------------------------- */
 .header-left {
    display: flex;
    align-items: center;
 }
 
+.header-logo {
+   width: 15%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.tab-logo {
+   height: 3em;
+   padding-right: 1vw;
+}
+
+.tab-logo:hover {
+   transform: scale(1.125);
+}
+
+.header-tab {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   width: fit-content;
+   height: 75%;
+   gap: .25em;
+   padding: 0 1.1em 0 .75em;
+   margin: 0 .5vw 0 .5vw;
+}
+
+.header a {
+   height: fit-content;
+   width: fit-content;
+   font-style: medium;
+   color: white;
+   font-size: 1.1em;
+   text-decoration: none;
+   text-align: center;
+}
+
+.tab-icon {
+   width: 2em;
+}
+
+.header-tab:hover {
+   background: rgba(255, 255, 255, .25);
+   border-radius: 100px;
+   transform: scale(1.070);
+   box-shadow: 0 0 25px -10px rgba(0, 0, 0, .5);
+}
+
+.header-tab:hover .header a {
+   color: var(--black);
+}
+
+.header-tab:hover .tab-icon {
+   fill: var(--black)
+}
+
+/* Right Part ------------------------------------------------------------------------------------------------------------------- */
 .header-right {
    width: 100%;
    display: flex;
@@ -66,41 +118,19 @@ body {
 
 }
 
-.header a {
-   height: fit-content;
-   width: fit-content;
-   font-style: medium;
-   color: white;
-   padding: 1vh 1.25vw;
-   font-size: 1.1em;
-   margin-right: .5vw;
-   margin-left: .5vw;
-   text-decoration: none;
-   text-align: center;
-}
-
-.header a:hover {
-   background: white;
-   border-radius: 100px;
-   color: var(--black);
-}
-
-.header img {
-   height: 3em;
-   padding-right: 1vw;
-}
-
-.header img:hover {
-   transform: scale(1.125);
-}
 
 .header-right button {
    scale: .95;
    margin-left: 1vw;
 }
 
-.header-right .second-button {
-   scale: .9;
+.header-right button:hover {
+   transform: scale(1.1);
+}
+
+
+.header-right .third-button {
+   scale: .94;
 }
 
 /* responsive */
@@ -135,12 +165,21 @@ body {
       margin-left: 1em;
    }
 
+   .header-tab {
+      height: 75%;
+      padding: 0 1em 0 1em;
+      margin: 0 .5vw 0 .5vw;
+   }
+
    .header a {
-      font-size: .9em;
+      display: none;
+      margin: 0;
+      padding: 0;
    }
 
    .header img {
       height: 2.5em;
+      padding: 0;
    }
 
    .header button {
@@ -150,33 +189,39 @@ body {
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
 
    .header {
       height: 2.5em;
-      width: 83%;
-      margin-right: 0.2em;
-      margin-left: 0.5em;
-   }
-
-   .header a {
-      font-size: .8em;
-      padding: .4em .5em;
+      width: 90%;
+      margin-right: .1em;
+      margin-left: 0;
    }
 
    .header img {
-      height: 2.25em;
-      margin-left: -.75em;
+      height: 2em;
+      padding: 0;
    }
 
-   .header button {
-      scale: .75;
+   .header-logo {
+      width: 1.25em;
+   }
+
+   .tab-icon {
+      width: 1.25em;
    }
 
    .header button {
       height: 2em;
-      padding: 0.10em 0.65em;
-      margin-right: -0.5em;
+   }
+
+   .header button {
+      height: 2em;
+      padding: 0 ;
+   }
+
+   .third-button {
+      font-size: 1em;
    }
 
 }

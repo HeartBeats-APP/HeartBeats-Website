@@ -2,19 +2,37 @@
 
 document.write(`
 
-<link rel="stylesheet" href="/header/header.css"/>
-<link rel="stylesheet" href="header/header.css"/>
-<link rel="stylesheet" href="/css/components/components.css"/>
+<link rel="stylesheet" href="/Header/header.css"/>
+<link rel="stylesheet" href="/css/components/componentsV2.css"/>
+
 
 <div class="header">
     <div class="header-left">
-        <img onclick="window.location.href='/index.html'" src="/images/Logo.svg" alt="HeartBeats Logo" />
-        <a href="/dashboard.html">Dashboard</a>
-        <a href="/q&a.html">Q&A</a>
-        <a href="/contact.html">Contact</a>
+
+        <div class="header-logo">
+            <img class="tab-logo" onclick="window.location.href='/index.html'" src="/Header/svg/Logo.svg"
+                alt="HeartBeats Logo" />
+        </div>
+
+        <div class="header-tab" onclick="window.location.href='/dashboard.html'">
+            <img class="tab-icon" src="/Header/svg/Dashboard.svg" width="50" height="50" alt="" />
+            <a>Dashboard</a>
+        </div>
+
+        <div class="header-tab" onclick="window.location.href='/q&a.html'">
+            <img class="tab-icon" src="/Header/svg/Questions.svg" width="50" height="50" alt="" />
+            <a>Q&A</a>
+        </div>
+
+        <div class="header-tab" onclick="window.location.href='/contact.html'">
+            <img class="tab-icon" src="/Header/svg/Chat.svg" width="50" height="50" alt="" />
+            <a>Contact</a>
+        </div>
+
+
     </div>
     <div class="header-right">
-        <button onclick="window.location.href='/account/login.html'" class="second-button orange">Account</button>
+        <button onclick="window.location.href='/account/login.html'" class="third-button">Account</button>
         <button class="language-button">En</button>
     </div>
 </div>
