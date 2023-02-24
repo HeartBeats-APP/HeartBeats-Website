@@ -118,20 +118,11 @@
 
 }
 
-
 .header-right button {
-   scale: .95;
    margin-left: 1vw;
 }
 
-.header-right button:hover {
-   transform: scale(1.1);
-}
 
-
-.header-right .third-button {
-   scale: .94;
-}
 
 /* responsive */
 @media screen and (max-width: 1000px) {

@@ -13,9 +13,10 @@
     --yellow: #f7c23b;
     --red: #e93d57;
     --purple: #a423ba;
+    font-family: 'Poppins';
 }
 
-.main-button, .secondary-button {
+.main-button, .secondary-button, .third-button, .language-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +35,9 @@
 }
 
 .main-button:hover,
-.secondary-button:hover {
+.secondary-button:hover,
+.third-button:hover,
+.language-button:hover {
     transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
     transform: scale(1.1);
 }
@@ -61,19 +64,16 @@
 
 /* Third Button ------------------------------------------------------------------------------------------------------------------------------------- */
 .third-button {
-    text-align: center;
-    width: fit-content;
-    height: fit-content;
-    align-items: center;
-
     background: transparent;
     border: var(--red) 3px solid;
     color: var(--red);
 
 }
 
-
-
-
-
-
+/* Language button --------------------------------------------------------------------------------------------------------------*/
+.language-button {
+    background-color: white;
+    border-radius: 100px;
+    border: none;
+    color: #e93d57;
+}
