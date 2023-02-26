@@ -4,11 +4,12 @@ require_once 'entries-checker.php';
 $name = $_REQUEST['name'];
 $email = $_REQUEST['email'];
 $password = $_REQUEST['password'];
-$passwordConfirm = $_REQUEST['passwordConfirmation'];    
+$passwordConfirm = $_REQUEST['passwordConfirmation'];   
+$zxcvbnSS = $_REQUEST['zxcvbnSS']; 
 
-$emailErrorMessage = checkEmailAdress($email, true);
-$passwordErrorMessage = checkPassword($email, $password);
+$emailErrorMessage = checkEmailAdress($email, 'register');
 $nameErrorMessage = checkName($name);
+$passwordErrorMessage = checkPasswordCreation($password, $zxcvbnSS);
 $passwordConfirmErrorMessage = checkPasswordConfirmation($password, $passwordConfirm);
 
 if ($emailErrorMessage != "" || $passwordErrorMessage != "") {
