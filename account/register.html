@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="/css/components/componentsV2.css" />
   <link rel="stylesheet" href="css/form-card.css" />
   <link rel="stylesheet" href="css/register.css" />
+  <link rel="stylesheet" href="css/password-recovery.css" />
 
   <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
 
 </head>
 
@@ -22,12 +24,38 @@
     <script src="/Header/header.js"></script>
 
     <div class="login-card">
-      <div class="login-wrapper">
+      <div id="card-content" class="login-wrapper">
 
         <div class="login-text">
-          <h1>Create an account</h1>
-          <p>Welcome aboard.</p>
+          <h1 id="title">Create an account</h1>
+          <p id="subtitle">Welcome aboard.</p>
         </div>
+
+        <!-- Email animation -->
+        <div class="animation-wrapper">
+
+          <div class="email-animation" id="email-animation">
+
+            <script>
+              var animation = bodymovin.loadAnimation({
+                container: document.getElementById('email-animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'json/email-sent-animation.json',
+                name: 'Email Sent Animation',
+                animationSpeed: 0.5,
+              });
+            </script>
+
+          </div>
+        </div>
+        <style>
+          .email-animation {
+            display: none;
+          }
+        </style>
+        <!-- Email animation ends here -->
 
         <form id="register-form" action="" method="POST">
 
@@ -62,8 +90,10 @@
           </div>
         </form>
 
-        <div class="buttons-area">
-          <button onclick="createAccount()" class="main-button g-recaptcha" type="submit" form="register-form" data-sitekey="6LcDxpkkAAAAAE4Jdj3-JZD6ugtBsZjdeEtfz5I5" data-callback="createAccount"  data-action='submit'>Create</button>
+        <div id="buttons-area" class="buttons-area">
+          <button onclick="createAccount()" class="main-button g-recaptcha" type="submit" form="register-form"
+            data-sitekey="6LcDxpkkAAAAAE4Jdj3-JZD6ugtBsZjdeEtfz5I5" data-callback="createAccount"
+            data-action='submit'>Create</button>
           <button onclick="window.location.href='login.html'" class="secondary-button">Login instead</button>
         </div>
 

@@ -42,7 +42,13 @@ function createAccount() {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
-                window.location.href = "/dashboard.html";
+                document.getElementById("title").innerHTML = "You're almost there!";
+                document.getElementById("subtitle").innerHTML = "We've sent you an email to confirm your account. <br> Please check your inbox and click the link to complete the registration process.";
+                document.getElementById("register-form").remove();
+                document.getElementById("buttons-area").remove();
+                document.getElementById("email-animation").style.display = "block";
+
+                
             }
             else {
                 try {
