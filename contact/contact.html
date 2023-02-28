@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HeartBeats</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/components/componentsV2.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+
+    <script src="js/sending-button.js"></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Header -->
+        <script src="/header/header.js"></script>
+
+        <div class="assistance-card">
+            <div class="text-wrapper">
+
+                <h1>Need assistance?</h1>
+                <p>We're here to help, feel free to contact us</p>
+
+            </div>
+            <div class="icon-wrapper">
+
+                <img class="assistance-icon" src="svg/arrow.svg" alt="Assistance Icon" />
+
+            </div>
+        </div>
+        <div class="feedback-card">
+
+            <h1>Send feedback</h1>
+            <p>If you need to tell us something, it's here</p>
+
+            <div class="adaptive-margin-height"></div>
+            <input class="title-field" id="title" type="text" placeholder="Title" spellcheck="false" autocomplete="off">
+            <div id="title-error-message" class="error-message"></div>
+
+            <div class="adaptive-margin-height"></div>
+
+            <textarea class="text-field" id="message" placeholder="Write your message here" cols="30" rows="10" autocomplete="off" spellcheck="true"></textarea>
+            <div id="text-error-message" class="error-message"></div>
+            <div class="buttons-area">
+                <button class="main-button" onclick="sendFeedback()">Send</button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script src="js/feedback.js"></script>
+</body>
+
+</html>

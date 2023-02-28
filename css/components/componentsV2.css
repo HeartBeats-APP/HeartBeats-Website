@@ -27,10 +27,10 @@
     height: fit-content;
     width: fit-content;
 
-    font-size: 1em;
+    font-size: clamp(.75em, 2vw, 1em);
     font-weight: 400;
 
-    padding: 8px 20px 7px 20px;
+    padding: clamp(0px, 1vw, 8px) clamp(10px, 2vw, 20px) clamp(3px, 1vw, 7px) clamp(10px, 2vw, 20px);
     border-radius: 100px;
     border: none;
     outline: none;
@@ -42,7 +42,7 @@
 .third-button:hover,
 .language-button:hover {
     transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
-    transform: scale(1.1);
+    transform: scale(1.125);
 }
 
 /* Main Button -------------------------------------------------------------------------------------------------------------------------------------- */
@@ -68,7 +68,7 @@
 /* Third Button ------------------------------------------------------------------------------------------------------------------------------------- */
 .third-button {
     background: transparent;
-    border: var(--red) 3px solid;
+    border: var(--red) clamp(2px, .5vw, 3px) solid;
     color: var(--red);
 
 }
@@ -122,4 +122,10 @@ input[type="checkbox"]:checked+label:after {
 
 label[for="switch"]:active:after {
     width: 25px;
+}
+
+/* Adaptive margin ---------------------------------------------------------------------------------------------------------------------------------- */
+
+.adaptive-margin-height {
+    height: clamp(0em, 4vh, 5em);
 }

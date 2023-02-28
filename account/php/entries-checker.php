@@ -1,5 +1,5 @@
 <?php
-require_once 'private-compute-core.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/protected-computing/private-compute-core.php');
 
 function checkName($name)
 {

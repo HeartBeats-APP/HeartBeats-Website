@@ -24,7 +24,7 @@ document.write(`
             <a>Q&A</a>
         </div>
 
-        <div class="header-tab" onclick="window.location.href='/contact.html'">
+        <div class="header-tab" onclick="window.location.href='/contact/contact.html'">
             <img class="tab-icon" src="/Header/svg/Chat.svg" width="50" height="50" alt="" />
             <a>Contact</a>
         </div>
