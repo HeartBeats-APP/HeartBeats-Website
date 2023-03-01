@@ -179,3 +179,57 @@ p {
     font-size: clamp(.5em, 1vw, 1em);
     margin-left: 1.5em;
 }
+
+.animation-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 25%;
+    margin-left: 37%;
+    padding-top: 10em;
+    margin-bottom: -10em;
+}
+
+.animatinon {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .animation-wrapper {
+        margin-left: 33%;
+        width: 30%;
+        height: 30%;
+        padding-top: 6em;
+        margin-bottom: -5em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .animation-wrapper {
+        margin-left: 33%;
+        width: 35%;
+        height: 35%;
+        padding-top: 6em;
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .animation-wrapper {
+        margin-left: 27%;
+        width: 50%;
+        height: 50%;
+        padding-top: 6em;
+        margin-bottom: 0;
+    }
+}
+
+    

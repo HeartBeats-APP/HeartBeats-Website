@@ -126,6 +126,6 @@ label[for="switch"]:active:after {
 
 /* Adaptive margin ---------------------------------------------------------------------------------------------------------------------------------- */
 
-.adaptive-margin-height {
-    height: clamp(0em, 4vh, 5em);
+.adaptive-margin {
+    height: clamp(0em, calc(var(--coef) * 1vh), 20em);
 }

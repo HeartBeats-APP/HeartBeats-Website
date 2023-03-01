@@ -9,7 +9,10 @@ function sendFeedback() {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
-                window.location.href = "/dashboard.html";
+                document.getElementById("title").innerHTML = "Thank you for your feedback!";
+                document.getElementById("subtitle").innerHTML = "We appreciate your time and effort";
+                document.getElementById("input-fields").remove();
+                document.getElementById("animation").style.display = "block";
             }
             else {
                 try {

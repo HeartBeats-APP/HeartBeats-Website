@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HeartBeats</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/components/componentsV2.css" />
+    <link rel="stylesheet" href="css/account.css" />
+    <link rel="stylesheet" href="css/badges.css" />
+
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Header -->
+        <script src="/header/header.js"></script>
+
+        <!-- Main -->
+        <div class="card-wrapper">
+
+            <div class="adaptive-margin" style="--coef: 15"></div>
+            <div class="main-text">
+                <h1>Account</h1>
+                <p>Here you can change your account settings.</p>
+            </div>
+
+            <div class="card">
+                <img class="card-icon" src="svg/account-icon.svg"></img>
+                <h3>Name</h3> <!-- TODO: Username -->
+                <h5>Matthew</h5>
+                <div class="to-right">
+                    <div class="badge admin">Admin</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-icon" src="svg/email-address-icon.svg"></img>
+                <h3>Email</h3> <!-- TODO: Username -->
+                <h5>matthieu.admin@heart-beats.fr</h5>
+                <div class="to-right">
+                    <h4>Change</h4>
+                    <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-icon" src="svg/password-icon.svg"></img>
+                <h3>Password</h3> <!-- TODO: Username -->
+                <h5>**********</h5>
+                <div onclick="window.location.href='password-recovery.html'" class="to-right clickable">
+                    <h4>Change</h4>
+                    <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+</body>
+
+</html>
