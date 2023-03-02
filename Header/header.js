@@ -32,10 +32,28 @@ document.write(`
 
     </div>
     <div class="header-right">
-        <button onclick="window.location.href='/account/login.html'" class="third-button">Account</button>
+        <button id="account-button" onclick="adaptiveLoginButton()" class="third-button"></button>
         <button class="language-button">En</button>
     </div>
 </div>
 
+<script>
+    if (localStorage.getItem("connected") == 'false') {
+        document.getElementById("account-button").innerHTML = "Login";
+    } else {
+        document.getElementById("account-button").innerHTML = "Account";
+    }
+</script>
 
 `);
+
+function adaptiveLoginButton() {
+    if (localStorage.getItem("connected") == "true") {
+        document.getElementById("account-button").innerHTML = "Account";
+        window.location.href = "/account/user.html";
+
+    } else {
+        document.getElementById("account-button").innerHTML = "Login";
+        window.location.href = "/account/login.html";
+    }
+}

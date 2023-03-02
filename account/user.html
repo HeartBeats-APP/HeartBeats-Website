@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/account.css" />
     <link rel="stylesheet" href="css/badges.css" />
 
-
 </head>
 
 <body>
@@ -28,19 +27,27 @@
                 <p>Here you can change your account settings.</p>
             </div>
 
+            <div id="setup-card" class="card new-device" onclick="addNewDevice()">
+                <img class="card-icon" src="svg/pairing-icon.svg"></img>
+                <h3>Device Setup</h3>
+                <h5 class="details">Click to pair a new device and add it to your account</h5>
+            </div>
+
             <div class="card">
                 <img class="card-icon" src="svg/account-icon.svg"></img>
                 <h3>Name</h3>
-                <h5>Matthew</h5> <!-- TODO: name -->
-                <div class="to-right">
-                    <div class="badge admin">Admin</div>
+                <div class="badge admin">Admin</div>
+                <h5 class="details">Matthew</h5> <!-- TODO: name -->
+                <div class="to-right clickable" onclick="logout()">
+                    <h4>Logout</h4>
+                    <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
                 </div>
             </div>
 
             <div class="card">
                 <img class="card-icon" src="svg/email-address-icon.svg"></img>
                 <h3>Email</h3>
-                <h5>matthieu.admin@heart-beats.fr</h5> <!-- TODO: email -->
+                <h5 class="details">matthieu.admin@heart-beats.fr</h5> <!-- TODO: email -->
                 <div class="to-right">
                     <h4>Change</h4>
                     <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
@@ -50,7 +57,7 @@
             <div class="card">
                 <img class="card-icon" src="svg/password-icon.svg"></img>
                 <h3>Password</h3>
-                <h5>**********</h5>
+                <h5 class="details">**********</h5>
                 <div onclick="window.location.href='password-recovery.html'" class="to-right clickable">
                     <h4>Change</h4>
                     <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
@@ -75,7 +82,7 @@
                         <h4>Jan 01 2023</h4>
                     </div>
                     <div id="buttons-row" class="card-row">
-                        <button class="main-button">Remove</button>
+                        <button onclick="deleteDevice()" id="remove-button" class="main-button">Remove</button>
                         <button class="secondary-button">Copy Infos</button>
                     </div>
                 </div>
@@ -112,22 +119,24 @@
                         </div>
                     </div>
 
-                <div class="toggle-container">
-                    <input type="radio" id="radio1" name="toggle" value="1" style="--selected: 1">
-                    <label for="radio1">Battery Saver</label>
-                    <input type="radio" id="radio2" name="toggle" value="2" style="--selected: 2">
-                    <label for="radio2">Normal</label>
-                    <input type="radio" id="radio3" name="toggle" value="3" style="--selected: 3">
-                    <label for="radio3">Debug</label>
-                    <span class="toggle-state"></span>
+                    <div class="toggle-container">
+                        <input type="radio" id="radio1" name="toggle" value="1" style="--selected: 1">
+                        <label for="radio1">Battery Saver</label>
+                        <input type="radio" id="radio2" name="toggle" value="2" style="--selected: 2" checked>
+                        <label for="radio2">Normal</label>
+                        <input type="radio" id="radio3" name="toggle" value="3" style="--selected: 3">
+                        <label for="radio3">Debug</label>
+                        <span class="toggle-state"></span>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-    </div>
     </div>
 
 </body>
+<script src="js/user-account.js"></script>
+<script>
+    updatePageInfo();
+</script>
 
 </html>

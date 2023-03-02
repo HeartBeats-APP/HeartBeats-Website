@@ -35,9 +35,10 @@ body {
 
 h1 {
     color: white;
-    font-size: clamp(1em, 3vw, 2em);
+    font-size: clamp(1em, 3vw, 1.75em);
     font-weight: 600;
     text-align: left;
+    justify-content: center;
     height: fit-content;
     padding: 0;
     margin: 0;
@@ -45,7 +46,7 @@ h1 {
 
 p {
     color: white;
-    font-size: clamp(.7em, 2vw, 1.2em);
+    font-size: clamp(.7em, 2vw, 1em);
     font-weight: 400;
     text-align: left;
     height: fit-content;
@@ -62,9 +63,9 @@ p {
 
     width: clamp(20em, 75vw, 75%);
     height: fit-content;
-    max-height: 10em;
+    max-height: 8em;
     border-radius: 15px;
-    padding: 2em;
+    padding: 1.75em 2em 2em 2em;
     margin-top: 10em;
     margin-bottom: 2em;
     background-color: rgb(255, 255, 255, 0.25);
@@ -79,7 +80,7 @@ p {
     
     width: 100%;
     height: 100%;
-    gap: 1vh;
+    gap: .5vh;
 }
 
 .icon-wrapper {

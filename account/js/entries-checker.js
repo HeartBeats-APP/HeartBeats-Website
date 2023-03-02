@@ -11,6 +11,8 @@ function login() {
 
             if (this.responseText == true) {
                 window.location.href = "/dashboard.html";
+                localStorage.setItem('email', email);
+                localStorage.setItem('connected', "true");
             }
             else {
                 try {
