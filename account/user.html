@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/components/componentsV2.css" />
     <link rel="stylesheet" href="css/account.css" />
+    <link rel="stylesheet" href="css/user.css" />
     <link rel="stylesheet" href="css/badges.css" />
 
 </head>
@@ -23,7 +24,10 @@
 
             <div class="adaptive-margin" style="--coef: 15"></div>
             <div class="main-text">
-                <h1>Account</h1>
+                <div id="account-row" class="card-row">
+                    <h1>Account</h1>
+                    <div class="to-right secondary-button" onclick="logout()">Logout</div>
+                </div>
                 <p>Here you can change your account settings.</p>
             </div>
 
@@ -38,8 +42,8 @@
                 <h3>Name</h3>
                 <div class="badge admin">Admin</div>
                 <h5 class="details">Matthew</h5> <!-- TODO: name -->
-                <div class="to-right clickable" onclick="logout()">
-                    <h4>Logout</h4>
+                <div class="to-right not-clickable">
+                    <h4>Change</h4>
                     <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
                 </div>
             </div>
@@ -48,7 +52,7 @@
                 <img class="card-icon" src="svg/email-address-icon.svg"></img>
                 <h3>Email</h3>
                 <h5 class="details">matthieu.admin@heart-beats.fr</h5> <!-- TODO: email -->
-                <div class="to-right">
+                <div class="to-right not-clickable">
                     <h4>Change</h4>
                     <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
                 </div>
@@ -137,6 +141,9 @@
 <script src="js/user-account.js"></script>
 <script>
     updatePageInfo();
+    if (localStorage.getItem("connected") == 'false') {
+        window.location.href = "login.html";
+    }
 </script>
 
 </html>

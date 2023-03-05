@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    transition: all 1s cubic-bezier(0.075, 0.8, 0.165, 1);
+
+    --transition: cubic-bezier(0.075, 0.8, 0.165, 1);
+    --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+    --second-gradient: linear-gradient(100deg, #f7c23b 0%, #e93d57 50%, #a423ba 100%);
+    --black: #1c1a1a;
+    --yellow: #f7c23b;
+    --red: #e93d57;
+    --purple: #a423ba;
+}
+
+
+/* Pulse 1 Card ------------------------------------------------------------------------------------------------------------------------------------- */
+
+#device-card {
+    display: none;
+}
+
+.card-image {
+    height: clamp(5em, 10vw, 20em);
+    width: clamp(5em, 20vw, 25em);
+}
+
+.card-column h4, .card-column h5, .card-column p {
+    padding-top: 3px;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: clamp(7em, 100%, 25em);
+    height: clamp(2em, fit-content, 3em);
+    gap: .5em;
+}
+
+.card-column {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    gap: 1vh;
+}
+
+#buttons-row {
+    gap: 1.5vw;
+}
+
+#device-controls {
+    background: rgb(255, 255, 255, 0.25);
+    border-radius: 8px;
+    padding: 1vh clamp(.5em, 1vw, 1vw) 1vh clamp(.5em, 1vw, 1vw);
+}
+
+.measure-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 50%;
+    height: fit-content;
+    gap: .5vw;
+}
+
+/* New Device card ---------------------------------------------------------------------------------------------------------------------------------- */
+
+.new-device {
+    background: rgb(255, 255, 255, 0.25);
+}
+
+.new-device:hover {
+    cursor: pointer;
+    transform: scale(1.025);
+    background: rgb(255, 255, 255, 0.15);
+}
+
+/* Responsive --------------------------------------------------------------------------------------------------------------------------------------- */
+@media screen and (max-width: 1200px) {
+
+    #device-card {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 2em;
+    }
+
+    .card .card-image {
+        height: clamp(5em, 12vw, 15em);
+        width: clamp(5em, 8vw, 15em);
+        margin-left: 11vw;
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+    }
+
+    #device-infos{
+        width: clamp(10em, 35vw, 25em);
+    }
+
+    #device-controls {
+        grid-row: 2 / 3;
+        grid-column: 1 / 3;
+    }
+
+}
