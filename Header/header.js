@@ -24,7 +24,7 @@ document.write(`
             <a>Q&A</a>
         </div>
 
-        <div class="header-tab" onclick="window.location.href='/contact.html'">
+        <div class="header-tab" onclick="window.location.href='/contact/contact.html'">
             <img class="tab-icon" src="/Header/svg/Chat.svg" width="50" height="50" alt="" />
             <a>Contact</a>
         </div>
@@ -32,10 +32,28 @@ document.write(`
 
     </div>
     <div class="header-right">
-        <button onclick="window.location.href='/account/login.html'" class="third-button">Account</button>
+        <button id="account-button" onclick="adaptiveLoginButton()" class="third-button"></button>
         <button class="language-button">En</button>
     </div>
 </div>
 
+<script>
+    if (localStorage.getItem("connected") == 'false') {
+        document.getElementById("account-button").innerHTML = "Login";
+    } else {
+        document.getElementById("account-button").innerHTML = "Account";
+    }
+</script>
 
 `);
+
+function adaptiveLoginButton() {
+    if (localStorage.getItem("connected") == "true") {
+        document.getElementById("account-button").innerHTML = "Account";
+        window.location.href = "/account/user.html";
+
+    } else {
+        document.getElementById("account-button").innerHTML = "Login";
+        window.location.href = "/account/login.html";
+    }
+}

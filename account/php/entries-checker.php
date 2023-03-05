@@ -1,9 +1,8 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/protected-computing/private-compute-core.php');
 
-$forbiddenCharacters = array("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", ";", ":", "'", ",", ".", "<", ">", "/", "?", "~", "`", "|", "\\", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "É", "È", "Ê", "Ë", "À", "Â", "Ä", "Ù", "Û", "Ü", "Î", "Ï", "Ô", "Ö", "Ç", "œ", "æ", "Œ", "Æ", "€", "£", "¥", "¤", "§", "°", "²", "³", "µ", "¶", "¹", "¼", "½", "¾", "¿", "¡", "«", "»");
-$forbiddenNames = array("admin", "root", "administrator", "moderator", "mod", "moderateur", "fdp", "connard", "con", "connasse", "pute", "salope", "administrateur", "administratrice", "marie-soline", "marie soline", "marie solin", "marie-solin", "superadmin", "super-admin", "super admin", "super-administrator", "super administrator", "super-administrateur", "super administrateur", "super-administratrice", "super administratrice", "super-mod", "super mod", "super-moderator", "super moderator", "super-moderateur", "super moderateur", "super-moderatrice", "super moderatrice", "super-modérateur", "super modérateur", "super-modératrice", "super modératrice", "super-modérateur", "super modérateur", "sup", "moderateur", "mod");
-
-function checkName($name) {
+function checkName($name)
+{
 
     // Check if name is not empty
     if (isFieldEmpty($name)) {
@@ -15,26 +14,28 @@ function checkName($name) {
         return "The name is too short";
     }
 
-    // Check if name has not forbidden characters
-    global $forbiddenCharacters;
-    foreach ($forbiddenCharacters as $char) {
-        if (strpos($name, $char) !== false) {
-            return "The name can't contain special characters";
-        }
+    // Security layer
+    $IFSresult = IFS($name);
+    if ($IFSresult != "") {
+        return $IFSresult;
     }
 
-    // Check if the name is not forbidden
-    global $forbiddenNames;
-    $name = strtolower($name);
-    if (in_array($name, $forbiddenNames)) {
-        return "This name can't be used";
+    $INFresult = INF($name);
+    if ($INFresult != "") {
+        return $INFresult;
+    }
+
+    //check if name contains only letters, whitespaces, dashes and accents
+    if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+        return "The name can only contain letters, whitespaces and dashes";
     }
 
     return "";
 }
 
-function checkEmailAdress($email, $emailNeedtoExist) {
-   
+function checkEmailAdress($email, $action)
+{
+
     // Check if the email is not empty
     if (isFieldEmpty($email)) {
         return "This field can't be empty";
@@ -45,20 +46,38 @@ function checkEmailAdress($email, $emailNeedtoExist) {
         return "This email is not valid";
     }
 
-    if ($emailNeedtoExist) {
+    // Security layer
+    $IFSresult = IFS($email);
+    if ($IFSresult != "") {
+        return $IFSresult;
+    }
 
-        //check if email exist in database
+    if ($action == "register") {
+        // Check if the email is not already used
+        //TODO
+    } else if ($action == "login") {
+        // Check if the email exists
         //TODO
     }
+
+
+
 
     return "";
 }
 
-function checkPassword($email, $password) {
+function checkPasswordEmailCombination($email, $password)
+{
 
     // Check if the password is not empty
     if (isFieldEmpty($password)) {
         return "This field can't be empty";
+    }
+
+    // Security layer
+    $IFSresult = IFS($password);
+    if ($IFSresult != "") {
+        return $IFSresult;
     }
 
     //check if password match with the one in database
@@ -67,18 +86,30 @@ function checkPassword($email, $password) {
     return "";
 }
 
-function checkPasswordCreation($password) {
+function checkPasswordCreation($password, $passwordScore)
+{
 
     // Check if the password is not empty
     if (isFieldEmpty($password)) {
         return "This field can't be empty";
     }
 
-    return "";
+    // Check if the password score is not too low
+    if ($passwordScore < 3) {
+        return "The password is too weak";
+    }
 
+    // Security layer
+    $IFSresult = IFS($password);
+    if ($IFSresult != "") {
+        return $IFSresult;
+    }
+
+    return "";
 }
 
-function checkPasswordConfirmation($password, $passwordConfirmation) {
+function checkPasswordConfirmation($password, $passwordConfirmation)
+{
 
     // Check if the password confirmation is not empty
     if (isFieldEmpty($passwordConfirmation)) {
@@ -90,10 +121,17 @@ function checkPasswordConfirmation($password, $passwordConfirmation) {
         return "Passwords doesn't match";
     }
 
+    // Security layer
+    $IFSresult = IFS($passwordConfirmation);
+    if ($IFSresult != "") {
+        return $IFSresult;
+    }
+
     return "";
 }
 
-function isFieldEmpty($field) {
+function isFieldEmpty($field)
+{
     $field = preg_replace('/\s+/', '', $field);
 
     if ($field == "") {
@@ -101,5 +139,3 @@ function isFieldEmpty($field) {
     }
     return false;
 }
-
-?> 

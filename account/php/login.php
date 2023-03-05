@@ -3,9 +3,10 @@ require_once 'entries-checker.php';
 
 $email = $_REQUEST['email'];
 $password = $_REQUEST['password'];
+$stayConnected = $_REQUEST['stayConnected'];
 
-$emailErrorMessage = checkEmailAdress($email, true);
-$passwordErrorMessage = checkPassword($email, $password);
+$emailErrorMessage = checkEmailAdress($email, 'login');
+$passwordErrorMessage = checkPasswordEmailCombination($email, $password);
 
 if ($emailErrorMessage != "" || $passwordErrorMessage != "") {
     echo json_encode(array(
@@ -15,8 +16,9 @@ if ($emailErrorMessage != "" || $passwordErrorMessage != "") {
     return;
 } 
 
-echo true;
 // TODO: Log the user in
+// TODO: If stayConnected is true, set a cookie
+echo true;
 
 
 ?>

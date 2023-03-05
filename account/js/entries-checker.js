@@ -2,14 +2,17 @@ function login() {
 
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+    var stayConnected = document.getElementById("switch").checked;
 
     var request = new XMLHttpRequest();
-    request.open("GET", "php/login.php?email=" + email + "&password=" + password, true);
+    request.open("GET", "php/login.php?email=" + email + "&password=" + password + "&stayConnected=" + stayConnected, true);
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
                 window.location.href = "/dashboard.html";
+                localStorage.setItem('email', email);
+                localStorage.setItem('connected', "true");
             }
             else {
                 try {
@@ -32,22 +35,22 @@ function createAccount() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var passwordConfirmation = document.getElementById("password-confirmation").value;
-
-    //check if password is strong enough
-    var result = zxcvbn(password);
-    if (result.score < 3) {
-        document.getElementById("password-warning-message").innerHTML = "Password is too weak";
-        return;
-    }
+    var zxcvbnSS = zxcvbn(password);
 
     //Send HTTPS request to server
     var request = new XMLHttpRequest();
-    request.open("GET", "php/register.php?name=" + name + "&email=" + email + "&password=" + password + "&passwordConfirmation=" + passwordConfirmation, true);
+    request.open("GET", "php/register.php?name=" + name + "&email=" + email + "&password=" + password + "&passwordConfirmation=" + passwordConfirmation +"&zxcvbnSS=" + zxcvbnSS.score, true);
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
-                window.location.href = "/dashboard.html";
+                document.getElementById("title").innerHTML = "You're almost there!";
+                document.getElementById("subtitle").innerHTML = "We've sent you an email to confirm your account. <br> Please check your inbox and click the link to complete the registration process.";
+                document.getElementById("register-form").remove();
+                document.getElementById("buttons-area").remove();
+                document.getElementById("email-animation").style.display = "block";
+
+                
             }
             else {
                 try {
@@ -106,8 +109,5 @@ function recoverPassword() {
     };
 
     request.send();
-
-
-
 
 }
