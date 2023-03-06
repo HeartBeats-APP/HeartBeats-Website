@@ -112,8 +112,17 @@ function addNewDevice() {
                 updatePageInfo();
             }
             else {
-                localStorage.setItem('serial', "");
+                // If the device has not been registered, display the error message and remove the device info from the local storage
                 localStorage.setItem('deviceRegistered', "false");
+                localStorage.setItem('purshaseDate', "");
+                localStorage.setItem('serialNumber', "");
+
+                try {
+                    var response = JSON.parse(this.responseText);
+                    alert(response.message);
+                } catch (e) {
+                    // handle the error
+                }
             }
         }
     };
