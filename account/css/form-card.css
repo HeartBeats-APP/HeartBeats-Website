@@ -17,7 +17,7 @@ body {
     background-image: url("../svg/login-background.svg");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 80% 80%;
+    background-size: clamp(25em, 50%, 60em);
     backdrop-filter: blur(150px);
     margin: 0px;
     overflow: hidden;

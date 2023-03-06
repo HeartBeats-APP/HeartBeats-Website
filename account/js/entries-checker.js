@@ -10,9 +10,13 @@ function login() {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
+
+                // Connect the user
                 window.location.href = "/dashboard.html";
-                localStorage.setItem('email', email);
                 localStorage.setItem('connected', "true");
+                localStorage.setItem('email', email);
+                localStorage.setItem('stayConnected', stayConnected);
+
             }
             else {
                 try {
@@ -21,6 +25,8 @@ function login() {
                     document.getElementById("email-warning-message").innerHTML = response.emailErrorMessage;
                     document.getElementById("password-warning-message").innerHTML = response.passwordErrorMessage;
                 } catch (e) {
+
+                    // TODO: don't print the error message but store it somewhere
                     document.getElementById("email-warning-message").innerHTML = this.responseText;
                 }
             }
@@ -30,7 +36,7 @@ function login() {
     request.send();
 }
 
-function createAccount() {
+function createAccount() { /* AKA register */
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -43,6 +49,13 @@ function createAccount() {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
+            /* If the user account has been correctly created */
+
+            /* Store the data in the local storage */
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+
+            /* Update the page */
             if (this.responseText == true) {
                 document.getElementById("title").innerHTML = "You're almost there!";
                 document.getElementById("subtitle").innerHTML = "We've sent you an email to confirm your account. <br> Please check your inbox and click the link to complete the registration process.";
@@ -50,17 +63,18 @@ function createAccount() {
                 document.getElementById("buttons-area").remove();
                 document.getElementById("email-animation").style.display = "block";
 
-                
             }
             else {
                 try {
-                    // Parse the JSON response
+                    // Handle the JSON response
                     var response = JSON.parse(this.responseText);
                     document.getElementById("name-warning-message").innerHTML = response.nameErrorMessage;
                     document.getElementById("email-warning-message").innerHTML = response.emailErrorMessage;
                     document.getElementById("password-warning-message").innerHTML = response.passwordErrorMessage;
                     document.getElementById("passwordConfirm-warning-message").innerHTML = response.passwordConfirmErrorMessage;
                 } catch (e) {
+
+                    // TODO: don't print the error message but store it somewhere
                     document.getElementById("name-warning-message").innerHTML = this.responseText;
                 }
             }
@@ -81,15 +95,14 @@ function recoverPassword() {
 
             if (this.responseText == true) {
 
-                // update login text
+                // Update login text
                 document.getElementById("title").innerHTML = "Check your inbox";
                 document.getElementById("subtitle").innerHTML = "If your account exist, we'll send you an email with a new password inside";
-
                 document.getElementById("login-field").remove();
                 document.getElementById("email-animation").style.display = "block";
 
 
-                // change button text
+                // Change button text
                 document.getElementById("submit-button-passwordRecovery").innerHTML = "Back to login";
                 document.getElementById("submit-button-passwordRecovery").addEventListener("click", function () {
                     window.location.href = "login.html";
@@ -98,7 +111,8 @@ function recoverPassword() {
             }
             else {
                 try {
-                    // Parse the JSON response
+
+                    // Handle the JSON response
                     var response = JSON.parse(this.responseText);
                     document.getElementById("email-warning-message").innerHTML = response.emailErrorMessage;
                 } catch (e) {

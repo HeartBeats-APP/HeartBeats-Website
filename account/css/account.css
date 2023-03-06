@@ -12,15 +12,8 @@
 }
 
 body {
-    background-color: var(--black);
-    background-image: url("/account/svg/login-background.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 85%;
-    backdrop-filter: blur(150px);
-    margin: 0px;
-    overflow-y: visible;
     overflow-x: hidden;
+    overflow-y: visible;
 }
 
 .wrapper {
@@ -73,7 +66,7 @@ h3 {
     text-align: left;
     align-items: center;
     height: fit-content;
-    width: clamp(25em, 20vw, 20em);
+    width: clamp(10em, 50%, 20em);
     padding: 0;
     margin: 0;
 }
@@ -83,6 +76,7 @@ h4 {
     font-size: clamp(.5em, 1.4vw, 1em);
     font-weight: 400;
     text-align: left;
+    flex-wrap: nowrap;
     align-items: center;
     height: fit-content;
     width: fit-content;

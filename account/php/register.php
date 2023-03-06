@@ -7,12 +7,16 @@ $password = $_REQUEST['password'];
 $passwordConfirm = $_REQUEST['passwordConfirmation'];   
 $zxcvbnSS = $_REQUEST['zxcvbnSS']; 
 
-$emailErrorMessage = checkEmailAdress($email, 'register');
+$emailErrorMessage = checkEmailAdress($email);
 $nameErrorMessage = checkName($name);
 $passwordErrorMessage = checkPasswordCreation($password, $zxcvbnSS);
 $passwordConfirmErrorMessage = checkPasswordConfirmation($password, $passwordConfirm);
 
-if ($emailErrorMessage != "" || $passwordErrorMessage != "") {
+// TODO: check if the email is already used. If it is, write the error in $emailErrorMessage.
+
+// TODO: register the user in the database. If it fails, return an error in either $emailErrorMessage or $passwordErrorMessage.
+
+if ($emailErrorMessage != "" || $passwordErrorMessage != "" || $nameErrorMessage != "" || $passwordConfirmErrorMessage != ""){
     echo json_encode(array(
         'emailErrorMessage' => $emailErrorMessage,
         'passwordErrorMessage' => $passwordErrorMessage,
@@ -22,8 +26,8 @@ if ($emailErrorMessage != "" || $passwordErrorMessage != "") {
     return;
 } 
 
+
 echo true;
-// TODO: register the user
 
 
 ?>

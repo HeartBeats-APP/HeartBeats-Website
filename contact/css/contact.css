@@ -11,18 +11,6 @@
     --purple: #a423ba;
 }
 
-body {
-    background-color: var(--black);
-    background-image: url("/account/svg/login-background.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 85%;
-    backdrop-filter: blur(150px);
-    margin: 0px;
-    overflow-y: visible;
-    overflow-x: hidden;
-}
-
 .wrapper {
     display: flex;
     flex-direction: column;
