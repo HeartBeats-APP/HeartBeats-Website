@@ -14,7 +14,33 @@
     --red: #e93d57;
     --purple: #a423ba;
     font-family: 'Poppins';
+    
+    --background-opacity: 0.75;
 }
+
+body {
+    background-color: #1C1A1A;
+    margin: 0;
+}
+
+.background1 {
+    background: linear-gradient(100deg, rgba(28, 26, 26, var(--background-opacity)) 0.5%, rgba(233, 61, 87, var(--background-opacity)) 35%, rgba(164, 35, 186, var(--background-opacity)) 65%, rgba(28, 26, 26, var(--background-opacity)) 100%);
+}
+
+.background2 {
+    background: linear-gradient(155deg, #1C1A1A 15%, #E93D57 30%, #A423BA 75%, #1C1A1A 90%);
+}
+
+/* Warning, this one may not work */
+.background3 {
+    background: radial-gradient(100% 50% at 50% 50%, #1C1A1A 1%, #E93D57 20%, #A423BA 90%, #1C1A1A 100%)
+}
+
+.background4 {
+    background: conic-gradient(from 180deg at 50% 50%, #A423BA -25deg, #1C1A1A 75deg, #E93D57 165deg, #1C1A1A 235deg, #A423BA 345eg, #1C1A1A 425deg);
+}
+
+
 
 .main-button,
 .secondary-button,

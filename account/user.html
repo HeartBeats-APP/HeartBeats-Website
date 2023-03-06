@@ -14,7 +14,7 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="wrapper background1">
 
         <!-- Header -->
         <script src="/header/header.js"></script>
@@ -74,16 +74,16 @@
 
                 <div id="device-infos" class="card-column">
                     <div class="card-row">
-                        <h3>Your device:</h3> <!-- TODO: Username -->
-                        <h4>HeartBeats Pulse 1</h4>
+                        <h3>Your device:</h3>
+                        <h4 class="no-wrap">HeartBeats Pulse 1</h4>
                     </div>
                     <div class="card-row">
-                        <h3>Serial number:</h3> <!-- TODO: Username -->
-                        <h4>61308-WPA3X</h4>
+                        <h3>Serial number:</h3>
+                        <h4 id="serialNumber" class="no-wrap">61308-WPA3X</h4>
                     </div>
                     <div class="card-row">
-                        <h3>Purchase date:</h3> <!-- TODO: Username -->
-                        <h4>Jan 01 2023</h4>
+                        <h3>Purchase date:</h3> 
+                        <h4 id="purshaseDate" class="no-wrap">Jan 01 2023</h4>
                     </div>
                     <div id="buttons-row" class="card-row">
                         <button onclick="deleteDevice()" id="remove-button" class="main-button">Remove</button>
@@ -140,10 +140,11 @@
 </body>
 <script src="js/user-account.js"></script>
 <script>
-    updatePageInfo();
     if (localStorage.getItem("connected") == 'false') {
         window.location.href = "login.html";
     }
+    getDeviceInfo();
+    updatePageInfo();
 </script>
 
 </html>

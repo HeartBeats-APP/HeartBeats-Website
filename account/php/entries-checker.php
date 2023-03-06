@@ -14,26 +14,25 @@ function checkName($name)
         return "The name is too short";
     }
 
-    // Security layer
+    // Check if name contains only letters, whitespaces, dashes and apostrophes
+    if (!preg_match("/^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/", $name)) {
+        return "The name can only contain letters, dashes, and apostrophes";
+    }
+
+    // Security layers
     $IFSresult = IFS($name);
     if ($IFSresult != "") {
         return $IFSresult;
     }
-
     $INFresult = INF($name);
     if ($INFresult != "") {
         return $INFresult;
     }
 
-    //check if name contains only letters, whitespaces, dashes and accents
-    if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
-        return "The name can only contain letters, whitespaces and dashes";
-    }
-
     return "";
 }
 
-function checkEmailAdress($email, $action)
+function checkEmailAdress($email)
 {
 
     // Check if the email is not empty
@@ -51,37 +50,6 @@ function checkEmailAdress($email, $action)
     if ($IFSresult != "") {
         return $IFSresult;
     }
-
-    if ($action == "register") {
-        // Check if the email is not already used
-        //TODO
-    } else if ($action == "login") {
-        // Check if the email exists
-        //TODO
-    }
-
-
-
-
-    return "";
-}
-
-function checkPasswordEmailCombination($email, $password)
-{
-
-    // Check if the password is not empty
-    if (isFieldEmpty($password)) {
-        return "This field can't be empty";
-    }
-
-    // Security layer
-    $IFSresult = IFS($password);
-    if ($IFSresult != "") {
-        return $IFSresult;
-    }
-
-    //check if password match with the one in database
-    //TODO
 
     return "";
 }

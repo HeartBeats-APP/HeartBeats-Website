@@ -1,16 +1,56 @@
 var deviceDeleteConfirmation = '0';
 
+function getDeviceInfo() {
+    var email = localStorage.getItem('email');
+    if (email == null) {
+        window.location.href = "/account/login.html";
+        return;
+    }
+
+    // Get if the user has a device registered
+    var request = new XMLHttpRequest();
+    request.open("GET", "php/get-device-registered.php?email=" + email, true);
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (this.responseText == false) {
+                // If No, display the setup card instead of the device card and remove the device info from the local storage
+                localStorage.setItem('deviceRegistered', "false");
+                localStorage.setItem('purshaseDate', "");
+                localStorage.setItem('serialNumber', "");
+            }
+            else {
+
+                // If Yes, get the device info and display it in the device card
+                try {
+                    var response = JSON.parse(this.responseText);
+                    document.getElementById("purshaseDate").innerHTML = response.purshaseDate;
+                    document.getElementById("serialNumber").innerHTML = response.serialNumber;
+                } catch (e) {
+                    // TODO: don't print the error message but store it somewhere
+                }
+
+                localStorage.setItem('deviceRegistered', "true");
+                localStorage.setItem('purshaseDate', response.purshaseDate);
+                localStorage.setItem('serialNumber', response.serialNumber);
+
+            }
+        }
+    };
+
+    request.send();
+}
 
 function updatePageInfo() {
     localStorage.setItem('deviceDeleteConfirmation', "0");
 
+    // Update the page info (and the responsive layout)
     if (localStorage.getItem('deviceRegistered') == "true") {
         if (window.innerWidth < 1200) {
             document.getElementById("device-card").style.display = "grid";
         } else {
             document.getElementById("device-card").style.display = "flex";
         }
-
         document.getElementById("setup-card").style.display = "none";
     } else {
         document.getElementById("device-card").style.display = "none";
@@ -24,8 +64,19 @@ function deleteDevice() {
         localStorage.setItem('deviceDeleteConfirmation', "1");
         document.getElementById("remove-button").innerHTML = "Click to confirm";
     } else {
-        localStorage.setItem('deviceRegistered', "false");
-        localStorage.setItem('serial', "");
+
+        var email = localStorage.getItem('email');
+        if (email == null) {
+            window.location.href = "/account/login.html";
+            return;
+        }
+    
+        // Delete the device in the database
+        var request = new XMLHttpRequest();
+        request.open("GET", "php/device-delete.php?email=" + email, true);
+        request.send();
+
+        getDeviceInfo();
         updatePageInfo();
     }
 }
@@ -34,29 +85,30 @@ function addNewDevice() {
 
     //Get serial number from user
     var serialNumber = prompt("To pair a new device, enter it's serial number", "XXXX-XXXX");
-    while (serialNumber == null || serialNumber.length < 8) {
-        serialNumber = prompt("ℹ️ Incorrect serial number \n Please try-again ", "XXXX-XXXX");
+    if (serialNumber == null || serialNumber.length < 8) {
+        return;
     }
     localStorage.setItem('serial', serialNumber);
 
     // If login has failed and we can't retrieve the email, ask it to the user
     var email = localStorage.getItem('email');
-    while (email == null) {
-        email = prompt("We got lost :/ \n Please re-enter your mail", "");
+    if (email == null) {
+        window.location.href = "/account/login.html";
+        return;
     }
     localStorage.setItem('email', email);
 
     // Get the date 
     var date = new Date().toISOString().slice(0, 10);
 
-    //Send HTTPS request to register the device
+    //Register the device in the database
     var request = new XMLHttpRequest();
     request.open("GET", "php/device-register.php?serial=" + serialNumber + "&date=" + date + "&email=" + email, true);
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
-                localStorage.setItem('deviceRegistered', "true");
+                getDeviceInfo();
                 updatePageInfo();
             }
             else {
@@ -70,13 +122,38 @@ function addNewDevice() {
 }
 
 function logout() {
-    localStorage.setItem('email', "");
-    localStorage.setItem('connected', "false");
-    window.location.href = "/index.html";
+
+        //Log out the user
+        var request = new XMLHttpRequest();
+        request.open("GET", "php/logout.php?email=" + email, true);
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+    
+                if (this.responseText == true) {
+                    localStorage.setItem('connected', "false");
+                    window.location.href = "/index.html";
+
+                    // Remove user info from the local storage for security reasons
+                    localStorage.setItem('deviceRegistered', "false");
+                    localStorage.setItem('purshaseDate', "");
+                    localStorage.setItem('serialNumber', "");
+                    localStorage.setItem('deviceDeleteConfirmation', "0");
+
+                    if (localStorage.getItem('stayConnected') == "false") {
+                        localStorage.setItem('email', "");
+                    }
+                }
+                else {
+                    // TODO: handle the error
+                }
+            }
+        };
+        request.send();
 }
 
+// Responsive layout
 window.addEventListener('resize', () => {
-    if (localStorage.getItem('deviceRegistered') == "false") {  
+    if (localStorage.getItem('deviceRegistered') == "false") {
         return;
     }
     if (window.matchMedia("(max-width: 1200px)").matches) {
