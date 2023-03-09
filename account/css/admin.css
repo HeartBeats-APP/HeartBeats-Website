@@ -74,4 +74,5 @@ h3 {
     width: 98%;
     margin-left: 1%;
     padding: 1%;
+    font-size: clamp(.6em, 1vw, 1.2em);
 }
