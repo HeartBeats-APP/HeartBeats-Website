@@ -11,6 +11,9 @@
     --purple: #a423ba;
 }
 
+h3 {
+    width: clamp(5em, 40vw, 50em);
+}
 
 /* Security Card ------------------------------------------------------------------------------------------------------------------------------------ */
 .security {
@@ -54,4 +57,22 @@
 .card-column img {
     width: clamp(1em, 15vw, 15em);
     height: clamp(1em, 15vw, 15em);
+}
+
+.logs{
+    height: clamp(5em, 15vh, 10em);
+    margin-top: .5em;
+    border-radius: 10px;
+    border: white solid 2px;
+    overflow-y: auto;
+    padding-top: 1%;
+}
+
+.log-card {
+    background: rgb(255, 255, 255, 0.25);
+    border-radius: 5px;
+    width: 98%;
+    margin-left: 1%;
+    padding: 1%;
+    font-size: clamp(.6em, 1vw, 1.2em);
 }

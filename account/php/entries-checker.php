@@ -54,6 +54,23 @@ function checkEmailAdress($email)
     return "";
 }
 
+function checkPasswordLogin($password)
+{
+
+    // Check if the password is not empty
+    if (isFieldEmpty($password)) {
+        return "This field can't be empty";
+    }
+
+    // Security layer
+    $IFSresult = IFS($password);
+    if ($IFSresult != "") {
+        return $IFSresult;
+    }
+
+    return "";
+}
+
 function checkPasswordCreation($password, $passwordScore)
 {
 

@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="/css/components/componentsV2.css" />
   <link rel="stylesheet" href="css/form-card.css" />
   <link rel="stylesheet" href="css/login.css" />
+
 </head>
 
 <body>
 
   <div class="wrapper">
-    
+
     <!-- Header -->
     <script src="/Header/header.js"></script>
 
@@ -27,14 +28,18 @@
 
         <div class="login-field">
           <label for="">Email</label>
-          <input id="email" type="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on"  required>
+          <input id="email" type="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on" required>
           <a id="email-warning-message" class="warning-message"></a>
         </div>
 
         <div class="login-field">
           <label for="">Password</label>
-          <input  id="password" type="password" placeholder="**********" spellcheck="false" autocomplete="on"  required >
-          <a id="password-warning-message" class="warning-message"></a> 
+          <input id="password" type="password" placeholder="**********" spellcheck="false" autocomplete="on" required>
+          <div class="show-password">
+            <input type="checkbox" id="show-password-input" onclick="showPassword()"/><label for="show-password-input"></label>
+            <p class="connected-text">Show password</p>
+          </div>
+          <a id="password-warning-message" class="warning-message"></a>
         </div>
 
         <div class="stay-connected">

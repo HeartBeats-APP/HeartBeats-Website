@@ -16,7 +16,7 @@
 
 
 /* Stay connected row ----------------------------------------------------------------------------------------------------------- */
-.stay-connected {
+.stay-connected, .show-password{
   display: flex;
   justify-content: left;
   flex-direction: row;
@@ -37,7 +37,12 @@ input[type="checkbox"]+label {
 }
 
 input[type="checkbox"]:hover+label {
-  scale: .9;
+  scale: .85;
+}
+
+.show-password{
+  margin-top: -1.5em;
+  margin-bottom: 2em;
 }
 
 .connected-text {
@@ -56,5 +61,11 @@ input[type="checkbox"]:hover+label {
 
 .stay-connected a:hover {
   text-decoration: underline;
+}
+
+
+#password-warning-message{
+  margin-top: -3em;
+  margin-left: .1em;
 }
 

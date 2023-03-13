@@ -119,7 +119,7 @@ function addNewDevice() {
 
                 try {
                     var response = JSON.parse(this.responseText);
-                    alert(response.message);
+                    alert(response.serialNumberErrorMessage);
                 } catch (e) {
                     // handle the error
                 }

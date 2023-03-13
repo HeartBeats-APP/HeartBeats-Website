@@ -88,4 +88,39 @@ meter::-webkit-meter-optimum-value {
   margin-top: -1em;
 }
 
+/* show password ----------------------------------------------------------------------------------------------------------------------*/
+.stay-connected, .show-password{
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  justify-content: left;
+}
+
+input[type="checkbox"]+label {
+  scale: 0.70;
+  width: 3em;
+  min-width: 3em;
+  margin-left: -.75em;
+  margin-top: -.1em;
+}
+
+input[type="checkbox"]:hover+label {
+  scale: .85;
+}
+
+.show-password{
+  margin-top: 1em;
+  margin-bottom: -.5em;
+}
+
+.connected-text {
+  color: white;
+  font-size: 0.85em;
+  margin-left: .5em;
+}
 
