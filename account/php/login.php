@@ -6,11 +6,11 @@ $password = $_REQUEST['password'];
 $stayConnected = $_REQUEST['stayConnected'];
 
 $emailErrorMessage = checkEmailAdress($email);
+$passwordErrorMessage = checkPasswordLogin($password);
 
 // TODO: check if the mail exists in the database. If it doesn't, write the error in $emailErrorMessage.
 
 // TODO: If mail/password combination match, log the user in in the database. Else, return an error message in $passwordErrorMessage.
-$passwordErrorMessage = "";
 
 // TODO: When the user is being loged, store the time of the login in the database for later use.
 

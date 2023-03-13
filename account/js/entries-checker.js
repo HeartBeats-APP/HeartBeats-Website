@@ -19,6 +19,7 @@ function login() {
 
             }
             else {
+                localStorage.setItem('connected', "false");
                 try {
                     // Parse the JSON response
                     var response = JSON.parse(this.responseText);
@@ -124,4 +125,22 @@ function recoverPassword() {
 
     request.send();
 
+}
+
+function showPassword() {
+    var x = document.getElementById("password");
+    var confirmation = document.getElementById("password-confirmation");
+
+    if (x.type === "password") {
+        x.type = "text";
+        if (confirmation != null) {
+            confirmation.type = "text";
+        }
+
+    } else {
+        x.type = "password";
+        if (confirmation != null) {
+            confirmation.type = "password";
+        }
+    }
 }

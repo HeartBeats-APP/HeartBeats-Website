@@ -140,6 +140,48 @@ body {
     margin-right: 1.5rem;
 }
 
+/* Show Password  --------------------------------------------------------------------------------------------------------------- */
+input[type="checkbox"] {
+    visibility: hidden;
+    position: relative;
+    height: 0px;
+    width: 0px;
+    justify-content: left;
+}
+
+label[for="show-password-input"] {
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    border-radius: 100px;
+    position: relative;
+}
+
+label[for="show-password-input"]:after {
+    content: "";
+    position: absolute;
+    top: 2.5px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 100px;
+    transition: 0.5s;
+}
+
+input[type="checkbox"]:checked+label {
+    background: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+}
+
+input[type="checkbox"]:checked+label:after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+}
+
+label[for="show-password-input"]:active:after {
+    width: 25px;
+}
 /* Responsive ------------------------------------------------------------------------------------------------------------------- */
 
 @media screen and (max-width: 1000px) {
