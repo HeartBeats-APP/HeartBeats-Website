@@ -26,7 +26,7 @@
             <div class="main-text">
                 <div id="account-row" class="card-row">
                     <h1>Account</h1>
-                    <div class="to-right secondary-button" onclick="logout()">Logout</div>
+                    <div id="logout-button" class="to-right secondary-button" onclick="logout()">Logout</div>
                 </div>
                 <p>Here you can change your account settings.</p>
             </div>
@@ -82,7 +82,7 @@
                         <h4 id="serialNumber" class="no-wrap">61308-WPA3X</h4>
                     </div>
                     <div class="card-row">
-                        <h3>Purchase date:</h3> 
+                        <h3>Purchase date:</h3>
                         <h4 id="purshaseDate" class="no-wrap">Jan 01 2023</h4>
                     </div>
                     <div id="buttons-row" class="card-row">
@@ -138,13 +138,13 @@
     </div>
 
 </body>
-<script src="js/user-account.js"></script>
-<script>
-    if (localStorage.getItem("connected") == 'false') {
-        window.location.href = "login.html";
-    }
-    getDeviceInfo();
-    updatePageInfo();
-</script>
+    <script src="js/user-account.js"></script>
+    <script>
+        if (localStorage.getItem("connected") != 'true') {
+            window.location.href = "/account/login.htmllogin.html";
+        }
+        getDeviceInfo();
+        updatePageInfo();
+    </script>
 
 </html>

@@ -11,8 +11,10 @@ function login() {
 
             if (this.responseText == true) {
 
-                // Connect the user
+                // Redirect the user to the dashboard
                 window.location.href = "/dashboard.html";
+
+                // Create a cookie to store the user's data
                 localStorage.setItem('connected', "true");
                 localStorage.setItem('email', email);
                 localStorage.setItem('stayConnected', stayConnected);

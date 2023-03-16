@@ -64,6 +64,10 @@
     if (localStorage.getItem("email") != "" && localStorage.getItem("email") != null) {
       document.getElementById("email").value = localStorage.getItem("email");
     }
+    if (localStorage.getItem("connected") == "true") {
+      document.href = "/account/user.html";
+    }
+    
   </script>
 </body>
 

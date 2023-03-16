@@ -2,43 +2,14 @@ var deviceDeleteConfirmation = '0';
 
 function getDeviceInfo() {
     var email = localStorage.getItem('email');
-    if (email == null) {
+    if (email == null || email == "") {
         window.location.href = "/account/login.html";
+        document.getElementById("email-warning-message").innerHTML = "Something went wrong, please log in again";
         return;
     }
 
-    // Get if the user has a device registered
-    var request = new XMLHttpRequest();
-    request.open("GET", "php/get-device-registered.php?email=" + email, true);
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-
-            if (this.responseText == false) {
-                // If No, display the setup card instead of the device card and remove the device info from the local storage
-                localStorage.setItem('deviceRegistered', "false");
-                localStorage.setItem('purshaseDate', "");
-                localStorage.setItem('serialNumber', "");
-            }
-            else {
-
-                // If Yes, get the device info and display it in the device card
-                try {
-                    var response = JSON.parse(this.responseText);
-                    document.getElementById("purshaseDate").innerHTML = response.purshaseDate;
-                    document.getElementById("serialNumber").innerHTML = response.serialNumber;
-                } catch (e) {
-                    // TODO: don't print the error message but store it somewhere
-                }
-
-                localStorage.setItem('deviceRegistered', "true");
-                localStorage.setItem('purshaseDate', response.purshaseDate);
-                localStorage.setItem('serialNumber', response.serialNumber);
-
-            }
-        }
-    };
-
-    request.send();
+    document.getElementById("purshaseDate").innerHTML = localStorage.getItem('addedDate');
+    document.getElementById("serialNumber").innerHTML = localStorage.getItem('deviceID');
 }
 
 function updatePageInfo() {
@@ -60,46 +31,63 @@ function updatePageInfo() {
 
 function deleteDevice() {
     deviceDeleteConfirmation = localStorage.getItem('deviceDeleteConfirmation');
+
     if (deviceDeleteConfirmation == "0") {
         localStorage.setItem('deviceDeleteConfirmation', "1");
         document.getElementById("remove-button").innerHTML = "Click to confirm";
+
     } else {
 
         var email = localStorage.getItem('email');
-        if (email == null) {
+        if (email == null || email == "") {
             window.location.href = "/account/login.html";
             return;
         }
-    
+
         // Delete the device in the database
         var request = new XMLHttpRequest();
         request.open("GET", "php/device-delete.php?email=" + email, true);
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+                if (this.responseText != true) {
+                    try {
+                        var response = JSON.parse(this.responseText);
+                        window.alert(response.errorMessage);
+                    } catch (e) {
+                        window.alert("Something went wrong on our side, please try again later");
+                    }
+                } else {
+                    getSession(email);
+                    window.location.reload();
+                }
+            }
+        };
         request.send();
 
-        getDeviceInfo();
-        updatePageInfo();
     }
 }
 
 function addNewDevice() {
 
     //Get serial number from user
-    var serialNumber = prompt("To pair a new device, enter it's serial number", "XXXX-XXXX");
-    if (serialNumber == null || serialNumber.length < 8) {
+    var serialNumber = window.prompt("To pair a new device, enter it's serial number", "XXXX-XXXX");
+    if (serialNumber.length < 8) {
+        window.alert("Invalid serial number");
         return;
     }
-    localStorage.setItem('serial', serialNumber);
 
-    // If login has failed and we can't retrieve the email, ask it to the user
     var email = localStorage.getItem('email');
     if (email == null) {
         window.location.href = "/account/login.html";
+        document.getElementById("email-warning-message").innerHTML = "Something went wrong, please log in again";
         return;
     }
-    localStorage.setItem('email', email);
 
     // Get the date 
     var date = new Date().toISOString().slice(0, 10);
+
+    getSession(email);
 
     //Register the device in the database
     var request = new XMLHttpRequest();
@@ -108,57 +96,86 @@ function addNewDevice() {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
-                getDeviceInfo();
-                updatePageInfo();
+                getSession(email);
+                window.location.reload();
             }
             else {
-                // If the device has not been registered, display the error message and remove the device info from the local storage
-                localStorage.setItem('deviceRegistered', "false");
-                localStorage.setItem('purshaseDate', "");
-                localStorage.setItem('serialNumber', "");
-
                 try {
                     var response = JSON.parse(this.responseText);
-                    alert(response.serialNumberErrorMessage);
+                    window.alert(response.errorMessage);
                 } catch (e) {
-                    // handle the error
+                    window.alert("Something went wrong on our side, please try again later");
                 }
             }
         }
     };
-
     request.send();
+
 }
 
 function logout() {
 
-        //Log out the user
-        var request = new XMLHttpRequest();
-        request.open("GET", "php/logout.php?email=" + email, true);
-        request.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-    
-                if (this.responseText == true) {
-                    localStorage.setItem('connected', "false");
-                    window.location.href = "/index.html";
+    document.getElementById("logout-button").style.display = "none";
+    //Log out the user
+    var request = new XMLHttpRequest();
+    request.open("GET", "/account/php/logout.php", true);
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
 
-                    // Remove user info from the local storage for security reasons
-                    localStorage.setItem('deviceRegistered', "false");
-                    localStorage.setItem('purshaseDate', "");
-                    localStorage.setItem('serialNumber', "");
-                    localStorage.setItem('deviceDeleteConfirmation', "0");
+            if (this.responseText != true) {
 
-                    if (localStorage.getItem('stayConnected') == "false") {
-                        localStorage.setItem('email', "");
-                    }
-                }
-                else {
-                    // TODO: handle the error
-                }
             }
-        };
-        request.send();
+
+            localStorage.setItem('connected', "false");
+            window.location.href = "/index.html";
+
+            // Remove user info from the local storage for security reasons
+            localStorage.setItem('deviceRegistered', "false");
+            localStorage.setItem('purshaseDate', "");
+            localStorage.setItem('serialNumber', "");
+            localStorage.setItem('deviceDeleteConfirmation', "0");
+
+            if (localStorage.getItem('stayConnected') == "false") {
+                localStorage.setItem('email', "");
+            }
+
+        }
+    };
+    request.send();
 }
+
+function getSession(email) {
+    var request = new XMLHttpRequest();
+    request.open("GET", "/account/php/getSession.php?email=" + email, true);
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            // If answer is false, then it's mean that the user is not connected, that the session has expired or that some informations are incorrect
+            if (this.responseText == false) {
+                localStorage.setItem('connected', "false");
+                window.location.href = "/account/login.html";
+                document.getElementById("email-warning-message").innerHTML = "Something went wrong, you need to log in again";
+                return;
+            }
+
+            var response = JSON.parse(this.responseText);
+            localStorage.setItem('connected', "true");
+            localStorage.setItem('email', response.email);
+            localStorage.setItem('name', response.name);
+            localStorage.setItem('deviceID', response.deviceID);
+            localStorage.setItem('addedDate', response.addedDate);
+            localStorage.setItem('deviceConnected', response.deviceConnected);
+
+            if (response.deviceID != null && response.deviceID != "") {
+                localStorage.setItem('deviceRegistered', "true");   
+            } else {
+                localStorage.setItem('deviceRegistered', "false");
+            }
+        }
+    };
+    request.send();
+}
+
 
 // Responsive layout
 window.addEventListener('resize', () => {
@@ -171,6 +188,7 @@ window.addEventListener('resize', () => {
         document.getElementById("device-card").style.display = "flex";
     }
 });
+
 
 
 
