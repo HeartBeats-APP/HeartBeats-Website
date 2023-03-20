@@ -1,7 +1,0 @@
-Options -MultiViews
-RewriteEngine On
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-
-RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
