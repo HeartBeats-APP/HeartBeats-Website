@@ -11,6 +11,7 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/' . $view . '.php';
+        //$data will be available in the view
     }
 }
 

@@ -2,7 +2,6 @@
 
 class App
 {
-
     protected $controller = 'home'; // default controller
     protected $method = 'index'; // default method
     protected $params = []; // default params (optional arguments in the url)
@@ -16,7 +15,7 @@ class App
             $this->controller = $url[0];
             unset($url[0]);
         } else {
-            $this->controller = 'error404';
+            $this->controller = '404';
         }
 
         require_once '../app/controllers/' . $this->controller . '.php';
@@ -29,6 +28,8 @@ class App
                 $this->method = $url[1];
                 unset($url[1]);
             }
+        } else {
+            $this->method = 'index';
         }
 
         $this->params = $url ? array_values($url) : [];
