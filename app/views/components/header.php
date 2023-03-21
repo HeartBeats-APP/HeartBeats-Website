@@ -26,7 +26,7 @@
                 <a>Contact</a>
             </div>
 
-            <div id="account-tab" class="header-tab" onclick="window.location.href='/contact/contact.html'">
+            <div id="account-tab" class="header-tab" onclick="window.location.href='/public/account/<?php echo $AccountAction ?>.php'">
                 <img class="tab-icon" src="/public/svg/header/Account.svg" width="50" height="50" alt="" />
             </div>
         </div>
