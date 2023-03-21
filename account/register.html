@@ -61,23 +61,25 @@
 
           <div class="login-field">
             <label for="">Name</label>
-            <input type="text" id="name" placeholder="Matthew" spellcheck="on" autocomplete="on" >
+            <input type="text" id="name" placeholder="Matthew" spellcheck="on" autocomplete="on">
             <a id="name-warning-message" class="warning-message"></a>
           </div>
 
           <div class="login-field">
             <label for="">Email</label>
-            <input type="email" id="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on" >
+            <input type="email" id="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on">
             <a id="email-warning-message" class="warning-message"></a>
           </div>
 
           <div class="show-password">
-            <input type="checkbox" id="show-password-input" onclick="showPassword()"/><label for="show-password-input"></label>
+            <input type="checkbox" id="show-password-input" onclick="showPassword()" /><label
+              for="show-password-input"></label>
             <p class="connected-text">Show passwords</p>
           </div>
           <div class="login-field">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="**********" spellcheck="false" autocomplete="on" >
+            <input type="password" name="password" id="password" placeholder="**********" spellcheck="false"
+              autocomplete="on">
             <a id="password-warning-message" class="warning-message"></a>
           </div>
 
@@ -90,7 +92,8 @@
 
           <div class="login-field" id="confirm-password">
             <label for="">Confirm password</label>
-            <input type="password" id="password-confirmation" placeholder="**********" spellcheck="false" autocomplete="on" >
+            <input type="password" id="password-confirmation" placeholder="**********" spellcheck="false"
+              autocomplete="on">
             <a id="passwordConfirm-warning-message" class="warning-message"></a>
           </div>
         </form>
@@ -111,6 +114,12 @@
   <script src="js/zxcvbn.js"></script>
   <script src="js/password-strength-checker.js"></script>
 
+  <script>
+    if (localStorage.getItem("connected") == "true") {
+      document.href = "user.html";
+    }
+  </script>
+  
 </body>
 
 </html>

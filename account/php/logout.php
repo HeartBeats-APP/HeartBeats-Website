@@ -1,8 +1,14 @@
 <?php
+session_start();
 
-$email = $_REQUEST['email'];
+// Delete user session
+session_unset();
+session_destroy();
 
-// TODO: log the user out in the database. If the user is supposed to be logged in, ignore the request (and flag the user as dangerous because this behavior is suspicious).
+if (session_status() == PHP_SESSION_ACTIVE) {
+    echo false;
+    return;
+}
 
 echo true;
 
