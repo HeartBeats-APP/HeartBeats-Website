@@ -40,7 +40,13 @@ class App
     {
         if (isset($_GET['url'])) 
         {
-            return $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)); 
+            $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+                        
+            //If the first element of the url is empty, remove it
+            if ($url[0] == 'public' || $url[0] == "" || $url[0] == "Public") {
+                unset($url[0]);
+            }
+            return $url;
         }
     }
 }

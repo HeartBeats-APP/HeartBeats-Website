@@ -5,7 +5,8 @@
 
     --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
     --second-gradient: linear-gradient(100deg, #f7c23b 0%, #e93d57 50%, #a423ba 100%);
-    --blue-gradient: linear-gradient(130deg, #BDEDF9 0.50%, #92E9FE 25%, #3361DA 90%);
+    --blue-gradient: linear-gradient(130deg, #9fe5f7 0%, #92E9FE 50%, #3361DA 90%);
+    --gold-gradient: linear-gradient(100deg, #fce16a 0%, #b38d35 100%);
 
     --black: #1c1a1a;
     --yellow: #f7c23b;
@@ -15,11 +16,13 @@
     --background-opacity: 0.75;
 }
 
+* {
+    font-family: 'Poppins';
+    box-sizing: border-box;
+}
+
 body {
     transition: all 0.5s cubic-bezier(0.075, 0.8, 0.165, 1);
-    box-sizing: border-box;
-    font-family: 'Poppins';
-
     background-color: #1C1A1A;
     color: white;
 
@@ -33,6 +36,7 @@ body {
 .wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     height: fit-content;
     min-height: 100%;
@@ -157,7 +161,7 @@ h5 {
 
 p {
     color: white;
-    font-size: clamp(.7em, 2vw, 1.2em);
+    font-size: clamp(.5em, 2vw, 1em);
     font-weight: 350;
     text-align: left;
     height: fit-content;

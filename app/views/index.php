@@ -11,8 +11,9 @@
 
 <body>
 
+  <div class="background3"></div>
   <!-- Wrapper, contains the whole page and add margins to the sides -->
-  <div class="wrapper background3">
+  <div class="wrapper ">
 
     <div class="column">
       <h1>HeartBeats</h1>
@@ -20,6 +21,7 @@
     </div>
 
   </div>
+
 
 </body>
 

@@ -6,6 +6,28 @@
   margin-top: 15em;
 }
 
+
+.background3{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 225vw;
+  height: 225vw;
+  margin-left: -125vw;
+  transform-origin: 50% 50%;
+  background: var(--main-gradient);
+  border-radius: 50% 75%;
+  animation: spin 20s infinite linear;
+  filter: blur(150px);
+  z-index: -1;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 h1 {
   text-align: center;
   font-size: 6vw;

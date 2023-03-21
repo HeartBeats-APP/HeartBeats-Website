@@ -1,0 +1,206 @@
+/* Setup ------------------------------------------------------------------------------------------------------------------------*/
+
+* {
+  box-sizing: border-box;
+  transition: all 1.5s cubic-bezier(0.075, 0.8, 0.165, 1);
+  --cubic-bezier: cubic-bezier(0.075, 0.8, 0.165, 1);
+
+  --main-gradient: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+  --second-gradient: linear-gradient(
+    100deg,
+    #f7c23b 0%,
+    #e93d57 50%,
+    #a423ba 100%
+  );
+  --black: #1c1a1a;
+}
+
+body .rect {
+  height: 2000px;
+}
+
+details:hover {
+  transition: all 0.5s var(--cubic-bezier);
+  transform: scale(1.03);
+  cursor: pointer;
+  box-shadow: 0 0 100px -25px var(--black);
+}
+
+
+/* Components -------------------------------------------------------------------------------------------------------------------*/
+
+h2 {
+  margin: 5%;
+  margin-top: 10%;
+  font-size: 3em;
+  font-weight: 500;
+  text-align: center;
+  color: white;
+}
+
+details {
+  width: 75%;
+  max-height: fit-content;
+  max-width: 75%;
+  margin: 0 auto;
+  font-size: 1.25em;
+  border-radius: 15px;
+  box-sizing: border-box;
+  background: rgb(0, 0, 0, .5);
+  color: white;
+  padding: 1%;
+}
+
+/* padding between questions */
+details + details {
+  margin-top: 5vh;
+}
+
+details p {
+  display: flex;
+  color: white;
+  font-weight: 300;
+  margin: 0 2% 2% 2%;
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  padding: 2%;
+  cursor: pointer;
+}
+
+details[open] .control-icon-close {
+  display: initial;
+}
+
+details[open] .control-icon-expand {
+  display: none;
+}
+
+.control-icon {
+  pointer-events: none;
+  -webkit-animation: icon-spin-up .4s var(--cubic-bezier);
+  animation: icon-spin-up .4s var(--cubic-bezier);
+}
+
+.control-icon-close {
+  display: none;
+  -webkit-animation: icon-spin .4s var(--cubic-bezier);
+  animation: icon-spin .4s var(--cubic-bezier);
+  transform: rotate(180deg);
+}
+
+@-webkit-keyframes icon-spin-up {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes icon-spin-up {
+  0% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+
+  }
+}
+
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+
+  }
+
+  100% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+/* responsive -------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 1.5em;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+  }
+
+  summary {
+    font-size: 0.75em;
+  }
+
+  details p {
+    font-size: 0.65em;
+  }
+
+  details {
+    width: 100%;
+    max-width: 100%;
+    padding: 2.5%;
+    margin: 0 0;
+  }
+
+  .control-icon {
+    transform: scale(0.6);
+  }
+
+  details + details {
+    margin-top: 5%;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+
+  h2 {
+    font-size: 4.5vw;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+  summary {
+    font-size: 0.9em;
+  }
+  details p {
+    font-size: 0.75em;
+  }
+
+  details {
+    padding: 2%;
+    max-width: 85%;
+    width: 85%;
+  }
+
+  .control-icon {
+    transform: scale(0.7);
+  }
+
+  details + details {
+    margin-top: 5%;
+  }
+}

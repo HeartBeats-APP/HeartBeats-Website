@@ -1,0 +1,15 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="shield-bad">
+<path id="Vector 24" d="M100.268 23.4537C78.3474 40.4071 63.6865 46.178 34.1436 48.8091C33.6266 48.8552 33.2198 49.2886 33.2198 49.8077V96.0097C29.9413 131.938 63.8537 173.546 100.52 182.916C100.737 182.971 100.967 182.949 101.172 182.858C142.812 164.257 165.088 144.043 168 96.0097V49.8867C168 49.3357 167.545 48.8889 166.994 48.883C139.913 48.5927 125.77 40.1563 101.463 23.42C101.104 23.1727 100.613 23.1869 100.268 23.4537Z" fill="url(#paint0_linear_477_657)" stroke="white" stroke-width="10"/>
+<g id="Group 7">
+<path id="Vector 26" d="M100 67V117" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<circle id="Ellipse 3" cx="100" cy="129" r="4" fill="white"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_477_657" x1="101" y1="26" x2="192.156" y2="121.385" gradientUnits="userSpaceOnUse">
+<stop offset="0.0800959" stop-color="#FF810D"/>
+<stop offset="1" stop-color="#CE0C00"/>
+</linearGradient>
+</defs>
+</svg>
