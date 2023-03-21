@@ -26,19 +26,14 @@
                 <a>Contact</a>
             </div>
 
-
+            <div id="account-tab" class="header-tab" onclick="window.location.href='/contact/contact.html'">
+                <img class="tab-icon" src="/public/svg/header/Account.svg" width="50" height="50" alt="" />
+            </div>
         </div>
+
         <div class="header-right">
-            <button id="account-button" onclick="adaptiveLoginButton()" class="third-button"></button>
+            <button id="language-button" class="third-button" onclick="window.location.href='/public/account/<?php echo $AccountAction ?>.php'"><?php echo $AccountText ?></button>
             <button class="language-button">En</button>
         </div>
     </div>
 </div>
-
-<script>
-    if (localStorage.getItem("connected") == 'false') {
-        document.getElementById("account-button").innerHTML = "Login";
-    } else {
-        document.getElementById("account-button").innerHTML = "Account";
-    }
-</script>
