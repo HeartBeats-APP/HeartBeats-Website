@@ -1,6 +1,6 @@
 
 body {
-    background-image: url("../svg/login-background.svg");
+    background-image: url("/public/svg/account/login-background.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: clamp(25em, 50%, 60em);
@@ -46,16 +46,6 @@ body {
     color: white;
 }
 
-.login-text h1 {
-    font-size: 2em;
-    font-weight: 600;
-}
-
-.login-text p {
-    font-size: 1.1em;
-    font-weight: 400;
-    margin-top: -1em;
-}
 
 /* Form Components -------------------------------------------------------------------------------------------------------------------- */
 

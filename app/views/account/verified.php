@@ -5,8 +5,8 @@
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/css/components/componentsV2.css" />
-  <link rel="stylesheet" href="css/form-card.css" />
+  <link rel="stylesheet" href="/public/css/components.css" />
+  <link rel="stylesheet" href="/public/css/account/form-card.css" />
 
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
@@ -17,9 +17,6 @@
   <div class="login-background"></div>
 
   <div class="wrapper">
-
-    <!-- Header -->
-    <script src="/Header/header.js"></script>
 
     <div class="login-card">
       <div id="card-content" class="login-wrapper">
@@ -51,8 +48,8 @@
         <!-- Animation ends here -->      
 
         <div id="buttons-area" class="buttons-area">
-          <button onclick="window.location.href='login.html'" class="main-button">Login</button>
-          <button onclick="window.location.href='/index.html'" class="secondary-button">Home</button>
+          <button onclick="window.location.href='/account/login'" class="main-button">Login</button>
+          <button onclick="window.location.href='/home'" class="secondary-button">Home</button>
         </div>
 
       </div>

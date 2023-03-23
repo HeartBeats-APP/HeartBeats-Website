@@ -5,9 +5,9 @@
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/css/components/componentsV2.css" />
-  <link rel="stylesheet" href="css/form-card.css" />
-  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="/public/css/components.css" />
+  <link rel="stylesheet" href="/public/css/account/form-card.css" />
+  <link rel="stylesheet" href="/public/css/account/login.css" />
 
 </head>
 
@@ -15,14 +15,11 @@
 
   <div class="wrapper">
 
-    <!-- Header -->
-    <script src="/Header/header.js"></script>
-
     <div class="login-card">
       <div class="login-wrapper">
 
         <div class="login-text">
-          <h1>Login to your account</h1>
+          <h2>Login to your account</h2>
           <p>Let's jump in.</p>
         </div>
 
@@ -45,12 +42,12 @@
         <div class="stay-connected">
           <input type="checkbox" id="switch" /><label for="switch"></label>
           <p class="connected-text">Stay connected</p>
-          <a href="password-recovery.html">Forgot password?</a>
+          <a href="/account/password_recovery">Forgot password?</a>
         </div>
 
         <div class="buttons-area">
           <button onclick="login()" class="main-button">Login</button>
-          <button onclick="window.location.href='register.html'" class="secondary-button">Register instead</button>
+          <button onclick="window.location.href='/account/register'" class="secondary-button">Register instead</button>
         </div>
 
       </div>
@@ -58,17 +55,8 @@
     </div>
   </div>
 
-  <script src="js/entries-checker.js"></script>
+  <script src="/public/js/account/entries-checker.js"></script>
 
-  <script>
-    if (localStorage.getItem("email") != "" && localStorage.getItem("email") != null) {
-      document.getElementById("email").value = localStorage.getItem("email");
-    }
-    if (localStorage.getItem("connected") == "true") {
-      document.href = "/account/user.html";
-    }
-    
-  </script>
 </body>
 
 </html>

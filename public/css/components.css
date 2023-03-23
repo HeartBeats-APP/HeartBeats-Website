@@ -125,7 +125,7 @@ h3 {
     text-align: left;
     align-items: center;
     height: fit-content;
-    width: clamp(10em, 50%, 20em);
+    width: fit-content;
     padding: 0;
     margin: 0;
 }

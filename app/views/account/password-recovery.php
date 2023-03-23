@@ -5,9 +5,9 @@
     <title>HeartBeats</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/components/componentsV2.css" />
-    <link rel="stylesheet" href="css/form-card.css" />
-    <link rel="stylesheet" href="css/password-recovery.css" />
+    <link rel="stylesheet" href="/public/css/components.css" />
+    <link rel="stylesheet" href="/public/css/account/form-card.css" />
+    <link rel="stylesheet" href="/public/css/account/password-recovery.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
 
@@ -19,14 +19,11 @@
 
     <div class="wrapper">
 
-        <!-- Header -->
-        <script src="/Header/header.js"></script>
-
         <div class="login-card">
             <div id="login-wrapper" class="login-wrapper">
 
                 <div class="login-text">
-                    <h1 id="title">Lost your password?</h1>
+                    <h2 id="title">Lost your password?</h2>
                     <p id="subtitle">We're here to help.</p>
                 </div>
 
@@ -72,7 +69,7 @@
         </div>
     </div>
 
-    <script src="js/entries-checker.js"></script>
+    <script src="/public/js/account/entries-checker.js"></script>
     <script>
         if (localStorage.getItem("email") != "" && localStorage.getItem("email") != null) {
           document.getElementById("email").value = localStorage.getItem("email");

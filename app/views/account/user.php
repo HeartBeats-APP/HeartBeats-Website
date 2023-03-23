@@ -5,20 +5,17 @@
     <title>HeartBeats</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/css/components/componentsV2.css" />
-    <link rel="stylesheet" href="css/account.css" />
-    <link rel="stylesheet" href="css/user.css" />
-    <link rel="stylesheet" href="css/badges.css" />
+    <link rel="stylesheet" href="/public/css/components.css²" />
+    <link rel="stylesheet" href="/public/css/account/account.css" />
+    <link rel="stylesheet" href="/public/css/account/user.css" />
+    <link rel="stylesheet" href="/public/css/account/badges.css" />
 
 </head>
 
 <body>
 
     <div class="wrapper background1">
-
-        <!-- Header -->
-        <script src="/header/header.js"></script>
-
+        
         <!-- Main -->
         <div class="card-wrapper">
 
@@ -138,13 +135,5 @@
     </div>
 
 </body>
-    <script src="js/user-account.js"></script>
-    <script>
-        if (localStorage.getItem("connected") != 'true') {
-            window.location.href = "/account/login.htmllogin.html";
-        }
-        getDeviceInfo();
-        updatePageInfo();
-    </script>
-
+    <script src="/public/js/account/entries-checker.js></script>
 </html>

@@ -25,7 +25,6 @@ input[type="checkbox"]:hover+label {
 }
 
 .show-password{
-  margin-top: -1.5em;
   margin-bottom: 2em;
 }
 

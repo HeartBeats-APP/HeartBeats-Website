@@ -5,10 +5,10 @@
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/css/components/componentsV2.css" />
-  <link rel="stylesheet" href="css/form-card.css" />
-  <link rel="stylesheet" href="css/register.css" />
-  <link rel="stylesheet" href="css/password-recovery.css" />
+  <link rel="stylesheet" href="/public/css/components.css" />
+  <link rel="stylesheet" href="/public/css/account/form-card.css" />
+  <link rel="stylesheet" href="/public/css/account/register.css" />
+  <link rel="stylesheet" href="/public/css/account/password-recovery.css" />
 
   <script src="https://www.google.com/recaptcha/api.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
@@ -20,14 +20,11 @@
 
   <div class="wrapper">
 
-    <!-- Header -->
-    <script src="/Header/header.js"></script>
-
     <div class="login-card">
       <div id="card-content" class="login-wrapper">
 
         <div class="login-text">
-          <h1 id="title">Create an account</h1>
+          <h2 id="title">Create an account</h2>
           <p id="subtitle">Welcome aboard.</p>
         </div>
 
@@ -102,7 +99,7 @@
           <button onclick="createAccount()" class="main-button g-recaptcha" type="submit" form="register-form"
             data-sitekey="6LcDxpkkAAAAAE4Jdj3-JZD6ugtBsZjdeEtfz5I5" data-callback="createAccount"
             data-action='submit'>Create</button>
-          <button onclick="window.location.href='login.html'" class="secondary-button">Login instead</button>
+          <button onclick="window.location.href='/account/login'" class="secondary-button">Login instead</button>
         </div>
 
       </div>
@@ -110,15 +107,9 @@
     </div>
   </div>
 
-  <script src="js/entries-checker.js"></script>
-  <script src="js/zxcvbn.js"></script>
-  <script src="js/password-strength-checker.js"></script>
-
-  <script>
-    if (localStorage.getItem("connected") == "true") {
-      document.href = "user.html";
-    }
-  </script>
+  <script src="/public/js/account/entries-checker.js"></script>
+  <script src="/public/js/account/zxcvbn.js"></script>
+  <script src="/public/js/account/password-strength-checker.js"></script>
   
 </body>
 

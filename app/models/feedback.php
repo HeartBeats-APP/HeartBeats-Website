@@ -43,7 +43,6 @@ function checkErrorInText($text, $minLength, $maxLength)
         return $IFSresult;
     }
 
-
     return "";
 }
 
@@ -56,3 +55,5 @@ function isFieldEmpty($field)
     }
     return false;
 }
+
+?>
