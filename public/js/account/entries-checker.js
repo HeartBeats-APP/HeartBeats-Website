@@ -46,14 +46,9 @@ function createAccount() { /* AKA register */
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            /* If the user account has been correctly created */
-
-            /* Store the data in the local storage */
-            localStorage.setItem('name', name);
-            localStorage.setItem('email', email);
-
             /* Update the page */
             if (this.responseText == true) {
+                localStorage.setItem('email', email);
                 document.getElementById("title").innerHTML = "Account created";
                 document.getElementById("subtitle").innerHTML = "An email will be sent to confirm your account";
                 document.getElementById("register-form").remove();

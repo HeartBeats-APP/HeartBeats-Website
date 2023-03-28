@@ -13,9 +13,25 @@ function registerUser($name, $email, $password, $role)
     $stmt->execute();
 
     // Adding the user into other tables
+    // Check the case where the user is already in the table
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM userdata WHERE mail = :mail");
+    $stmt->bindParam(':mail', $email);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    if ($count > 0) {
+        return true;
+    }
+
+    // If not, adding the user into the userdata table
     $stmt = $conn->prepare("INSERT INTO userdata (mail) VALUES (:mail)");
     $stmt->bindParam(':mail', $email);
     $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function isEmailExist($email)

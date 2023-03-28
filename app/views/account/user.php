@@ -37,7 +37,7 @@
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/account-icon.svg"></img>
                 <h3>Name</h3>
-                <div class="badge admin">Admin</div>
+                <div id="badge" class="badge">Admin</div>
                 <h5 class="details"> <?php echo $data['name'] ?></h5>
                 <div class="to-right not-clickable">
                     <h4>Change</h4>
@@ -152,11 +152,23 @@
         } else {
             document.getElementById("serialNumber").innerHTML = "Not connected 🟠";
         }
-        
+
         document.getElementById("purshaseDate").innerHTML = data['added date'];
     } else {
         document.getElementById("device-card").style.display = "none";
         document.getElementById("setup-card").style.display = "flex";
+    }
+
+    var role = data['role'];
+    if (role == 'ISEP') {
+        document.getElementById("badge").innerHTML = 'ISEP';
+        document.getElementById("badge").classList.add('isep');
+    } else if (role == 'Insider') {
+        document.getElementById("badge").innerHTML = 'Insider';
+        document.getElementById("badge").classList.add('insider');
+    } else {
+        document.getElementById("badge").innerHTML = 'User';
+        document.getElementById("badge").classList.add('user');
     }
 </script>
 

@@ -139,7 +139,6 @@ class account extends Controller
         }
 
         createSession($email);
-
         echo true;
     }
 
@@ -321,20 +320,26 @@ class account extends Controller
 
     private function getRole($email)
     {
-
         $email = strtolower($email);
 
-        if (substr($email, -8) == ".isep.fr") {
+        // Check if the user is an admin
+        if (isAnAdmin($email)){
+            return "Admin";
+        }
+
+        // Check if the user is an insider
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/insiders.php');
+        foreach (getInsidersList() as $insider) {
+            if ($insider['email'] == $email) {
+                return "Insider";
+            }
+        }
+
+        // Check if the user is an ISEP student
+        if (substr($email, -7) == "isep.fr") {
             return "ISEP";
         }
 
-        $adminList = array("matthieu.delarue5@gmail.com");
-        if (in_array($email, $adminList)) {
-            return "admin";
-        }
-
-        // TODO: Add more roles
-
-        return "user";
+        return "User";
     }
 }

@@ -17,13 +17,13 @@ class Controller
 
     public function header()
     {   
-        if (isSessionActive() && getRole() == "user") {
-            $AccountText = "Account";
-            $AccountAction = "user";
-        } 
-        else if (isSessionActive() && getRole() == "admin") {
+        if (isSessionActive() && getRole() == "admin") {
             $AccountText = "Admin";
             $AccountAction = "admin";
+        } 
+        else if (isSessionActive()) {
+            $AccountText = "Account";
+            $AccountAction = "user";
         } 
         else {
             $AccountText = "Login";
@@ -40,7 +40,7 @@ class Controller
         if (isSessionActive() && getRole() == "admin") {
             $this->view('account/admin', $data);
         } 
-        else if (isSessionActive() && getRole() == "user") {
+        else if (isSessionActive()) {
             $this->view('account/user', $data);
         } 
         else {

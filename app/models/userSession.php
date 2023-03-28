@@ -20,6 +20,7 @@ function loadUserSession($email)
 
 function createSession($email)
 {
+    ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes of inactivity
     session_start();
     loadUserSession($email);
 }
