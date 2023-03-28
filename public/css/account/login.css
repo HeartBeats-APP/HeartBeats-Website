@@ -1,0 +1,54 @@
+
+/* Stay connected row ----------------------------------------------------------------------------------------------------------- */
+.stay-connected, .show-password{
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  justify-content: left;
+}
+
+input[type="checkbox"]+label {
+  scale: 0.70;
+  width: 3em;
+  min-width: 3em;
+  margin-left: -.75em;
+  margin-top: -.1em;
+}
+
+input[type="checkbox"]:hover+label {
+  scale: .85;
+}
+
+.show-password{
+  margin-bottom: 2em;
+}
+
+.connected-text {
+  color: white;
+  font-size: 0.85em;
+  margin-left: .5em;
+}
+
+.stay-connected a {
+  font-weight: 500;
+  color: var(--red);
+  text-decoration: none;
+  font-size: .85em;
+  margin-left: 6em;
+}
+
+.stay-connected a:hover {
+  text-decoration: underline;
+}
+
+
+#password-warning-message{
+  margin-top: -3em;
+  margin-left: .1em;
+}
+
