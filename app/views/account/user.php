@@ -5,7 +5,7 @@
     <title>HeartBeats</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/public/css/components.css²" />
+    <link rel="stylesheet" href="/public/css/components.css" />
     <link rel="stylesheet" href="/public/css/account/account.css" />
     <link rel="stylesheet" href="/public/css/account/user.css" />
     <link rel="stylesheet" href="/public/css/account/badges.css" />
@@ -15,7 +15,7 @@
 <body>
 
     <div class="wrapper background1">
-        
+
         <!-- Main -->
         <div class="card-wrapper">
 
@@ -23,51 +23,51 @@
             <div class="main-text">
                 <div id="account-row" class="card-row">
                     <h1>Account</h1>
-                    <div id="logout-button" class="to-right secondary-button" onclick="logout()">Logout</div>
+                    <div id="logout-button" class="secondary-button" onclick="logout()">Logout</div>
                 </div>
                 <p>Here you can change your account settings.</p>
             </div>
 
             <div id="setup-card" class="card new-device" onclick="addNewDevice()">
-                <img class="card-icon" src="svg/pairing-icon.svg"></img>
+                <img class="card-icon" src="/public/svg/account/pairing-icon.svg"></img>
                 <h3>Device Setup</h3>
                 <h5 class="details">Click to pair a new device and add it to your account</h5>
             </div>
 
             <div class="card">
-                <img class="card-icon" src="svg/account-icon.svg"></img>
+                <img class="card-icon" src="/public/svg/account/account-icon.svg"></img>
                 <h3>Name</h3>
                 <div class="badge admin">Admin</div>
-                <h5 class="details">Matthew</h5> <!-- TODO: name -->
+                <h5 class="details"> <?php echo $data['name'] ?></h5>
                 <div class="to-right not-clickable">
                     <h4>Change</h4>
-                    <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
+                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="">
                 </div>
             </div>
 
             <div class="card">
-                <img class="card-icon" src="svg/email-address-icon.svg"></img>
+                <img class="card-icon" src="/public/svg/account/email-address-icon.svg"></img>
                 <h3>Email</h3>
-                <h5 class="details">matthieu.admin@heart-beats.fr</h5> <!-- TODO: email -->
+                <h5 class="details"><?php echo $data['email'] ?></h5> <!-- TODO: email -->
                 <div class="to-right not-clickable">
                     <h4>Change</h4>
-                    <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
+                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="">
                 </div>
             </div>
 
             <div class="card">
-                <img class="card-icon" src="svg/password-icon.svg"></img>
+                <img class="card-icon" src="/public/svg/account/password-icon.svg"></img>
                 <h3>Password</h3>
                 <h5 class="details">**********</h5>
-                <div onclick="window.location.href='password-recovery.html'" class="to-right clickable">
+                <div onclick="window.location.href='/account/changePassword'" class="to-right clickable">
                     <h4>Change</h4>
-                    <img class="card-icon small" src="svg/arrow-right-icon.svg" alt="">
+                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="">
                 </div>
             </div>
 
             <div id="device-card" class="card">
 
-                <img class="card-image" src="png/Pulse1.png"></img>
+                <img class="card-image" src="/public/png/Pulse1.png"></img>
 
                 <div id="device-infos" class="card-column">
                     <div class="card-row">
@@ -76,11 +76,11 @@
                     </div>
                     <div class="card-row">
                         <h3>Serial number:</h3>
-                        <h4 id="serialNumber" class="no-wrap">61308-WPA3X</h4>
+                        <h4 id="serialNumber" class="no-wrap"><?php echo $data['device id'] ?></h4>
                     </div>
                     <div class="card-row">
                         <h3>Purchase date:</h3>
-                        <h4 id="purshaseDate" class="no-wrap">Jan 01 2023</h4>
+                        <h4 id="purshaseDate" class="no-wrap"><?php echo $data['added date'] ?></h4>
                     </div>
                     <div id="buttons-row" class="card-row">
                         <button onclick="deleteDevice()" id="remove-button" class="main-button">Remove</button>
@@ -93,7 +93,7 @@
 
                     <div class="card-row">
                         <h4>Satuts:</h4> <!-- TODO: Username -->
-                        <h5>Connected 🟢</h5>
+                        <h5 id="device-status"></h5>
                     </div>
 
                     <div class="card-row">
@@ -135,5 +135,29 @@
     </div>
 
 </body>
-    <script src="/public/js/account/entries-checker.js></script>
+<script src="/public/js/account/user-account.js"></script>
+<script>
+    var data = <?php echo json_encode($data); ?>;
+
+    if (data['hasDevice'] == true) {
+        if (window.innerWidth < 1200) {
+            document.getElementById("device-card").style.display = "grid";
+        } else {
+            document.getElementById("device-card").style.display = "flex";
+        }
+        document.getElementById("setup-card").style.display = "none";
+
+        if (data['device connected'] == 'true') {
+            document.getElementById("device-status").innerHTML = 'Connected 🟢';
+        } else {
+            document.getElementById("serialNumber").innerHTML = "Not connected 🟠";
+        }
+        
+        document.getElementById("purshaseDate").innerHTML = data['added date'];
+    } else {
+        document.getElementById("device-card").style.display = "none";
+        document.getElementById("setup-card").style.display = "flex";
+    }
+</script>
+
 </html>

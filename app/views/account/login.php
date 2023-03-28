@@ -42,7 +42,7 @@
         <div class="stay-connected">
           <input type="checkbox" id="switch" /><label for="switch"></label>
           <p class="connected-text">Stay connected</p>
-          <a href="/account/password_recovery">Forgot password?</a>
+          <a href="/account/changePassword">Forgot password?</a>
         </div>
 
         <div class="buttons-area">

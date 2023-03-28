@@ -29,9 +29,9 @@
         </div>
 
         <!-- Email animation -->
-        <div class="animation-wrapper">
+        <div class="animation-wrapper" id="email-animation">
 
-          <div class="email-animation" id="email-animation">
+          <div class="animation">
 
             <script>
               var animation = bodymovin.loadAnimation({
@@ -39,7 +39,7 @@
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'json/email-sent-animation.json',
+                path: '/public/json/account-created-animation.json',
                 name: 'Email Sent Animation',
                 animationSpeed: 0.5,
               });
@@ -48,7 +48,7 @@
           </div>
         </div>
         <style>
-          .email-animation {
+          .animation-wrapper {
             display: none;
           }
         </style>

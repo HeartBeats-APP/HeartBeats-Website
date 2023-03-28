@@ -19,7 +19,7 @@
             <div class="adaptive-margin" style="--coef: 15"></div>
             <div class="main-text">
                 <h1>Dashboard</h1>
-                <p>Welcome Back Matthew</p>
+                <p>Welcome Back <?php echo $data['name'] ?></p>
             </div>
         </div>
 

@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/userSession.php');
 
 class Controller
 {
@@ -11,22 +12,43 @@ class Controller
     public function view($view, $data = [])
     {
         require_once '../app/views/' . $view . '.php';
-        //$data will be available in the view
+        //$data will be available in the view without any extra code needed
     }
 
     public function header()
-    {
-        if (isset($_SESSION['connected']) && $_SESSION['connected'] == true)
-        {
+    {   
+        if (isSessionActive() && getRole() == "user") {
             $AccountText = "Account";
             $AccountAction = "user";
-        } else {
+        } 
+        else if (isSessionActive() && getRole() == "admin") {
+            $AccountText = "Admin";
+            $AccountAction = "admin";
+        } 
+        else {
             $AccountText = "Login";
             $AccountAction = "login";
         }
 
         require_once '../app/views/components/header.php';
     }
+
+    public function account($data = [])
+    {
+        $this->header();
+
+        if (isSessionActive() && getRole() == "admin") {
+            $this->view('account/admin', $data);
+        } 
+        else if (isSessionActive() && getRole() == "user") {
+            $this->view('account/user', $data);
+        } 
+        else {
+            $this->view('account/login');
+        }
+    }
+
+    
 }
 
 ?>

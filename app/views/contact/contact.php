@@ -34,12 +34,12 @@
 
             <div id="input-fields">
                 <div class="adaptive-margin" style="--coef: 3"></div>
-                <input class="title-field" id="title" type="text" placeholder="Title" spellcheck="false" autocomplete="off">
+                <input class="title-field" id="message-title" type="text" placeholder="Title" spellcheck="true" autocomplete="off">
                 <div id="title-error-message" class="error-message"></div>
 
                 <div class="adaptive-margin" style="--coef: 3"></div>
 
-                <textarea class="text-field" id="message" placeholder="Write your message here" cols="30" rows="10" autocomplete="off" spellcheck="true"></textarea>
+                <textarea class="text-field" id="message-text" placeholder="Write your message here" cols="30" rows="10" autocomplete="off" spellcheck="true"></textarea>
                 <div id="text-error-message" class="error-message"></div>
                 <div class="buttons-area">
                     <button class="main-button" onclick="sendFeedback()">Send</button>
