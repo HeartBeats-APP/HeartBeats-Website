@@ -1,0 +1,267 @@
+
+body {
+    background-image: url("/public/svg/account/login-background.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: clamp(25em, 50%, 60em);
+    backdrop-filter: blur(150px);
+    margin: 0px;
+    overflow: hidden;
+}
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: clamp(150vh, fit-content, 250vh);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card body -------------------------------------------------------------------------------------------------------------------- */
+.login-card {
+    height: fit-content;
+    width: fit-content;
+    max-width: 90%;
+    margin-top: 5vh;
+
+    background: rgb(28, 26, 26, 0.5);
+    border-radius: 25px;
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 4.25em 5em 4em 5em;
+    gap: 1vh;
+}
+
+/* Card Text -------------------------------------------------------------------------------------------------------------------- */
+.login-text {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-bottom: 2vh;
+}
+
+
+/* Form Components -------------------------------------------------------------------------------------------------------------------- */
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+    gap: .25em;
+}
+
+.login-field label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+}
+
+/* Input field */
+.login-field input {
+    font-size: 1rem;
+    line-height: 2.25em;
+    width: 100%;
+    border-radius: clamp(.5em, 1vw, .65em);
+    padding-left: 20px;
+    outline: none;
+    border: none;
+    background: rgb(255, 255, 255, 0.5);
+    margin-bottom: 2vh;
+}
+
+.login-field input::placeholder {
+    font-family: inherit;
+    color: white;
+    opacity: 0.75;
+}
+
+.login-field input:focus {
+    padding-left: 40px;
+    outline: white solid clamp(.1em, 1vw, .2em);
+    border-radius: 50px;
+    padding-left: 2em;
+}
+
+.login-field input:focus::placeholder {
+    opacity: 0;
+}
+
+.login-field input:hover {
+    scale: 1.03;
+}
+
+.warning-message {
+    color: var(--red);
+    font-size: 0.85em;
+    margin-left: 1.5em;
+    margin-top: -1.5em;
+    margin-bottom: .5em;
+}
+
+.buttons-area {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: right;
+    margin-top: 3vh;
+}
+
+.buttons-area .secondary-button {
+    margin-right: 1.5rem;
+}
+
+/* Show Password  --------------------------------------------------------------------------------------------------------------- */
+input[type="checkbox"] {
+    visibility: hidden;
+    position: relative;
+    height: 0px;
+    width: 0px;
+    justify-content: left;
+}
+
+label[for="show-password-input"] {
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    border-radius: 100px;
+    position: relative;
+}
+
+label[for="show-password-input"]:after {
+    content: "";
+    position: absolute;
+    top: 2.5px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 100px;
+    transition: 0.5s;
+}
+
+input[type="checkbox"]:checked+label {
+    background: linear-gradient(100deg, #e93d57 10%, #a423ba 100%);
+}
+
+input[type="checkbox"]:checked+label:after {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+}
+
+label[for="show-password-input"]:active:after {
+    width: 25px;
+}
+/* Responsive ------------------------------------------------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1000px) {
+    body {
+        background-size: 90% 90%;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    body {
+        background-size: 100% 100%;
+    }
+
+    .login-card {
+        margin: 5em 5em 2em 5em;
+    }
+
+    .login-wrapper {
+        margin: 2em 4em 2em 4em;
+    }
+
+    .login-text h1 {
+        font-size: 1.7em;
+    }
+    
+    .login-text p {
+        font-size: .9em;
+    }
+
+    .buttons-area {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+        margin-top: 3vh;
+    }
+
+    .buttons-area .secondary-button, .buttons-area .main-button {
+        margin: 0;
+        width: 100%;
+        scale: 1;
+    }
+
+    .buttons-area .secondary-button:hover, .buttons-area .main-button:hover {
+        scale: .95;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .login-card {
+        margin: 4em 4em 4em 5em;
+    }
+
+    .login-wrapper {
+        margin: 2em 3em 2em 3em;
+    }
+
+    .login-text h1 {
+        font-size: 1.5em;
+    }
+    
+    .login-text p {
+        font-size: .8em;
+        margin-top: -1em;
+    }
+
+    .login-field label {
+        font-size: .9rem;
+    }
+
+    .login-field input {
+        font-size: .95rem;
+        line-height: 1.75em;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .login-card {
+        margin: 3em 2em 2em 2em;
+    }
+    .login-wrapper {
+        margin: 2em 2em 2em 2em;
+    }
+
+    .login-text h1 {
+        font-size: 1.4em;
+    }
+    
+    .login-text p {
+        font-size: .7em;
+        margin-top: -1em;
+    }
+
+    .login-field label {
+        font-size: .7rem;
+    }
+
+    .login-field input {
+        font-size: .9rem;
+        line-height: 1.5em;
+    }
+}
