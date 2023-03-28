@@ -1,3 +1,0 @@
-CA MARCHE MDR
-
-FEUR
