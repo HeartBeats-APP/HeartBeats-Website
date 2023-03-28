@@ -1,0 +1,52 @@
+
+.badge {
+  height: fit-content;
+  width: fit-content;
+  padding: clamp(.4em, .90vh, 1.5em) clamp(1em, 1.25vw, 1.6em) clamp(.4em, .8vh, 1.25em) clamp(1em, 1.25vw, 1.6em);
+  border-radius: 25px;
+  font-weight: 450;
+  font-size: clamp(.5em, 2vw, .75em);
+  text-align: center;
+  color: white;
+  background: #1c1a1a;
+}
+
+.admin {
+  background: var(--gold-gradient);
+  background-size: 200%;
+  -webkit-animation: anime 5s linear infinite;
+  animation: anime 5s linear infinite;
+}
+
+.isep {
+  background: var(--second-gradient);
+  background-size: 250%;
+  -webkit-animation: anime 10s linear infinite;
+  animation: anime 10s linear infinite;
+}
+
+
+.insider {
+  background: var(--blue-gradient);
+  background-size: 250%;
+  -webkit-animation: anime 10s linear infinite;
+  animation: anime 10s linear infinite;
+}
+
+.user {
+  background: var(--purple);
+}
+
+@keyframes anime {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
