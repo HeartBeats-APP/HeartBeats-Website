@@ -1,5 +1,6 @@
 <?php
 require_once 'connect.php';
+require_once 'errors-manager.php';
 
 function registerUser($name, $email, $password, $role)
 {
@@ -10,28 +11,14 @@ function registerUser($name, $email, $password, $role)
     $stmt->bindParam(':password', $password);
     $stmt->bindParam(':mail', $email);
     $stmt->bindParam(':role', $role);
-    $stmt->execute();
-
-    // Adding the user into other tables
-    // Check the case where the user is already in the table
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM userdata WHERE mail = :mail");
-    $stmt->bindParam(':mail', $email);
-    $stmt->execute();
-    $count = $stmt->fetchColumn();
-    if ($count > 0) {
-        return true;
+    
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        newErrorMessage($e->getMessage()); 
+        return;
     }
 
-    // If not, adding the user into the userdata table
-    $stmt = $conn->prepare("INSERT INTO userdata (mail) VALUES (:mail)");
-    $stmt->bindParam(':mail', $email);
-    $stmt->execute();
-
-    if ($stmt->rowCount() > 0) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 function isEmailExist($email)
@@ -39,9 +26,15 @@ function isEmailExist($email)
     $conn = connect();
     $stmt = $conn->prepare("SELECT mail FROM users WHERE mail = :mail");
     $stmt->bindParam(':mail', $email);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        newErrorMessage($e->getMessage());
+        return;
+    }
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
         return true;
     } else {

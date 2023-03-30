@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="debug-icon">
+<g id="debug-line-by-line-svgrepo-com 1" clip-path="url(#clip0_582_642)">
+<path id="Vector 32" d="M23.7693 111.859V38.2209C23.7693 35.8249 26.4397 34.3957 28.4334 35.7248L84.038 72.7945C85.8259 73.9865 85.8177 76.6165 84.0223 77.7972L28.4177 114.366C26.4229 115.678 23.7693 114.247 23.7693 111.859Z" stroke="white" stroke-width="10"/>
+<g id="Grid">
+<path id="Line 19" d="M177.231 33.7692L73.3846 33.7692" stroke="white" stroke-width="10" stroke-linecap="round"/>
+<path id="Line 20" d="M118.385 74.1538L177.231 74.1538" stroke="white" stroke-width="10" stroke-linecap="round"/>
+<path id="Line 21" d="M73.3845 114.538L177.231 114.538" stroke="white" stroke-width="10" stroke-linecap="round"/>
+<path id="Line 22" d="M73.3845 154.923L177.231 154.923" stroke="white" stroke-width="10" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_582_642">
+<rect width="165" height="144.231" fill="white" transform="translate(18 28)"/>
+</clipPath>
+</defs>
+</svg>

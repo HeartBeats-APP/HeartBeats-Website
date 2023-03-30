@@ -1,4 +1,5 @@
 <?php
+require_once 'errors-manager.php';
 
 function storeFeedback($title, $message)
 {
@@ -10,12 +11,19 @@ function storeFeedback($title, $message)
     $stmt->bindParam(':email', getMail());
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':message', $message);
-    $stmt->execute();
+
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        newErrorMessage($e->getMessage());
+        return;
+    }
 
     if ($stmt->rowCount() == 1) {
         return true;
     } else {
         return false;
+        newErrorMessage("Feedback could not be stored despite the absence of errors");
     }
 }
 ?>

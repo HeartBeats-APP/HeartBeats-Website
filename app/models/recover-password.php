@@ -2,8 +2,7 @@
 require_once 'entries-checker.php';
 
 $email = $_REQUEST['email'];
-
-$emailErrorMessage = checkEmailAdress($email, false);
+$emailErrorMessage ;
 
 
 if ($emailErrorMessage != "") {

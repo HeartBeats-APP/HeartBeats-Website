@@ -14,8 +14,10 @@
     <div class="onboarding-bg">
         <div class="onboarding-card">
 
-            <h3>Thanks for joining the preview!</h3>
-            <p> HeartBeats is currently in preview. We're working hard to make it better. </p>
+            <h3>Thank you for joining the release preview</h3>
+            <p>Our website is still in preview, and we are working hard to make it perfect</p>
+            <p>More updates are coming soon 🚀</p>
+
             <!-- Animation -->
             <div class="animation-wrapper">
                 <div class="email-animation" id="animation">
@@ -34,7 +36,7 @@
                 </div>
             </div>
             <!-- Animation ends here -->
-            <div class="main-button" onclick="hideOnboarding()">Great!</div>
+            <div class="main-button" onclick="hideOnboarding()">Jump in</div>
         </div>
     </div>
 

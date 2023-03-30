@@ -33,8 +33,15 @@
     document.getElementById("onboarding").remove();
   }
 
-  
+
   window.onscroll = function() {
+    if (localStorage.getItem("onboarding") == "true") {
+      return;
+    }
+    window.scrollTo(0, 0);
+  };
+
+  window.ontouchmove = function() {
     if (localStorage.getItem("onboarding") == "true") {
       return;
     }

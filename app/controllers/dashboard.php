@@ -8,4 +8,6 @@ class dashboard extends Controller
         $this->header();
         $this->view('dashboard/dashboard', $data);
     }
+
+    
 }
