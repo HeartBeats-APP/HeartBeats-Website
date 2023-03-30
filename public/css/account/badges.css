@@ -13,14 +13,14 @@
 
 .admin {
   background: var(--gold-gradient);
-  background-size: 200%;
-  -webkit-animation: anime 5s linear infinite;
+  background-size: 500%;
+  -webkit-animation: anime 10s linear infinite;
   animation: anime 5s linear infinite;
 }
 
 .isep {
   background: var(--second-gradient);
-  background-size: 250%;
+  background-size: 500%;
   -webkit-animation: anime 10s linear infinite;
   animation: anime 10s linear infinite;
 }
@@ -28,7 +28,7 @@
 
 .insider {
   background: var(--blue-gradient);
-  background-size: 250%;
+  background-size: 500%;
   -webkit-animation: anime 10s linear infinite;
   animation: anime 10s linear infinite;
 }
@@ -38,6 +38,7 @@
 }
 
 @keyframes anime {
+
   0% {
     background-position: 0% 50%;
   }
@@ -49,4 +50,5 @@
   100% {
     background-position: 0% 50%;
   }
+
 }

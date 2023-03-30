@@ -11,7 +11,6 @@
     align-items: left;
     height: 100%;
     gap: 2vh;
-    border: var(--black) solid 2px;
 }
 
 .card-row {
@@ -61,3 +60,12 @@
     padding: 1%;
     font-size: clamp(.6em, 1vw, 1.2em);
 }
+
+#DebugModeSwitch {
+    margin-right: .5em;
+}
+
+input[type="checkbox"]:hover+label {
+    scale: 1.175;
+    cursor: pointer;
+  }

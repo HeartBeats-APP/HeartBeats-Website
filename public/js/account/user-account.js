@@ -15,7 +15,7 @@ function deleteDevice() {
                     var response = JSON.parse(this.responseText);
                     window.alert(response.errorMessage);
                 } catch (e) {
-                    window.alert("Something went wrong on our side, please try again later");
+                    window.alert(this.responseText);
                 }
             } else {
                 window.location.reload();
@@ -66,11 +66,33 @@ function logout() {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText != true) {
-                window.alert("Something went wrong on our side, please try again later");
+                window.alert(this.responseText);
             }
 
             window.location.href = "/account/login";
+        }
+    };
+    request.send();
+}
 
+function debugMode() {
+    var value = document.getElementById("switch").checked;
+
+    if (value == true){
+        value = "1";
+    } else {
+        value = "0";
+    }
+
+    var request = new XMLHttpRequest();
+    request.open("GET", "/account/debugMode?value=" + value, true);
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (this.responseText != true) {
+                document.getElementById("switch").checked = false;
+                window.alert(this.responseText);
+            }
         }
     };
     request.send();
@@ -88,6 +110,7 @@ window.addEventListener('resize', () => {
         document.getElementById("device-card").style.display = "flex";
     }
 });
+
 
 
 

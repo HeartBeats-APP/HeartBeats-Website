@@ -16,16 +16,14 @@ class Controller
     }
 
     public function header()
-    {   
-        if (isSessionActive() && getRole() == "user") {
-            $AccountText = "Account";
-            $AccountAction = "user";
-        } 
-        else if (isSessionActive() && getRole() == "admin") {
+    {
+        if (isSessionActive() && getRole() == "admin") {
             $AccountText = "Admin";
             $AccountAction = "admin";
-        } 
-        else {
+        } else if (isSessionActive()) {
+            $AccountText = "Account";
+            $AccountAction = "user";
+        } else {
             $AccountText = "Login";
             $AccountAction = "login";
         }
@@ -33,22 +31,23 @@ class Controller
         require_once '../app/views/components/header.php';
     }
 
-    public function account($data = [])
+    public function account($data = [], $destination = "")
     {
         $this->header();
 
-        if (isSessionActive() && getRole() == "admin") {
+        if (isSessionActive() && getRole() == "admin" && $destination == "admin") {
+            $data = $this->addAdminData($data);
             $this->view('account/admin', $data);
-        } 
-        else if (isSessionActive() && getRole() == "user") {
+        } else if (isSessionActive()) {
             $this->view('account/user', $data);
-        } 
-        else {
+        } else {
             $this->view('account/login');
         }
     }
 
-    
+    private function addAdminData($data)
+    {
+        $data['debugMode'] = isDebugMode();
+        return $data;
+    }
 }
-
-?>

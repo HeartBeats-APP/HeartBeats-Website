@@ -13,7 +13,7 @@ h3 {
 }
 
 .details {
-    width: clamp(50em, 100vw, 100em);
+    width: fit-content
 }
 
 .main-text {

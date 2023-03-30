@@ -19,32 +19,31 @@
         <!-- Main -->
         <div class="card-wrapper">
 
-            <div class="adaptive-margin" style="--coef: 15"></div>
+            <div class="adaptive-margin" style="--coef: 10"></div>
             <div class="main-text">
                 <div id="account-row" class="card-row">
                     <h1>Admin</h1>
                     <div class=" secondary-button" onclick="logout()">Logout</div>
                 </div>
-                <p>Danger Zone 💀</p>
+                <h5>Danger Zone 💀</h5>
             </div>
 
             <div class="card security">
                 <div id="security-details" class="card-column">
                     <div class="card-row">
-                        <h3>Website Security</h3>
-                        <h4 class="details">Everything looks good 👌</h4>
+                        <h2>Website Security</h2>
                     </div>
-                    <div>
-                        <h3>Recent logs</h3>
-                        <div class="card-column logs">
+                    <div class="card-row">
+                        <h3>Recent logs: </h3>
+                        <h5 class="details">Everything is looking good</h5>
+                    </div>
+                    <div class="card-row">
+                        <h3>Security check: </h3>
+                        <h5 class="details">Everything is looking good</h5>
+                    </div>
+                    <div class="card-row">
+                        <h3>Area under development </h3>
 
-                            <div class="card-row log-card">AAAA</div>
-                            <div class="card-row log-card">bbbb</div>
-                            <div class="card-row log-card">CCCC</div>
-                            <div class="card-row log-card">DDDD</div>
-                            <div class="card-row log-card">EEEE</div>
-
-                        </div>
                     </div>
                 </div>
                 <div id="security-img" class="card-column">
@@ -53,9 +52,28 @@
             </div>
 
             <div class="card">
+                <img class="card-icon" src="/public/svg/account/debug-icon.svg" draggable="false"></img>
+                <h3>Debug Mode</h3>
+                <h5  id="debugText" class="details">Shows precise error messages for easier problem-solving</h5>
+                <div class="to-right" id="DebugModeSwitch">
+                    <input onclick="debugMode()" type="checkbox" id="switch" /><label for="switch"></label>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="card-icon" src="/public/svg/account/account-icon.svg" draggable="false"></img>
+                <h3>User View</h3>
+                <h5 class="details"> View and manage your account as a normal user</h5>
+                <div class="to-right clickable" onclick="window.location.href='/account/user'">
+                    <h4>Switch</h4>
+                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="" draggable="false">
+                </div>
+            </div>
+
+            <div class="card">
                 <img class="card-icon" src="/public/svg/header/Questions.svg" draggable="false"></img>
                 <h3>Q&A</h3>
-                <h5 class="details">Change the content of the Q&A page</h5> <!-- TODO: name -->
+                <h5 class="details">Change the content of the Q&A page</h5>
                 <div class="to-right not-clickable">
                     <h4>Modify</h4>
                     <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="" draggable="false">
@@ -72,41 +90,19 @@
                 </div>
             </div>
 
-            <div class="card">
-                <img class="card-icon" src="/public/svg/account/account-icon.svg" draggable="false"></img>
-                <h3>Name</h3>
-                <div class="badge admin">Admin</div>
-                <h5 class="details"><?php echo $data['name'] ?></h5>
-                <div class="to-right not-clickable">
-                    <h4>Change</h4>
-                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="" draggable="false">
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="card-icon" src="/public/svg/account/email-address-icon.svg" draggable="false"></img>
-                <h3>Email</h3>
-                <h5 class="details"><?php echo $data['email'] ?></h5>
-                <div class="to-right not-clickable">
-                    <h4>Change</h4>
-                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="" draggable="false">
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="card-icon" src="/public/svg/account/password-icon.svg" draggable="false"></img>
-                <h3>Password</h3>
-                <h5 class="details">**********</h5>
-                <div onclick="window.location.href='/account/changePassword'" class="to-right clickable">
-                    <h4>Change</h4>
-                    <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="" draggable="false">
-                </div>
-            </div>
-
         </div>
     </div>
 
 </body>
 <script src="/public/js/account/user-account.js"></script>
+<script>
+    var data = <?php echo json_encode($data); ?>;
+
+    if (data['debugMode'] == "1") {
+        document.getElementById("switch").checked = true;
+    } else {
+        document.getElementById("switch").checked = false;
+    }
+</script>
 
 </html>

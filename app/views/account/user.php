@@ -19,13 +19,13 @@
         <!-- Main -->
         <div class="card-wrapper">
 
-            <div class="adaptive-margin" style="--coef: 15"></div>
+            <div class="adaptive-margin" style="--coef: 10"></div>
             <div class="main-text">
                 <div id="account-row" class="card-row">
                     <h1>Account</h1>
                     <div id="logout-button" class="secondary-button" onclick="logout()">Logout</div>
                 </div>
-                <p>Here you can change your account settings.</p>
+                <h5>Manage your informations and device</h5>
             </div>
 
             <div id="setup-card" class="card new-device" onclick="addNewDevice()">
@@ -37,7 +37,7 @@
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/account-icon.svg"></img>
                 <h3>Name</h3>
-                <div class="badge admin">Admin</div>
+                <div id="badge" class="badge">Admin</div>
                 <h5 class="details"> <?php echo $data['name'] ?></h5>
                 <div class="to-right not-clickable">
                     <h4>Change</h4>
@@ -147,16 +147,32 @@
         }
         document.getElementById("setup-card").style.display = "none";
 
-        if (data['device connected'] == 'true') {
+
+        if (data['device connected'] == '1' ) {
             document.getElementById("device-status").innerHTML = 'Connected 🟢';
         } else {
-            document.getElementById("serialNumber").innerHTML = "Not connected 🟠";
+            document.getElementById("device-status").innerHTML = 'Disconnected 🔴';
         }
-        
+
         document.getElementById("purshaseDate").innerHTML = data['added date'];
     } else {
         document.getElementById("device-card").style.display = "none";
         document.getElementById("setup-card").style.display = "flex";
+    }
+
+    var role = data['role'];
+    if (role == 'ISEP') {
+        document.getElementById("badge").innerHTML = 'ISEP';
+        document.getElementById("badge").classList.add('isep');
+    } else if (role == 'Insider') {
+        document.getElementById("badge").innerHTML = 'Insider';
+        document.getElementById("badge").classList.add('insider');
+    } else if (role == 'admin') {
+        document.getElementById("badge").innerHTML = 'Admin';
+        document.getElementById("badge").classList.add('admin');
+    } else  {
+        document.getElementById("badge").innerHTML = 'User';
+        document.getElementById("badge").classList.add('user');
     }
 </script>
 

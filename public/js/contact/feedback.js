@@ -1,8 +1,16 @@
 function sendFeedback() {
 
-    // Get the values from the input fields
     var title = document.getElementById("message-title").value;
     var message = document.getElementById("message-text").value;
+
+    if (isFieldEmpty(title)) {
+        document.getElementById("title-error-message").innerHTML = "Please enter a title";
+        return;
+    }
+    if (isFieldEmpty(message)) {
+        document.getElementById("text-error-message").innerHTML = "Please enter a message";
+        return;
+    }
 
     var request = new XMLHttpRequest();
     request.open("GET", "/contact/getFeedback?title=" + title + "&message=" + message, true);
@@ -31,6 +39,14 @@ function sendFeedback() {
             }
         }
     };
-
     request.send();
+}
+
+function isFieldEmpty(field) {
+    field = field.replace(/\s/g, '');
+
+    if (field == "") {
+        return true;
+    }
+    return false;
 }

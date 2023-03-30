@@ -4,6 +4,15 @@ function login() {
     var password = document.getElementById("password").value;
     var stayConnected = document.getElementById("switch").checked;
 
+    if (isFieldEmpty(email)) {
+        document.getElementById("email-warning-message").innerHTML = "Please enter your email";
+        return;
+    }
+    if (isFieldEmpty(password)) {
+        document.getElementById("password-warning-message").innerHTML = "Please enter your password";
+        return;
+    }
+
     var request = new XMLHttpRequest();
     request.open("GET", "/account/logUserIn?email=" + email + "&password=" + password + "&stayConnected=" + stayConnected, true);
     request.onreadystatechange = function () {
@@ -23,8 +32,7 @@ function login() {
                     document.getElementById("email-warning-message").innerHTML = response.emailErrorMessage;
                     document.getElementById("password-warning-message").innerHTML = response.passwordErrorMessage;
                 } catch (e) {
-                    // TODO: don't print the error message but store it somewhere
-                    document.getElementById("email-warning-message").innerHTML = this.responseText;
+                    window.alert(this.responseText);
                 }
             }
         }
@@ -40,20 +48,40 @@ function createAccount() { /* AKA register */
     var passwordConfirmation = document.getElementById("password-confirmation").value;
     var zxcvbnSS = zxcvbn(password);
 
+    if (isFieldEmpty(name)) {
+        document.getElementById("name-warning-message").innerHTML = "Please enter your name";
+        return;
+    }
+    if (isFieldEmpty(email)) {
+        document.getElementById("email-warning-message").innerHTML = "Please enter your email";
+        return;
+    }
+    if (isFieldEmpty(password)) {
+        document.getElementById("password-warning-message").innerHTML = "Please enter your password";
+        return;
+    }
+    if (isFieldEmpty(passwordConfirmation)) {
+        document.getElementById("passwordConfirm-warning-message").innerHTML = "Please confirm your password";
+        return;
+    }
+    if (password != passwordConfirmation) {
+        document.getElementById("passwordConfirm-warning-message").innerHTML = "Passwords doesn't match";
+        return;
+    }
+    if (zxcvbnSS.score < 3) {
+        document.getElementById("password-warning-message").innerHTML = "Your password is too weak";
+        return;
+    }
+
     //Send HTTPS request to server
     var request = new XMLHttpRequest();
     request.open("GET", "/account/registerUser?name=" + name + "&email=" + email + "&password=" + password + "&passwordConfirmation=" + passwordConfirmation + "&zxcvbnSS=" + zxcvbnSS.score, true);
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            /* If the user account has been correctly created */
-
-            /* Store the data in the local storage */
-            localStorage.setItem('name', name);
-            localStorage.setItem('email', email);
-
             /* Update the page */
             if (this.responseText == true) {
+                localStorage.setItem('email', email);
                 document.getElementById("title").innerHTML = "Account created";
                 document.getElementById("subtitle").innerHTML = "An email will be sent to confirm your account";
                 document.getElementById("register-form").remove();
@@ -69,8 +97,7 @@ function createAccount() { /* AKA register */
                     document.getElementById("password-warning-message").innerHTML = response.passwordErrorMessage;
                     document.getElementById("passwordConfirm-warning-message").innerHTML = response.passwordConfirmErrorMessage;
                 } catch (e) {
-                    // TODO: don't print the error message but store it somewhere
-                    document.getElementById("name-warning-message").innerHTML = this.responseText;
+                    window.alert(this.responseText);
                 }
             }
         }
@@ -82,6 +109,11 @@ function createAccount() { /* AKA register */
 
 function recoverPassword() {
     var email = document.getElementById("email").value;
+
+    if (isFieldEmpty(email)) {
+        document.getElementById("email-warning-message").innerHTML = "Please enter your email";
+        return;
+    }
 
     var request = new XMLHttpRequest();
     request.open("GET", "/account/getNewPassword?email=" + email, true);
@@ -96,7 +128,6 @@ function recoverPassword() {
                 document.getElementById("login-field").remove();
                 document.getElementById("email-animation").style.display = "block";
 
-
                 // Change button text
                 document.getElementById("submit-button-passwordRecovery").innerHTML = "Back to login";
                 document.getElementById("submit-button-passwordRecovery").addEventListener("click", function () {
@@ -104,7 +135,7 @@ function recoverPassword() {
                 });
             }
             else {
-                alert(this.responseText);
+                window.alert(this.responseText);
             }
         }
     };
@@ -129,4 +160,13 @@ function showPassword() {
             confirmation.type = "password";
         }
     }
+}
+
+function isFieldEmpty(field) {
+    field = field.replace(/\s/g, '');
+
+    if (field == "") {
+        return true;
+    }
+    return false;
 }

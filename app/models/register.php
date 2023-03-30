@@ -1,5 +1,6 @@
 <?php
 require_once 'connect.php';
+require_once 'errors-manager.php';
 
 function registerUser($name, $email, $password, $role)
 {
@@ -10,12 +11,14 @@ function registerUser($name, $email, $password, $role)
     $stmt->bindParam(':password', $password);
     $stmt->bindParam(':mail', $email);
     $stmt->bindParam(':role', $role);
-    $stmt->execute();
+    
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        newErrorMessage($e->getMessage()); 
+        return;
+    }
 
-    // Adding the user into other tables
-    $stmt = $conn->prepare("INSERT INTO userdata (mail) VALUES (:mail)");
-    $stmt->bindParam(':mail', $email);
-    $stmt->execute();
 }
 
 function isEmailExist($email)
@@ -23,9 +26,15 @@ function isEmailExist($email)
     $conn = connect();
     $stmt = $conn->prepare("SELECT mail FROM users WHERE mail = :mail");
     $stmt->bindParam(':mail', $email);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    try {
+        $stmt->execute();
+    } catch (PDOException $e) {
+        newErrorMessage($e->getMessage());
+        return;
+    }
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
         return true;
     } else {

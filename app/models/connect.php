@@ -1,12 +1,10 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/protected-computing/private-compute-core.php');
-
 
 function connect()
 {
     $servername = "localhost";
     $username = "HB";
-    $password = GP();
+    $password = getenv('DB_PASSWORD');
     $dbname = "heartbeats_logs*";
 
     try {
@@ -18,3 +16,5 @@ function connect()
     
     return $conn;
 }
+
+?>
