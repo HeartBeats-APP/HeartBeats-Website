@@ -19,9 +19,7 @@ function login() {
         if (this.readyState == 4 && this.status == 200) {
 
             if (this.responseText == true) {
-
                 window.location.href = "/dashboard";
-
                 // Create a cookie to store the user's data
                 localStorage.setItem('email', email);
             }

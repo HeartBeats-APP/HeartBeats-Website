@@ -238,15 +238,9 @@ class account extends Controller
     {
         $inputNoWhiteSpace = preg_replace('/\s+/', '', $input);
 
+
         if ($inputNoWhiteSpace == "") {
             return "This field can't be empty";
-        }
-
-        // Security layer
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/protected-computing/private-compute-core.php');
-        $IFSresult = IFS($email);
-        if ($IFSresult != "") {
-            return $IFSresult;
         }
 
         return "";
@@ -258,7 +252,6 @@ class account extends Controller
         if ($result != "") {
             return $result;
         }
-
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) < 10 || strlen($email) > 50) {
             return "This email is not valid";
         }

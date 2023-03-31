@@ -3,7 +3,7 @@ require_once 'connect.php';
 require_once 'errors-manager.php';
 require_once 'userSession.php';
 
-$GLOBALS['databaseLastVersion'] = 1.3;
+$GLOBALS['databaseLastVersion'] = 1.4;
 
 function getDatabseLastVersion() {
     if (!isAnAdmin()) {

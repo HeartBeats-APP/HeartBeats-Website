@@ -105,7 +105,7 @@
         document.getElementById("switch").checked = false;
     }
 
-    if (data['databaseVersion'] == data['databaseLastVersion']) {
+    if (data['databaseVersion'] == data['databaseLastVersion'] ) {
         document.getElementById("database-text").innerHTML = "Database is up to date";
         document.getElementById("databaseIndicator").classList.add("blue-bg");
 

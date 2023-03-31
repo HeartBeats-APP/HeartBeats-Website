@@ -19,7 +19,6 @@ class contact extends Controller
     {
         $title = $_REQUEST['title'];
         $message = $_REQUEST['message'];
-        
         $titleErrorMessage = $this->checkInput($title, 5, 50);
         $messageErrorMessage = $this->checkInput($message, 10, 1000);
 
@@ -30,6 +29,7 @@ class contact extends Controller
             ));
             return;
         }
+
 
         require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/feedbacks.php');
         $result = storeFeedback($title, $message);
@@ -44,8 +44,6 @@ class contact extends Controller
         ));
     }
 
-
-
     private function checkInput($input, $min, $max)
     {
         $input = trim($input);
@@ -56,13 +54,6 @@ class contact extends Controller
             return "This field must be at least $min characters long";
         } else if (strlen($input) > $max) {
             return "This field must be at most $max characters long";
-        }
-
-        // Security layer
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/protected-computing/private-compute-core.php');
-        $IFSresult = IFS($input);
-        if ($IFSresult != "") {
-            return $IFSresult;
         }
 
         return "";

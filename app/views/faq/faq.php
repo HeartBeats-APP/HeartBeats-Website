@@ -66,4 +66,24 @@
   </div>
 </body>
 
+<script>
+
+var data = <?php echo json_encode($data); ?>;
+
+for (var i = 0; i < data.length; i++) {
+  var question = data[i].question;
+  var answer = data[i].answer;
+  var details = document.createElement("details");
+  var summary = document.createElement("summary");
+  var p = document.createElement("p");
+  var text = document.createTextNode(question);
+  var text2 = document.createTextNode(answer);
+  summary.appendChild(text);
+  p.appendChild(text2);
+  details.appendChild(summary);
+  details.appendChild(p);
+}
+
+</script>
+
 </html>

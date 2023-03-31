@@ -1,5 +1,7 @@
 <?php
 require_once 'errors-manager.php';
+require_once 'connect.php';
+require_once 'userSession.php';
 
 function storeFeedback($title, $message)
 {
@@ -23,7 +25,7 @@ function storeFeedback($title, $message)
         return true;
     } else {
         return false;
-        newErrorMessage("Feedback could not be stored despite the absence of errors");
+        newErrorMessage("Feedback could  not be stored despite the absence of errors");
     }
 }
 ?>
