@@ -174,3 +174,8 @@ function isDebugMode()
 {
     return $_SESSION['debugMode'] && $_SESSION['role'] == 'admin';
 }
+
+function isAnAdmin()
+{
+    return $_SESSION['role'] == 'admin';
+}

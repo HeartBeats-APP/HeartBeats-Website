@@ -33,8 +33,9 @@
           <label for="">Password</label>
           <input id="password" type="password" placeholder="**********" spellcheck="false" autocomplete="on" required>
           <div class="show-password">
-            <input type="checkbox" id="show-password-input" onclick="showPassword()"/><label for="show-password-input"></label>
-            <p class="connected-text">Show password</p>
+            <input type="checkbox" id="show-password-input" onclick="showPassword()" /><label
+              for="show-password-input"></label>
+            <p class="connected-text">Show passwords</p>
           </div>
           <a id="password-warning-message" class="warning-message"></a>
         </div>
@@ -42,8 +43,8 @@
         <div class="stay-connected">
           <input type="checkbox" id="switch" /><label for="switch"></label>
           <p class="connected-text">Stay connected</p>
-          <a href="/account/changePassword">Forgot password?</a>
         </div>
+        <a href="/account/changePassword">Forgot password?</a>
 
         <div class="buttons-area">
           <button onclick="login()" class="main-button">Login</button>

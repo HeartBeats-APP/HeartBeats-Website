@@ -46,8 +46,12 @@ class Controller
     }
 
     private function addAdminData($data)
-    {
+    {   
+        require_once '../app/models/database-version.php';
+        $data['databaseVersion'] = getDatabseVersion();
+        $data['databaseLastVersion'] = getDatabseLastVersion();
         $data['debugMode'] = isDebugMode();
+
         return $data;
     }
 }

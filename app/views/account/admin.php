@@ -21,7 +21,7 @@
 
             <div class="adaptive-margin" style="--coef: 10"></div>
             <div class="main-text">
-                <div id="account-row" class="card-row">
+                <div id="account-row" class="row">
                     <h1>Admin</h1>
                     <div class=" secondary-button" onclick="logout()">Logout</div>
                 </div>
@@ -30,20 +30,21 @@
 
             <div class="card security">
                 <div id="security-details" class="card-column">
-                    <div class="card-row">
-                        <h2>Website Security</h2>
-                    </div>
-                    <div class="card-row">
+
+                    <h2>Website Security</h2>
+
+                    <div class="security-row">
                         <h3>Recent logs: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="card-row">
+                    <div class="security-row">
                         <h3>Security check: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="card-row">
-                        <h3>Area under development </h3>
-
+                    <div class="security-row">
+                        <h3>Database Version: </h3>
+                        <h5 class="details" id="database-text">Everything is looking good</h5>
+                        <div id="databaseIndicator" class="to-right indicator"></div>
                     </div>
                 </div>
                 <div id="security-img" class="card-column">
@@ -54,7 +55,7 @@
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/debug-icon.svg" draggable="false"></img>
                 <h3>Debug Mode</h3>
-                <h5  id="debugText" class="details">Shows precise error messages for easier problem-solving</h5>
+                <h5 id="debugText" class="details">Shows precise error messages for easier problem-solving</h5>
                 <div class="to-right" id="DebugModeSwitch">
                     <input onclick="debugMode()" type="checkbox" id="switch" /><label for="switch"></label>
                 </div>
@@ -103,6 +104,16 @@
     } else {
         document.getElementById("switch").checked = false;
     }
+
+    if (data['databaseVersion'] == data['databaseLastVersion']) {
+        document.getElementById("database-text").innerHTML = "Database is up to date";
+        document.getElementById("databaseIndicator").classList.add("blue-bg");
+
+    } else {
+        document.getElementById("database-text").innerHTML = "Dabatase can be updated to version " + data['databaseLastVersion'];
+        document.getElementById("databaseIndicator").classList.add("red-bg");
+    }
+
 </script>
 
 </html>
