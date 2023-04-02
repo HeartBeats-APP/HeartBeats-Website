@@ -1,5 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/userSession.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DatabaseManager.php');
 
 class Controller
 {
@@ -17,10 +18,10 @@ class Controller
 
     public function header()
     {
-        if (isSessionActive() && getRole() == "admin") {
+        if (AccountManager::isAdmin()) {
             $AccountText = "Admin";
             $AccountAction = "admin";
-        } else if (isSessionActive()) {
+        } else if (AccountManager::isSessionActive()) {
             $AccountText = "Account";
             $AccountAction = "user";
         } else {
@@ -35,10 +36,10 @@ class Controller
     {
         $this->header();
 
-        if (isSessionActive() && getRole() == "admin" && $destination == "admin") {
+        if (AccountManager::isAdmin() && $destination == "admin") {
             $data = $this->addAdminData($data);
             $this->view('account/admin', $data);
-        } else if (isSessionActive()) {
+        } else if (AccountManager::isSessionActive()) {
             $this->view('account/user', $data);
         } else {
             $this->view('account/login');
@@ -47,10 +48,9 @@ class Controller
 
     private function addAdminData($data)
     {   
-        require_once '../app/models/database-version.php';
-        $data['databaseVersion'] = getDatabseVersion();
-        $data['databaseLastVersion'] = getDatabseLastVersion();
-        $data['debugMode'] = isDebugMode();
+        $Database = new DatabaseManager;
+        $data['versions'] = $Database->isUpToDate();
+        $data['debugMode'] = (new DebugMode)->isDebugModeActive();
 
         return $data;
     }

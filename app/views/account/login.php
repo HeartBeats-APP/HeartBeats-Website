@@ -32,12 +32,12 @@
         <div class="login-field">
           <label for="">Password</label>
           <input id="password" type="password" placeholder="**********" spellcheck="false" autocomplete="on" required>
+          <a id="password-warning-message" class="warning-message"></a>
           <div class="show-password">
             <input type="checkbox" id="show-password-input" onclick="showPassword()" /><label
               for="show-password-input"></label>
-            <p class="connected-text">Show passwords</p>
+            <p class="connected-text">Show password</p>
           </div>
-          <a id="password-warning-message" class="warning-message"></a>
         </div>
 
         <div class="stay-connected">

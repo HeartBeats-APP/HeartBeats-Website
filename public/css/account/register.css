@@ -1,12 +1,11 @@
 
 /* Password strength indicator ----------------------------------------------------------------------------------------------------------------------*/
 .strength-indicator{
-  margin-top: -2em;
+  margin-top: -2.5em;
 }
 
 meter {
-  margin-top: 1.5em;
-  margin-left: 1.1em;
+  margin-left: 1em;
   width: 90%;
   height: 1em;
   border-radius: 100px;

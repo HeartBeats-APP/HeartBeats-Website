@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/faq.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Q&AManager.php');
 
 class faq extends Controller
 {

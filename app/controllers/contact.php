@@ -1,12 +1,15 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/userSession.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/InputValidator.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/FeedbacksManager.php');
+
 
 class contact extends Controller
 {
     public function index()
     {   
         //check if user is logged in
-        if (!isSessionActive()) {
+        if (!AccountManager::isSessionActive()) {
             header('Location: /account/login');
             return;
         }
@@ -19,43 +22,25 @@ class contact extends Controller
     {
         $title = $_REQUEST['title'];
         $message = $_REQUEST['message'];
-        $titleErrorMessage = $this->checkInput($title, 5, 50);
-        $messageErrorMessage = $this->checkInput($message, 10, 1000);
 
-        if ($titleErrorMessage != "" || $messageErrorMessage != "") {
-            echo json_encode(array(
-                'titleErrorMessage' => $titleErrorMessage,
-                'messageErrorMessage' => $messageErrorMessage
-            ));
+        $inputValidator = new TextInput;
+        $titleResult = $inputValidator->validate($title, 5, 50);
+        $messageResult = $inputValidator->validate($message, 10, 500);
+
+        if ($titleResult || $messageResult) {
+            echo json_encode(array('result' => 'InputsError', 'titleErrorMessage' => $titleResult, 'messageErrorMessage' => $messageResult));
             return;
         }
 
-
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/feedbacks.php');
-        $result = storeFeedback($title, $message);
+        $feedbacksManager = new FeedbacksManager;
+        $result = $feedbacksManager->addFeedback($title, $message);
 
         if ($result) {
             echo true;
             return;
         } 
 
-        echo json_encode(array(
-            'Error' => "Something went wrong on our side. Please try again later.",
-        ));
+        echo false;
     }
 
-    private function checkInput($input, $min, $max)
-    {
-        $input = trim($input);
-        $input = stripslashes($input);
-        $input = htmlspecialchars($input);
-
-        if (strlen($input) < $min) {
-            return "This field must be at least $min characters long";
-        } else if (strlen($input) > $max) {
-            return "This field must be at most $max characters long";
-        }
-
-        return "";
-    }
 }

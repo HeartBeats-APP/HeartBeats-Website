@@ -92,8 +92,14 @@ body {
     color: var(--red);
     font-size: 0.85em;
     margin-left: 1.5em;
-    margin-top: -1.5em;
     margin-bottom: .5em;
+    margin-top: -1.5em;
+    width: 100%;
+}
+
+#password-warning-message {
+    padding-top: 1.5em;
+    padding-bottom: 1em;
 }
 
 .buttons-area {

@@ -1,5 +1,8 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/userSession.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/InputValidator.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
 
 class account extends Controller
 {
@@ -23,12 +26,13 @@ class account extends Controller
 
     public function user()
     {
-        $data = getSessionData();
-        if (hasADevice()) {
-            $deviceData = getDeviceData();
+        $data = AccountManager::getSessionData();
+        if (DeviceManager::isDeviceExists()) {
+            $deviceData = DeviceManager::getDeviceData();
             $data['device id'] = $deviceData['device id'];
             $data['added date'] = $deviceData['added date'];
-            $data['device connected'] = $deviceData['device connected'];
+            $data['device mode'] = $deviceData['device mode'];
+            $data['device connected'] = $deviceData['isDeviceConnected'];
             $data['hasDevice'] = true;
         } else {
             $data['hasDevice'] = false;
@@ -38,98 +42,75 @@ class account extends Controller
 
     public function admin()
     {
-        $data = getSessionData();
+        $data = AccountManager::getSessionData();
         $this->account($data, "admin");
     }
 
     public function logUserIn()
     {
-        $email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
-        $stayConnected = $_REQUEST['stayConnected'];
+        $email = trim($_REQUEST['email']);
+        $password = trim($_REQUEST['password']);
 
-        $emailErrorMessage = $this->checkEmail($email);
-        $passwordErrorMessage = $this->checkInput($password);
+        $emailInput = new EmailInput;
+        $emailResult = $emailInput->validate($email);
+        $passwordInput = new PasswordInput;
+        $passwordResult = $passwordInput->validate($password);
 
-        if ($emailErrorMessage != "" || $passwordErrorMessage != "") {
-            echo json_encode(array(
-                'emailErrorMessage' => $emailErrorMessage,
-                'passwordErrorMessage' => $passwordErrorMessage
-            ));
+        if ($emailResult || $passwordResult ) {
+            echo json_encode(array('result' => 'InputsError', 'emailErrorMessage' => $emailResult, 'passwordErrorMessage' => $passwordResult));
             return;
         }
 
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/login.php');
-        if (isEmailExist($email) && isPasswordCorrect($email, $password)) {
-            createSession($email);
-            if (isSessionActive() && isSessionDataExist()) {
-                echo true;
-                return;
-            }
-            newErrorMessage("Impossible to log in the following user despite correct credentials: " . $email);
-        }
+        $login = new Login;
+        $loginResult = $login->logUserIn($email, $password);
 
-        echo json_encode(array(
-            'emailErrorMessage' => "Mail or password incorrect",
-            'passwordErrorMessage' => ""
-        ));
+        if ($loginResult != "") {
+            echo json_encode(array('result' => 'LoginError', 'emailErrorMessage' => $loginResult, 'passwordErrorMessage' => ""));
+            return ;
+        }
+        echo true;
     }
 
     public function logUserOut()
     {
-        destroySession();
-        if (!isSessionActive() && !isSessionDataExist()) {
+        if (AccountManager::destroySession() == true) {
             echo true;
-            return;
+            return ;
         }
 
-        newErrorMessage("Impossible to log out the following user: " . getMail());
+        ErrorsHandler::newError('Something went wrong while logging out' . AccountManager::getMail(), 1, true);
     }
 
     public function registerUser()
     {
-        $name = $_REQUEST['name'];
-        $email = $_REQUEST['email'];
+        $name = trim($_REQUEST['name']);
+        $email = trim($_REQUEST['email']);
         $password = $_REQUEST['password'];
         $passwordConfirm = $_REQUEST['passwordConfirmation'];
-        $zxcvbnSS = $_REQUEST['zxcvbnSS'];
+        $zxcvbn = $_REQUEST['zxcvbnSS'];
 
-        $emailErrorMessage = $this->checkEmail($email);
-        $nameErrorMessage = $this->checkName($name);
-        $passwordErrorMessage = $this->checkPasswordCreation($zxcvbnSS, $password);
-        $passwordConfirmErrorMessage = $this->checkPasswordsMatch($password, $passwordConfirm);
+        $nameInput = new NameInput;
+        $nameResult = $nameInput->validate($name);
+        $emailInput = new EmailInput;
+        $emailResult = $emailInput->validate($email);
+        $passwordInput = new PasswordInput;
+        $passwordResult = $passwordInput->validate($password, $zxcvbn);
+        $passwordConfirmResult = $passwordInput->validate($passwordConfirm, $zxcvbn);
 
-        if ($emailErrorMessage != "" || $passwordErrorMessage != "" || $nameErrorMessage != "" || $passwordConfirmErrorMessage != "") {
-            echo json_encode(array(
-                'emailErrorMessage' => $emailErrorMessage,
-                'passwordErrorMessage' => $passwordErrorMessage,
-                'nameErrorMessage' => $nameErrorMessage,
-                'passwordConfirmErrorMessage' => $passwordConfirmErrorMessage
-            ));
-            return;
+        if ($nameResult != "" || $emailResult != "" || $passwordResult != "" || $passwordConfirmResult != "") {
+            echo json_encode(array('result' => 'InputsError', 'nameErrorMessage' => $nameResult, 'emailErrorMessage' => $emailResult, 'passwordErrorMessage' => $passwordResult, 'passwordConfirmErrorMessage' => $passwordConfirmResult));
+            return ;
         }
 
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/register.php');
-        if (isEmailExist($email)) {
-            echo json_encode(array(
-                'emailErrorMessage' => 'This email is already used',
-                'passwordErrorMessage' => '',
-                'nameErrorMessage' => '',
-                'passwordConfirmErrorMessage' => ''
-            ));
-            return;
-        }
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $role = $this->getRole($email);
+        $register = new Register;
+        $registerResult = $register->registerUser($name, $email, $password, $passwordConfirm);
 
-        registerUser($name, $email, $password, $role);
-        if (isEmailExist($email)) {
-            echo true;
-            createSession($email);
-            return;
+        if ($registerResult != "") {
+            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult));
+            return ;
         }
 
-        newErrorMessage("Impossible to register the following user: $email");
+        echo true;
     }
 
     public function changePassword()
@@ -148,13 +129,6 @@ class account extends Controller
 
     public function getNewPassword()
     {
-        if (!isSessionActive()) {
-            echo 'You are not logged in';
-            destroySession();
-            newErrorMessage("User tried to get a new password while he was not logged in");
-            return;
-        }
-
         echo 'function not supported yet :/';
     }
 
@@ -163,177 +137,73 @@ class account extends Controller
         $serialNumber = $_REQUEST['serial'];
         $purshaseDate = $_REQUEST['date'];
 
-        if (hasADevice()) {
-            newErrorMessage("User " . getMail() . " tried to add a device while he already has one");
+        if (!AccountManager::isSessionActive()) {
+            echo json_encode(array('errorMessage' => 'It seems that you are not logged in'));
+            AccountManager::destroySession();
             return;
         }
 
-        if (!isSessionActive()) {
-            echo "It seems that you are not logged in";
-            destroySession();
+        if (DeviceManager::isDeviceExists()) {
+            echo json_encode(array('errorMessage' => 'You already have a device'));
             return;
         }
 
-        $serialNumberErrorMessage = $this->checkInput($serialNumber);
-        if ($serialNumberErrorMessage != "") {
-            echo $serialNumberErrorMessage;
+        $serialNumberInput = new SerialNumberInput;
+        $serialNumberResult = $serialNumberInput->validate($serialNumber);
+
+        if ($serialNumberResult != "") {
+            echo json_encode(array('errorMessage' => $serialNumberResult));
             return;
         }
 
-        addDevice($serialNumber, $purshaseDate);
-        if (hasADevice()) {
-            echo true;
+        $Device = new Device;
+        $registerResult = $Device->addNew($serialNumber, $purshaseDate);
+
+        if ($registerResult != "") {
+            echo json_encode(array('errorMessage' => $registerResult));
             return;
         }
 
-        newErrorMessage("Failed to add the device of the following user: " . getMail());
+        echo true;
     }
 
     public function deleteDevice()
     {
-        if (!isSessionActive()) {
-            echo json_encode(array(
-                'errorMessage' => 'It seems that you are not logged in'
-            ));
-            destroySession();
+        if (!AccountManager::isSessionActive()) {
+            echo "It seems that you are not logged in";
+            AccountManager::destroySession();
             return;
         }
 
-        if (!hasADevice()) {
-            newErrorMessage("User " . getMail() . " tried to delete a device while he doesn't have one");
+        if (!DeviceManager::isDeviceExists()) {
+            echo "You don't own a device";
             return;
         }
 
-        removeDevice();
+        $Device = new Device;
+        $deleteResult = $Device->remove();
 
-        if (!hasADevice()) {
-            echo true;
+        if ($deleteResult != "") {
+            echo $deleteResult;
             return;
         }
 
-        newErrorMessage("Impossible to delete the device of the following user: " . getMail());
+        echo true;
     }
 
     public function debugMode()
-    {
-        if (!isSessionActive() || getRole() != 'admin') {
-            echo 'Something went wrong';
-            newWarningMessage("The non-admin user " . getMail() . " tried to enable the debug mode");
-            return;
-        }
-        $value = $_REQUEST['value'];
+    {   
+        $state = $_REQUEST['value'];
 
-        debugMode($value);
+        $debugMode = new debugMode;
+        $debugModeResult = $debugMode->toggleDebugMode($state);
 
-        if (isDebugMode() == $value) {
-            echo true;
+        if ($debugModeResult != "") {
+            echo $debugModeResult;
             return;
         }
 
-        newErrorMessage("Impossible to change the debug mode state for the following admin: " . getMail());
+        echo true;
     }
 
-
-    private function checkInput($input)
-    {
-        $inputNoWhiteSpace = preg_replace('/\s+/', '', $input);
-
-
-        if ($inputNoWhiteSpace == "") {
-            return "This field can't be empty";
-        }
-
-        return "";
-    }
-
-    private function checkEmail($email)
-    {
-        $result = $this->checkInput($email);
-        if ($result != "") {
-            return $result;
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) < 10 || strlen($email) > 50) {
-            return "This email is not valid";
-        }
-    }
-
-    private function checkName($name)
-    {
-        // Check if name is not too short
-        if (strlen($name) < 3) {
-            return "The name is too short";
-        }
-
-        // Check if name contains only letters, whitespaces, dashes and apostrophes
-        if (!preg_match("/^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/", $name)) {
-            return "Your name cannot contain special characters";
-        }
-
-        $forbiddenNames = array(base64_decode('YWRtaW4='), base64_decode('cm9vdA=='), base64_decode('YWRtaW5pc3RyYXRvcg=='), base64_decode('bW9kZXJhdG9y'), base64_decode('bW9k'), base64_decode('bW9kZXJhdGV1cg=='), base64_decode('ZmRw'), base64_decode('Y29ubmFyZA=='), base64_decode('Y29u'), base64_decode('Y29ubmFzc2U='), base64_decode('cHV0ZQ=='), base64_decode('c2Fsb3Bl'), base64_decode('YWRtaW5pc3RyYXRldXI='), base64_decode('YWRtaW5pc3RyYXRyaWNl'), base64_decode('bWFyaWUtc29saW5l'), base64_decode('bWFyaWUgc29saW5l'), base64_decode('bWFyaWUgc29saW4='), base64_decode('bWFyaWUtc29saW4='), base64_decode('c3VwZXJhZG1pbg=='), base64_decode('c3VwZXItYWRtaW4='), base64_decode('c3VwZXIgYWRtaW4='), base64_decode('c3VwZXItYWRtaW5pc3RyYXRvcg=='), base64_decode('c3VwZXIgYWRtaW5pc3RyYXRvcg=='), base64_decode('c3VwZXItYWRtaW5pc3RyYXRldXI='), base64_decode('c3VwZXIgYWRtaW5pc3RyYXRldXI='), base64_decode('c3VwZXItYWRtaW5pc3RyYXRyaWNl'), base64_decode('c3VwZXIgYWRtaW5pc3RyYXRyaWNl'), base64_decode('c3VwZXItbW9k'), base64_decode('c3VwZXIgbW9k'), base64_decode('c3VwZXItbW9kZXJhdG9y'), base64_decode('c3VwZXIgbW9kZXJhdG9y'), base64_decode('c3VwZXItbW9kZXJhdGV1cg=='), base64_decode('c3VwZXIgbW9kZXJhdGV1cg=='), base64_decode('c3VwZXItbW9kZXJhdHJpY2U='), base64_decode('c3VwZXIgbW9kZXJhdHJpY2U='), base64_decode('c3VwZXItbW9kw6lyYXRldXI='), base64_decode('c3VwZXIgbW9kw6lyYXRldXI='), base64_decode('c3VwZXItbW9kw6lyYXRyaWNl'), base64_decode('c3VwZXIgbW9kw6lyYXRyaWNl'), base64_decode('c3VwZXItbW9kw6lyYXRldXI='), base64_decode('c3VwZXIgbW9kw6lyYXRldXI='), base64_decode('c3Vw'), base64_decode('bW9kZXJhdGV1cg=='), base64_decode('bW9k'));
-        $name = strtolower($name);
-        if (in_array($name, $forbiddenNames)) {
-            return "This name is not allowed";
-        }
-
-        return "";
-    }
-
-    private function checkPasswordCreation($passwordScore, $password)
-    {
-        // Check if the password score is not too low
-        if ($passwordScore < 3) {
-            return "The password is too weak";
-        }
-
-        if (strlen($password) >= 500) {
-            return "Okay dude, calm down on your password";
-        }
-
-        return "";
-    }
-
-    private function checkPasswordsMatch($password, $passwordConfirmation)
-    {
-        $result = $this->checkInput($password);
-        if ($result != "") {
-            return $result;
-        }
-
-        $result = $this->checkInput($passwordConfirmation);
-        if ($result != "") {
-            return $result;
-        }
-
-        // Check if the passwords match
-        if ($password != $passwordConfirmation) {
-            return "Passwords doesn't match";
-        }
-
-        return "";
-    }
-
-    private function getRole($email)
-    {
-        $email = strtolower($email);
-
-        // Check if the user is an admin
-        if (isAnAdmin($email)) {
-            return "Admin";
-        }
-
-        // Check if the user is an insider
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/insiders.php');
-        foreach (getInsidersList() as $insider) {
-            if ($insider['email'] == $email) {
-                return "Insider";
-            }
-        }
-
-        // Check if the user is an ISEP student
-        if (substr($email, -7) == "isep.fr") {
-            return "ISEP";
-        }
-
-        return "User";
-    }
 }
