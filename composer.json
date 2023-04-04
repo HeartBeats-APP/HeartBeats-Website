@@ -22,13 +22,5 @@
       "app\\": "Classes/"
     }
   },
-  "replace": {
-    "school": "self.version",
-    "heartbeats/website": "self.version"
-  },
-  "extra": {
-      "typo3/cms": {
-          "extension-key": "school"
-      }
-  }
+
 }
