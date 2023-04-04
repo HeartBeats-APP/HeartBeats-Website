@@ -164,7 +164,7 @@
     if (role == 'ISEP') {
         document.getElementById("badge").innerHTML = 'ISEP';
         document.getElementById("badge").classList.add('isep');
-    } else if (role == 'Insider') {
+    } else if (role == 'insider') {
         document.getElementById("badge").innerHTML = 'Insider';
         document.getElementById("badge").classList.add('insider');
     } else if (role == 'admin') {

@@ -47,26 +47,19 @@ summary {
   cursor: pointer;
 }
 
-details[open] .control-icon-close {
-  display: initial;
+.animation {
+  height: clamp(10em, 30vw, 30em);
+  width: clamp(10em, 30vw, 30em);
 }
 
-details[open] .control-icon-expand {
-  display: none;
-}
-
-.control-icon {
-  pointer-events: none;
-  -webkit-animation: icon-spin-up .4s var(--transition);
-  animation: icon-spin-up .4s var(--transition);
-}
-
-.control-icon-close {
-  display: none;
+.rotate {
   -webkit-animation: icon-spin .4s var(--transition);
   animation: icon-spin .4s var(--transition);
   transform: rotate(180deg);
+
 }
+
+
 
 @-webkit-keyframes icon-spin-up {
   0% {

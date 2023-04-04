@@ -1,8 +1,23 @@
-
+.hidden {
+    display: none;
+}
 
 /* Security Card ------------------------------------------------------------------------------------------------------------------------------------ */
 .security {
-    padding: 2vh clamp(.5em, 2vw, 2em) 2vh clamp(.5em, 2vw, 2em);
+    padding: 2.5vh clamp(.5em, 2vw, 2em) 3vh clamp(.5em, 2vw, 2em);
+}
+
+.security h2 {
+    margin-bottom: -1vh;
+}
+
+.security h3 {
+    min-width: unset;
+    white-space: nowrap;
+}
+
+.details {
+    min-width: clamp(15em, 30vw, 30em);
 }
 
 .card-column {
@@ -13,19 +28,54 @@
     gap: 2vh;
 }
 
-.card-row {
+/* Expandable Card ---------------------------------------------------------------------------------------------------------------------------------- */
+.expandable-card {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: left;
     width: 100%;
-    height: clamp(2em, fit-content, 3em);
-    gap: .5em;
+    height: fit-content;
+    background: rgb(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 1% 2.5%;
+    gap: 2.5%;
 }
 
-.card-row h4, .card-column h5, .card-column p {
-    padding-top: 5px;
+.expandable-card:hover {
+    background: rgb(255, 255, 255, 0.15);
+    cursor: pointer;
+    transform: scale(1.02);
 }
+
+.expandable-card.large {
+    z-index: 500;
+    width: 50%;
+    min-height: 50%;
+    height: fit-content;
+    top: 30%;
+    left: 25%;
+    position: absolute;
+}
+
+.expandable-card.large:hover {
+    transform: none;
+    cursor: default;
+    background-color: rgb(255, 255, 255, 0.25);
+}
+
+.overlay-bg{
+    position: absolute;
+    z-index: 499;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0, 0.25);
+    backdrop-filter: blur(25px);
+    top: 0;
+    left: 0;
+}
+
+/* Security Details ---------------------------------------------------------------------------------------------------------------------------------- */
 
 #security-details {
     width: 75%;
@@ -43,7 +93,7 @@
     height: clamp(1em, 15vw, 15em);
 }
 
-.logs{
+.logs {
     height: clamp(5em, 15vh, 10em);
     margin-top: .5em;
     border-radius: 10px;
@@ -61,6 +111,22 @@
     font-size: clamp(.6em, 1vw, 1.2em);
 }
 
+.indicator {
+    width: clamp(1em, 1vw, 1.5em);
+    height: clamp(1em, 1vw, 1.5em);
+    border-radius: 50%;
+}
+
+.blue-bg {
+    background: var(--blue-gradient);
+}
+
+.red-bg {
+    background: var(--main-gradient);
+}
+
+/* Rest of the page ---------------------------------------------------------------------------------------------------------------------------------- */
+
 #DebugModeSwitch {
     margin-right: .5em;
 }
@@ -68,4 +134,4 @@
 input[type="checkbox"]:hover+label {
     scale: 1.175;
     cursor: pointer;
-  }
+}

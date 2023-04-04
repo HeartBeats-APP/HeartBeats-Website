@@ -14,14 +14,14 @@
 
 <body>
 
-    <div class="wrapper background1">
+    <div class="wrapper background1" id="wrapper">
 
         <!-- Main -->
         <div class="card-wrapper">
 
             <div class="adaptive-margin" style="--coef: 10"></div>
             <div class="main-text">
-                <div id="account-row" class="card-row">
+                <div id="account-row" class="row">
                     <h1>Admin</h1>
                     <div class=" secondary-button" onclick="logout()">Logout</div>
                 </div>
@@ -30,19 +30,25 @@
 
             <div class="card security">
                 <div id="security-details" class="card-column">
-                    <div class="card-row">
-                        <h2>Website Security</h2>
-                    </div>
-                    <div class="card-row">
+
+                    <div id="overlay-bg"></div>
+
+                    <h2>Website Security</h2>
+                    <div class="expandable-card">
                         <h3>Recent logs: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="card-row">
+                    <div class="expandable-card">
                         <h3>Security check: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="card-row">
-                        <h3>Area under development </h3>
+                    <div class="expandable-card" id="updatesCard">
+                        <iframe id="updatesCard-expanded" class="updatesFrame" src="/app/views/account/admin/updates.php" frameborder="0" allowTransparency="true"></iframe>
+                        <h3>Updates: </h3>
+                        <h5 class="details" id="database-text">Everything is looking good</h5>
+                        <div class="to-right">
+                            <div id="updatesIndicator" class="indicator"></div>
+                        </div>
 
                     </div>
                 </div>
@@ -54,7 +60,7 @@
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/debug-icon.svg" draggable="false"></img>
                 <h3>Debug Mode</h3>
-                <h5  id="debugText" class="details">Shows precise error messages for easier problem-solving</h5>
+                <h5 id="debugText" class="details">Shows precise error messages for easier problem-solving</h5>
                 <div class="to-right" id="DebugModeSwitch">
                     <input onclick="debugMode()" type="checkbox" id="switch" /><label for="switch"></label>
                 </div>
@@ -95,13 +101,25 @@
 
 </body>
 <script src="/public/js/account/user-account.js"></script>
+<script src="/public/js/account/admin.js"></script>
 <script>
+    document.getElementById("updatesCard-expanded").classList.add("hidden");
+
     var data = <?php echo json_encode($data); ?>;
 
     if (data['debugMode'] == "1") {
         document.getElementById("switch").checked = true;
     } else {
         document.getElementById("switch").checked = false;
+    }
+
+    var updates = data['updates'];
+    document.getElementById("database-text").innerHTML = updates;
+
+    if (updates == "Everything is up to date") {
+        document.getElementById("updatesIndicator").classList.add("blue-bg");
+    } else {
+        document.getElementById("updatesIndicator").classList.add("red-bg");
     }
 </script>
 

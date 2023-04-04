@@ -1,12 +1,11 @@
 
 /* Password strength indicator ----------------------------------------------------------------------------------------------------------------------*/
 .strength-indicator{
-  margin-top: -2em;
+  margin-top: -2.5em;
 }
 
 meter {
-  margin-top: 1.5em;
-  margin-left: 1.1em;
+  margin-left: 1em;
   width: 90%;
   height: 1em;
   border-radius: 100px;
@@ -66,12 +65,14 @@ meter::-webkit-meter-optimum-value {
 }
 
 /* show password ----------------------------------------------------------------------------------------------------------------------*/
-.stay-connected, .show-password{
+.show-password{
   display: flex;
   justify-content: left;
   flex-direction: row;
   align-items: center;
   width: 100%;
+  margin-top: 1em;
+  margin-bottom: .25em;
 }
 
 input[type="checkbox"] {
@@ -90,14 +91,9 @@ input[type="checkbox"]:hover+label {
   scale: .85;
 }
 
-.show-password{
-  margin-top: 1em;
-  margin-bottom: .25em;
-}
-
 .connected-text {
   color: white;
-  font-size: 0.85em;
+  font-size: clamp(.75em, 1.5vw, 1em);
   margin-left: .5em;
 }
 

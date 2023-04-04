@@ -34,7 +34,7 @@ function sendFeedback() {
                         alert(response.Error);
                     }
                 } catch (e) {
-                    alert("An error occurred while sending your feedback. Please try again later.");
+                    window.alert(this.responseText);
                 }
             }
         }
