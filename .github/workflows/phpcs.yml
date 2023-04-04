@@ -60,7 +60,7 @@ jobs:
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Analysis result
-          content-filepath:  ${{ github.event.repository.name }}/report.json
+          content-filepath: actions/upload-artifact/report.json
           labels: |
             report
             automated issue
