@@ -34,6 +34,7 @@ jobs:
     steps :
       - name : Commit
         run: |
+          git init
           git config --global user.email "matthieu.delarue5@gmail.com"
           git config --global user.name "Matthew"
           git add .
