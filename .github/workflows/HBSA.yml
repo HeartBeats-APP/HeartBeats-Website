@@ -53,6 +53,4 @@ jobs:
           git config --global user.name "Matthew"
           git add .
           git commit -m "Apply PHPCS suggested fixes"
-          
-      - name : Push
           git push
