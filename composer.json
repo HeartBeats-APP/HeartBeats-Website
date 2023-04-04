@@ -1,0 +1,34 @@
+{
+  "name": "heartbeats/website",
+  "type": "typo3-cms-extension",
+  "description": "app project",
+  "authors": [
+    {
+      "name": "APPG8E",
+      "email": "heartbeats-app@isep.fr",
+      "role": "",
+      "homepage": ""
+    }
+  ],
+  "support": {
+    "issues": ""
+  },
+  "license": [""],
+  "require": {
+    "typo3/cms-core": "9.5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "Classes/"
+    }
+  },
+  "replace": {
+    "school": "self.version",
+    "heartbeats/website": "self.version"
+  },
+  "extra": {
+      "typo3/cms": {
+          "extension-key": "school"
+      }
+  }
+}
