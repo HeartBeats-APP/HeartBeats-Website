@@ -28,7 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2.24.0
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
       - name: Install dependencies
@@ -50,19 +50,12 @@ jobs:
       - name: Install dependencies
         run: npm install @actions/core @actions/github
       - name: Create issue if phpcbf modified files
-        if: ${{ steps.phpcbf.outputs.exit-code == 0 }}
-        run: |
-          COUNT=$(git diff --name-only --diff-filter=M | wc -l)
-          ISSUE_BODY="PHPCBF applied modifications to ${COUNT} files: \n\n"
-          FILES=$(git diff --name-only --diff-filter=M)
-          for FILE in $FILES; do
-            ISSUE_BODY+="$(echo -e "#### ${FILE}\n\n\`\`\`diff\n$(git diff --unified=0 ${FILE} | tail -n +5)\n\`\`\`\n\n")"
-          done
-          echo "$ISSUE_BODY" | tee /tmp/issue-body.txt
-          ISSUE_TITLE="PHPCBF applied modifications to ${COUNT} files"
-          ISSUE_LABELS="PHPCBF"
-          ISSUE_ASSIGNEES="${{ github.actor }}"
-          ISSUE_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-          node /app/create-issue.js "$ISSUE_TITLE" /tmp/issue-body.txt "$ISSUE_LABELS" "$ISSUE_ASSIGNEES" "$ISSUE_TOKEN"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ steps.phpcbf.outputs.exit_code == 0 }}
+        uses: peter-evans/create-issue-from-file@v4.0.1
+        with:
+          title: 'PHPCBF applied modifications to files'
+          content-filepath: app
+          labels: 'PHPCBF'
+          assignees: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
