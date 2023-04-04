@@ -18,7 +18,7 @@ jobs:
         run: composer install
       - name: Check coding standards
         id: phpcs
-        run: ./vendor/bin/phpcs --standard=PSR2 --colors --encoding=utf-8 --ignore=*/vendor/* --ignore=*/tests/* --ignore=*/public/* --ignore=*/storage/* --ignore=*/database/* app
+        run: ./vendor/bin/phpcs --report=json --standard=PSR2 --colors --encoding=utf-8 app
 
   phpcbf:
     needs: phpcs
@@ -36,7 +36,7 @@ jobs:
       - name: Preview fixes
         run: ./vendor/bin/phpcbf --dry-run --standard=PSR2 --colors --encoding=utf-8 --ignore=*/vendor/* --ignore=*/tests/* --ignore=*/public/* --ignore=*/storage/* --ignore=*/database/* app
       - name: Apply fixes
-        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 --ignore=*/vendor/* --ignore=*/tests/* --ignore=*/public/* --ignore=*/storage/* --ignore=*/database/* app
+        run: ./vendor/bin/phpcbf --report=json --standard=PSR2 --colors --encoding=utf-8 --ignore=*/vendor/* --ignore=*/tests/* --ignore=*/public/* --ignore=*/storage/* --ignore=*/database/* app
 
   create-issue:
     needs: [phpcs, phpcbf]
@@ -51,11 +51,15 @@ jobs:
         run: npm install @actions/core @actions/github
       - name: Create issue if phpcbf modified files
         if: ${{ steps.phpcbf.outputs.exit_code == 0 }}
-        uses: peter-evans/create-issue-from-file@v4.0.1
-        with:
-          title: 'PHPCBF applied modifications to files'
-          content-filepath: app
-          labels: 'PHPCBF'
-          assignees: ${{ github.actor }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REPORT=$(cat ./report.txt)
+          while read -r line; do
+            file=$(echo "$line" | awk '{print $1}')
+            line_number=$(echo "$line" | awk '{print $2}')
+            message=$(echo "$line" | awk '{$1=$2=""; print $0}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+            issue_title="PHPCS Error: $message"
+            issue_body="Error found in $file on line $line_number:\n\n$message"
+            echo "Creating issue: $issue_title"
+            gh issue create --title "$issue_title" --body "$issue_body" --assignee "${{ github.actor }}" --label PHPCS --project "My Project" --project-column "To Do"
+          done <<< "$REPORT"
 
