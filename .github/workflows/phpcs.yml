@@ -18,3 +18,5 @@ jobs:
         run: composer install
       - name: Run phpcs
         run: ./vendor/bin/phpcs app
+      - name: Run phpcbf
+        run: ./vendor/bin/phpcbf app
