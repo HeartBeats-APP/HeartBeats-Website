@@ -17,5 +17,6 @@ jobs:
           php phpcs.phar --version
       - uses: thenabeel/action-phpcs@v8
         with:
+          path: github.ref
           phpcs_path: php phpcs.phar
           standard: phpcs.xml
