@@ -32,8 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps :
-    - name: Change directory
-      run: cd HeartBeats-Website
 
     - name: Commit
       run: |
@@ -43,5 +41,9 @@ jobs:
         git config --global user.name "Matthew"
         git add .
         git commit -m "Apply PHPCS suggested fixes"
-        git push 
+
+    - name: Push changes
+      uses: ad-m/github-push-action@main
+      with:
+        branch: ${{ github.head_ref }}
 
