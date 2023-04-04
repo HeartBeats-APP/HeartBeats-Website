@@ -10,40 +10,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+          
       - name: Install dependencies
         run: composer install
+        
       - name: Check coding standards
         id: phpcs
         run: ./vendor/bin/phpcs --report=json  --report-file=report.json --standard=PSR2 --colors --encoding=utf-8 app
-      - name: Upload report
-        uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: report.json
-          path: report.json
-
-  Code-AutoFix:
-    needs: Code-Analysis
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-      - name: Install dependencies
-        run: composer install
+        
       - name: Apply fixes
-        run: ./vendor/bin/phpcbf --report=json --standard=PSR2 --colors --encoding=utf-8 --ignore=*/vendor/* --ignore=*/tests/* --ignore=*/public/* --ignore=*/storage/* --ignore=*/database/* app
+        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
+        
 
   Branch-Update:
-    needs: [Code-Analysis,  Code-AutoFix]
+    needs: [Code-Analysis]
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps :
