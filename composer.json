@@ -1,26 +1,38 @@
 {
   "name": "heartbeats/website",
-  "type": "typo3-cms-extension",
   "description": "app project",
+  "type": "project",
+  "homepage": "https://heart-beats",
+  "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "APPG8E",
       "email": "heartbeats-app@isep.fr",
-      "role": "",
-      "homepage": "https://heart-beats"
+      "role": "lead",
+
     }
   ],
   "support": {
     "issues": "https://github.com/HeartBeats-APP/HeartBeats-Website/security"
+    "source": "https://github.com/HeartBeats-APP/HeartBeats-Website"
   },
-  "license": [""],
-  "require": {
-    "typo3/cms-core": "9.5.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "app\\": "Classes/"
-    }
-  }
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "ext-tokenizer": "*",
+        "ext-xmlwriter": "*",
+        "ext-simplexml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+    },
+    "bin": [
+        "bin/phpcs",
+        "bin/phpcbf"
+    ]
 
 }
