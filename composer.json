@@ -7,11 +7,11 @@
       "name": "APPG8E",
       "email": "heartbeats-app@isep.fr",
       "role": "",
-      "homepage": ""
+      "homepage": "https://heart-beats"
     }
   ],
   "support": {
-    "issues": ""
+    "issues": "https://github.com/HeartBeats-APP/HeartBeats-Website/security"
   },
   "license": [""],
   "require": {
