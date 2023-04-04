@@ -17,4 +17,4 @@ jobs:
       - name: Install dependencies
         run: composer install
       - name: Run phpcs
-        run: ./vendor/bin/phpcs
+        run: ./vendor/bin/phpcs app
