@@ -19,7 +19,6 @@ jobs:
       - name: Run phpcs
         id: phpcs
         run: ./vendor/bin/phpcs app
-        continue-on-error: true
 
   phpcbf:
     needs: phpcs
