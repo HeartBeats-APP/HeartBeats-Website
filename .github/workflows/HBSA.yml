@@ -35,15 +35,15 @@ jobs:
 
     - name: Commit
       run: |
-        git init
         git branch -m main
         git config --global user.email "matthieu.delarue5@gmail.com"
         git config --global user.name "Matthew"
         git add .
-        git commit -m "Apply PHPCS suggested fixes"
+        git commit -a -m "Apply PHPCS suggested fixes"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: ${{ github.head_ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
 
