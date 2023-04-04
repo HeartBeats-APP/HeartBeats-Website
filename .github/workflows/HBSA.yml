@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  phpcs:
+  Code-Analysis: 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,8 +26,8 @@ jobs:
           name: report.json
           path: report.json
 
-  phpcbf:
-    needs: phpcs
+  Code-AutoFix:
+    needs: Code-Analysis
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
@@ -42,8 +42,8 @@ jobs:
       - name: Apply fixes
         run: ./vendor/bin/phpcbf --report=json --standard=PSR2 --colors --encoding=utf-8 --ignore=*/vendor/* --ignore=*/tests/* --ignore=*/public/* --ignore=*/storage/* --ignore=*/database/* app
 
-  commit-and-push :
-    needs: [phpcs, phpcbf]
+  Branch-Update:
+    needs: [Code-Analysis,  Code-AutoFix]
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps :
@@ -53,4 +53,4 @@ jobs:
           git config --global user.name "Matthew"
           git add .
           git commit -m "Apply PHPCS suggested fixes"
-          git push
+          git push origin ${{ github.ref }}
