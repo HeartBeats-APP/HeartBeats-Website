@@ -23,8 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
-          name: report
-          path: report.json
+          name: report.json
 
   phpcbf:
     needs: phpcs
@@ -56,11 +55,16 @@ jobs:
       - name: Install dependencies
         run: npm install @actions/core @actions/github
         
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: report.json
+
       - name: Create Issue From analysis result
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Analysis result
-          content-filepath: /actions/runs/${{ github.run_id }}
+          content-filepath: ${{ github.workspace }}/report.json
           labels: |
             report
             automated issue
