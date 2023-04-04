@@ -33,10 +33,11 @@ jobs:
     if: ${{ failure() }}
     steps :
 
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - name: Push
+      uses: actions/checkout@v3
       with:
-        commit_message: "Analysis Fix"
-        commit_user_name: Matthew
-        commit_user_email: "matthieu.delarue5@gmail.com"
-        commit_author: Matthew "matthieu.delarue5@gmail.com"
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.pull_request.head.ref }}
+        push: origin scriptupdate/updated-admin-list --set-upstream --force
+
 
