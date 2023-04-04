@@ -32,12 +32,16 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps :
-      - name : Commit
-        run: |
-          git init
-          git branch -m main
-          git config --global user.email "matthieu.delarue5@gmail.com"
-          git config --global user.name "Matthew"
-          git add .
-          git commit -m "Apply PHPCS suggested fixes"
-          git push 
+    - name: Change directory
+      run: cd HeartBeats-Website
+
+    - name: Commit
+      run: |
+        git init
+        git branch -m main
+        git config --global user.email "matthieu.delarue5@gmail.com"
+        git config --global user.name "Matthew"
+        git add .
+        git commit -m "Apply PHPCS suggested fixes"
+        git push 
+
