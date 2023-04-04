@@ -1,0 +1,21 @@
+name: PHP CodeSniffer
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install PHP CodeSniffer
+        run: composer global require "squizlabs/php_codesniffer=*"
+
+      - name: Install phpcs.xml coding standard
+        run: git clone https://github.com/squizlabs/PHP_CodeSniffer.git /tmp/phpcs && /tmp/phpcs/scripts/phpcs --config-set installed_paths /tmp/phpcs/src/Standards/phpcs.xml
+
+      - name: Run PHP CodeSniffer
+        run: phpcs --standard=phpcs.xml .
