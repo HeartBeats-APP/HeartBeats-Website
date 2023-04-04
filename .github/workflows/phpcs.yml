@@ -69,3 +69,7 @@ jobs:
           labels: |
             report
             automated issue
+          assignees: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+            
+            
