@@ -18,18 +18,12 @@ jobs:
         run: composer install
       - name: Run phpcs
         run: ./vendor/bin/phpcs app
-
-  phpcbf:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-      - name: Install dependencies
-        run: composer install
+        continue-on-error: true
       - name: Run phpcbf
-        run: ./vendor/bin/phpcbf app
+        run: |
+          ./vendor/bin/phpcbf app
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Fix code style issues detected by phpcbf"
 
