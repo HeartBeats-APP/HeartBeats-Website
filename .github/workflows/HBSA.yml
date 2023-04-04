@@ -43,7 +43,7 @@ jobs:
         git commit -m "Apply PHPCS suggested fixes"
 
     - name: Push changes
-      uses: ad-m/github-push-action@main
+      uses: ad-m/github-push-action@master
       with:
         branch: ${{ github.head_ref }}
 
