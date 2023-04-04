@@ -19,6 +19,11 @@ jobs:
       - name: Check coding standards
         id: phpcs
         run: ./vendor/bin/phpcs --report=json --standard=PSR2 --colors --encoding=utf-8 app
+      - name: Upload report
+        uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: report.json
 
   phpcbf:
     needs: phpcs
@@ -49,17 +54,12 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install @actions/core @actions/github
-      - name: Create issue if phpcbf modified files
-        if: ${{ steps.phpcbf.outputs.exit_code == 0 }}
-        run: |
-          REPORT=$(cat ./report.txt)
-          while read -r line; do
-            file=$(echo "$line" | awk '{print $1}')
-            line_number=$(echo "$line" | awk '{print $2}')
-            message=$(echo "$line" | awk '{$1=$2=""; print $0}' | sed 's/^[ \t]*//;s/[ \t]*$//')
-            issue_title="PHPCS Error: $message"
-            issue_body="Error found in $file on line $line_number:\n\n$message"
-            echo "Creating issue: $issue_title"
-            gh issue create --title "$issue_title" --body "$issue_body" --assignee "${{ github.actor }}" --label PHPCS --project "My Project" --project-column "To Do"
-          done <<< "$REPORT"
-
+        
+      - name: Create Issue From analysis result
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: Analysis result
+          content-filepath: report.json
+          labels: |
+            report
+            automated issue
