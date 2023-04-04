@@ -19,10 +19,12 @@ jobs:
       - name: Run phpcs
         id: phpcs
         run: ./vendor/bin/phpcs app
+        continue-on-error: true
 
   phpcbf:
     needs: phpcs
     runs-on: ubuntu-latest
+    if: ${{ failure() }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -33,13 +35,12 @@ jobs:
       - name: Install dependencies
         run: composer install
       - name: Run phpcbf
-        id: phpcbf
         run: ./vendor/bin/phpcbf app
 
   create-issue:
     needs: [phpcs, phpcbf]
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    if: ${{ failure() }}
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -47,12 +48,16 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install @actions/core @actions/github
-      - name: Create issue if phpcbf modified files
-        if: ${{ steps.phpcbf.outputs.exit_code == 0 }}
-        uses: peter-evans/create-issue-from-file@v4.0.1
+      - name: Create issue if phpcs failed
+        uses: peter-evans/create-issue@v2
         with:
-          title: 'PHPCBF applied modifications to files'
-          content-file: app
-          labels: 'PHPCBF'
+          title: 'PHPCS found issues in code'
+          body: |
+            The following issues were found in the code:
+            
+            ```
+            ${{ steps.phpcs.outputs.stdout }}
+            ```
+          labels: 'PHPCS'
           assignees: ${{ github.actor }}
           token: ${{ secrets.GITHUB_TOKEN }}
