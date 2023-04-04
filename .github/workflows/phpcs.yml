@@ -18,9 +18,10 @@ jobs:
         run: composer install
       - name: Check coding standards
         id: phpcs
-        run: ./vendor/bin/phpcs --report=json --standard=PSR2 --colors --encoding=utf-8 app
+        run: ./vendor/bin/phpcs --report=json  --report-file=report.json --standard=PSR2 --colors --encoding=utf-8 app
       - name: Upload report
         uses: actions/upload-artifact@v2
+        if: ${{ always() }}
         with:
           name: report
           path: report.json
