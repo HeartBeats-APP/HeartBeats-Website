@@ -47,7 +47,8 @@ class account extends Controller
     }
 
     public function logUserIn()
-    {
+    {   
+
         $email = trim($_REQUEST['email']);
         $password = trim($_REQUEST['password']);
 
@@ -82,7 +83,8 @@ class account extends Controller
     }
 
     public function registerUser()
-    {
+    {   
+
         $name = trim($_REQUEST['name']);
         $email = trim($_REQUEST['email']);
         $password = $_REQUEST['password'];
@@ -134,19 +136,20 @@ class account extends Controller
 
     public function registerDevice()
     {
-        $serialNumber = $_REQUEST['serial'];
-        $purshaseDate = $_REQUEST['date'];
-
+  
         if (!AccountManager::isSessionActive()) {
             echo json_encode(array('errorMessage' => 'It seems that you are not logged in'));
             AccountManager::destroySession();
             return;
         }
-
+        
         if (DeviceManager::isDeviceExists()) {
             echo json_encode(array('errorMessage' => 'You already have a device'));
             return;
         }
+
+        $serialNumber = $_REQUEST['serial'];
+        $purshaseDate = $_REQUEST['date'];
 
         $serialNumberInput = new SerialNumberInput;
         $serialNumberResult = $serialNumberInput->validate($serialNumber);
@@ -193,6 +196,12 @@ class account extends Controller
 
     public function debugMode()
     {   
+        if (!AccountManager::isSessionActive()) {
+            echo "It seems that you are not logged in";
+            AccountManager::destroySession();
+            return;
+        }
+
         $state = $_REQUEST['value'];
 
         $debugMode = new debugMode;
@@ -204,6 +213,19 @@ class account extends Controller
         }
 
         echo true;
+    }
+
+    public function getUpdatesInfos()
+    {
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            echo false;
+            AccountManager::destroySession();
+            return;
+        }
+
+        $databseManager = new DatabaseManager;
+        ErrorsHandler::newError("Warning, sensitives updates informations have been requested", 1);
+        echo $databseManager->getUpdatesInfo();
     }
 
 }

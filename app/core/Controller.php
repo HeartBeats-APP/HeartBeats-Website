@@ -49,7 +49,7 @@ class Controller
     private function addAdminData($data)
     {   
         $Database = new DatabaseManager;
-        $data['versions'] = $Database->isUpToDate();
+        $data['updates'] = $Database->isUpToDate();
         $data['debugMode'] = (new DebugMode)->isDebugModeActive();
 
         return $data;

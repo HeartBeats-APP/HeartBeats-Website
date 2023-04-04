@@ -6,8 +6,7 @@ class QAManager
 {
     public function getFAQ()
     {
-        return database_query("SELECT id, question, answer FROM q&a");
-
+        return database_query("SELECT id, question, answer FROM `q&a`");
     }
 
     public function addQuestion($question, $answer)

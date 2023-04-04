@@ -14,7 +14,7 @@
 
 <body>
 
-    <div class="wrapper background1">
+    <div class="wrapper background1" id="wrapper">
 
         <!-- Main -->
         <div class="card-wrapper">
@@ -31,20 +31,25 @@
             <div class="card security">
                 <div id="security-details" class="card-column">
 
-                    <h2>Website Security</h2>
+                    <div id="overlay-bg"></div>
 
-                    <div class="security-row">
+                    <h2>Website Security</h2>
+                    <div class="expandable-card">
                         <h3>Recent logs: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="security-row">
+                    <div class="expandable-card">
                         <h3>Security check: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="security-row">
-                        <h3>Database Version: </h3>
+                    <div class="expandable-card" id="updatesCard">
+                        <iframe id="updatesCard-expanded" class="updatesFrame" src="/app/views/account/admin/updates.php" frameborder="0" allowTransparency="true"></iframe>
+                        <h3>Updates: </h3>
                         <h5 class="details" id="database-text">Everything is looking good</h5>
-                        <div id="databaseIndicator" class="to-right indicator"></div>
+                        <div class="to-right">
+                            <div id="updatesIndicator" class="indicator"></div>
+                        </div>
+
                     </div>
                 </div>
                 <div id="security-img" class="card-column">
@@ -96,7 +101,10 @@
 
 </body>
 <script src="/public/js/account/user-account.js"></script>
+<script src="/public/js/account/admin.js"></script>
 <script>
+    document.getElementById("updatesCard-expanded").classList.add("hidden");
+
     var data = <?php echo json_encode($data); ?>;
 
     if (data['debugMode'] == "1") {
@@ -105,15 +113,14 @@
         document.getElementById("switch").checked = false;
     }
 
-    if (data['databaseVersion'] == data['databaseLastVersion'] ) {
-        document.getElementById("database-text").innerHTML = "Database is up to date";
-        document.getElementById("databaseIndicator").classList.add("blue-bg");
+    var updates = data['updates'];
+    document.getElementById("database-text").innerHTML = updates;
 
+    if (updates == "Everything is up to date") {
+        document.getElementById("updatesIndicator").classList.add("blue-bg");
     } else {
-        document.getElementById("database-text").innerHTML = "Dabatase can be updated to version " + data['databaseLastVersion'];
-        document.getElementById("databaseIndicator").classList.add("red-bg");
+        document.getElementById("updatesIndicator").classList.add("red-bg");
     }
-
 </script>
 
 </html>

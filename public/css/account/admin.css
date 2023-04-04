@@ -1,3 +1,7 @@
+.hidden {
+    display: none;
+}
+
 /* Security Card ------------------------------------------------------------------------------------------------------------------------------------ */
 .security {
     padding: 2.5vh clamp(.5em, 2vw, 2em) 3vh clamp(.5em, 2vw, 2em);
@@ -24,7 +28,8 @@
     gap: 2vh;
 }
 
-.security-row {
+/* Expandable Card ---------------------------------------------------------------------------------------------------------------------------------- */
+.expandable-card {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -37,12 +42,40 @@
     gap: 2.5%;
 }
 
-.security-row:hover {
+.expandable-card:hover {
     background: rgb(255, 255, 255, 0.15);
     cursor: pointer;
     transform: scale(1.02);
 }
 
+.expandable-card.large {
+    z-index: 500;
+    width: 50%;
+    min-height: 50%;
+    height: fit-content;
+    top: 30%;
+    left: 25%;
+    position: absolute;
+}
+
+.expandable-card.large:hover {
+    transform: none;
+    cursor: default;
+    background-color: rgb(255, 255, 255, 0.25);
+}
+
+.overlay-bg{
+    position: absolute;
+    z-index: 499;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0, 0.25);
+    backdrop-filter: blur(25px);
+    top: 0;
+    left: 0;
+}
+
+/* Security Details ---------------------------------------------------------------------------------------------------------------------------------- */
 
 #security-details {
     width: 75%;

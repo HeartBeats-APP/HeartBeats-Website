@@ -6,11 +6,12 @@ require_once 'ErrorsHandler.php';
 
 class AccountManager
 {
-    const LOGIN_ERROR = "Mail or password incorrect";
-    const MAIL_EXISTS_ERROR = "Mail already exists";
-    const PASSWORD_MATCH_ERROR = "Passwords doesn't match";
-    const GENERAL_ERROR = "Something went wrong on our side, please try again later";
-    const ACCESS_DENIED_ERROR = "Access denied";
+    protected const LOGIN_ERROR = "Mail or password incorrect";
+    protected const MAIL_EXISTS_ERROR = "Mail already exists";
+    protected const PASSWORD_MATCH_ERROR = "Passwords doesn't match";
+    protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
+    protected const ACCESS_DENIED_ERROR = "Access denied";
+    protected const INCOMPATIBLE_ACTION = "Someone tries to access action '%s' from page '%s' which is not allowed";
  
     public static function isSessionActive()
     {
@@ -208,4 +209,3 @@ class debugMode extends AccountManager
 
     }
 }
-

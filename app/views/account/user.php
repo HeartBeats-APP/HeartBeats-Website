@@ -167,7 +167,7 @@
     } else if (role == 'insider') {
         document.getElementById("badge").innerHTML = 'Insider';
         document.getElementById("badge").classList.add('insider');
-    } else if (role == 'Admin') {
+    } else if (role == 'admin') {
         document.getElementById("badge").innerHTML = 'Admin';
         document.getElementById("badge").classList.add('admin');
     } else  {
