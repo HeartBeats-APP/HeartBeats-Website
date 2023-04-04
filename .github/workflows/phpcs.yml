@@ -60,6 +60,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: report.json
+          permission: 'read'
 
       - name: Create Issue From analysis result
         uses: peter-evans/create-issue-from-file@v4
