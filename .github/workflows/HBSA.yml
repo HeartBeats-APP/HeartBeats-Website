@@ -38,6 +38,5 @@ jobs:
       with:
         repository: ${{ github.event.pull_request.head.repo.full_name }}
         ref: ${{ github.event.pull_request.head.ref }}
-        push: origin scriptupdate/updated-admin-list --set-upstream --force
 
 
