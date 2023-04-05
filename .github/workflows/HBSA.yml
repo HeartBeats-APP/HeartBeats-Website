@@ -21,9 +21,10 @@ jobs:
         
       - name: Check coding standards
         id: phpcs
-        run: ./vendor/bin/phpcs --report=json  --report-file=report.json --standard=PSR2 --colors --encoding=utf-8 app
+        run: ./vendor/bin/phpcs --standard=PSR2 --colors --encoding=utf-8 app
         
       - name: Apply fixes
+        if: ${{ steps.phpcs.outcome == 'failure' }}
         run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
         
       - name: Push changes
