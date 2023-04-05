@@ -27,11 +27,14 @@ jobs:
         if: always() && steps.phpcs.outcome == 'failure'
         run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
         
+      - uses: actions/checkout@v2 
+      - name: Checkout
+      
       - name: Push changes
         if: always() && steps.phpcs.outcome == 'failure'
         run: |
-          git config user.name HeartBeats Smart Analysis
-          git config user.email heartbeats-app@isep.fr
+          git config user.name "HeartBeats Smart Analysis"
+          git config user.email "heartbeats-app@isep.fr"
           git add .
           git commit -m "HeartBeats Smart Analysis"
           git push
