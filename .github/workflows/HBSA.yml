@@ -26,13 +26,11 @@ jobs:
       - name: Apply fixes
         run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
         
-      - name: Push    
+      - name: Push changes
+        if: ${{ steps.phpcs.outcome == 'failure' }}
         run: |
           git config user.name HeartBeats Smart Analysis
           git config user.email heartbeats-app@isep.fr
           git add .
           git commit -m "HeartBeats Smart Analysis"
           git push
-
-
-
