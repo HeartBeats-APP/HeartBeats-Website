@@ -23,37 +23,16 @@ jobs:
         id: phpcs
         run: ./vendor/bin/phpcs --report=json  --report-file=report.json --standard=PSR2 --colors --encoding=utf-8 app
         
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: main # checkout the code in the main branch
-          
-      - name: Create new branch
-        run: git checkout -b HBSA
-        
       - name: Apply fixes
         run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
         
-
-  Branch-Update:
-    needs: [Code-Analysis]
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    steps:        
-      - name: Commit and push changes
+      - name: Push    
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add -A
-          git commit -m "Apply coding standards fixes"
-          git push origin my-new-branch
-          
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: Apply coding standards fixes
-          branch: HBSA
-          base: main
+          git config user.name HeartBeats Smart Analysis
+          git config user.email heartbeats-app@isep.fr
+          git add .
+          git commit -m "HeartBeats Smart Analysis"
+          git push
 
 
 
