@@ -23,6 +23,9 @@ jobs:
         id: phpcs
         run: ./vendor/bin/phpcs --report=json  --report-file=report.json --standard=PSR2 --colors --encoding=utf-8 app
         
+      - name: Apply fixes
+        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
+        
 
   Branch-Update:
     needs: [Code-Analysis]
@@ -36,9 +39,6 @@ jobs:
           
       - name: Create new branch
         run: git checkout -b HBSA
-        
-      - name: Apply fixes
-        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
         
       - name: Commit and push changes
         run: |
