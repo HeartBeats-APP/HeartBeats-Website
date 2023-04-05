@@ -26,10 +26,10 @@ jobs:
       - name: Apply fixes
         if: always() && steps.phpcs.outcome == 'failure'
         run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
-        
-      - uses: actions/checkout@v2 
+    
       - name: Checkout
-      
+      - uses: actions/checkout@v2 
+
       - name: Push changes
         if: always() && steps.phpcs.outcome == 'failure'
         run: |
