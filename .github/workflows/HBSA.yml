@@ -23,15 +23,6 @@ jobs:
         id: phpcs
         run: ./vendor/bin/phpcs --report=json  --report-file=report.json --standard=PSR2 --colors --encoding=utf-8 app
         
-      - name: Apply fixes
-        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
-        
-
-  Branch-Update:
-    needs: [Code-Analysis]
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -40,6 +31,15 @@ jobs:
       - name: Create new branch
         run: git checkout -b HBSA
         
+      - name: Apply fixes
+        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
+        
+
+  Branch-Update:
+    needs: [Code-Analysis]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:        
       - name: Commit and push changes
         run: |
           git config --global user.email "actions@github.com"
