@@ -2,7 +2,7 @@ name: HeartBeats Smart Analysis
 
 on:
   push:
-    branches: [main]
+    branches: [beta]
 
 jobs:
   Code-Analysis: 
