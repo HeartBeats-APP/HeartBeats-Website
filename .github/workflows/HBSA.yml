@@ -3,6 +3,9 @@ name: HeartBeats Smart Analysis
 on:
   push:
     branches: [beta]
+  pull_request:
+    branches: [main]
+    
 
 jobs:
   Code-Analysis: 
