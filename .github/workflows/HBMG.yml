@@ -1,4 +1,4 @@
-name: HeartBeats Smart Guard
+name: HeartBeats Main Guard
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     
 
 jobs:
-  Code-Analysis: 
+  Checking-Code:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
