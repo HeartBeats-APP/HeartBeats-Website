@@ -40,10 +40,15 @@ class account extends Controller
         $this->account($data);
     }
 
-    public function admin()
-    {
+    public function admin($args = [])
+    {   
         $data = AccountManager::getSessionData();
         $this->account($data, "admin");
+
+        if ($args == 'updates'){
+            $data2 = $this->getUpdatesInfo();
+            $this->popup($data2);
+        }
     }
 
     public function logUserIn()
@@ -215,7 +220,7 @@ class account extends Controller
         echo true;
     }
 
-    public function getUpdatesInfos()
+    private function getUpdatesInfo()
     {
         if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
             echo false;
@@ -223,9 +228,10 @@ class account extends Controller
             return;
         }
 
-        $databseManager = new DatabaseManager;
-        ErrorsHandler::newError("Warning, sensitives updates informations have been requested", 1);
-        echo $databseManager->getUpdatesInfo();
+        $databaseManager = new DatabaseManager;
+        $data = $databaseManager->getUpdatesInfo();
+        $data['title'] = "Updates Center";  
+        return $data;
     }
 
 }

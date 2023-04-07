@@ -1,4 +1,3 @@
-<!-- Warning! Modifying the header here will NOT change the header appearance on the website. Please modify the header.js file along with this one -->
 
 <link rel="stylesheet" href="/public/css/components.css" />
 <link rel="stylesheet" href="/public/css/header.css" />

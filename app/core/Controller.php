@@ -32,6 +32,11 @@ class Controller
         require_once '../app/views/components/header.php';
     }
 
+    public function popup($data = [])
+    {
+        require_once '../app/views/components/popup.php';
+    }
+
     public function account($data = [], $destination = "")
     {
         $this->header();

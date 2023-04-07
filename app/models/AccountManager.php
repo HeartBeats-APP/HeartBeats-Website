@@ -152,6 +152,10 @@ class Register extends AccountManager
         if (substr($email, -7) == "isep.fr") {
             return "ISEP";
         }
+        
+        if (substr($email, -14) == "juniorisep.com") {
+            return "JE";
+        }
 
         return "user";
     }

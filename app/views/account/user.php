@@ -164,13 +164,20 @@
     if (role == 'ISEP') {
         document.getElementById("badge").innerHTML = 'ISEP';
         document.getElementById("badge").classList.add('isep');
-    } else if (role == 'insider') {
+    } 
+    else if (role == 'insider') {
         document.getElementById("badge").innerHTML = 'Insider';
         document.getElementById("badge").classList.add('insider');
-    } else if (role == 'admin') {
+    } 
+    else if (role == 'admin') {
         document.getElementById("badge").innerHTML = 'Admin';
         document.getElementById("badge").classList.add('admin');
-    } else  {
+    } 
+    else if (role == 'JE'){
+        document.getElementById("badge").innerHTML = 'Junior ISEP';
+        document.getElementById("badge").classList.add('je');
+    } 
+    else  {
         document.getElementById("badge").innerHTML = 'User';
         document.getElementById("badge").classList.add('user');
     }

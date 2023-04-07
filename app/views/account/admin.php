@@ -42,10 +42,9 @@
                         <h3>Security check: </h3>
                         <h5 class="details">Everything is looking good</h5>
                     </div>
-                    <div class="expandable-card" id="updatesCard">
-                        <iframe id="updatesCard-expanded" class="updatesFrame" src="/app/views/account/admin/updates.php" frameborder="0" allowTransparency="true"></iframe>
+                    <div class="expandable-card" id="updatesCard" onclick="window.location.href='/account/admin/updates'">
                         <h3>Updates: </h3>
-                        <h5 class="details" id="database-text">Everything is looking good</h5>
+                        <h5 class="details" id="database-text"></h5>
                         <div class="to-right">
                             <div id="updatesIndicator" class="indicator"></div>
                         </div>
@@ -103,8 +102,6 @@
 <script src="/public/js/account/user-account.js"></script>
 <script src="/public/js/account/admin.js"></script>
 <script>
-    document.getElementById("updatesCard-expanded").classList.add("hidden");
-
     var data = <?php echo json_encode($data); ?>;
 
     if (data['debugMode'] == "1") {

@@ -19,7 +19,7 @@
 }
 
 .isep {
-  background: var(--second-gradient);
+  background: var(--main-gradient);
   background-size: 500%;
   -webkit-animation: anime 10s linear infinite;
   animation: anime 10s linear infinite;
@@ -28,6 +28,12 @@
 
 .insider {
   background: var(--blue-gradient);
+  background-size: 500%;
+  -webkit-animation: anime 10s linear infinite;
+  animation: anime 10s linear infinite;
+}
+.je {
+  background: var(--second-gradient);
   background-size: 500%;
   -webkit-animation: anime 10s linear infinite;
   animation: anime 10s linear infinite;
