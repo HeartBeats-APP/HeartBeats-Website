@@ -1,7 +1,7 @@
 
 # HeartBeats
 
-HeartBeat is a fictional startup that was created by a powerful group of students during our first year in engineering school. Our main objective is to develop a revolutionary headset that can adapt music to the user's preferences based on several factors.
+HeartBeat is a fictional startup that was created by a powerful group of students during our first year in engineering school. Our main objective is to develop a revolutionary headset that can adapt the music played to the user's preferences based on several physiological and environmental factors.
 
 It is important to note that this repository is solely dedicated to the website of our project. The website aims to introduce our team, showcase our product, and allow users to personalize their own headset.
 
