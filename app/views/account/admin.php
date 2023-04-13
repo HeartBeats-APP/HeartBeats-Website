@@ -79,7 +79,7 @@
                 <img class="card-icon" src="/public/svg/header/Questions.svg" draggable="false"></img>
                 <h3>Q&A</h3>
                 <h5 class="details">Change the content of the Q&A page</h5>
-                <div class="to-right not-clickable">
+                <div class="to-right clickable" onclick="window.location.href='/account/admin/faq'">
                     <h4>Modify</h4>
                     <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="" draggable="false">
                 </div>

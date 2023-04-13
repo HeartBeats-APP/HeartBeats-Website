@@ -11,7 +11,6 @@ class AccountManager
     protected const PASSWORD_MATCH_ERROR = "Passwords doesn't match";
     protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
     protected const ACCESS_DENIED_ERROR = "Access denied";
-    protected const INCOMPATIBLE_ACTION = "Someone tries to access action '%s' from page '%s' which is not allowed";
  
     public static function isSessionActive()
     {

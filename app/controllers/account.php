@@ -3,6 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/InputValidator.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
 
 class account extends Controller
 {
@@ -42,12 +43,27 @@ class account extends Controller
 
     public function admin($args = [])
     {   
+        // Redirect to login if not admin
+        if (!AccountManager::isAdmin()) {
+            ErrorsHandler::newError('User ' . AccountManager::getMail() . ' tried to access admin panel', 1, false);
+            AccountManager::destroySession();
+            $this->account();
+            return;
+        }
+
         $data = AccountManager::getSessionData();
         $this->account($data, "admin");
 
         if ($args == 'updates'){
             $data2 = $this->getUpdatesInfo();
-            $this->popup($data2);
+            $this->view('account/admin/updates', $data2);
+            return;
+        }
+
+        if ($args == 'faq'){
+            $QAManager = new QAManager;
+            $data2 = $QAManager->getFAQ();
+            $this->view('account/admin/faq', $data2);
         }
     }
 
@@ -217,6 +233,23 @@ class account extends Controller
             return;
         }
 
+        echo true;
+    }
+
+    public function updateFAQ()
+    {
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            echo false;
+            AccountManager::destroySession();
+            return;
+        }
+
+        $data = json_decode(file_get_contents('php://input'));
+        
+        $QAManager = new QAManager;
+        $QAManager->updateFAQ($data);
+        
+        ErrorsHandler::newError('FAQ updated by ' . AccountManager::getMail(), 1, true);
         echo true;
     }
 

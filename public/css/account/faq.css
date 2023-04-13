@@ -1,0 +1,81 @@
+.popupcard {
+    width: 70%;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.id {
+    width: 3%;
+    word-break: break-all;
+}
+
+.question {
+    width: 40%;
+    word-break: break-all;
+}
+
+.answer {
+    width: 55%;
+    word-break: break-all;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 7%;
+    gap: .5vw;
+}
+
+.actions img {
+    height: 2em;
+    width: 3em;
+}
+
+.actions img:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+}
+
+.input {
+    background: rgba(255, 255, 255, 0.20);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: .5em 1em ;
+    word-wrap: break-word;
+}
+
+.input:focus {
+    outline: white solid 2px;
+    border-radius: 25px;
+    padding-left: 1.5em;
+}
+
+.input:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (max-width: 1000px) {
+    .popupcard {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .popupcard {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .popupcard {
+        width: 75%;
+    }
+}
