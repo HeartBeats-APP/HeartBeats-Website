@@ -151,7 +151,7 @@
    /* Turning the header into a navigation bar */
    .header {
       position: fixed;
-      bottom: 1.5em;
+      bottom: 4em;
       top: unset;
       justify-content: center;
       width: fit-content;

@@ -18,10 +18,8 @@
 
         <div class="assistance-card">
             <div class="text-wrapper">
-
                 <h3>Need assistance?</h3>
                 <p>We're here to help, feel free to contact us</p>
-
             </div>
             <div class="icon-wrapper">
                 <img class="assistance-icon" src="/public/svg/full-arrow.svg" alt="Assistance Icon" />

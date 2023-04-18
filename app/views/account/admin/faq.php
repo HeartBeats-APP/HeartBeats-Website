@@ -12,7 +12,7 @@
     <div class="column popup-wrapper">
 
 
-    </div>
+    </div
     <div class="buttons-row">
         <div class="secondary-button" onclick="window.location.href='/account/admin'">Cancel</div>
         <div class="main-button clickable" onclick="saveFAQ()">Save</div>

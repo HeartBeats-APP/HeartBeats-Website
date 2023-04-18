@@ -39,6 +39,7 @@ class account extends Controller
             $data['hasDevice'] = false;
         }
         $this->account($data);
+        $this->footer();
     }
 
     public function admin($args = [])
@@ -65,6 +66,7 @@ class account extends Controller
             $data2 = $QAManager->getFAQ();
             $this->view('account/admin/faq', $data2);
         }
+        $this->footer();
     }
 
     public function logUserIn()

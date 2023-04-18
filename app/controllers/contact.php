@@ -16,6 +16,7 @@ class contact extends Controller
 
         $this->header();
         $this->view('contact/contact');
+        $this->footer();
     }
 
     public function getFeedback()

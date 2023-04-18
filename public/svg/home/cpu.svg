@@ -1,0 +1,29 @@
+<svg width="125" height="125" viewBox="0 0 125 125" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1_71)">
+<path d="M48.55 109H76.45C99.7 109 109 99.7 109 76.45V48.55C109 25.3 99.7 16 76.45 16H48.55C25.3 16 16 25.3 16 48.55V76.45C16 99.7 25.3 109 48.55 109Z" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M53.3 91H70.7C85.2 91 91 85.2 91 70.7V53.3C91 38.8 85.2 33 70.7 33H53.3C38.8 33 33 38.8 33 53.3V70.7C33 85.2 38.8 91 53.3 91Z" stroke="url(#paint0_linear_1_71)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M39 16V4" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M63 15V3" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M86 16V4" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M109 39H121" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M110 62H122" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M109 85H121" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M86 108V120" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M63 110V122" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M39 108V120" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4 39H16" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 62H15" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4 85H16" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M62 49L56.5243 58.6263C55.301 60.7393 56.2912 62.5001 58.7379 62.5001H65.2621C67.7088 62.5001 68.699 64.261 67.4757 66.374L62 76" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_71" x1="27.0792" y1="40.7333" x2="83.6114" y2="88.5031" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BDEDF9"/>
+<stop offset="0.219689" stop-color="#92E9FE"/>
+<stop offset="1" stop-color="#3361DA"/>
+</linearGradient>
+<clipPath id="clip0_1_71">
+<rect width="125" height="125" fill="white"/>
+</clipPath>
+</defs>
+</svg>

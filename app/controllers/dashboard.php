@@ -8,6 +8,7 @@ class dashboard extends Controller
         $data = AccountManager::getSessionData();
         $this->header();
         $this->view('dashboard/dashboard', $data);
+        $this->footer();
     }
 
     

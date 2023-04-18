@@ -6,6 +6,7 @@ class Home extends Controller
     {
         $this->header();
         $this->view('index');
+        $this->footer();
     }
 }
 

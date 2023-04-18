@@ -16,8 +16,10 @@
 
   <div class="wrapper background1">
 
+    <div class="adaptive-margin" style="--coef: 10"></div>
     <!-- Q&A section -->
     <h2>Frequently Asked Questions</h2>
+    <div class="adaptive-margin" style="--coef: 5"></div>
 
     <div class="animation-wrapper" id="animation-wrapper">
       <div class="animation" id="animation">
@@ -90,7 +92,7 @@
         });
 
       });
-      
+
       function arrowRotate(state, element) {
         if (state) {
           element.classList.remove('rotate');
@@ -99,8 +101,8 @@
         }
       }
     </script>
-
   </div>
+
 </body>
 
 
