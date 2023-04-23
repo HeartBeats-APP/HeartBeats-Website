@@ -11,8 +11,12 @@
     </div>
     <div class="column popup-wrapper">
 
+        <div class="new-question" onclick="addNewQuestion()">
+            <img src="/public/svg/account/add.svg" alt="">
+            Add new question
+        </div>
 
-    </div
+    </div>
     <div class="buttons-row">
         <div class="secondary-button" onclick="window.location.href='/account/admin'">Cancel</div>
         <div class="main-button clickable" onclick="saveFAQ()">Save</div>

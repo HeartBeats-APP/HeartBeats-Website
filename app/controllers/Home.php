@@ -8,6 +8,7 @@ class Home extends Controller
         $this->view('index');
         $this->footer();
     }
+
 }
 
 ?>

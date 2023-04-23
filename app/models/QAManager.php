@@ -1,6 +1,7 @@
 <?php
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 
 class QAManager
 {
@@ -11,17 +12,36 @@ class QAManager
 
     public function updateFAQ($data){
 
-        for ($i = 0; $i < count($data); $i++) {
-            $id = $data[$i]->id;
-            $question = $data[$i]->question;
-            $answer = $data[$i]->answer;
+        if (empty($data)) {
+            $debugMode = new debugMode();
+            if ($debugMode->isDebugModeActive()) {
+                echo "Incoming data is empty and cannot be processed";
+            } else {
+                echo "Something went wrong";
+            }
+            return false;
+        }
+        $this->wipeFAQ();
 
-            database_query("UPDATE `q&a` SET question = :question, answer = :answer WHERE id = :id", [':question' => $question, ':answer' => $answer, ':id' => $id]);
+        foreach ($data as $QA) {
+            $id = $QA->id;
+            $question = $QA->question;
+            $answer = $QA->answer;
+
+            database_query("INSERT INTO `q&a` (id, question, answer) VALUES (:id, :question, :answer)", [
+                ":id" => $id,
+                ":question" => $question,
+                ":answer" => $answer
+            ]);
         }
 
         return true;
     }
 
+    private function wipeFAQ()
+    {
+        database_query("TRUNCATE TABLE `q&a`");
+    }
 
     private function getNumberOfQuestions()
     {

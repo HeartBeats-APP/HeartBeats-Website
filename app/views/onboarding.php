@@ -29,7 +29,7 @@
                             loop: true,
                             autoplay: true,
                             path: '/public/json/Onboarding.json',
-                            name: 'Email Sent Animation',
+                            name: 'Onboarding Animation',
                             animationSpeed: 1,
                         });
                     </script>

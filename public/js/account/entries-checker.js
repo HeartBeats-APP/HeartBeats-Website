@@ -2,7 +2,6 @@ function login() {
 
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
-    var stayConnected = document.getElementById("switch").checked;
 
     if (isFieldEmpty(email)) {
         document.getElementById("email-warning-message").innerHTML = "Please enter your email";
@@ -14,7 +13,7 @@ function login() {
     }
 
     var request = new XMLHttpRequest();
-    request.open("GET", "/account/logUserIn?email=" + email + "&password=" + password + "&stayConnected=" + stayConnected, true);
+    request.open("GET", "/account/logUserIn?email=" + email + "&password=" + password, true);
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
@@ -80,10 +79,12 @@ function createAccount() { /* AKA register */
             /* Update the page */
             if (this.responseText == true) {
                 localStorage.setItem('email', email);
-                document.getElementById("title").innerHTML = "Account created";
+                document.getElementById("title").innerHTML = "Check your inbox";
                 document.getElementById("subtitle").innerHTML = "An email will be sent to confirm your account";
                 document.getElementById("register-form").remove();
-                document.getElementById("buttons-area").remove();
+                document.getElementById("create-account-button").remove();
+                document.getElementById("login-button").innerHTML = "Login";
+                document.getElementById("section-img").style.display = "none";
                 document.getElementById("email-animation").style.display = "flex";
             }
             else {
@@ -95,7 +96,7 @@ function createAccount() { /* AKA register */
                     document.getElementById("password-warning-message").innerHTML = response.passwordErrorMessage;
                     document.getElementById("passwordConfirm-warning-message").innerHTML = response.passwordConfirmErrorMessage;
                 } catch (e) {
-                    window.alert(this.responseText);
+                    window.alert("Something went wrong, please try again later");
                 }
             }
         }

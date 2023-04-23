@@ -1,4 +1,4 @@
-var data ;
+var data;
 
 function updateFAQ(inboundData) {
 
@@ -119,7 +119,7 @@ function editQuestion(id) {
 
         question.innerHTML = newQuestion;
         answer.innerHTML = newAnswer;
-        
+
         question.style.display = "block";
         answer.style.display = "block";
         editImg.style.display = "block";
@@ -152,6 +152,78 @@ function saveFAQ() {
             alert(this.responseText);
         }
     }
-
-
 }
+
+function addNewQuestion() {
+    var newId;
+    try {
+        newId = data[data.length - 1].id + 1;
+    } catch (error) {
+        newId = 1;
+    }
+    var question = "New question";
+    var answer = "New answer";
+
+    try {
+        data[data.length] = {
+            id: newId,
+            question: question,
+            answer: answer
+        };
+    } catch (error) {
+        data[0] = {
+            id: newId,
+            question: question,
+            answer: answer
+        };
+    }
+    
+    //create new card
+    var wrapper = document.querySelector(".popup-wrapper");
+    var card = document.createElement("div");
+    card.classList.add("card");
+
+    var idDiv = document.createElement("div");
+    idDiv.classList.add("id");
+    idDiv.innerHTML = newId;
+
+
+    var questionDiv = document.createElement("div");
+    questionDiv.classList.add("question");
+    questionDiv.innerHTML = question;
+    questionDiv.id = "question-" + newId;
+
+
+    var answerDiv = document.createElement("div");
+    answerDiv.classList.add("answer");
+    answerDiv.innerHTML = answer;
+    answerDiv.id = "answer-" + newId;
+
+    var actionsDiv = document.createElement("div");
+    actionsDiv.classList.add("actions");
+    actionsDiv.id = "actions-" + newId;
+
+    var trashImg = document.createElement("img");
+    trashImg.src = "/public/svg/account/trash.svg";
+    trashImg.id = "trash-" + newId;
+    trashImg.onclick = function () {
+        removeQuestion(this.id.split("-")[1]);
+    }
+
+    var editImg = document.createElement("img");
+    editImg.src = "/public/svg/account/edit.svg";
+    editImg.id = "edit-" + newId;
+    editImg.onclick = function () {
+        editQuestion(this.id.split("-")[1]);
+    }
+
+    actionsDiv.appendChild(editImg);
+    actionsDiv.appendChild(trashImg);
+    card.appendChild(idDiv);
+    card.appendChild(questionDiv);
+    card.appendChild(answerDiv);
+    card.appendChild(actionsDiv);
+    wrapper.appendChild(card);
+
+    editQuestion(newId);
+}   

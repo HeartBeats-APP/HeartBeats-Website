@@ -11,7 +11,7 @@ class contact extends Controller
         //check if user is logged in
         if (!AccountManager::isSessionActive()) {
             header('Location: /account/login');
-            return;
+            exit();
         }
 
         $this->header();
