@@ -17,7 +17,6 @@
     z-index: -1;
 }
 
-
 .welcome-banner, .dashboard-box {
     position: relative;
     z-index: 1;
@@ -51,15 +50,14 @@ button:hover {
 
 .welcome-banner {
     margin-top: 10%;
-    justify-content: center;
-    display: flex;
+    text-align: center;
+    padding: 20px;
 }
 
 .welcome-banner h1 {
     font-size: 32px;
     margin: 0;
 }
-
 
 .dashboard-box {
     background-color: rgba(255, 255, 255, 0.1);
@@ -71,6 +69,14 @@ button:hover {
     padding: 30px;
     text-align: center;
     margin-top: 30px;
+}
+
+.dashboard-box:nth-of-type(2) {
+    margin-top: 60px;
+}
+
+.dashboard-box:last-of-type {
+    margin-bottom: 60px;
 }
 
 .now-playing {
@@ -90,7 +96,6 @@ button:hover {
     margin-top: 20px;
 }
 
-
 .dashboard-controls {
     display: flex;
     justify-content: center;
@@ -100,7 +105,6 @@ button:hover {
 .dashboard-controls button {
     margin: 0 10px;
 }
-
 
 .stats-box {
     background-color: rgba(255, 255, 255, 0.1);
@@ -112,13 +116,4 @@ button:hover {
     padding: 30px;
     text-align: center;
     margin-top: 30px;
-}
-
-.stats-box h2 {
-    margin-bottom: 10px;
-}
-
-.stats-box p {
-    font-size: 18px;
-    margin-bottom: 20px;
 }

@@ -1,9 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/public/css/dashboard/dashboardStyle.css" />
+    <link rel="stylesheet" href="/css/dashboardStyle.css" />
+    <script src="/header/header.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Mobile styles */
+        @media only screen and (max-width: 480px) {
+            .dashboard-box {
+                width: 90%;
+            }
+            .now-playing, .listening-stats {
+                padding: 20px;
+            }
+            .dashboard-controls {
+                flex-wrap: wrap;
+            }
+            .dashboard-controls button {
+                margin: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="background"></div>
