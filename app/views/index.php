@@ -13,9 +13,9 @@
   
     <main>
         <section class="intro animate">
+          <div class="pink-gradient-bg"></div>
           <h1>Heart Beats</h1>
           <h2>Music that adapts to you</h2>
-          <img src="/public/png/pink-wave-bg.png" alt="onde rose" class="background">
         </section>
 
         <section class="pulse animate">
@@ -35,6 +35,7 @@
         </section>
 
         <section class="adaptive-sound animate">
+            <div class="adaptive-sound-bg"></div>
             <div class="adaptive-sound-image-container">
                 <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
                 <img src="/public/png/sound-wave.png" alt="sound wave" class="sound-wave-image">
@@ -49,7 +50,6 @@
                 <p>The headset is measuring itself various factors such as circadian rhythm, time, weather, activity.</p>
               </div>
             </div>
-            <img src="/public/png/breach-orange-bg.png" alt="background image" class="adaptive-sound-background">
         </section>
 
         <section class="animate">
@@ -80,7 +80,7 @@
         </section>
 
         <section class="control-section animate">
-            <img src="/public/png/breach-blue-bg.png" alt="background" class="background-image">
+            <div class="blue-security-bg"></div>
             <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
             <h3 class="control-title">You're in control.</h3>
             <h4 class="control-subtitle">Secure by Design.</h4>

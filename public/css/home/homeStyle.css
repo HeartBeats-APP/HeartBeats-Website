@@ -5,6 +5,47 @@ body {
 }
 
 
+/* 1st bg */
+.pink-gradient-bg {
+  position: absolute;
+  width: 2600px;
+  height: 1381px;
+  left: -241px;
+  top: 0;
+  background: linear-gradient(97.27deg, #E93D57 8.3%, #A423BA 100%);
+  opacity: 0.3;
+  filter: blur(200px);
+  z-index: -1;
+}
+
+/* 2nd bg */
+.adaptive-sound-bg {
+  position: absolute;
+  width: 1673px;
+  height: 812px;
+  left: -47px;
+  top: 0;
+  background: linear-gradient(97.27deg, #F7C23B 0%, #E93D57 51.07%, #A423BA 100%);
+  filter: blur(500px);
+  border-radius: 29px;
+  z-index: -1;
+}
+
+/* 3rd bg */
+.blue-security-bg {
+  position: absolute;
+  width: 2984px;
+  height: 814px;
+  left: 463px;
+  top: 0;
+  background: linear-gradient(130.2deg, #BDEDF9 0.57%, #92E9FE 20.47%, #3361DA 91.12%);
+  opacity: 0.85;
+  filter: blur(500px);
+  border-radius: 29px;
+  z-index: -1;
+}
+
+
 /* animation lors du scroll de la page */
 .animate {
   opacity: 0;
