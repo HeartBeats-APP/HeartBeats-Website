@@ -10,7 +10,7 @@
 
     <div class="row legal">
         <a href="">Terms of Use</a>
-        <a href="">Legal Notice</a> 
+        <a href="/legal/cgu">Legal Notice</a> 
     </div>
 
     <div class="row">
