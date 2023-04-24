@@ -24,8 +24,8 @@
       <div id="card-content" class="login-wrapper">
 
         <div class="login-text">
-          <h2 id="title">Create an account</h2>
-          <p id="subtitle">Welcome aboard.</p>
+          <h2 id="title" data-translate="reg_title">Create an account</h2>
+          <p id="subtitle" data-translate="reg_sub">Welcome aboard.</p>
         </div>
 
         <!-- Email animation -->
@@ -110,7 +110,8 @@
   <script src="/public/js/account/entries-checker.js"></script>
   <script src="/public/js/account/zxcvbn.js"></script>
   <script src="/public/js/account/password-strength-checker.js"></script>
-  
+  <script src="/public/js/components/header.js"
+
 </body>
 
 </html>

@@ -19,8 +19,8 @@
       <div class="login-wrapper">
 
         <div class="login-text">
-          <h2>Login to your account</h2>
-          <p>Let's jump in.</p>
+          <h2 data-translate="log_title">Login to your account</h2>
+          <p data-translate="log_sub">Let's jump in.</p>
         </div>
 
         <div class="login-field">
@@ -57,6 +57,7 @@
   </div>
 
   <script src="/public/js/account/entries-checker.js"></script>
+  <script src="/public/js/components/header.js"></script>
 
 </body>
 

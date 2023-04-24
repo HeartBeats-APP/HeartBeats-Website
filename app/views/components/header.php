@@ -32,7 +32,9 @@
 
         <div class="header-right">
             <button id="language-button" class="third-button" onclick="window.location.href='/account/<?php echo $AccountAction ?>'"><?php echo $AccountText ?></button>
-            <button class="language-button">En</button>
+            <button id="translate-button" class="language-button" >En</button>
         </div>
     </div>
 </div>
+
+<script src="/public/js/components/header.js"></script>
