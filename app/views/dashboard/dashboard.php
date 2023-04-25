@@ -118,7 +118,17 @@
         <div class="listening-stats">
             <h2>Listening statistics</h2>
             <p>Listening time: 1 hour and 30 minutes</p>
-            <p>Comparison to yesterday: +20%</p>
+
+    <div class="wrapper background2">
+
+        <!-- Main -->
+        <div class="card-wrapper">
+
+            <div class="adaptive-margin" style="--coef: 15"></div>
+            <div class="main-text">
+                <h1 lang-id="dsh_title">Dashboard</h1>
+                <p>Welcome Back <?php echo $data['name'] ?></p>
+            </div>
         </div>
     </div>
 </body>

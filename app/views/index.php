@@ -14,7 +14,6 @@
 <body>
 
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
-
   <main>
     <section class="intro animate">
       <div class="pink-gradient-bg"></div>
@@ -104,6 +103,7 @@
 
   </main>
   <script src="/public/js/home/script.js"></script>
+  <script src="/public/js/components/translation.js"></script>
 
 </body>
 

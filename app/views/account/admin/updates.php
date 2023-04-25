@@ -9,8 +9,8 @@
 
     </div>
     <div class="buttons-row">
-        <div class="secondary-button" onclick="window.location.href='/account/admin'">Close</div>
-        <div class="main-button not-clickable">Update</div>
+        <div class="secondary-button" lang-id="upd_close" onclick="window.location.href='/account/admin'">Close</div>
+        <div class="main-button not-clickable" lang-id="upd_upd">Update</div>
     </div>
 </div>
 
@@ -70,3 +70,4 @@
         return card;
     }
 </script>
+<script src="/public/js/components/translation.js"></script>
