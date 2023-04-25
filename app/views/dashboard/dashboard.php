@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/public/css/dashboard/dashboardStyle.css"/>
-    <script src="/header/header.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* Mobile styles */
@@ -98,7 +97,7 @@
 <body>
     <div class="background"></div>
     <div class="welcome-banner">
-        <h1>Welcome back Ivan!</h1>
+        <h1>Welcome Back <?php echo $data['name'] ?></h1>
     </div>
     <div class="dashboard-box playing-music-box">
         <div class="now-playing">
@@ -118,17 +117,6 @@
         <div class="listening-stats">
             <h2>Listening statistics</h2>
             <p>Listening time: 1 hour and 30 minutes</p>
-
-    <div class="wrapper background2">
-
-        <!-- Main -->
-        <div class="card-wrapper">
-
-            <div class="adaptive-margin" style="--coef: 15"></div>
-            <div class="main-text">
-                <h1 lang-id="dsh_title">Dashboard</h1>
-                <p>Welcome Back <?php echo $data['name'] ?></p>
-            </div>
         </div>
     </div>
 </body>
