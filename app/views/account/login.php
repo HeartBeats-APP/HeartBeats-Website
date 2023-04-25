@@ -15,7 +15,9 @@
   <div class="wrapper">
 
     <div class="login-card">
-      <div class="login-wrapper">
+      <div class="section">
+        <div class="login-wrapper">
+
 
         <div class="login-text">
           <h2 lang-id="log_title">Login to your account</h2>
@@ -37,7 +39,7 @@
               for="show-password-input"></label>
             <p class="connected-text" lang-id="log_spw" >Show password</p>
           </div>
-        </div>
+
 
         <div class="stay-connected">
           <input type="checkbox" id="switch" /><label for="switch"></label>
@@ -51,8 +53,10 @@
                   lang-id="log_reg_but" >Register instead</button>
         </div>
 
-      </div>
 
+        </div>
+        <img class="section-img" src="/public/png/login-1.png" alt="login-image">
+      </div>
     </div>
   </div>
 

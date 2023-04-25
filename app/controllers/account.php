@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Moderation.php');
 
 class account extends Controller
 {
@@ -92,6 +93,15 @@ class account extends Controller
             echo json_encode(array('result' => 'LoginError', 'emailErrorMessage' => $loginResult, 'passwordErrorMessage' => ""));
             return ;
         }
+
+        $confirmation = new Confirmation;
+        $confirmationResult = $confirmation->isAccountConfirmed($email);
+
+        if ($confirmationResult != 1) {
+            echo json_encode(array('result' => 'ConfirmationError', 'emailErrorMessage' => "Please confirm your account first", 'passwordErrorMessage' => ""));
+            return ;
+        }
+
         echo true;
     }
 
@@ -107,7 +117,6 @@ class account extends Controller
 
     public function registerUser()
     {   
-
         $name = trim($_REQUEST['name']);
         $email = trim($_REQUEST['email']);
         $password = $_REQUEST['password'];
@@ -131,17 +140,50 @@ class account extends Controller
         $registerResult = $register->registerUser($name, $email, $password, $passwordConfirm);
 
         if ($registerResult != "") {
-            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult));
+            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult , 'passwordErrorMessage' => "", 'nameErrorMessage' => "", 'passwordConfirmErrorMessage' => ""));
             return ;
         }
 
+        $confirmation = new Confirmation;
+        $confirmation->createConfirmationCode($email);
+
         echo true;
+    }
+
+    public function confirmAccount()
+    {
+        $email = $_GET['mail'];
+        $token = $_GET['token'];
+        
+        if ($email == "" || $token == "" || AccountManager::isMailExists($email))
+        {
+            echo "Something went wrong";
+            exit();
+        }
+        
+        if (Moderation::isUserBanned($email))
+        {
+            echo "Something went wrong";
+            exit();
+        }
+        Moderation::flagUser($email);
+        echo $email . " " . $token;
+
+        $confirmation = new Confirmation;
+        $result = $confirmation->confirmAccount($token, $email);
+
+        if ($result != "")
+        {
+            //TODO : redirect to a page for error
+        }
+        // TODO : redirect to a page for success
     }
 
     public function changePassword()
     {
         $this->header();
         $this->view('account/password-recovery');
+        $this->footer();
     }
 
     public function changeEmail()
@@ -189,7 +231,6 @@ class account extends Controller
             echo json_encode(array('errorMessage' => $registerResult));
             return;
         }
-
         echo true;
     }
 
@@ -219,8 +260,8 @@ class account extends Controller
 
     public function debugMode()
     {   
-        if (!AccountManager::isSessionActive()) {
-            echo "It seems that you are not logged in";
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            echo "Something went wrong";
             AccountManager::destroySession();
             return;
         }
@@ -234,7 +275,6 @@ class account extends Controller
             echo $debugModeResult;
             return;
         }
-
         echo true;
     }
 
@@ -251,7 +291,7 @@ class account extends Controller
         $QAManager = new QAManager;
         $QAManager->updateFAQ($data);
         
-        ErrorsHandler::newError('FAQ updated by ' . AccountManager::getMail(), 1, true);
+        echo "Q&A updated successfully";
         echo true;
     }
 
@@ -268,5 +308,4 @@ class account extends Controller
         $data['title'] = "Updates Center";  
         return $data;
     }
-
 }

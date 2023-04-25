@@ -1,0 +1,356 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+/* 1st bg */
+.pink-gradient-bg {
+  position: absolute;
+  width: 2600px;
+  height: 1381px;
+  left: -241px;
+  top: 0;
+  background: linear-gradient(97.27deg, #E93D57 8.3%, #A423BA 100%);
+  opacity: 0.3;
+  filter: blur(200px);
+  z-index: -1;
+}
+
+/* 2nd bg */
+.adaptive-sound-bg {
+  position: absolute;
+  width: 1673px;
+  height: 812px;
+  left: -47px;
+  top: 0;
+  background: linear-gradient(97.27deg, #F7C23B 0%, #E93D57 51.07%, #A423BA 100%);
+  filter: blur(500px);
+  border-radius: 29px;
+  z-index: -1;
+}
+
+/* 3rd bg */
+.blue-security-bg {
+  position: absolute;
+  width: 2984px;
+  height: 814px;
+  left: 463px;
+  top: 0;
+  background: linear-gradient(130.2deg, #BDEDF9 0.57%, #92E9FE 20.47%, #3361DA 91.12%);
+  opacity: 0.85;
+  filter: blur(500px);
+  border-radius: 29px;
+  z-index: -1;
+}
+
+
+/* animation lors du scroll de la page */
+.animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.75s ease;
+  transition-delay: 0.25s;
+}
+
+.animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+
+/* haut de page */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -2;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+  color: white;
+}
+
+
+/* main title */
+.intro h1 {
+  font-size: 7.5em;
+  margin-top: 2.5em;
+}
+
+.intro h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15rem;
+  font-weight: 400;
+}
+
+
+/* headphone and text presentation */
+.pulse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+}
+
+.introducing {
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  max-width: 500px;
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  position: relative;
+  z-index: -2;
+}
+
+.introducing p {
+  margin-top: 15vh;
+}
+
+.introducing h3 {
+  margin: 0;
+  font-size: 4rem;
+}
+
+.pulse-image {
+  max-width: 400%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+
+/* headphone and text infor */
+.pulse-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(60vh - 80px);
+}
+
+.pulse-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.pulse-content p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: white;
+}
+
+
+/* technical details about the goal of the product */
+.adaptive-sound {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -10rem;
+  height: calc(125vh - 80px);
+}
+
+.adaptive-sound-info {
+  width: 50%;
+  text-align: left;
+  padding: 2rem;
+}
+
+.adaptive-sound-info h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.adaptive-sound-info h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.adaptive-sound-content {
+  max-width: 600px;
+}
+
+.adaptive-sound-content p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.adaptive-sound-image-container {
+  width: 50%;
+  position: relative;
+  margin-left: 5%;
+}
+
+.adaptive-sound-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.sound-wave-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 200%;
+  height: auto;
+  z-index: 1;
+}
+
+.volume-control-image {
+  position: absolute;
+  top: 10%;
+  right: 50%;
+  max-width: 50%;
+  height: auto;
+  z-index: -1;
+}
+
+.adaptive-sound-background {
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+}
+
+.adaptive-sound-info-2 {
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  margin-top: -3rem;
+}
+
+.adaptive-sound-info-2 h3 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.adaptive-sound-info-2 h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+
+/* sensors boxes */
+.sensor-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: -10rem;
+  height: calc(80vh - 80px);
+}
+
+.sensor-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  padding: 1rem;
+  width: 350px;
+  height: 350px;
+}
+
+.sensor-box img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sensor-box p {
+  font-size: 2rem;
+  color: white;
+}
+
+
+/* security part */
+.control-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.overlay-image {
+  position: absolute;
+  top: 0;
+  right: -350px;
+  height: calc(100% + 60px);
+  object-fit: cover;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.control-title {
+  font-size: 32px;
+  color: white;
+  z-index: 2;
+}
+
+.control-subtitle {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  z-index: 2;
+}
+
+
+.control-box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-box {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  width: 80%;
+  z-index: 2;
+}
+
+.control-box-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.control-box p {
+  font-size: 20px;
+  color: white;
+  line-height: 1.5;
+}

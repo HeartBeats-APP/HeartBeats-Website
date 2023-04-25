@@ -11,28 +11,32 @@
 .id {
     width: 3%;
     word-break: break-all;
+    font-size: clamp(.5em, 1vw, 1em);
 }
 
 .question {
     width: 40%;
     word-break: break-all;
+    font-size: clamp(.5em, 1vw, 1em);
 }
 
 .answer {
     width: 55%;
     word-break: break-all;
+    font-size: clamp(.5em, 1vw, 1em);
 }
 
 .actions {
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
     width: 7%;
-    gap: .5vw;
+    gap: 1vw;
 }
 
 .actions img {
-    height: 2em;
-    width: 3em;
+    height: clamp(1em, 2vw, 2em);
+    width: clamp(1em, 3vw, 3em);
 }
 
 .actions img:hover {
@@ -62,20 +66,59 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+.new-question {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: clamp(2em, 4vw, 4em);
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(.5em, 1vw, 1em);
+    margin-bottom: clamp(.5em, 2vw, 2em);
+    padding: clamp(1em, 1.5vw, 1.5em) ;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+}
+
+.new-question:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+.new-question img {
+    height: clamp(1.5em, 2vw, 2em);
+    width: clamp(1.5em, 2vw, 2em);
+    margin-right: .5em;
+}
+
+.buttons-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 2.5vw;
+}
+
 @media screen and (max-width: 1000px) {
     .popupcard {
-        width: 70%;
+        width: 75%;
+    }
+
+    .popup-wrapper {
+        padding: 5%;
     }
 }
 
 @media screen and (max-width: 768px) {
     .popupcard {
-        width: 70%;
+        width: 80%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .popupcard {
-        width: 75%;
+        width: 85%;
     }
+
 }

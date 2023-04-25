@@ -66,6 +66,7 @@
       if (count > 0) {
         document.querySelector("#animation-wrapper").remove();
       }
+
     </script>
 
     <script>

@@ -21,25 +21,25 @@ footer img {
     width: clamp(1em, 2.5vw, 2.5em);
 }
 
-.company-area {
+footer .company-area {
     gap: .5vw;
 }
 
-a {
+footer a {
     color: #fff;
     text-decoration: underline;
     font-size: clamp(.6em, .8vw, .8em);
 }
 
-p {
+footer p {
     font-size: clamp(.6em, .8vw, .8em);
 }
 
-#links {
+footer #links {
     margin-left: 0.5vw;
 }
 
-.legal {
+footer .legal {
     gap: 15vw;
 }
 

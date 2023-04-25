@@ -86,8 +86,58 @@
             <p id="password-strength-text"></p>
           </div>
 
+              <script>
+                var animation = bodymovin.loadAnimation({
+                  container: document.getElementById('email-animation'),
+                  renderer: 'svg',
+                  loop: true,
+                  autoplay: true,
+                  path: '/public/json/email-sent.json',
+                  name: 'Email Sent Animation',
+                });
+              </script>
 
-          <div class="login-field" id="confirm-password">
+            </div>
+          </div>
+          <style>
+            .animation-wrapper {
+              display: none;
+            }
+          </style>
+          <!-- Email animation ends here -->
+
+          <form id="register-form" action="" method="POST">
+
+            <div class="login-field">
+              <label for="">Name</label>
+              <input type="text" id="name" placeholder="Matthew" spellcheck="on" autocomplete="on">
+              <a id="name-warning-message" class="warning-message"></a>
+            </div>
+
+            <div class="login-field">
+              <label for="">Email</label>
+              <input type="email" id="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on">
+              <a id="email-warning-message" class="warning-message"></a>
+            </div>
+
+            <div class="show-password">
+              <input type="checkbox" id="show-password-input" onclick="showPassword()"/><label for="show-password-input"></label>
+              <p class="connected-text">Show passwords</p>
+            </div>
+            <div class="login-field">
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" placeholder="**********" spellcheck="false" autocomplete="on">
+              <a id="password-warning-message" class="warning-message"></a>
+            </div>
+
+            <!-- Password strength indicator -->
+            <div class="strength-indicator">
+              <meter max="4" id="password-strength-meter"></meter>
+              <p id="password-strength-text"></p>
+            </div>
+
+
+            <div class="login-field" id="confirm-password">
             <label for="" lang-id="reg_cpw">Confirm password</label>
             <input type="password" id="password-confirmation" placeholder="**********" spellcheck="false"
               autocomplete="on">
@@ -100,10 +150,13 @@
             data-sitekey="6LcDxpkkAAAAAE4Jdj3-JZD6ugtBsZjdeEtfz5I5" data-callback="createAccount"
             data-action='submit' lang-id="reg_cac">Create</button>
           <button onclick="window.location.href='/account/login'" class="secondary-button" lang-id="reg_log">Login instead</button>
+          </div>
+
         </div>
 
-      </div>
+        <img id="section-img" class="section-img" src="/public/svg/register-1.svg" alt="">
 
+      </div>
     </div>
   </div>
 
@@ -111,6 +164,7 @@
   <script src="/public/js/account/zxcvbn.js"></script>
   <script src="/public/js/account/password-strength-checker.js"></script>
   <script src="/public/js/components/translation.js"></script>
+
 
 </body>
 

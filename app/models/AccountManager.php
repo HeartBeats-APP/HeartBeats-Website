@@ -11,6 +11,7 @@ class AccountManager
     protected const PASSWORD_MATCH_ERROR = "Passwords doesn't match";
     protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
     protected const ACCESS_DENIED_ERROR = "Access denied";
+    protected const INCORRECT_TOKEN = "Incorrect Token";
  
     public static function isSessionActive()
     {
@@ -131,6 +132,7 @@ class Register extends AccountManager
         }
         
         if (self::startSession($email)) {
+            self::destroySession();
             return "";
         }
         return self::GENERAL_ERROR;
@@ -180,6 +182,7 @@ class Register extends AccountManager
     {
         $hashed_password = password_hash($entered_password, PASSWORD_DEFAULT);
         database_query("INSERT INTO users (name, mail, password, role, debugMode) VALUES (:name, :mail, :password, :role, DEFAULT)", [':name' => $name, ':mail' => $email, ':password' => $hashed_password, ':role' => $role]);
+        database_query("INSERT INTO moderation (mail, isBanned, tokenNb) VALUES (:mail, DEFAULT, DEFAULT)",[':mail'=> $email]);
     }
 }
 
@@ -211,4 +214,38 @@ class debugMode extends AccountManager
         return $result['debugMode'];
 
     }
+}
+
+class Confirmation extends AccountManager
+{
+    public function createConfirmationCode($email)
+    {
+        $verifCode = random_int(100000, 999999);
+        database_query("UPDATE users SET verifCode = :verifCode WHERE mail = :mail", [':verifCode' => $verifCode, ':mail' => $email]);
+        $this->sendConfirmationMail($email, $verifCode);
+    }
+
+    public function confirmAccount($inboundCode, $mail)
+    {
+        $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
+        if ($verifCode['verifCode'] == $inboundCode) {
+            database_query("UPDATE users SET verifCode = 1 WHERE mail = :mail", [':mail' => $mail]);
+            return "";
+        }
+        return self::INCORRECT_TOKEN;
+    }
+
+    public function isAccountConfirmed($mail)
+    {
+        $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
+        if ($verifCode['verifCode'] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private function sendConfirmationMail($email, $verifCode)
+    {
+        //TODO : send mail
+    } 
 }

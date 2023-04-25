@@ -5,6 +5,10 @@ class dashboard extends Controller
 {
     public function index()
     {
+        if (!AccountManager::isSessionActive()) {
+            header('Location: /account/login');
+            exit();
+        }
         $data = AccountManager::getSessionData();
         $this->header();
         $this->view('dashboard/dashboard', $data);

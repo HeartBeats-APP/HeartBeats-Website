@@ -161,7 +161,7 @@ h5 {
 
 p {
     color: white;
-    font-size: clamp(.75em, 1vw, .85em);
+    font-size: clamp(.8em, 1vw, .9em);
     font-weight: 350;
     text-align: left;
     height: fit-content;

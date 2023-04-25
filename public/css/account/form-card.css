@@ -4,7 +4,7 @@ body {
     background-position: center;
     background-size: clamp(25em, 50%, 60em);
     backdrop-filter: blur(150px);
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
 }
 
@@ -14,7 +14,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: clamp(150vh, fit-content, 250vh);
     width: 100%;
     margin: 0;
     padding: 0;
@@ -45,6 +44,20 @@ body {
     margin-bottom: clamp(1em, 3vw, 3em);
     justify-content: space-between;
     height: 3em;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: fit-content;
+}
+
+.section-img {
+    height: 35em;
+    border-radius: 15px;
+    margin: clamp(2em, 4vw, 4em);
+    padding: 0;
 }
 
 
@@ -97,11 +110,6 @@ body {
     width: 100%;
 }
 
-#password-warning-message {
-    padding-top: 1.5em;
-    padding-bottom: 1em;
-}
-
 .buttons-area {
     display: flex;
     flex-direction: row-reverse;
@@ -142,18 +150,36 @@ label[for="show-password-input"]:active:after {
 }
 
 /* Responsive ------------------------------------------------------------------------------------------------------------------- */
+@media screen and (max-width: 1000px) {
+
+    .section {
+        display: contents;
+    }
+
+    .section-img {
+        display: none;
+        width: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .login-card {
+        width: 50%;
+        margin-top: 1vh;
+    }
+}
 
 @media screen and (max-width: 750px) {
 
     .login-card {
-        max-width: 80%;
         width: 80%;
+        margin-top: 3vh;
     }
 
     .buttons-area {
         flex-direction: column-reverse;
         gap: 1em;
-        margin-top: 3vh;
+        margin-top: 2vh;
     }
 
     .main-button,
@@ -161,6 +187,13 @@ label[for="show-password-input"]:active:after {
         width: 100%;
         height: 2.25em;
         font-size: .85rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .login-card {
+        margin-top: -10vh;
     }
 
 }
