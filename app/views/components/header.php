@@ -25,9 +25,15 @@
                 <a>Contact</a>
             </div>
 
+            <div class="header-tab" onclick="window.location.href='/slides/'">
+                <img class="tab-icon" src="/public/svg/header/Slides.svg" width="50" height="50" alt="" />
+                <a>Slides</a>
+            </div>  
+
             <div id="account-tab" class="header-tab" onclick="window.location.href='/account/<?php echo $AccountAction ?>'">
                 <img class="tab-icon" src="/public/svg/header/Account.svg" width="50" height="50" alt="" />
             </div>
+
         </div>
 
         <div class="header-right">

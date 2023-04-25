@@ -37,7 +37,7 @@
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'json/account-created-animation.json',
+                path: '/public/json/account-created-animation.json',
                 name: 'Email Sent Animation',
                 animationSpeed: 1,
               });
@@ -48,7 +48,7 @@
         <!-- Animation ends here -->      
 
         <div id="buttons-area" class="buttons-area">
-          <button onclick="window.location.href='/account/login'" class="main-button">Login</button>
+          <button onclick="window.location.href='/dashboard'" class="main-button">Dashboard</button>
           <button onclick="window.location.href='/home'" class="secondary-button">Home</button>
         </div>
 

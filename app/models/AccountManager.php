@@ -3,6 +3,7 @@ ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes
 session_start();
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
+require_once 'Moderation.php';
 
 class AccountManager
 {
@@ -10,6 +11,7 @@ class AccountManager
     protected const MAIL_EXISTS_ERROR = "Mail already exists";
     protected const PASSWORD_MATCH_ERROR = "Passwords doesn't match";
     protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
+    protected const BANNED_ERROR = "Couldn't log you in :/";
     protected const ACCESS_DENIED_ERROR = "Access denied";
     protected const INCORRECT_TOKEN = "Incorrect Token";
  
@@ -86,6 +88,12 @@ class Login extends AccountManager
 {   
     public function logUserIn($email, $entered_password)
     {
+        if (Moderation::isUserBanned($email))
+        {
+            echo self::BANNED_ERROR;
+            exit();
+        }
+
         if (!(self::isMailExists($email) && $this->isPasswordCorrect($email, $entered_password))) {
             return self::LOGIN_ERROR;
         }
@@ -220,7 +228,7 @@ class Confirmation extends AccountManager
 {
     public function createConfirmationCode($email)
     {
-        $verifCode = random_int(100000, 999999);
+        $verifCode = random_int(100000, 999999999);
         database_query("UPDATE users SET verifCode = :verifCode WHERE mail = :mail", [':verifCode' => $verifCode, ':mail' => $email]);
         $this->sendConfirmationMail($email, $verifCode);
     }
@@ -230,8 +238,10 @@ class Confirmation extends AccountManager
         $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
         if ($verifCode['verifCode'] == $inboundCode) {
             database_query("UPDATE users SET verifCode = 1 WHERE mail = :mail", [':mail' => $mail]);
+            self::startSession($mail);
             return "";
         }
+
         return self::INCORRECT_TOKEN;
     }
 

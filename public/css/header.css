@@ -84,6 +84,7 @@
    height: fit-content;
    width: fit-content;
    font-style: medium;
+   white-space: nowrap;
    color: white;
    font-size: clamp(.75em, 1.5vw, 1em);
    text-decoration: none;

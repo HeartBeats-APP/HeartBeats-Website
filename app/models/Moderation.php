@@ -6,9 +6,10 @@ class Moderation
 {
     public static function flagUser($email)
     {
-        $result = database_query("SELECT * FROM moderation WHERE mail = :mail", [":mail" => $email]);
+        
+        $result = database_query("SELECT mail FROM moderation WHERE mail = :mail", [':mail' => $email]);
         if (!$result) {
-            return;
+            database_query("INSERT INTO moderation (mail, tokenNb, isBanned) VALUES (:mail, DEFAULT, DEFAULT)", [':mail' => $email]);
         }
 
         database_query("UPDATE moderation SET tokenNb = tokenNb + 1 WHERE mail = :mail", [":mail" => $email]);
@@ -33,7 +34,7 @@ class Moderation
         }
 
         $tokenNb = $result['tokenNb'];
-        if ($tokenNb > 15 && $result['isBanned'] == 0)
+        if ($tokenNb >= 15 && $result['isBanned'] == 0)
         {
             database_query("UPDATE moderation SET isBanned = 1 WHERE mail = :mail", [":mail" => $email]);
         }

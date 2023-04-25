@@ -6,6 +6,7 @@
   border-radius: 25px;
   font-weight: 450;
   font-size: clamp(.5em, 2vw, .75em);
+  white-space: nowrap;
   text-align: center;
   color: white;
   background: #1c1a1a;

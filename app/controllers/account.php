@@ -44,7 +44,7 @@ class account extends Controller
     }
 
     public function admin($args = [])
-    {   
+    {
         // Redirect to login if not admin
         if (!AccountManager::isAdmin()) {
             ErrorsHandler::newError('User ' . AccountManager::getMail() . ' tried to access admin panel', 1, false);
@@ -56,13 +56,13 @@ class account extends Controller
         $data = AccountManager::getSessionData();
         $this->account($data, "admin");
 
-        if ($args == 'updates'){
+        if ($args == 'updates') {
             $data2 = $this->getUpdatesInfo();
             $this->view('account/admin/updates', $data2);
             return;
         }
 
-        if ($args == 'faq'){
+        if ($args == 'faq') {
             $QAManager = new QAManager;
             $data2 = $QAManager->getFAQ();
             $this->view('account/admin/faq', $data2);
@@ -71,7 +71,7 @@ class account extends Controller
     }
 
     public function logUserIn()
-    {   
+    {
 
         $email = trim($_REQUEST['email']);
         $password = trim($_REQUEST['password']);
@@ -81,7 +81,7 @@ class account extends Controller
         $passwordInput = new PasswordInput;
         $passwordResult = $passwordInput->validate($password);
 
-        if ($emailResult || $passwordResult ) {
+        if ($emailResult || $passwordResult) {
             echo json_encode(array('result' => 'InputsError', 'emailErrorMessage' => $emailResult, 'passwordErrorMessage' => $passwordResult));
             return;
         }
@@ -91,7 +91,7 @@ class account extends Controller
 
         if ($loginResult != "") {
             echo json_encode(array('result' => 'LoginError', 'emailErrorMessage' => $loginResult, 'passwordErrorMessage' => ""));
-            return ;
+            return;
         }
 
         $confirmation = new Confirmation;
@@ -99,7 +99,7 @@ class account extends Controller
 
         if ($confirmationResult != 1) {
             echo json_encode(array('result' => 'ConfirmationError', 'emailErrorMessage' => "Please confirm your account first", 'passwordErrorMessage' => ""));
-            return ;
+            return;
         }
 
         echo true;
@@ -109,14 +109,14 @@ class account extends Controller
     {
         if (AccountManager::destroySession() == true) {
             echo true;
-            return ;
+            return;
         }
 
         ErrorsHandler::newError('Something went wrong while logging out' . AccountManager::getMail(), 1, true);
     }
 
     public function registerUser()
-    {   
+    {
         $name = trim($_REQUEST['name']);
         $email = trim($_REQUEST['email']);
         $password = $_REQUEST['password'];
@@ -133,15 +133,15 @@ class account extends Controller
 
         if ($nameResult != "" || $emailResult != "" || $passwordResult != "" || $passwordConfirmResult != "") {
             echo json_encode(array('result' => 'InputsError', 'nameErrorMessage' => $nameResult, 'emailErrorMessage' => $emailResult, 'passwordErrorMessage' => $passwordResult, 'passwordConfirmErrorMessage' => $passwordConfirmResult));
-            return ;
+            return;
         }
 
         $register = new Register;
         $registerResult = $register->registerUser($name, $email, $password, $passwordConfirm);
 
         if ($registerResult != "") {
-            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult , 'passwordErrorMessage' => "", 'nameErrorMessage' => "", 'passwordConfirmErrorMessage' => ""));
-            return ;
+            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult, 'passwordErrorMessage' => "", 'nameErrorMessage' => "", 'passwordConfirmErrorMessage' => ""));
+            return;
         }
 
         $confirmation = new Confirmation;
@@ -155,28 +155,42 @@ class account extends Controller
         $email = $_GET['mail'];
         $token = $_GET['token'];
         
-        if ($email == "" || $token == "" || AccountManager::isMailExists($email))
-        {
+        if ($token == '""' || empty($token) || $email == '""' || empty($email)) {
+            echo "Invalid Query";
+            exit();
+        }
+        
+        if (!AccountManager::isMailExists($email)) {
+            echo "Invalid Query*";
+            exit();
+        }
+        
+        if (Moderation::isUserBanned($email)) {
             echo "Something went wrong";
             exit();
         }
         
-        if (Moderation::isUserBanned($email))
-        {
-            echo "Something went wrong";
-            exit();
-        }
         Moderation::flagUser($email);
-        echo $email . " " . $token;
-
+        
         $confirmation = new Confirmation;
-        $result = $confirmation->confirmAccount($token, $email);
+        $token = preg_replace("/[^0-9]/", "", $token);
+        $confirmation->confirmAccount($token, $email);
 
-        if ($result != "")
+        if ($token != "0000")
         {
-            //TODO : redirect to a page for error
+            header("Location: confirmAccount?mail=" . $email . "&token=0000");
         }
-        // TODO : redirect to a page for success
+
+        if ($confirmation->isAccountConfirmed($email)) 
+        {
+            $this->header();
+            $this->view('account/verified');
+            $this->footer();
+        } else 
+        {
+            echo "Impossible to verify your account :/";
+        }
+
     }
 
     public function changePassword()
@@ -201,13 +215,13 @@ class account extends Controller
 
     public function registerDevice()
     {
-  
+
         if (!AccountManager::isSessionActive()) {
             echo json_encode(array('errorMessage' => 'It seems that you are not logged in'));
             AccountManager::destroySession();
             return;
         }
-        
+
         if (DeviceManager::isDeviceExists()) {
             echo json_encode(array('errorMessage' => 'You already have a device'));
             return;
@@ -259,7 +273,7 @@ class account extends Controller
     }
 
     public function debugMode()
-    {   
+    {
         if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
             echo "Something went wrong";
             AccountManager::destroySession();
@@ -287,10 +301,10 @@ class account extends Controller
         }
 
         $data = json_decode(file_get_contents('php://input'));
-        
+
         $QAManager = new QAManager;
         $QAManager->updateFAQ($data);
-        
+
         echo "Q&A updated successfully";
         echo true;
     }
@@ -305,7 +319,7 @@ class account extends Controller
 
         $databaseManager = new DatabaseManager;
         $data = $databaseManager->getUpdatesInfo();
-        $data['title'] = "Updates Center";  
+        $data['title'] = "Updates Center";
         return $data;
     }
 }
