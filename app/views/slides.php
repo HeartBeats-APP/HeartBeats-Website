@@ -40,7 +40,7 @@
             <section class="slide">
                 <div class="slide__content">
                     <figure class="slide__figure">
-                        <div class="slide__img" style="background-image: url(https://source.unsplash.com/okmtVMuBzkQ/2000x1100)"></div>
+                        <div class="slide__img" style="background-image: url(https://source.unsplash.com/okmtVMuBzkQ/2000x1100)">
                     </figure>
                     <header class="slide__header">
                         <h2 class="slide__title">

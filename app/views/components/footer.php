@@ -5,12 +5,12 @@
 
     <div class="Company-area row">
         <img src="/public/svg/header/Logo.svg" alt="">
-        <p>HeartBeats Inc - (C) 2023</p>
+        <p>HeartBeats Inc - 2023</p>
     </div>
 
     <div class="row legal">
         <a href="" lang-id="fot_tou">Terms of Use</a>
-        <a href="" lang-id="fot_leg">Legal Notice</a>
+        <a href="/legal/cgu" lang-id="fot_leg">Legal Notice</a>
     </div>
 
     <div class="row">

@@ -17,20 +17,17 @@
     z-index: -1;
 }
 
-.welcome-banner, .dashboard-box {
+.welcome-banner,
+.dashboard-box {
     position: relative;
     z-index: 1;
 }
 
 body {
     text-align: center;
-}
+}*
 
-h1, h2, p {
-    color: #fff;
-}
-
-button {
+.dashboard-btn {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 5px;
@@ -41,7 +38,7 @@ button {
     transition: all 0.5s ease;
 }
 
-button:hover {
+.dashboard-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: rgb(56, 56, 56);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
@@ -61,11 +58,10 @@ button:hover {
 
 .dashboard-box {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
     width: 60%;
-    border-radius: 40px;
+    border-radius: 20px;
     padding: 30px;
     text-align: center;
     margin-top: 30px;
@@ -108,12 +104,124 @@ button:hover {
 
 .stats-box {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
     width: 60%;
-    border-radius: 40px;
+    border-radius: 20px;
     padding: 30px;
     text-align: center;
     margin-top: 30px;
+}
+
+/* Mobile styles */
+@media screen and (min-width: 760px) and (max-width: 920px) {
+    .welcome-banner {
+        margin-top: 20%;
+    }
+
+    .now-playing,
+    .listening-stats {
+        padding: 20px;
+    }
+
+    .listening-stats-box {
+        margin-top: 7%;
+        padding: 5%;
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 750px) {
+    button {
+        padding: 3%;
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .welcome-banner {
+        margin-left: 0;
+    }
+
+    .welcome-banner h1 {
+        font-size: 30px;
+    }
+
+    .dashboard-box {
+        width: 90%;
+    }
+
+    .now-playing,
+    .listening-stats {
+        padding: 20px;
+    }
+
+    .dashboard-controls {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-controls button {
+        margin: 5px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .welcome-banner {
+        margin-top: -2%;
+    }
+
+    .dashboard-box {
+        margin-top: 5%;
+    }
+
+    .now-playing,
+    .listening-stats {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 395px) {
+
+    .now-playing,
+    .listening-stats {
+        padding: 7%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+
+    .now-playing,
+    .listening-stats {
+        padding: 0%;
+    }
+
+    .playing-music-box {
+        margin-top: -2%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .listening-stats-box {
+        margin-top: 7%;
+        padding: 10%;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .welcome-banner h1 {
+        font-size: 18px;
+    }
+
+    .dashboard-box {
+        margin-top: 5%;
+    }
+
+    .listening-stats {
+        font-size: 12px;
+    }
+
+    button {
+        padding: 5%;
+        font-size: 13px;
+    }
 }

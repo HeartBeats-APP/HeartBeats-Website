@@ -6,93 +6,7 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="/public/css/dashboard/dashboardStyle.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Mobile styles */
-        @media screen and (min-width: 760px) and (max-width: 920px) {
-            .welcome-banner {
-                margin-top: 20%;
-            }
-            .now-playing, .listening-stats {
-                padding: 20px;
-            }
-            .listening-stats-box {
-                margin-top: 7%;
-                padding: 5%;
-                font-size: 20px;
-            }
-        }
-        @media screen and (min-width: 500px) and (max-width: 750px) {
-            button {
-                padding: 3%;
-                font-size: 16px;
-            }
-        }
-        @media only screen and (max-width: 480px) {
-            .welcome-banner {
-                margin-left: 0;
-            }
-            .welcome-banner h1 {
-                font-size: 30px;
-            }
-            .dashboard-box {
-                width: 90%;
-            }
-            .now-playing, .listening-stats {
-                padding: 20px;
-            }
-            .dashboard-controls {
-                flex-wrap: wrap;
-            }
-            .dashboard-controls button {
-                margin: 5px;
-            }
-        }
-        @media only screen and (max-width: 400px) {
-            .welcome-banner {
-                margin-top: -2%;
-            }
-            .dashboard-box {
-                margin-top: 5%;
-            }
-            .now-playing, .listening-stats {
-                padding: 0;
-            }
-        }
-        @media only screen and (max-width: 395px) {
-            .now-playing, .listening-stats {
-                padding: 7%;
-            }
-        }
-        @media only screen and (max-width: 375px) {
-            .now-playing, .listening-stats {
-                padding: 0%;
-            }
-            .playing-music-box {
-                margin-top: -2%;
-            }
-        }
-        @media screen and (max-width: 360px) {
-            .listening-stats-box {
-                margin-top: 7%;
-                padding: 10%;
-            }
-        }
-        @media screen and (max-width: 300px) {
-            .welcome-banner h1 {
-                font-size: 18px;
-            }
-            .dashboard-box {
-                margin-top: 5%;
-            }
-            .listening-stats {
-                font-size: 12px;
-            }
-            button {
-                padding: 5%;
-                font-size: 13px;
-            }
-        }
-    </style>
+
 </head>
 <body>
     <div class="background"></div>
@@ -106,11 +20,11 @@
             <div class="progress-bar"></div>
         </div>
         <div class="dashboard-controls">
-            <button class="play-button">Play</button>
-            <button class="pause-button">Pause</button>
-            <button class="next-button">Next</button>
-            <button class="like-button">Like</button>
-            <button class="dislike-button">Dislike</button>
+            <button class="dashboard-btn play-button">Play</button>
+            <button class="dashboard-btn pause-button">Pause</button>
+            <button class="dashboard-btn next-button">Next</button>
+            <button class="dashboard-btn like-button">Like</button>
+            <button class="dashboard-btn dislike-button">Dislike</button>
         </div>
     </div>
     <div class="dashboard-box listening-stats-box">
