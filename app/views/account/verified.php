@@ -22,8 +22,8 @@
       <div id="card-content" class="login-wrapper">
 
         <div class="login-text">
-          <h1 id="title">Account verified</h1>
-          <p id="subtitle">You're ready to go</p>
+          <h1 id="title" lang-id="ver_tit" >Account verified</h1>
+          <p id="subtitle" lang-id="ver_sub">You're ready to go</p>
         </div>
 
         <!-- Animation -->

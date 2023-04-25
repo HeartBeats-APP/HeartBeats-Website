@@ -19,8 +19,8 @@
   <div class="wrapper ">
 
     <div class="column">
-      <h1>HeartBeats</h1>
-      <h5>Music that adapts to you.</h5>
+      <h1 >HeartBeats</h1>
+      <h5 >Music that adapts to you.</h5>
     </div>
 
   </div>

@@ -6,7 +6,7 @@
 <div class="popupBackground" onclick="window.location.href='/account/admin'"></div>
 <div id="PopupCard" class="popupcard">
     <div class="popupcard-header">
-        <h3>Q&A Editor</h3>
+        <h3 lang-id="qae_title">Q&A Editor</h3>
         <div class="badge insider">Beta</div>
     </div>
     <div class="column popup-wrapper">
@@ -14,8 +14,8 @@
 
     </div
     <div class="buttons-row">
-        <div class="secondary-button" onclick="window.location.href='/account/admin'">Cancel</div>
-        <div class="main-button clickable" onclick="saveFAQ()">Save</div>
+        <div class="secondary-button" lang-id="qae_cancel" onclick="window.location.href='/account/admin'">Cancel</div>
+        <div class="main-button clickable" lang-id="qae_save" onclick="saveFAQ()">Save</div>
     </div>
 </div>
 
@@ -24,3 +24,4 @@
     var data = <?php echo json_encode($data); ?>;
     updateFAQ(data);
 </script>
+<script src="/public/js/components/translation.js"></script>

@@ -24,8 +24,8 @@
       <div id="card-content" class="login-wrapper">
 
         <div class="login-text">
-          <h2 id="title" data-translate="reg_title">Create an account</h2>
-          <p id="subtitle" data-translate="reg_sub">Welcome aboard.</p>
+          <h2 id="title" lang-id="reg_title">Create an account</h2>
+          <p id="subtitle" lang-id="reg_sub">Welcome aboard.</p>
         </div>
 
         <!-- Email animation -->
@@ -57,13 +57,13 @@
         <form id="register-form" action="" method="POST">
 
           <div class="login-field">
-            <label for="">Name</label>
+            <label for="" lang-id="reg_name">Name</label>
             <input type="text" id="name" placeholder="Matthew" spellcheck="on" autocomplete="on">
             <a id="name-warning-message" class="warning-message"></a>
           </div>
 
           <div class="login-field">
-            <label for="">Email</label>
+            <label for="">E-mail</label>
             <input type="email" id="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on">
             <a id="email-warning-message" class="warning-message"></a>
           </div>
@@ -71,13 +71,13 @@
           <div class="show-password">
             <input type="checkbox" id="show-password-input" onclick="showPassword()" /><label
               for="show-password-input"></label>
-            <p class="connected-text">Show passwords</p>
+            <p class="connected-text" lang-id="reg_spw">Show passwords</p>
           </div>
           <div class="login-field">
-            <label for="password">Password</label>
+            <label for="password" lang-id="reg_pw">Password</label>
             <input type="password" name="password" id="password" placeholder="**********" spellcheck="false"
               autocomplete="on">
-            <a id="password-warning-message" class="warning-message"></a>
+            <a id="password-warning-message" class="warning-message" ></a>
           </div>
 
           <!-- Password strength indicator -->
@@ -88,18 +88,18 @@
 
 
           <div class="login-field" id="confirm-password">
-            <label for="">Confirm password</label>
+            <label for="" lang-id="reg_cpw">Confirm password</label>
             <input type="password" id="password-confirmation" placeholder="**********" spellcheck="false"
               autocomplete="on">
-            <a id="passwordConfirm-warning-message" class="warning-message"></a>
+            <a id="passwordConfirm-warning-message" class="warning-message" ></a>
           </div>
         </form>
 
         <div id="buttons-area" class="buttons-area">
           <button onclick="createAccount()" class="main-button g-recaptcha" type="submit" form="register-form"
             data-sitekey="6LcDxpkkAAAAAE4Jdj3-JZD6ugtBsZjdeEtfz5I5" data-callback="createAccount"
-            data-action='submit'>Create</button>
-          <button onclick="window.location.href='/account/login'" class="secondary-button">Login instead</button>
+            data-action='submit' lang-id="reg_cac">Create</button>
+          <button onclick="window.location.href='/account/login'" class="secondary-button" lang-id="reg_log">Login instead</button>
         </div>
 
       </div>
@@ -110,7 +110,7 @@
   <script src="/public/js/account/entries-checker.js"></script>
   <script src="/public/js/account/zxcvbn.js"></script>
   <script src="/public/js/account/password-strength-checker.js"></script>
-  <script src="/public/js/components/header.js"
+  <script src="/public/js/components/translation.js"></script>
 
 </body>
 

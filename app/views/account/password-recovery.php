@@ -23,12 +23,12 @@
             <div id="login-wrapper" class="login-wrapper">
 
                 <div class="login-text">
-                    <h2 id="title">Lost your password?</h2>
-                    <p id="subtitle">We're here to help.</p>
+                    <h2 id="title" lang-id="pwr_title">Lost your password?</h2>
+                    <p id="subtitle" lang-id="pwr_sub">We're here to help.</p>
                 </div>
 
                 <div id="login-field" class="login-field">
-                    <label for="">Email</label>
+                    <label for="">E-mail</label>
                     <input type="email" id="email" placeholder="guest@heart-beats.fr" spellcheck="false" autocomplete="on" >
                     <a id="email-warning-message" class="warning-message"></a>
                 </div>
@@ -60,8 +60,8 @@
                 <!-- Email animation ends here -->
 
                 <div id="buttons-area" class="buttons-area">
-                    <div onclick="recoverPassword()" class="main-button" id="submit-button-passwordRecovery">Send email
-                    </div>
+                    <div onclick="recoverPassword()" class="main-button" id="submit-button-passwordRecovery"
+                         lang-id="pwr_snd">Send email</div>
                 </div>
 
             </div>
@@ -74,7 +74,8 @@
         if (localStorage.getItem("email") != "" && localStorage.getItem("email") != null) {
           document.getElementById("email").value = localStorage.getItem("email");
         }
-      </script>
+    </script>
+    <script src="/public/js/components/translation.js"></script>
 
 </body>
 

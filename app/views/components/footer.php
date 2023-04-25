@@ -5,17 +5,19 @@
 
     <div class="Company-area row">
         <img src="/public/svg/header/Logo.svg" alt="">
-        <p>HeartBeats Inc - Copyright 2023</p> 
+        <p>HeartBeats Inc - (C) 2023</p>
     </div>
 
     <div class="row legal">
-        <a href="">Terms of Use</a>
-        <a href="">Legal Notice</a> 
+        <a href="" lang-id="fot_tou">Terms of Use</a>
+        <a href="" lang-id="fot_leg">Legal Notice</a>
     </div>
 
     <div class="row">
-        <p>Learn more about us at: </p>
+        <p lang-id="fot_lau">Learn more about us at: </p>
         <a id="links" href="https://bento.me/heartbeats" target="_blank"> bento.me/heartbeats</a>
     </div>
+
+    <script src="/public/js/components/translation.js"></script>
 
 </footer>

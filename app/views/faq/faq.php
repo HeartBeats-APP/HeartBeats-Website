@@ -18,7 +18,7 @@
 
     <div class="adaptive-margin" style="--coef: 10"></div>
     <!-- Q&A section -->
-    <h2>Frequently Asked Questions</h2>
+    <h2 lang-id="faq_title">Frequently Asked Questions</h2>
     <div class="adaptive-margin" style="--coef: 5"></div>
 
     <div class="animation-wrapper" id="animation-wrapper">
@@ -103,9 +103,8 @@
     </script>
   </div>
 
+  <script src="/public/js/components/translation.js"></script>
+
 </body>
-
-
-
 
 </html>

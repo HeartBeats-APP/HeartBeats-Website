@@ -18,7 +18,7 @@
 
             <div class="adaptive-margin" style="--coef: 15"></div>
             <div class="main-text">
-                <h1>Dashboard</h1>
+                <h1 lang-id="dsh_title">Dashboard</h1>
                 <p>Welcome Back <?php echo $data['name'] ?></p>
             </div>
         </div>
