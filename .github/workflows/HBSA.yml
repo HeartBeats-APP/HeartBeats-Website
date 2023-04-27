@@ -1,0 +1,38 @@
+name: HeartBeats Smart Analysis
+
+on:
+  push:
+    branches: [beta]
+    
+
+jobs:
+  Code-Analysis: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          
+      - name: Install dependencies
+        run: composer install
+        
+      - name: Check coding standards
+        id: phpcs
+        run: ./vendor/bin/phpcs --standard=PSR2 --colors --encoding=utf-8 app
+        
+      - name: Apply fixes
+        if: always() && steps.phpcs.outcome == 'failure'
+        run: ./vendor/bin/phpcbf --standard=PSR2 --colors --encoding=utf-8 app
+
+      - name: Commit changes
+        if: always() && steps.phpcs.outcome == 'failure'
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: HeartBeats
+          author_email: heartbeats-app@isep.fr
+          message: 'HeartBeats Smart Analysis'
+          tag_push: '--force'
