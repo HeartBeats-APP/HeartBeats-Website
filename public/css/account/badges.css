@@ -6,6 +6,7 @@
   border-radius: 25px;
   font-weight: 450;
   font-size: clamp(.5em, 2vw, .75em);
+  white-space: nowrap;
   text-align: center;
   color: white;
   background: #1c1a1a;
@@ -19,7 +20,7 @@
 }
 
 .isep {
-  background: var(--second-gradient);
+  background: var(--main-gradient);
   background-size: 500%;
   -webkit-animation: anime 10s linear infinite;
   animation: anime 10s linear infinite;
@@ -28,6 +29,12 @@
 
 .insider {
   background: var(--blue-gradient);
+  background-size: 500%;
+  -webkit-animation: anime 10s linear infinite;
+  animation: anime 10s linear infinite;
+}
+.je {
+  background: var(--second-gradient);
   background-size: 500%;
   -webkit-animation: anime 10s linear infinite;
   animation: anime 10s linear infinite;

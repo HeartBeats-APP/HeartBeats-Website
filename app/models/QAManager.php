@@ -1,6 +1,7 @@
 <?php
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 
 class QAManager
 {
@@ -9,28 +10,37 @@ class QAManager
         return database_query("SELECT id, question, answer FROM `q&a`");
     }
 
-    public function addQuestion($question, $answer)
-    {   
-        $previousNumber = $this->getNumberOfQuestions();
-        database_query("INSERT INTO q&a (`date`,`question`, `answer`) VALUES (DEFAULT, :question, :answer)", [':question' => $question, ':answer' => $answer]);
-        $currentNumber = $this->getNumberOfQuestions();
+    public function updateFAQ($data){
 
-        if ($previousNumber + 1 == $currentNumber) {
-            return true;
-        } 
-        ErrorsHandler::newError("Failed to add question in database", 2);
+        if (empty($data)) {
+            $debugMode = new debugMode();
+            if ($debugMode->isDebugModeActive()) {
+                echo "Incoming data is empty and cannot be processed";
+            } else {
+                echo "Something went wrong";
+            }
+            return false;
+        }
+        $this->wipeFAQ();
+
+        foreach ($data as $QA) {
+            $id = $QA->id;
+            $question = $QA->question;
+            $answer = $QA->answer;
+
+            database_query("INSERT INTO `q&a` (id, question, answer) VALUES (:id, :question, :answer)", [
+                ":id" => $id,
+                ":question" => $question,
+                ":answer" => $answer
+            ]);
+        }
+
+        return true;
     }
 
-    public function deleteQuestion($id)
+    private function wipeFAQ()
     {
-        $previousNumber = $this->getNumberOfQuestions();
-        database_query("DELETE FROM q&a WHERE id = :id", [':id' => $id]);
-        $currentNumber = $this->getNumberOfQuestions();
-
-        if ($previousNumber - 1 == $currentNumber) {
-            return true;
-        }
-        ErrorsHandler::newError("Failed to delete question id $id from database", 2);
+        database_query("TRUNCATE TABLE `q&a`");
     }
 
     private function getNumberOfQuestions()

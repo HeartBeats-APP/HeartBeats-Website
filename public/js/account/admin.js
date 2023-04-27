@@ -15,14 +15,3 @@ function expand(card){
     var id = card.id;
     document.getElementById(id + '-expanded').classList.toggle('hidden');
 }
-
-function getUpdatesInfos(){
-    var request = new XMLHttpRequest();
-    request.open("GET", "/account/getUpdatesInfos", true);
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            return this.responseText;
-        }
-    };
-    request.send();
-}

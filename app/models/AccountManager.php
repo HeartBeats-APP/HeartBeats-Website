@@ -3,6 +3,7 @@ ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes
 session_start();
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
+require_once 'Moderation.php';
 
 class AccountManager
 {
@@ -10,18 +11,27 @@ class AccountManager
     protected const MAIL_EXISTS_ERROR = "Mail already exists";
     protected const PASSWORD_MATCH_ERROR = "Passwords doesn't match";
     protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
+    protected const BANNED_ERROR = "Couldn't log you in :/";
     protected const ACCESS_DENIED_ERROR = "Access denied";
-    protected const INCOMPATIBLE_ACTION = "Someone tries to access action '%s' from page '%s' which is not allowed";
- 
+    protected const INCORRECT_TOKEN = "Incorrect Token";
+
     public static function isSessionActive()
     {
-        return session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['email']) && isset($_SESSION['name']) && isset($_SESSION['role']);
+        if (!(session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['email']) && isset($_SESSION['name']) && isset($_SESSION['role']))) {
+            return false;
+        }
+
+        if (Moderation::isUserBanned($_SESSION['email'])) {
+            self::destroySession();
+            return false;
+        }
+        return true;
     }
 
     protected static function startSession($email)
-    {   
+    {
         $_SESSION['email'] = $email;
-        
+
         $result = database_query("SELECT `name`, `role`, `debugMode` FROM users WHERE mail = :mail", [':mail' => $email]);
         $_SESSION['name'] = $result['name'];
         $_SESSION['role'] = $result['role'];
@@ -30,7 +40,7 @@ class AccountManager
         if (self::isSessionActive()) {
             $_SESSION['loggedIn'] = true;
             return true;
-        } 
+        }
 
         self::destroySession();
         return false;
@@ -47,7 +57,7 @@ class AccountManager
 
         return false;
     }
-    
+
     public static function isMailExists($email)
     {
         $result = database_query("SELECT mail FROM users WHERE mail = :mail", [':mail' => $email]);
@@ -83,9 +93,14 @@ class AccountManager
 }
 
 class Login extends AccountManager
-{   
+{
     public function logUserIn($email, $entered_password)
     {
+        if (Moderation::isUserBanned($email)) {
+            echo self::BANNED_ERROR;
+            exit();
+        }
+
         if (!(self::isMailExists($email) && $this->isPasswordCorrect($email, $entered_password))) {
             return self::LOGIN_ERROR;
         }
@@ -118,22 +133,19 @@ class Register extends AccountManager
 
         if (self::isMailExists($email)) {
             return self::MAIL_EXISTS_ERROR;
-        } 
+        }
 
         if ($entered_password != $entered_password_confirm) {
             return self::PASSWORD_MATCH_ERROR;
-        } 
+        }
 
         $role = $this->getRole($email);
         $this->registerInDatabase($name, $email, $entered_password, $role);
 
-        if (!self::isMailExists($email)) {
-            return self::GENERAL_ERROR;
-        }
-        
-        if (self::startSession($email)) {
+        if (self::isMailExists($email)) {
             return "";
         }
+
         return self::GENERAL_ERROR;
     }
 
@@ -151,6 +163,10 @@ class Register extends AccountManager
 
         if (substr($email, -7) == "isep.fr") {
             return "ISEP";
+        }
+
+        if (substr($email, -14) == "juniorisep.com") {
+            return "JE";
         }
 
         return "user";
@@ -177,6 +193,11 @@ class Register extends AccountManager
     {
         $hashed_password = password_hash($entered_password, PASSWORD_DEFAULT);
         database_query("INSERT INTO users (name, mail, password, role, debugMode) VALUES (:name, :mail, :password, :role, DEFAULT)", [':name' => $name, ':mail' => $email, ':password' => $hashed_password, ':role' => $role]);
+
+        $result = database_query("SELECT mail FROM moderation WHERE mail = :mail", [':mail' => $email]);
+        if (!$result) {
+            database_query("INSERT INTO moderation (mail, tokenNb, isBanned) VALUES (:mail, DEFAULT, DEFAULT)", [':mail' => $email]);
+        }
     }
 }
 
@@ -206,6 +227,57 @@ class debugMode extends AccountManager
 
         $result = database_query("SELECT debugMode FROM users WHERE mail = :mail", [':mail' => $_SESSION['email']]);
         return $result['debugMode'];
+    }
+}
 
+class Confirmation extends AccountManager
+{
+    public function createConfirmationCode($email)
+    {
+        $verifCode = random_int(100000, 999999999);
+        database_query("UPDATE users SET verifCode = :verifCode WHERE mail = :mail", [':verifCode' => $verifCode, ':mail' => $email]);
+        return $verifCode;
+    }
+
+    public function confirmAccount($inboundCode, $mail)
+    {
+        $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
+        if ($verifCode['verifCode'] == $inboundCode) {
+            database_query("UPDATE users SET verifCode = 1 WHERE mail = :mail", [':mail' => $mail]);
+            self::startSession($mail);
+            return "";
+        }
+
+        return self::INCORRECT_TOKEN;
+    }
+
+    public function isAccountConfirmed($mail)
+    {
+        $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
+        if ($verifCode['verifCode'] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function sendConfirmationMail($email, $verifCode)
+    {
+        $link = "https://heart-beats.fr/account/confirmAccount?mail=" . $email . "&token=" . $verifCode;
+
+        $to = $email;
+        $subject = "Account Validation";
+        $message = '<html><body>';
+        $message .= '<h1 style="text-align:center;">Click here to validate your account</h1>';
+        $message .= '<p style="text-align:center;"><a href="' . $link . '">Validation Link</a></p>';
+        $message .= '</body></html>';
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
+
+        if (mail($to, $subject, $message, $headers)) {
+            return "";
+        }
+
+        return "Couldn't confirm your account, please try again later";
     }
 }

@@ -1,4 +1,3 @@
-<!-- Warning! Modifying the header here will NOT change the header appearance on the website. Please modify the header.js file along with this one -->
 
 <link rel="stylesheet" href="/public/css/components.css" />
 <link rel="stylesheet" href="/public/css/header.css" />
@@ -13,12 +12,12 @@
 
             <div class="header-tab" onclick="window.location.href='/dashboard'">
                 <img class="tab-icon" src="/public/svg/header/Dashboard.svg" width="50" height="50" alt="" />
-                <a>Dashboard</a>
+                <a lang-id="hed_dash" dashboard>Dashboard</a>
             </div>
 
             <div class="header-tab" onclick="window.location.href='/faq'">
                 <img class="tab-icon" src="/public/svg/header/Questions.svg" width="50" height="50" alt="" />
-                <a>Q&A</a>
+                <a lang-id="hed_qna">Q&A</a>
             </div>
 
             <div class="header-tab" onclick="window.location.href='/contact'">
@@ -26,14 +25,22 @@
                 <a>Contact</a>
             </div>
 
+            <div class="header-tab" onclick="window.location.href='/slides/'">
+                <img class="tab-icon" src="/public/svg/header/Slides.svg" width="50" height="50" alt="" />
+                <a>Slides</a>
+            </div>  
+
             <div id="account-tab" class="header-tab" onclick="window.location.href='/account/<?php echo $AccountAction ?>'">
                 <img class="tab-icon" src="/public/svg/header/Account.svg" width="50" height="50" alt="" />
             </div>
+
         </div>
 
         <div class="header-right">
             <button id="language-button" class="third-button" onclick="window.location.href='/account/<?php echo $AccountAction ?>'"><?php echo $AccountText ?></button>
-            <button class="language-button">En</button>
+            <button id="translate-button" class="language-button" lang-id="hed_tra">En</button>
         </div>
     </div>
 </div>
+
+

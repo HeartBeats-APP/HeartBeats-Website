@@ -84,6 +84,7 @@
    height: fit-content;
    width: fit-content;
    font-style: medium;
+   white-space: nowrap;
    color: white;
    font-size: clamp(.75em, 1.5vw, 1em);
    text-decoration: none;
@@ -151,7 +152,7 @@
    /* Turning the header into a navigation bar */
    .header {
       position: fixed;
-      bottom: 1.5em;
+      bottom: 4em;
       top: unset;
       justify-content: center;
       width: fit-content;

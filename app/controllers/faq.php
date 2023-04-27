@@ -10,6 +10,7 @@ class faq extends Controller
         
         $this->header();
         $this->view('faq/faq', $data);
+        $this->footer();
     }
 }
 

@@ -18,10 +18,8 @@
 
         <div class="assistance-card">
             <div class="text-wrapper">
-
-                <h3>Need assistance?</h3>
-                <p>We're here to help, feel free to contact us</p>
-
+                <h3 lang-id="con_ass">Need assistance?</h3>
+                <p lang-id="con_des">We're here to help, feel free to contact us</p>
             </div>
             <div class="icon-wrapper">
                 <img class="assistance-icon" src="/public/svg/full-arrow.svg" alt="Assistance Icon" />
@@ -29,8 +27,8 @@
         </div>
         <div class="feedback-card">
 
-            <h3 id="title">Send feedback</h3>
-            <p id="subtitle">If you need to tell us something, it's here</p>
+            <h3 id="title" >Send feedback</h3>
+            <p id="subtitle" >If you need to tell us something, it's here</p>
 
             <div id="input-fields">
                 <div class="adaptive-margin" style="--coef: 3"></div>

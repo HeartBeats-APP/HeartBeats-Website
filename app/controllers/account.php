@@ -3,6 +3,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/InputValidator.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Moderation.php');
 
 class account extends Controller
 {
@@ -38,16 +40,38 @@ class account extends Controller
             $data['hasDevice'] = false;
         }
         $this->account($data);
+        $this->footer();
     }
 
-    public function admin()
+    public function admin($args = [])
     {
+        // Redirect to login if not admin
+        if (!AccountManager::isAdmin()) {
+            ErrorsHandler::newError('User ' . AccountManager::getMail() . ' tried to access admin panel', 1, false);
+            AccountManager::destroySession();
+            $this->account();
+            return;
+        }
+
         $data = AccountManager::getSessionData();
         $this->account($data, "admin");
+
+        if ($args == 'updates') {
+            $data2 = $this->getUpdatesInfo();
+            $this->view('account/admin/updates', $data2);
+            return;
+        }
+
+        if ($args == 'faq') {
+            $QAManager = new QAManager;
+            $data2 = $QAManager->getFAQ();
+            $this->view('account/admin/faq', $data2);
+        }
+        $this->footer();
     }
 
     public function logUserIn()
-    {   
+    {
 
         $email = trim($_REQUEST['email']);
         $password = trim($_REQUEST['password']);
@@ -57,7 +81,7 @@ class account extends Controller
         $passwordInput = new PasswordInput;
         $passwordResult = $passwordInput->validate($password);
 
-        if ($emailResult || $passwordResult ) {
+        if ($emailResult || $passwordResult) {
             echo json_encode(array('result' => 'InputsError', 'emailErrorMessage' => $emailResult, 'passwordErrorMessage' => $passwordResult));
             return;
         }
@@ -67,8 +91,17 @@ class account extends Controller
 
         if ($loginResult != "") {
             echo json_encode(array('result' => 'LoginError', 'emailErrorMessage' => $loginResult, 'passwordErrorMessage' => ""));
-            return ;
+            return;
         }
+
+        $confirmation = new Confirmation;
+        $confirmationResult = $confirmation->isAccountConfirmed($email);
+
+        if ($confirmationResult != 1) {
+            echo json_encode(array('result' => 'ConfirmationError', 'emailErrorMessage' => "Please confirm your account first", 'passwordErrorMessage' => ""));
+            return;
+        }
+
         echo true;
     }
 
@@ -76,15 +109,14 @@ class account extends Controller
     {
         if (AccountManager::destroySession() == true) {
             echo true;
-            return ;
+            return;
         }
 
         ErrorsHandler::newError('Something went wrong while logging out' . AccountManager::getMail(), 1, true);
     }
 
     public function registerUser()
-    {   
-
+    {
         $name = trim($_REQUEST['name']);
         $email = trim($_REQUEST['email']);
         $password = $_REQUEST['password'];
@@ -101,24 +133,73 @@ class account extends Controller
 
         if ($nameResult != "" || $emailResult != "" || $passwordResult != "" || $passwordConfirmResult != "") {
             echo json_encode(array('result' => 'InputsError', 'nameErrorMessage' => $nameResult, 'emailErrorMessage' => $emailResult, 'passwordErrorMessage' => $passwordResult, 'passwordConfirmErrorMessage' => $passwordConfirmResult));
-            return ;
+            return;
         }
 
         $register = new Register;
         $registerResult = $register->registerUser($name, $email, $password, $passwordConfirm);
 
         if ($registerResult != "") {
-            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult));
-            return ;
+            echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult, 'passwordErrorMessage' => "", 'nameErrorMessage' => "", 'passwordConfirmErrorMessage' => ""));
+            return;
         }
 
-        echo true;
+        echo true ;
+
+        $confirmation = new Confirmation;
+        $token = $confirmation->createConfirmationCode($email);
+        $confirmation->sendConfirmationMail($email, $token);
+
+    }
+
+    public function confirmAccount()
+    {
+        $email = $_GET['mail'];
+        $token = $_GET['token'];
+        
+        if ($token == '""' || empty($token) || $email == '""' || empty($email)) {
+            echo "Invalid Query";
+            exit();
+        }
+        
+        if (!AccountManager::isMailExists($email)) {
+            echo "Invalid Query*";
+            exit();
+        }
+        
+        if (Moderation::isUserBanned($email)) {
+            echo "Something went wrong";
+            exit();
+        }
+        
+        Moderation::flagUser($email);
+        
+        $confirmation = new Confirmation;
+        $token = preg_replace("/[^0-9]/", "", $token);
+        $confirmation->confirmAccount($token, $email);
+
+        if ($token != "0000")
+        {
+            header("Location: confirmAccount?mail=" . $email . "&token=0000");
+        }
+
+        if ($confirmation->isAccountConfirmed($email)) 
+        {
+            $this->header();
+            $this->view('account/verified');
+            $this->footer();
+        } else 
+        {
+            echo "Impossible to verify your account :/";
+        }
+
     }
 
     public function changePassword()
     {
         $this->header();
         $this->view('account/password-recovery');
+        $this->footer();
     }
 
     public function changeEmail()
@@ -136,13 +217,13 @@ class account extends Controller
 
     public function registerDevice()
     {
-  
+
         if (!AccountManager::isSessionActive()) {
             echo json_encode(array('errorMessage' => 'It seems that you are not logged in'));
             AccountManager::destroySession();
             return;
         }
-        
+
         if (DeviceManager::isDeviceExists()) {
             echo json_encode(array('errorMessage' => 'You already have a device'));
             return;
@@ -166,7 +247,6 @@ class account extends Controller
             echo json_encode(array('errorMessage' => $registerResult));
             return;
         }
-
         echo true;
     }
 
@@ -195,9 +275,9 @@ class account extends Controller
     }
 
     public function debugMode()
-    {   
-        if (!AccountManager::isSessionActive()) {
-            echo "It seems that you are not logged in";
+    {
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            echo "Something went wrong";
             AccountManager::destroySession();
             return;
         }
@@ -211,11 +291,10 @@ class account extends Controller
             echo $debugModeResult;
             return;
         }
-
         echo true;
     }
 
-    public function getUpdatesInfos()
+    public function updateFAQ()
     {
         if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
             echo false;
@@ -223,9 +302,26 @@ class account extends Controller
             return;
         }
 
-        $databseManager = new DatabaseManager;
-        ErrorsHandler::newError("Warning, sensitives updates informations have been requested", 1);
-        echo $databseManager->getUpdatesInfo();
+        $data = json_decode(file_get_contents('php://input'));
+
+        $QAManager = new QAManager;
+        $QAManager->updateFAQ($data);
+
+        echo "Q&A updated successfully";
+        echo true;
     }
 
+    private function getUpdatesInfo()
+    {
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            echo false;
+            AccountManager::destroySession();
+            return;
+        }
+
+        $databaseManager = new DatabaseManager;
+        $data = $databaseManager->getUpdatesInfo();
+        $data['title'] = "Updates Center";
+        return $data;
+    }
 }

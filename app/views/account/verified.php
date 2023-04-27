@@ -22,8 +22,8 @@
       <div id="card-content" class="login-wrapper">
 
         <div class="login-text">
-          <h1 id="title">Account verified</h1>
-          <p id="subtitle">You're ready to go</p>
+          <h1 id="title" lang-id="ver_tit" >Account verified</h1>
+          <p id="subtitle" lang-id="ver_sub">You're ready to go</p>
         </div>
 
         <!-- Animation -->
@@ -37,7 +37,7 @@
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'json/account-created-animation.json',
+                path: '/public/json/account-created-animation.json',
                 name: 'Email Sent Animation',
                 animationSpeed: 1,
               });
@@ -48,7 +48,7 @@
         <!-- Animation ends here -->      
 
         <div id="buttons-area" class="buttons-area">
-          <button onclick="window.location.href='/account/login'" class="main-button">Login</button>
+          <button onclick="window.location.href='/dashboard'" class="main-button">Dashboard</button>
           <button onclick="window.location.href='/home'" class="secondary-button">Home</button>
         </div>
 

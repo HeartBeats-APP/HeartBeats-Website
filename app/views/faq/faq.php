@@ -16,8 +16,10 @@
 
   <div class="wrapper background1">
 
+    <div class="adaptive-margin" style="--coef: 10"></div>
     <!-- Q&A section -->
-    <h2>Frequently Asked Questions</h2>
+    <h2 lang-id="faq_title">Frequently Asked Questions</h2>
+    <div class="adaptive-margin" style="--coef: 5"></div>
 
     <div class="animation-wrapper" id="animation-wrapper">
       <div class="animation" id="animation">
@@ -64,6 +66,7 @@
       if (count > 0) {
         document.querySelector("#animation-wrapper").remove();
       }
+
     </script>
 
     <script>
@@ -90,7 +93,7 @@
         });
 
       });
-      
+
       function arrowRotate(state, element) {
         if (state) {
           element.classList.remove('rotate');
@@ -99,11 +102,10 @@
         }
       }
     </script>
-
   </div>
+
+  <script src="/public/js/components/translation.js"></script>
+
 </body>
-
-
-
 
 </html>

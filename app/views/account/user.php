@@ -22,45 +22,45 @@
             <div class="adaptive-margin" style="--coef: 10"></div>
             <div class="main-text">
                 <div id="account-row" class="card-row">
-                    <h1>Account</h1>
-                    <div id="logout-button" class="secondary-button" onclick="logout()">Logout</div>
+                    <h1 lang-id="usr_title">Account</h1>
+                    <div id="logout-button" class="secondary-button" onclick="logout()" lang-id="usr_log">Logout</div>
                 </div>
-                <h5>Manage your informations and device</h5>
+                <h5 lang-id="usr_desc">Manage your information and devices</h5>
             </div>
 
             <div id="setup-card" class="card new-device" onclick="addNewDevice()">
                 <img class="card-icon" src="/public/svg/account/pairing-icon.svg"></img>
-                <h3>Device Setup</h3>
-                <h5 class="details">Click to pair a new device and add it to your account</h5>
+                <h3 lang-id="usr_dvs">Device Setup</h3>
+                <h5 class="details" lang-id="usr_dst">Click to pair a new device and add it to your account</h5>
             </div>
 
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/account-icon.svg"></img>
-                <h3>Name</h3>
+                <h3 lang-id="usr_usn">Name</h3>
                 <div id="badge" class="badge">Admin</div>
                 <h5 class="details"> <?php echo $data['name'] ?></h5>
                 <div class="to-right not-clickable">
-                    <h4>Change</h4>
+                    <h4 lang-id="usr_cng">Change</h4>
                     <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="">
                 </div>
             </div>
 
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/email-address-icon.svg"></img>
-                <h3>Email</h3>
+                <h3>E-mail</h3>
                 <h5 class="details"><?php echo $data['email'] ?></h5> <!-- TODO: email -->
                 <div class="to-right not-clickable">
-                    <h4>Change</h4>
+                    <h4 lang-id="usr_cng">Change</h4>
                     <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="">
                 </div>
             </div>
 
             <div class="card">
                 <img class="card-icon" src="/public/svg/account/password-icon.svg"></img>
-                <h3>Password</h3>
+                <h3 lang-id="usr_pwt">Password</h3>
                 <h5 class="details">**********</h5>
                 <div onclick="window.location.href='/account/changePassword'" class="to-right clickable">
-                    <h4>Change</h4>
+                    <h4 lang-id="usr_cng">Change</h4>
                     <img class="card-icon small" src="/public/svg/account/arrow-right-icon.svg" alt="">
                 </div>
             </div>
@@ -71,28 +71,28 @@
 
                 <div id="device-infos" class="card-column">
                     <div class="card-row">
-                        <h3>Your device:</h3>
-                        <h4 class="no-wrap">HeartBeats Pulse 1</h4>
+                        <h3 lang-id="usr_ydt">Your device:</h3>
+                        <h4 class="no-wrap" >HeartBeats Pulse 1</h4>
                     </div>
                     <div class="card-row">
-                        <h3>Serial number:</h3>
+                        <h3 lang-id="usr_dsn">Serial number:</h3>
                         <h4 id="serialNumber" class="no-wrap"><?php echo $data['device id'] ?></h4>
                     </div>
                     <div class="card-row">
-                        <h3>Purchase date:</h3>
+                        <h3 lang-id="usr_dpd">Purchase date:</h3>
                         <h4 id="purshaseDate" class="no-wrap"><?php echo $data['added date'] ?></h4>
                     </div>
                     <div id="buttons-row" class="card-row">
-                        <button onclick="deleteDevice()" id="remove-button" class="main-button">Remove</button>
-                        <button class="secondary-button">Copy Infos</button>
+                        <button onclick="deleteDevice()" id="remove-button" class="main-button" lang-id="usr_drm">Remove</button>
+                        <button class="secondary-button" lang-id="usr_dci">Copy Infos</button>
                     </div>
                 </div>
 
                 <div id="device-controls" class="card-column">
-                    <h3>Device Controls</h3>
+                    <h3 lang-id="usr_dct">Device Controls</h3>
 
                     <div class="card-row">
-                        <h4>Satuts:</h4> <!-- TODO: Username -->
+                        <h4 lang-id="usr_dcs">Status:</h4> <!-- TODO: Username -->
                         <h5 id="device-status"></h5>
                     </div>
 
@@ -115,14 +115,14 @@
                         </div>
 
                         <div class="measure-row">
-                            <h4>Humidity:</h4> <!-- TODO: Username -->
+                            <h4 lang-id="usr_dch">Humidity:</h4> <!-- TODO: Username -->
                             <h5>30%</h5>
                         </div>
                     </div>
 
                     <div class="toggle-container">
                         <input type="radio" id="radio1" name="toggle" value="1" style="--selected: 1">
-                        <label for="radio1">Battery Saver</label>
+                        <label for="radio1" lang-id="usr_dcb">Battery Saver</label>
                         <input type="radio" id="radio2" name="toggle" value="2" style="--selected: 2" checked>
                         <label for="radio2">Normal</label>
                         <input type="radio" id="radio3" name="toggle" value="3" style="--selected: 3">
@@ -164,13 +164,20 @@
     if (role == 'ISEP') {
         document.getElementById("badge").innerHTML = 'ISEP';
         document.getElementById("badge").classList.add('isep');
-    } else if (role == 'insider') {
+    } 
+    else if (role == 'insider') {
         document.getElementById("badge").innerHTML = 'Insider';
         document.getElementById("badge").classList.add('insider');
-    } else if (role == 'admin') {
+    } 
+    else if (role == 'admin') {
         document.getElementById("badge").innerHTML = 'Admin';
         document.getElementById("badge").classList.add('admin');
-    } else  {
+    } 
+    else if (role == 'JE'){
+        document.getElementById("badge").innerHTML = 'Junior ISEP';
+        document.getElementById("badge").classList.add('je');
+    } 
+    else  {
         document.getElementById("badge").innerHTML = 'User';
         document.getElementById("badge").classList.add('user');
     }

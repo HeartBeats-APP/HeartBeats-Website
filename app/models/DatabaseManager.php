@@ -3,7 +3,7 @@ require_once 'connect.php';
 
 class DatabaseManager {
 
-    const SUPPORTED_DATABASE_VERSION = 1.5;
+    const SUPPORTED_DATABASE_VERSION = 1.7;
     const SUPPORTED_ENV_VERSION = 1.2;
 
 
@@ -13,11 +13,11 @@ class DatabaseManager {
             return "Everything is up to date";
         }
 
-        return "Some components need to be updated";
+        return "Some updates are required";
     }
 
     public function getUpdatesInfo() {
-        $updates = array();
+        $updates = [];
         $updates['current_db'] = $this->getDatabaseVersion();
         $updates['current_env'] = $this->getEnvVersion();
         $updates['supported_db'] = self::SUPPORTED_DATABASE_VERSION;
@@ -30,7 +30,7 @@ class DatabaseManager {
     private function getDatabaseVersion() {
         $version = database_query("SELECT `version` FROM metadata ORDER BY id DESC LIMIT 1");
 
-        if (!$version){
+        if (!$version > 1){
             return 0;
         }
 
@@ -40,7 +40,7 @@ class DatabaseManager {
     private function getEnvVersion() {
         $version = getenv('ENV_VERSION');
 
-        if (!$version){
+        if (!$version > 1){
             return 0;
         }
         return $version;

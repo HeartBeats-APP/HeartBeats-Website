@@ -11,11 +11,12 @@ class contact extends Controller
         //check if user is logged in
         if (!AccountManager::isSessionActive()) {
             header('Location: /account/login');
-            return;
+            exit();
         }
 
         $this->header();
         $this->view('contact/contact');
+        $this->footer();
     }
 
     public function getFeedback()

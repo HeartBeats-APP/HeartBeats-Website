@@ -10,7 +10,7 @@
     height: fit-content;
     max-height: 8em;
     border-radius: 15px;
-    padding: 1.75em 2em 2em 2em;
+    padding: clamp(1.5em, 2vw, 2em);
     margin-top: 5em;
     margin-bottom: 2em;
     background-color: rgb(255, 255, 255, 0.25);
@@ -36,6 +36,7 @@
     
     width: 25%;
     height: 100%;
+    margin-right: -.4em;
 }
 
 .assistance-icon {
@@ -60,7 +61,7 @@
 
     height: fit-content;
     width: clamp(20em, 75vw, 75%);
-    padding: 2em;
+    padding: clamp(1.5em, 2vw, 2em);
     border-radius: 15px;
 
     background-color: rgb(0, 0, 0, .25);
@@ -123,8 +124,8 @@
 
 .error-message {
     color: var(--red);
-    font-size: clamp(.5em, 1vw, 1em);
-    margin-left: 1.5em;
+    font-size: clamp(.75em, 1vw, 1em);
+    margin-left: .25em;
 }
 
 .animation-wrapper {
@@ -155,7 +156,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
 
     .animation-wrapper {
         margin-left: 33%;
@@ -172,8 +173,7 @@
         margin-left: 27%;
         width: 50%;
         height: 50%;
-        padding-top: 6em;
-        margin-bottom: 0;
+        padding-top: 1vh;
     }
 }
 

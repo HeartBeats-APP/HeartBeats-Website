@@ -14,9 +14,9 @@
     <div class="onboarding-bg">
         <div class="onboarding-card">
 
-            <h3>Thank you for joining the release preview</h3>
-            <p>Our website is still in preview, and we are working hard to make it perfect</p>
-            <p>More updates are coming soon 🚀</p>
+            <h3 lang-id="onb_p1">Thank you for joining the release preview</h3>
+            <p lang-id="onb_p2">Our website is still in preview, and we are working hard to make it perfect</p>
+            <p lang-id="onb_p3">More updates are coming soon 🚀</p>
 
             <!-- Animation -->
             <div class="animation-wrapper">
@@ -29,14 +29,14 @@
                             loop: true,
                             autoplay: true,
                             path: '/public/json/Onboarding.json',
-                            name: 'Email Sent Animation',
+                            name: 'Onboarding Animation',
                             animationSpeed: 1,
                         });
                     </script>
                 </div>
             </div>
             <!-- Animation ends here -->
-            <div class="main-button" onclick="hideOnboarding()">Jump in</div>
+            <div class="main-button" onclick="hideOnboarding()" lang-id="onb_jin">Jump in</div>
         </div>
     </div>
 

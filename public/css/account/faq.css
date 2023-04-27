@@ -1,0 +1,124 @@
+.popupcard {
+    width: 70%;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.id {
+    width: 3%;
+    word-break: break-all;
+    font-size: clamp(.5em, 1vw, 1em);
+}
+
+.question {
+    width: 40%;
+    word-break: break-all;
+    font-size: clamp(.5em, 1vw, 1em);
+}
+
+.answer {
+    width: 55%;
+    word-break: break-all;
+    font-size: clamp(.5em, 1vw, 1em);
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 7%;
+    gap: 1vw;
+}
+
+.actions img {
+    height: clamp(1em, 2vw, 2em);
+    width: clamp(1em, 3vw, 3em);
+}
+
+.actions img:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+}
+
+.input {
+    background: rgba(255, 255, 255, 0.20);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: .5em 1em ;
+    word-wrap: break-word;
+}
+
+.input:focus {
+    outline: white solid 2px;
+    border-radius: 25px;
+    padding-left: 1.5em;
+}
+
+.input:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.new-question {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: clamp(2em, 4vw, 4em);
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(.5em, 1vw, 1em);
+    margin-bottom: clamp(.5em, 2vw, 2em);
+    padding: clamp(1em, 1.5vw, 1.5em) ;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+}
+
+.new-question:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+.new-question img {
+    height: clamp(1.5em, 2vw, 2em);
+    width: clamp(1.5em, 2vw, 2em);
+    margin-right: .5em;
+}
+
+.buttons-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 2.5vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .popupcard {
+        width: 75%;
+    }
+
+    .popup-wrapper {
+        padding: 5%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .popupcard {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .popupcard {
+        width: 85%;
+    }
+
+}
