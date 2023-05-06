@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  db:
+    container_name: db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+
+  php-environment:
+    image: php:8.0.3-apache
+    container_name: php-environment
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html/
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      ENV_VERSION: ${ENV_VERSION}
+      ADMIN_CREDENTIALS: ${ADMIN_CREDENTIALS}
+      FORBIDDEN_NAMES: ${FORBIDDEN_NAMES}
+    ports:
+      - 8000:80
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+    restart: always
+    ports:
+      - 8081:80
