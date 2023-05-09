@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SensorsData.php');
 
 class dashboard extends Controller
 {
@@ -15,5 +16,13 @@ class dashboard extends Controller
         $this->footer();
     }
 
-    
+    public function getData()
+    {
+        $result = [];
+        $result['BPM'] = SensorsData::getBPM();
+        $result['Sound'] = SensorsData::getSound();
+        $result['Temp'] = SensorsData::getTemp();
+        $result['Humidity'] = SensorsData::getHumidity();
+        echo json_encode($result);
+    }
 }
