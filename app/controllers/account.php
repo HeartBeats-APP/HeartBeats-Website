@@ -136,10 +136,20 @@ class account extends Controller
             return;
         }
 
+        if (Moderation::isUserBanned($email))
+        {
+            echo("Something went wrong :/, please contact us");
+            return;
+        } else 
+        {
+            Moderation::flagUser($email);
+        }
+
         $register = new Register;
         $registerResult = $register->registerUser($name, $email, $password, $passwordConfirm);
 
-        if ($registerResult != "") {
+        if ($registerResult != "")
+        {
             echo json_encode(array('result' => 'RegisterError', 'emailErrorMessage' => $registerResult, 'passwordErrorMessage' => "", 'nameErrorMessage' => "", 'passwordConfirmErrorMessage' => ""));
             return;
         }
@@ -188,6 +198,7 @@ class account extends Controller
             $this->header();
             $this->view('account/verified');
             $this->footer();
+            Moderation::unflagUser($email);
         } else 
         {
             echo "Impossible to verify your account :/";

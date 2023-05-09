@@ -4,9 +4,17 @@ require_once 'ErrorsHandler.php';
 
 class Moderation 
 {
+    const BAN_TRESHOLD = 10;
+
     public static function flagUser($email)
     {
         database_query("UPDATE moderation SET tokenNb = tokenNb + 1 WHERE mail = :mail", [":mail" => $email]);
+        self::shouldUserBeBanned($email);
+    }
+
+    public static function unflagUser($email)
+    {
+        database_query("UPDATE moderation SET tokenNb = tokenNb - 1 WHERE mail = :mail", [":mail" => $email]);
         self::shouldUserBeBanned($email);
     }
 
@@ -28,7 +36,7 @@ class Moderation
         }
 
         $tokenNb = $result['tokenNb'];
-        if ($tokenNb >= 15 && $result['isBanned'] == 0)
+        if ($tokenNb >= self::BAN_TRESHOLD && $result['isBanned'] == 0)
         {
             database_query("UPDATE moderation SET isBanned = 1 WHERE mail = :mail", [":mail" => $email]);
         }
