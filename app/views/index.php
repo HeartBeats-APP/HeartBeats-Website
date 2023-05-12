@@ -6,17 +6,22 @@
   <title>HeartBeats</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/public/css/home/homeStyle.css">
+  <link rel="stylesheet" href="/public/css/home/orb-styles.css">
   <link rel="stylesheet" href="/public/css/components.css" />
   <link rel="stylesheet" href="/public/css/index.css" />
   <link rel="stylesheet" href="/public/css/onboarding.css" />
+
+  <script type="module" src="/public/js/home/orb-animation.js"></script>
+
 </head>
 
 <body>
 
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
+
   <main>
     <section class="intro animate">
-      <div class="pink-gradient-bg"></div>
+      <canvas class="orb-canvas"></canvas>
       <h1>Heart Beats</h1>
       <h2>Music that adapts to you</h2>
     </section>
@@ -102,6 +107,7 @@
     </section>
 
   </main>
+
   <script src="/public/js/home/script.js"></script>
   <script src="/public/js/components/translation.js"></script>
 
