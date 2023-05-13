@@ -48,6 +48,7 @@ class account extends Controller
         // Redirect to login if not admin
         if (!AccountManager::isAdmin()) {
             ErrorsHandler::newError('User ' . AccountManager::getMail() . ' tried to access admin panel', 1, false);
+            Moderation::flagUser(AccountManager::getMail());
             AccountManager::destroySession();
             $this->account();
             return;
@@ -72,7 +73,6 @@ class account extends Controller
 
     public function logUserIn()
     {
-
         $email = trim($_REQUEST['email']);
         $password = trim($_REQUEST['password']);
 
@@ -102,6 +102,7 @@ class account extends Controller
             return;
         }
 
+        Moderation::unflagUser($email);
         echo true;
     }
 
@@ -136,6 +137,13 @@ class account extends Controller
             return;
         }
 
+        if (Moderation::isUserBanned($email)) {
+            echo ("Something went wrong :/, please contact us");
+            return;
+        } else {
+            Moderation::flagUser($email);
+        }
+
         $register = new Register;
         $registerResult = $register->registerUser($name, $email, $password, $passwordConfirm);
 
@@ -144,55 +152,51 @@ class account extends Controller
             return;
         }
 
-        echo true ;
+        echo true;
 
         $confirmation = new Confirmation;
         $token = $confirmation->createConfirmationCode($email);
         $confirmation->sendConfirmationMail($email, $token);
-
     }
 
     public function confirmAccount()
     {
         $email = $_GET['mail'];
         $token = $_GET['token'];
-        
+
         if ($token == '""' || empty($token) || $email == '""' || empty($email)) {
             echo "Invalid Query";
             exit();
         }
-        
+
         if (!AccountManager::isMailExists($email)) {
             echo "Invalid Query*";
             exit();
         }
-        
+
         if (Moderation::isUserBanned($email)) {
             echo "Something went wrong";
             exit();
         }
-        
+
         Moderation::flagUser($email);
-        
+
         $confirmation = new Confirmation;
         $token = preg_replace("/[^0-9]/", "", $token);
         $confirmation->confirmAccount($token, $email);
 
-        if ($token != "0000")
-        {
+        if ($token != "0000") {
             header("Location: confirmAccount?mail=" . $email . "&token=0000");
         }
 
-        if ($confirmation->isAccountConfirmed($email)) 
-        {
+        if ($confirmation->isAccountConfirmed($email)) {
             $this->header();
             $this->view('account/verified');
             $this->footer();
-        } else 
-        {
+            Moderation::unflagUser($email);
+        } else {
             echo "Impossible to verify your account :/";
         }
-
     }
 
     public function changePassword()

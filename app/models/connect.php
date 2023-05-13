@@ -3,16 +3,16 @@ require_once 'ErrorsHandler.php';
 
 function connect()
 {
-    $servername = "localhost";
+    $host = getenv('DB_HOST');
     $username = getenv('DB_USERNAME');
     $password = getenv('DB_PASSWORD');
     $dbname = getenv('DB_NAME');
 
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
-        die("Database connexion failed :/" . $e->getMessage());
+        die("Database connexion failed :/ " . $e->getMessage());
     }
     
     return $conn;
@@ -38,5 +38,3 @@ function database_query($query, $params = [])
         return null; // No rows returned
     }
 }
-
-?>

@@ -102,10 +102,12 @@ class Login extends AccountManager
         }
 
         if (!(self::isMailExists($email) && $this->isPasswordCorrect($email, $entered_password))) {
+            Moderation::flagUser($email);
             return self::LOGIN_ERROR;
         }
 
         if (self::startSession($email)) {
+            Moderation::unflagUser($email);
             return "";
         }
 

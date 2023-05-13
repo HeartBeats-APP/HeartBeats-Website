@@ -7,13 +7,6 @@ class Slides extends Controller
     public function index()
     {
         $this->header();
-        if (AccountManager::isSessionActive() && AccountManager::isAdmin() )
-        {
-            $this->view('slides');      
-        } else {
-            $this->account();
-        }
-
+        $this->view('slides');
     }
-
 }
