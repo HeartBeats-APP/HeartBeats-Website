@@ -22,7 +22,7 @@
   <main>
     <section class="intro animate">
       <canvas class="orb-canvas"></canvas>
-      <h1>Heart Beats</h1>
+      <h1>HeartBeats</h1>
       <h2>Music that adapts to you</h2>
     </section>
 
