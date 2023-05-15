@@ -1,0 +1,208 @@
+:root {
+    --graph-clicked-scale: 1.7;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(97.27deg, #F7C23B 0%, #E93D57 51.07%, #A423BA 100%);
+    opacity: 0.3;
+    filter: blur(250px);
+    z-index: -1;
+}
+
+.welcome-banner, .dashboard-box {
+    position: relative;
+    z-index: 1;
+}
+
+body {
+    text-align: center;
+}
+
+h1, h2, p {
+    color: #fff;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: all 0.5s ease;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(56, 56, 56);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.5s ease, color 0.2s ease, box-shadow 0.5s ease;
+}
+
+.welcome-banner {
+    margin-top: 15%;
+    margin-left: -15%;
+    padding: 20px;
+}
+
+.welcome-banner h1 {
+    font-size: 32px;
+    text-align: center;
+    justify-content: center;
+}
+
+.dashboard-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    width: 80%;
+    border-radius: 40px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.dashboard-box:nth-of-type(2) {
+    margin-top: 60px;
+}
+
+.dashboard-box:last-of-type {
+    margin-bottom: 60px;
+}
+
+.now-playing {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.music-title {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    background-color: #eee;
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 20px;
+}
+
+.dashboard-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.dashboard-controls button {
+    margin: 0 10px;
+}
+
+.stats-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    width: 60%;
+    border-radius: 40px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.graph-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.graph {
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.graph.hover {
+  transform: scale(1.1); /* Agrandir le graphique */
+}
+
+.graph.clicked {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+.top-left.clicked {
+  transform: translate(50%, 50%) scale(var(--graph-clicked-scale)); /* Centrer le graphique */
+}
+
+.top-right.clicked {
+  transform: translate(-50%, 50%) scale(var(--graph-clicked-scale));
+}
+
+.bottom-left.clicked {
+  transform: translate(50%, -50%) scale(var(--graph-clicked-scale));
+}
+
+.bottom-right.clicked {
+  transform: translate(-50%, -50%) scale(var(--graph-clicked-scale));
+}
+
+.graph-container.clicked .graph:not(.clicked) {
+  opacity: 0; /* Réduire l'opacité des autres graphiques */
+}
+
+.graph-content {
+  overflow: auto; /* Ajoute des barres de défilement si nécessaire */
+}
+
+@media screen and (max-width: 700px) {
+  .graph-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+  
+  .graph.clicked {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+  }
+  
+  .top-left.clicked {
+    transform: translate(50%, 50%) scale(var(--graph-clicked-scale)); /* Centrer le graphique */
+  }
+  
+  .top-right.clicked {
+    transform: translate(-50%, 50%) scale(var(--graph-clicked-scale));
+  }
+  
+  .bottom-left.clicked {
+    transform: translate(50%, -50%) scale(var(--graph-clicked-scale));
+  }
+  
+  .bottom-right.clicked {
+    transform: translate(-50%, -50%) scale(var(--graph-clicked-scale));
+  }
+  
+  .graph-container.clicked .graph:not(.clicked) {
+    opacity: 0; /* Réduire l'opacité des autres graphiques */
+  }
+}
