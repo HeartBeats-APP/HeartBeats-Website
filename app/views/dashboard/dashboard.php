@@ -11,7 +11,7 @@
 <body>
     <div class="background"></div>
     <div class="welcome-banner">
-        <h1>Welcome back Ivan!</h1>
+        <h1>Welcome back <?php echo $data['name'] ?>!</h1>
     </div>
     <div class="dashboard-box playing-music-box">
         <div class="now-playing">
