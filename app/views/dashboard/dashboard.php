@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="public/css/dashboard/dashboardStyle.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <div class="background"></div>
     <div class="welcome-banner">
@@ -27,32 +29,33 @@
             <button class="dislike-button">Dislike</button>
         </div>
     </div>
-    
+
     <div class="dashboard-box listening-stats-box">
-        <div class="graph-container">
-          <div class="graph top-left">
-            <div class="graph-content">
-                <canvas id="temperature-chart"></canvas>
+        <div class="graph-container" id="graph-container">
+            <div class="graph top-left">
+                <div class="graph-content">
+                    <canvas id="temperature-chart"></canvas>
+                </div>
             </div>
-          </div>
-          <div class="graph top-right">
-            <div class="graph-content">
-                <canvas id="humidity-chart"></canvas>
+            <div class="graph top-right">
+                <div class="graph-content">
+                    <canvas id="humidity-chart"></canvas>
+                </div>
             </div>
-          </div>
-          <div class="graph bottom-left">
-            <div class="graph-content">
-                <canvas id="sound-level-chart"></canvas>
+            <div class="graph bottom-left">
+                <div class="graph-content">
+                    <canvas id="sound-level-chart"></canvas>
+                </div>
             </div>
-          </div>
-          <div class="graph bottom-right">
-            <div class="graph-content">
-                <canvas id="bpm-level-chart"></canvas>
+            <div class="graph bottom-right">
+                <div class="graph-content">
+                    <canvas id="bpm-level-chart"></canvas>
+                </div>
             </div>
-          </div>
         </div>
     </div>
 
     <script src="public/js/dashboard/dashboard-script.js"></script>
 </body>
+
 </html>

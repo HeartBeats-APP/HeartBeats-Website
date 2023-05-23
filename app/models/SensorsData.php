@@ -19,7 +19,7 @@ class SensorsData
 
     public static function getSound()
     {
-        return(rand(0, 30));
+        return(rand(0, 100));
     }
 
 }

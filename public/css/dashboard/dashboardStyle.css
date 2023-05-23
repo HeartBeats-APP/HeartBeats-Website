@@ -138,7 +138,7 @@ button:hover {
 }
 
 .graph.hover {
-  transform: scale(1.1); /* Agrandir le graphique */
+  transform: scale(1.05); /* Agrandir le graphique */
 }
 
 .graph.clicked {

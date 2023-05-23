@@ -19,10 +19,10 @@ class dashboard extends Controller
     public function getData()
     {
         $result = [];
-        $result['BPM'] = SensorsData::getBPM();
-        $result['Sound'] = SensorsData::getSound();
-        $result['Temp'] = SensorsData::getTemp();
-        $result['Humidity'] = SensorsData::getHumidity();
+        $result['bpmLevel'] = SensorsData::getBPM();
+        $result['soundLevel'] = SensorsData::getSound();
+        $result['temperature'] = SensorsData::getTemp();
+        $result['humidity'] = SensorsData::getHumidity();
         echo json_encode($result);
     }
 }
