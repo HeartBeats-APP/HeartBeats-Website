@@ -54,7 +54,8 @@ button:hover {
 
 .welcome-banner {
     margin-top: 5%;
-    margin-left: -15%;
+    display: flex;
+    justify-content: center;
     padding: 20px;
 }
 
