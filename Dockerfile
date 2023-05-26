@@ -14,5 +14,5 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd
 
 # Install SQL drivers
-RUN docker-php-ext-install mariadb mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 RUN service apache2 restart
