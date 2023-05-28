@@ -25,6 +25,7 @@ services:
       - db
     volumes:
       - .:/var/www/html/
+    restart: always
     environment:
       DB_HOST: db
       DB_NAME: ${DB_NAME}
