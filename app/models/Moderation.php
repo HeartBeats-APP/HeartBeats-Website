@@ -4,7 +4,7 @@ require_once 'ErrorsHandler.php';
 
 class Moderation 
 {
-    const BAN_TRESHOLD = 5;
+    const BAN_TRESHOLD = 9;
 
     public static function flagUser($email)
     {
