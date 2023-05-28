@@ -2,7 +2,7 @@ version: '3.3'
 services:
   db:
     container_name: db
-    image: mariadb:latest
+    image: mariadb:10.11.3
     restart: always
     environment:
       MYSQL_DATABASE: ${DB_NAME}
@@ -14,9 +14,9 @@ services:
     volumes:
       - ./dump:/docker-entrypoint-initdb.d
 
-  php-environment:
+  website:
     image: php:8.0.3-apache
-    container_name: php-environment
+    container_name: website
     build:
       context: .
       dockerfile: Dockerfile
