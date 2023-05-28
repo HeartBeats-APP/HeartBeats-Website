@@ -20,13 +20,13 @@
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
   <main>
-    <section class="intro animate">
+    <section class="intro animate ">
       <canvas class="orb-canvas"></canvas>
       <h1>HeartBeats</h1>
       <h2>Music that adapts to you</h2>
     </section>
 
-    <section class="pulse animate">
+    <section class="pulse  ">
       <div class="introducing">
         <p>Introducing</p>
         <h3>Pulse 1</h3>
@@ -34,7 +34,7 @@
       </div>
     </section>
 
-    <section class="pulse-info animate">
+    <section class="pulse-info  ">
       <div class="pulse-content">
         <p>Pulse 1 is a headset with various sensors built-in which allow continuous measurements of user's surrounding.
           Data is reviewed with on-device processing and used for tuning automatically the audio to provide a new sound experience.
@@ -42,7 +42,7 @@
       </div>
     </section>
 
-    <section class="adaptive-sound animate">
+    <section class="adaptive-sound  ">
       <div class="adaptive-sound-bg"></div>
       <div class="adaptive-sound-image-container">
         <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <section class="animate">
+    <section class=" ">
       <div class="adaptive-sound-info-2">
         <h2>Cutting-edge sensors</h2>
         <h3>And so much more...</h3>
@@ -87,21 +87,21 @@
       </div>
     </section>
 
-    <section class="control-section animate">
+    <section class="control-section  ">
       <div class="blue-security-bg"></div>
       <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
       <h3 class="control-title">You're in control.</h3>
       <h4 class="control-subtitle">Secure by Design.</h4>
       <div class="control-box">
-        <h3 class="control-box-title">Encrypted database</h5>
+        <h3 class="control-box-title">Encrypted database</h3>
           <p>Your data is synced and securely stored on our side.</p>
       </div>
       <div class="control-box">
-        <h3 class="control-box-title">On-device processing</h5>
+        <h3 class="control-box-title">On-device processing</h3>
           <p>Sensible data never leaves your device and is deleted after a short time.</p>
       </div>
       <div class="control-box">
-        <h3 class="control-box-title">Encapsulation</h5>
+        <h3 class="control-box-title">Encapsulation</h3>
           <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
       </div>
     </section>
