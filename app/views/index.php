@@ -42,7 +42,7 @@
       </div>
     </section>
 
-    <section class="adaptive-sound  ">
+    <section class="adaptive-sound animate ">
       <div class="adaptive-sound-bg"></div>
       <div class="adaptive-sound-image-container">
         <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <section class="">
+    <section class="animate">
       <div class="adaptive-sound-info-2">
         <h2>Cutting-edge sensors</h2>
         <h3>And so much more...</h3>
@@ -87,7 +87,7 @@
       </div>
     </section>
 
-    <section class="control-section ">
+    <section class="control-section animate">
       <div class="blue-security-bg"></div>
       <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
       <h3 class="control-title">You're in control.</h3>
