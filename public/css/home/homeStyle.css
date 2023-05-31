@@ -129,7 +129,7 @@ body {
 
 .pulse-image {
   max-width: 400%;
-  height: auto;
+  height: 20em;
   position: absolute;
   top: 0;
   z-index: 2;
