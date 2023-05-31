@@ -20,7 +20,7 @@
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
   <main>
-    <section class="intro animate ">
+    <section class="intro animate">
       <canvas class="orb-canvas"></canvas>
       <h1>HeartBeats</h1>
       <h2>Music that adapts to you</h2>
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <section class=" ">
+    <section class="">
       <div class="adaptive-sound-info-2">
         <h2>Cutting-edge sensors</h2>
         <h3>And so much more...</h3>
@@ -87,7 +87,7 @@
       </div>
     </section>
 
-    <section class="control-section  ">
+    <section class="control-section ">
       <div class="blue-security-bg"></div>
       <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
       <h3 class="control-title">You're in control.</h3>
