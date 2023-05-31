@@ -3,7 +3,7 @@ require_once 'connect.php';
 
 class DatabaseManager {
 
-    const SUPPORTED_DATABASE_VERSION = 1.7;
+    const SUPPORTED_DATABASE_VERSION = 1.8;
     const SUPPORTED_ENV_VERSION = 1.2;
 
 

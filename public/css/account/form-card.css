@@ -4,6 +4,7 @@ body {
     background-position: center;
     background-size: clamp(25em, 50%, 60em);
     backdrop-filter: blur(150px);
+    -webkit-backdrop-filter: blur(150px);
     margin: 0;
     overflow: hidden;
 }

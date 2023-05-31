@@ -1,3 +1,7 @@
+:root {
+    --graph-clicked-scale: 1.7;
+}
+
 * {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
@@ -17,17 +21,20 @@
     z-index: -1;
 }
 
-.welcome-banner,
-.dashboard-box {
+.welcome-banner, .dashboard-box {
     position: relative;
     z-index: 1;
 }
 
 body {
     text-align: center;
-}*
+}
 
-.dashboard-btn {
+h1, h2, p {
+    color: #fff;
+}
+
+button {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 5px;
@@ -38,7 +45,7 @@ body {
     transition: all 0.5s ease;
 }
 
-.dashboard-btn:hover {
+button:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: rgb(56, 56, 56);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
@@ -46,8 +53,9 @@ body {
 }
 
 .welcome-banner {
-    margin-top: 10%;
-    text-align: center;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
     padding: 20px;
 }
 
@@ -58,10 +66,11 @@ body {
 
 .dashboard-box {
     background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
-    width: 60%;
-    border-radius: 20px;
+    width: 80%;
+    border-radius: 40px;
     padding: 30px;
     text-align: center;
     margin-top: 30px;
@@ -104,124 +113,58 @@ body {
 
 .stats-box {
     background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
     width: 60%;
-    border-radius: 20px;
+    border-radius: 40px;
     padding: 30px;
     text-align: center;
     margin-top: 30px;
 }
 
-/* Mobile styles */
-@media screen and (min-width: 760px) and (max-width: 920px) {
-    .welcome-banner {
-        margin-top: 20%;
-    }
-
-    .now-playing,
-    .listening-stats {
-        padding: 20px;
-    }
-
-    .listening-stats-box {
-        margin-top: 7%;
-        padding: 5%;
-        font-size: 20px;
-    }
+.graph-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
 }
 
-@media screen and (min-width: 500px) and (max-width: 750px) {
-    button {
-        padding: 3%;
-        font-size: 16px;
-    }
+.graph {
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-@media only screen and (max-width: 480px) {
-    .welcome-banner {
-        margin-left: 0;
-    }
-
-    .welcome-banner h1 {
-        font-size: 30px;
-    }
-
-    .dashboard-box {
-        width: 90%;
-    }
-
-    .now-playing,
-    .listening-stats {
-        padding: 20px;
-    }
-
-    .dashboard-controls {
-        flex-wrap: wrap;
-    }
-
-    .dashboard-controls button {
-        margin: 5px;
-    }
+.graph.hover {
+  transform: scale(1.05); /* Agrandir le graphique */
 }
 
-@media only screen and (max-width: 400px) {
-    .welcome-banner {
-        margin-top: -2%;
-    }
-
-    .dashboard-box {
-        margin-top: 5%;
-    }
-
-    .now-playing,
-    .listening-stats {
-        padding: 0;
-    }
+.graph.clicked {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  opacity: 1;
 }
 
-@media only screen and (max-width: 395px) {
-
-    .now-playing,
-    .listening-stats {
-        padding: 7%;
-    }
+.top-left.clicked {
+  transform: translate(50%, 50%) scale(var(--graph-clicked-scale)); /* Centrer le graphique */
 }
 
-@media only screen and (max-width: 375px) {
-
-    .now-playing,
-    .listening-stats {
-        padding: 0%;
-    }
-
-    .playing-music-box {
-        margin-top: -2%;
-    }
+.top-right.clicked {
+  transform: translate(-50%, 50%) scale(var(--graph-clicked-scale));
 }
 
-@media screen and (max-width: 360px) {
-    .listening-stats-box {
-        margin-top: 7%;
-        padding: 10%;
-    }
+.bottom-left.clicked {
+  transform: translate(50%, -50%) scale(var(--graph-clicked-scale));
 }
 
-@media screen and (max-width: 300px) {
-    .welcome-banner h1 {
-        font-size: 18px;
-    }
+.bottom-right.clicked {
+  transform: translate(-50%, -50%) scale(var(--graph-clicked-scale));
+}
 
-    .dashboard-box {
-        margin-top: 5%;
-    }
-
-    .listening-stats {
-        font-size: 12px;
-    }
-
-    button {
-        padding: 5%;
-        font-size: 13px;
-    }
+.graph-container.clicked .graph:not(.clicked) {
+  opacity: 0; /* Réduire l'opacité des autres graphiques */
 }

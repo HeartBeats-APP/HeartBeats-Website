@@ -22,7 +22,7 @@
     <div class="adaptive-margin" style="--coef: 5"></div>
 
     <div class="animation-wrapper" id="animation-wrapper">
-      <div class="animation" id="animation">
+      <div class="animation" id="animation">  
         <script>
           var animation = bodymovin.loadAnimation({
             container: document.getElementById('animation'),
