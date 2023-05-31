@@ -34,6 +34,8 @@ services:
       ENV_VERSION: ${ENV_VERSION}
       ADMIN_CREDENTIALS: ${ADMIN_CREDENTIALS}
       FORBIDDEN_NAMES: ${FORBIDDEN_NAMES}
+      G_ACCOUNT: ${G_ACCOUNT}
+      G_PASSWORD: ${G_PASSWORD}
     ports:
       - 8000:80
 
@@ -50,4 +52,4 @@ services:
 
 volumes:
   db:
-    name: heartbeats_data
+  
