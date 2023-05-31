@@ -104,7 +104,7 @@ var translations = {
         hed_log: 'Connexion',
         hed_qna: 'FAQ',
         hed_tra: 'EN',
-        qae_title: 'Editeur FAQ',
+        qae_title: 'Editeur de FAQ',
         qae_cancel: 'Annuler',
         qae_save: 'Enregistrer',
         upd_close: 'Quitter',
