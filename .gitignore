@@ -4,4 +4,4 @@
 dump
 
 auth.json
-/app/models/google_auth
+/vendor

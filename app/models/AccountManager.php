@@ -8,7 +8,7 @@ session_start();
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
-require_once 'google_auth/vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 class AccountManager
 {
@@ -19,9 +19,6 @@ class AccountManager
     protected const BANNED_ERROR = "Couldn't log you in :/";
     protected const ACCESS_DENIED_ERROR = "Access denied";
     protected const INCORRECT_TOKEN = "Incorrect Token";
-    protected const GOOGLE_AUTH_ID = "407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com";
-    protected const GOOGLE_AUTH_SECRET = "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";
-
 
     public static function isSessionActive()
     {
@@ -102,91 +99,23 @@ class AccountManager
 
 class GoogleAuth extends AccountManager
 {
-    public function register()
-    {
+    public function promptAuth()
+    {   
         $client = new Google\Client();
-        $client->setAuthConfig('/auth.json');
         $client->setScopes(array('https://www.googleapis.com/auth/userinfo.profile'));
-        $client->setRedirectUri('http://localhost:8000/dashboard');
         $client->setAccessType('offline');
         $client->setIncludeGrantedScopes(true);
-
-
-        try {
-            $auth_url = $client->createAuthUrl();
-            header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
-
-            if (isset($_GET['code'])) {
-                $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-                if (!isset($token['access_token'])) {
-                    throw new Exception('Access token not found');
-                }
-                $client->setAccessToken($token['access_token']);
-                $oauth = new Google\Service\Oauth2($client);
-                $userInfo = $oauth->userinfo->get();
-                if (!isset($userInfo->email) || !isset($userInfo->name)) {
-                    throw new Exception('User info not found');
-                }
-                $email = $userInfo->email;
-                $name = $userInfo->name;
-                $role = $this->getRole($email);
-                if (!$role) {
-                    throw new Exception('Role not found');
-                }
-                $this->registerInDatabase($name, $email, "", $role);
-                self::startSession($email);
-                header('Location: ' . filter_var('http://localhost:8000/dashboard', FILTER_SANITIZE_URL));
-            }
-        } catch (Exception $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
+        $client->setClientId(getenv('G_AUTH_ID'));
+        $client->setClientSecret(getenv('G_AUTH_SECRET'));
+        $client->setRedirectUri('http://localhost:8000');
+    
+        $auth_url = $client->createAuthUrl();
+        header('Location: ' .  $auth_url);
+        exit();
     }
 
-
-    private function getRole($email)
-    {
-        if ($this->isAnAdmin($email)) {
-            return "admin";
-        }
-
-        foreach ($this->getInsidersList() as $insider) {
-            if ($insider['email'] == $email) {
-                return "insider";
-            }
-        }
-
-        if (substr($email, -7) == "isep.fr") {
-            return "ISEP";
-        }
-
-        if (substr($email, -14) == "juniorisep.com") {
-            return "JE";
-        }
-
-        return "user";
-    }
-
-    private function getInsidersList()
-    {
-        return database_query("SELECT email FROM preco", []);
-    }
-
-    private function isAnAdmin($email)
-    {
-        $adminList = getenv('ADMIN_CREDENTIALS');
-        $adminList = explode(',', $adminList);
-        foreach ($adminList as $admin) {
-            if ($admin == $email) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private function registerInDatabase($name, $email, $entered_password, $role)
-    {
-        $hashed_password = password_hash($entered_password, PASSWORD_DEFAULT);
-        database_query("INSERT INTO users (name, mail, password, role) VALUES (:name, :mail, :password, :role) ON DUPLICATE KEY UPDATE name = :name, role = :role", [':name' => $name, ':mail' => $email, ':password' => $hashed_password, ':role' => $role]);
+    public function logUserIn($token){
+        
     }
 }
 

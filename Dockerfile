@@ -1,7 +1,9 @@
 FROM php:8.0.3-apache
 
 # Enbable the rewrite engine
-RUN a2enmod rewrite
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    a2enmod rewrite
 
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \

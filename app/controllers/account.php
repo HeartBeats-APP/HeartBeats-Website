@@ -12,7 +12,21 @@ class account extends Controller
     public function index()
     {
         $this->header();
-        $this->view('account/login');
+        $this->account();
+    }
+
+    public function googleAuth($redirect = [])
+    {   
+        $credential = $_GET['credential'];
+        $googleAuth = new GoogleAuth();
+
+        if ($credential == '' || $credential == null || $credential == 'null') {
+            $googleAuth->promptAuth();
+            return;
+        } 
+
+        $googleAuth->logUserIn($credential);
+        echo "hey there";
     }
 
     public function login()
