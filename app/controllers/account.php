@@ -20,7 +20,7 @@ class account extends Controller
         $tokenID = $_POST['credential'] ?? null;
 
         if (!$tokenID) {
-            ErrorsHandler::newError('Google Auth: No credential', 1, false);
+            echo "<script>alert('No crendential received');</script>";
             $this->account();
             exit();
         }
