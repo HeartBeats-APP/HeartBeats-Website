@@ -93,7 +93,6 @@ body {
   font-weight: 400;
 }
 
-
 /* headphone and text presentation */
 .pulse {
   display: flex;
@@ -155,21 +154,32 @@ body {
   color: white;
 }
 
+.groundbreaking-part {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15vh;
+  height: calc(125vh - 80px);
+}
 
 /* technical details about the goal of the product */
 .adaptive-sound {
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-top: -10rem;
+  margin-top: -15rem;
   height: calc(125vh - 80px);
 }
 
 .adaptive-sound-info {
   width: 50%;
   text-align: left;
+  margin-top: 10vh;
+  margin-bottom: -20vh;
   padding: 2rem;
 }
 
@@ -199,6 +209,7 @@ body {
 .adaptive-sound-image-container {
   width: 50%;
   position: relative;
+  margin-top: 30vh;
   margin-left: 5%;
 }
 
@@ -236,7 +247,7 @@ body {
   width: 100%;
   text-align: center;
   padding: 2rem;
-  margin-top: -3rem;
+  margin-top: 10rem;
 }
 
 .adaptive-sound-info-2 h3 {
@@ -251,14 +262,12 @@ body {
   color: white;
 }
 
-
-/* sensors boxes */
 .sensor-container {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  justify-items: center;
   align-items: center;
-  margin-top: -10rem;
-  height: calc(80vh - 80px);
 }
 
 .sensor-box {
@@ -268,21 +277,19 @@ body {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 40px;
-  padding: 1rem;
-  width: 350px;
-  height: 350px;
+  width: 20vw;
+  height: 20vw;
 }
 
 .sensor-box img {
-  max-width: 100%;
+  max-width: 7vw;
   height: auto;
 }
 
 .sensor-box p {
-  font-size: 2rem;
+  font-size: 150%;
   color: white;
 }
-
 
 /* security part */
 .control-section {
@@ -290,6 +297,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: -30vh;
 }
 
 .background-image {
@@ -326,7 +334,6 @@ body {
   z-index: 2;
 }
 
-
 .control-box-container {
   display: flex;
   flex-direction: column;
@@ -353,4 +360,39 @@ body {
   font-size: 20px;
   color: white;
   line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .sensor-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .sensor-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    width: 40vw;
+    height: 40vw;
+  }
+
+  .sensor-box img {
+    max-width: 15vw;
+    height: auto;
+  }
+
+  .adaptive-sound-info-2 {
+    margin-top: 50rem;
+  }
+
+  .overlay-image {
+    visibility: hidden;
+  }
+
+  .control-section {
+    margin-top: -10vh;
+  }
 }

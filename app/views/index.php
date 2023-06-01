@@ -6,9 +6,7 @@
   <title>HeartBeats</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/public/css/home/homeStyle.css">
-  <link rel="stylesheet" href="/public/css/home/orb-styles.css">
   <link rel="stylesheet" href="/public/css/components.css" />
-  <link rel="stylesheet" href="/public/css/index.css" />
   <link rel="stylesheet" href="/public/css/onboarding.css" />
 
   <script type="module" src="/public/js/home/orb-animation.js"></script>
@@ -22,12 +20,11 @@
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
   <!-- Sign in with Google -->
-  <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/dashboard" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true">
-  </div>
+  <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/dashboard" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true"></div>
 
   <main>
     <section class="intro animate">
-      <canvas class="orb-canvas"></canvas>
+      <div class="pink-gradient-bg"></div>
       <h1>HeartBeats</h1>
       <h2>Music that adapts to you</h2>
     </section>
@@ -48,7 +45,7 @@
       </div>
     </section>
 
-    <section class="adaptive-sound animate ">
+    <section class="groundbreaking-part animate ">
       <div class="adaptive-sound-bg"></div>
       <div class="adaptive-sound-image-container">
         <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
@@ -71,7 +68,7 @@
         <h2>Cutting-edge sensors</h2>
         <h3>And so much more...</h3>
       </div>
-      <div class="adaptive-sound-sensors-container">
+      <div class="adaptive-sound">
         <div class="sensor-container">
           <div class="sensor-box">
             <p>Heart Rate</p>
