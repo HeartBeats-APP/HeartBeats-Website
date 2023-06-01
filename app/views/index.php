@@ -21,10 +21,6 @@
 
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
-  <!-- Sign in with Google -->
-  <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/dashboard" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true">
-  </div>
-
   <main>
     <section class="intro animate">
       <canvas class="orb-canvas"></canvas>
@@ -135,6 +131,8 @@
     }
     window.scrollTo(0, 0);
   };
+
+
 </script>
 
 </html>

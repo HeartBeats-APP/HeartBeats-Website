@@ -1,8 +1,7 @@
 <?php
 
-use Google\Client;
-use Google\Service\BigQueryDataTransfer\UserInfo;
-use Google\Service\Oauth2;
+use Google\Auth\AccessToken;
+use Google\Auth\OAuth2;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -102,23 +101,38 @@ class AccountManager
 
 class GoogleAuth extends AccountManager
 {
-    public function promptAuth()
-    {   
-        $client = new Google\Client();
-        $client->setScopes(array('https://www.googleapis.com/auth/userinfo.profile'));
-        $client->setAccessType('offline');
-        $client->setIncludeGrantedScopes(true);
-        $client->setClientId(getenv('G_AUTH_ID'));
-        $client->setClientSecret(getenv('G_AUTH_SECRET'));
-        $client->setRedirectUri('http://localhost:8000');
-    
-        $auth_url = $client->createAuthUrl();
-        header('Location: ' .  $auth_url);
-        exit();
-    }
+    public function promptAuth($tokenID)
+    {
+        $clientID = getenv('G_AUTH_ID');
+        $client = new Google_Client(['client_id' => $clientID]);
+        $payload = $client->verifyIdToken($tokenID);
+        if (!$payload) {
+            echo "<script>alert('Failed to authenticate using Google');</script>";
+            return false;
+        }
+        $email = $payload['email'];
+        $name = $payload['name'];
 
-    public function logUserIn($token){
-        
+        if (self::isMailExists($email)) {
+            self::startSession($email);
+            Moderation::unflagUser($email);
+
+            if (Moderation::isUserBanned($email)) {
+                self::destroySession();
+                echo self::BANNED_ERROR;
+                return false;
+            }
+        } else {
+            $register = new Register();
+            if (!$register->registerWithGoogle($name, $email)) {
+                self::destroySession();
+                echo "<script>alert('Failed to register with Google');</script>";
+                return false;
+            }
+            self::startSession($email);
+            Moderation::unflagUser($email);
+            return true;
+        }
     }
 }
 
@@ -179,6 +193,23 @@ class Register extends AccountManager
         }
 
         return self::GENERAL_ERROR;
+    }
+
+    public function registerWithGoogle($name, $email)
+    {
+        $email = strtolower($email);
+        $name = ucfirst($name);
+
+        $role = $this->getRole($email);
+        $password = bin2hex(random_bytes(random_int(10, 20)));
+        $this->registerInDatabase($name, $email, $password, $role);
+
+        database_query("UPDATE users SET verifCode = 2 WHERE mail = :mail", [':mail' => $email]); //verifCode = 2 means that the user has been verified by Google
+
+        if (self::isMailExists($email)) {
+            return true;
+        }
+        return false;
     }
 
     private function getRole($email)
@@ -295,7 +326,7 @@ class Confirmation extends AccountManager
     public function sendConfirmationMail($email, $verifCode)
     {
         $link = "https://heart-beats.fr/account/confirmAccount?mail=" . $email . "&token=" . $verifCode;
-    
+
         $to = $email;
         $subject = "Account Validation";
         $message = '<html><body>';
@@ -305,7 +336,7 @@ class Confirmation extends AccountManager
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
-        
+
         $mail = new PHPMailer(true);
 
         try {
@@ -316,17 +347,16 @@ class Confirmation extends AccountManager
             $mail->Port = 587;
             $mail->Username = getenv('MAIL_ACCOUNT');
             $mail->Password = getenv('MAIL_PASSWORD');
-    
+
             $mail->setFrom(getenv('MAIL_ACCOUNT'), 'Heart Beats');
             $mail->addAddress($to);
             $mail->Subject = $subject;
             $mail->msgHTML($message);
-    
+
             $mail->send();
             return "";
         } catch (Exception $e) {
             return "Couldn't confirm your account, please try again later";
         }
     }
-    
 }

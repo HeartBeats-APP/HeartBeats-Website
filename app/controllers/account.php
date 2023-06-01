@@ -15,18 +15,26 @@ class account extends Controller
         $this->account();
     }
 
-    public function googleAuth($redirect = [])
+    public function googleAuth()
     {   
-        $credential = $_GET['credential'];
+        $tokenID = $_POST['credential'] ?? null;
+
+        if (!$tokenID) {
+            ErrorsHandler::newError('Google Auth: No credential', 1, false);
+            $this->account();
+            exit();
+        }
         $googleAuth = new GoogleAuth();
+        $googleAuth->promptAuth($tokenID);
+        header('Location: /dashboard');
+    }
 
-        if ($credential == '' || $credential == null || $credential == 'null') {
-            $googleAuth->promptAuth();
-            return;
-        } 
-
-        $googleAuth->logUserIn($credential);
-        echo "hey there";
+    public function isLogedIn(){
+        if (AccountManager::isSessionActive()) {
+            echo true;
+        } else {
+            echo false;
+        }
     }
 
     public function login()
@@ -111,7 +119,7 @@ class account extends Controller
         $confirmation = new Confirmation;
         $confirmationResult = $confirmation->isAccountConfirmed($email);
 
-        if ($confirmationResult != 1) {
+        if ($confirmationResult != 1 && $confirmationResult != 2) {
             echo json_encode(array('result' => 'ConfirmationError', 'emailErrorMessage' => "Please confirm your account first", 'passwordErrorMessage' => ""));
             return;
         }
