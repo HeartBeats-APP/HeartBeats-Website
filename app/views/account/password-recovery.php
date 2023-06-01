@@ -75,8 +75,6 @@
           document.getElementById("email").value = localStorage.getItem("email");
         }
     </script>
-    <script src="/public/js/components/translation.js"></script>
-
 </body>
 
 </html>

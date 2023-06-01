@@ -73,7 +73,7 @@
 
         </div>
     </div>
-
+    <script src="/public/js/components/translation.js"></script>
     <script src="/public/js/contact/feedback.js"></script>
 </body>
 

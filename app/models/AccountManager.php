@@ -8,7 +8,7 @@ session_start();
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
-require_once 'google_auth/vendor/autoload.php';
+//require_once 'google_auth/vendor/autoload.php';
 
 class AccountManager
 {

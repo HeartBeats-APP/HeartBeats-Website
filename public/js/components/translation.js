@@ -162,6 +162,9 @@ var translations = {
 };
 
 function setTranslateListener(){
+    const button = document.querySelector('#translate-button');
+    const newButton = button.cloneNode(true);
+    button.parentNode.replaceChild(newButton, button);
     document.querySelector('#translate-button').addEventListener('click', () => {
         clickedLanguageButton();
     });
