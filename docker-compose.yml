@@ -36,8 +36,8 @@ services:
       FORBIDDEN_NAMES: ${FORBIDDEN_NAMES}
       G_AUTH_ID: ${G_AUTH_ID}
       G_AUTH_SECRET: ${G_AUTH_SECRET}
-      G_ACCOUNT: ${G_ACCOUNT}
-      G_PASSWORD: ${G_PASSWORD}
+      MAIL_ACCOUNT: ${MAIL_ACCOUNT}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
     ports:
       - 8000:80
 
@@ -53,14 +53,17 @@ services:
       - 8081:80
 
   composer:
-    restart: no
+    restart: "no"
     image: composer:latest
     container_name: composer
     volumes:
       - .:/app
       - ./composer.json:/app/composer.json
     working_dir: /app
-    command: install
+    environment:
+    - COMPOSER_PROCESS_TIMEOUT=2000
+    mem_limit: 1g
+    command: install && dump-autoload 
 
 volumes:
   db:

@@ -1,14 +1,17 @@
 <?php
 
-use Google\Service\Analytics\Profile;
+use Google\Client;
 use Google\Service\BigQueryDataTransfer\UserInfo;
+use Google\Service\Oauth2;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes of inactivity
 session_start();
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 class AccountManager
 {
@@ -292,7 +295,7 @@ class Confirmation extends AccountManager
     public function sendConfirmationMail($email, $verifCode)
     {
         $link = "https://heart-beats.fr/account/confirmAccount?mail=" . $email . "&token=" . $verifCode;
-
+    
         $to = $email;
         $subject = "Account Validation";
         $message = '<html><body>';
@@ -302,11 +305,28 @@ class Confirmation extends AccountManager
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
+        
+        $mail = new PHPMailer(true);
 
-        if (mail($to, $subject, $message, $headers)) {
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->Username = getenv('MAIL_ACCOUNT');
+            $mail->Password = getenv('MAIL_PASSWORD');
+    
+            $mail->setFrom(getenv('MAIL_ACCOUNT'), 'Heart Beats');
+            $mail->addAddress($to);
+            $mail->Subject = $subject;
+            $mail->msgHTML($message);
+    
+            $mail->send();
             return "";
+        } catch (Exception $e) {
+            return "Couldn't confirm your account, please try again later";
         }
-
-        return "Couldn't confirm your account, please try again later";
     }
+    
 }
