@@ -19,14 +19,17 @@
   animation-duration: 0.25s;
   animation-timing-function: ease-in-out;
   backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
 @keyframes blur {
   from {
     backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
   }
   to {
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
   }
 }
 

@@ -101,6 +101,7 @@
 </body>
 <script src="/public/js/account/user-account.js"></script>
 <script src="/public/js/account/admin.js"></script>
+<script src="/public/js/components/translation.js"></script>
 <script>
     var data = <?php echo json_encode($data); ?>;
 

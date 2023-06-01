@@ -1,8 +1,8 @@
-version: '3.8'
+version: '3.3'
 services:
   db:
     container_name: db
-    image: mysql:5.7
+    image: mariadb:10.11.3
     restart: always
     environment:
       MYSQL_DATABASE: ${DB_NAME}
@@ -13,10 +13,11 @@ services:
       - "3306:3306"
     volumes:
       - ./dump:/docker-entrypoint-initdb.d
+      - db:/var/lib/mariadb/data
 
-  php-environment:
+  website:
     image: php:8.0.3-apache
-    container_name: php-environment
+    container_name: website
     build:
       context: .
       dockerfile: Dockerfile
@@ -33,11 +34,13 @@ services:
       ENV_VERSION: ${ENV_VERSION}
       ADMIN_CREDENTIALS: ${ADMIN_CREDENTIALS}
       FORBIDDEN_NAMES: ${FORBIDDEN_NAMES}
+      G_ACCOUNT: ${G_ACCOUNT}
+      G_PASSWORD: ${G_PASSWORD}
     ports:
       - 8000:80
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:latest
     container_name: phpmyadmin
     links:
       - db
@@ -46,3 +49,7 @@ services:
     restart: always
     ports:
       - 8081:80
+
+volumes:
+  db:
+  

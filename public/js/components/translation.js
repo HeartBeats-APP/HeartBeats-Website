@@ -87,14 +87,14 @@ var translations = {
         adm_dzs: 'Zone de Danger 💀',
         adm_wss: 'Sécurité du site',
         adm_rls: 'Logs récents',
-        adm_sck: 'Check sécurité',
+        adm_sck: 'Check de sécurité',
         adm_upd: 'Mises à jour : ',
         adm_dbm: 'Mode debug',
         adm_dbt: 'Affiche les erreurs précises',
         adm_uvm: 'Vue lambda',
         adm_uvt: 'Voir votre compte en tant qu\'utilisateur',
         adm_swt: 'Changer',
-        adm_qna: 'Q&R',
+        adm_qna: 'FAQ',
         adm_qat: 'Modifier les questions fréquentes',
         adm_qam: 'Modifier',
         adm_lvc: 'Assistance',
@@ -102,9 +102,9 @@ var translations = {
         adm_lcm: 'Aider',
         hed_dash: 'Tableau de bord',
         hed_log: 'Connexion',
-        hed_qna: 'Q&R',
+        hed_qna: 'FAQ',
         hed_tra: 'EN',
-        qae_title: 'Editeur FAQ',
+        qae_title: 'Editeur de FAQ',
         qae_cancel: 'Annuler',
         qae_save: 'Enregistrer',
         upd_close: 'Quitter',
@@ -122,7 +122,7 @@ var translations = {
         log_pwt: 'Mot de passe',
         log_spw: 'Afficher le mot de passe',
         log_stc: 'Rester connecté',
-        log_fpw: 'MdP oublié?',
+        log_fpw: 'Mot de passe oublié ?',
         log_log_but: 'Connexion',
         log_reg_but: 'Créer un compte',
         faq_title: 'Questions fréquentes',
@@ -152,7 +152,7 @@ var translations = {
         usr_ydt: 'Votre appareil : ',
         usr_dsn: 'N° de série : ',
         usr_dpd: 'Date d\'ajout : ',
-        usr_drm: 'Retirer',
+        usr_drm: 'Supprimer',
         usr_dci: 'Copier les infos',
         usr_dct: 'Gestion',
         usr_dcs: 'Statut',
@@ -162,6 +162,9 @@ var translations = {
 };
 
 function setTranslateListener(){
+    const button = document.querySelector('#translate-button');
+    const newButton = button.cloneNode(true);
+    button.parentNode.replaceChild(newButton, button);
     document.querySelector('#translate-button').addEventListener('click', () => {
         clickedLanguageButton();
     });

@@ -71,6 +71,7 @@
     height: 100%;
     background: rgb(0, 0, 0, 0.25);
     backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(-25px);
     top: 0;
     left: 0;
 }
