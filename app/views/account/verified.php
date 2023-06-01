@@ -56,6 +56,7 @@
 
     </div>
   </div>
+  <script src="/public/js/components/translation.js"></script>
 
 </body>
 

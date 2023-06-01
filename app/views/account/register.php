@@ -130,6 +130,7 @@
       console.log(response.credential);
     }
   </script>
+  <script src="/public/js/components/translation.js"></script>
 
 </body>
 

@@ -21,8 +21,8 @@
         <div class="login-wrapper">
 
           <div class="login-text">
-            <h2>Login to your account</h2>
-            <p>Let's jump in.</p>
+            <h2 lang-id="log_title">Login to your account</h2>
+            <p lang-id="log_sub">Let's jump in.</p>
           </div>
 
           <!-- Google Sign-In -->
@@ -38,20 +38,20 @@
           </div>
 
           <div class="login-field">
-            <label for="">Password</label>
+            <label lang-id="log_pwt" for="">Password</label>
             <input id="password" type="password" placeholder="**********" spellcheck="false" autocomplete="on" required>
             <a id="password-warning-message" class="warning-message"></a>
             <div class="show-password">
               <input type="checkbox" id="show-password-input" onclick="showPassword()" /><label for="show-password-input"></label>
-              <p class="connected-text">Show password</p>
+              <p lang-id="log_spw" class="connected-text">Show password</p>
             </div>
           </div>
 
-          <a class="change-password" href="/account/changePassword">Forgot password?</a>
+          <a lang-id="log_fpw" class="change-password" href="/account/changePassword">Forgot password?</a>
 
           <div class="buttons-area">
-            <button onclick="login()" class="main-button">Login</button>
-            <button onclick="window.location.href='/account/register'" class="secondary-button">Register instead</button>
+            <button lang-id="log_log_but" onclick="login()" class="main-button">Login</button>
+            <button lang-id="log_reg_but" onclick="window.location.href='/account/register'" class="secondary-button">Register instead</button>
           </div>
 
         </div>

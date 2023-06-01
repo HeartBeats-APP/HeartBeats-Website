@@ -182,5 +182,6 @@
         document.getElementById("badge").classList.add('user');
     }
 </script>
+<script src="/public/js/components/translation.js"></script>
 
 </html>
