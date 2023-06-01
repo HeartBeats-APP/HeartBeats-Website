@@ -12,12 +12,18 @@
   <link rel="stylesheet" href="/public/css/onboarding.css" />
 
   <script type="module" src="/public/js/home/orb-animation.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 
 </head>
 
 <body>
 
   <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
+
+  <!-- Sign in with Google -->
+  <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/dashboard" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true">
+  </div>
 
   <main>
     <section class="intro animate">
@@ -94,15 +100,15 @@
       <h4 class="control-subtitle">Secure by Design.</h4>
       <div class="control-box">
         <h3 class="control-box-title">Encrypted database</h3>
-          <p>Your data is synced and securely stored on our side.</p>
+        <p>Your data is synced and securely stored on our side.</p>
       </div>
       <div class="control-box">
         <h3 class="control-box-title">On-device processing</h3>
-          <p>Sensible data never leaves your device and is deleted after a short time.</p>
+        <p>Sensible data never leaves your device and is deleted after a short time.</p>
       </div>
       <div class="control-box">
         <h3 class="control-box-title">Encapsulation</h3>
-          <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
+        <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
       </div>
     </section>
 
