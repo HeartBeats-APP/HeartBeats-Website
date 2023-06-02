@@ -62,7 +62,6 @@ services:
     working_dir: /app
     environment:
     - COMPOSER_PROCESS_TIMEOUT=2000
-    mem_limit: 1g
     command: install
 
 volumes:
