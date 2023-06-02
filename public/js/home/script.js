@@ -1,21 +1,24 @@
-function isVisible(element) {
-    let position = element.getBoundingClientRect();
-    let windowHeight = window.innerHeight;
-    return position.top < windowHeight && position.bottom >= 0;
-  }
-  
-  function animateElements() {
-    let elements = document.querySelectorAll(".animate");
-    for (let element of elements) {
-      if (isVisible(element)) {
-        element.classList.add("visible");
-      } else {
-        element.classList.remove("visible");
-      }
+function animateElements(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    } else {
+      entry.target.classList.remove("visible");
     }
-  }
-  
-  animateElements();
-  
-  window.addEventListener("scroll", animateElements);
-  
+  });
+}
+
+const contentWrapper = document.querySelector(".content-wrapper");
+const elements = contentWrapper.querySelectorAll(".animate");
+
+const options = {
+  root: contentWrapper,
+  rootMargin: "0px",
+  threshold: 0.1, // Adjust this threshold value as needed
+};
+
+const observer = new IntersectionObserver(animateElements, options);
+
+elements.forEach((element) => {
+  observer.observe(element);
+});
