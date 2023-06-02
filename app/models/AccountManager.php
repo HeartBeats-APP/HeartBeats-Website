@@ -18,7 +18,7 @@ class AccountManager
     protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
     protected const BANNED_ERROR = "Couldn't log you in :/";
     protected const ACCESS_DENIED_ERROR = "Access denied";
-    protected const INCORRECT_TOKEN = "Incorrect Token";
+    protected const INCORRECT_TOKEN = "Couldn't verify the Google token";
 
     public static function isSessionActive()
     {
@@ -104,12 +104,13 @@ class GoogleAuth extends AccountManager
         $clientID = getenv('G_AUTH_ID');
         $client = new Google_Client(['client_id' => $clientID]);
         $payload = $client->verifyIdToken($tokenID);
-        if (!$payload) {
-            echo "<script>alert('Failed to verify Google token');</script>";
+        $email = $payload['email'] ?? null;
+        $name = $payload['name'] ?? null;
+
+        if ($name == null || $email == null) {
+            echo self::INCORRECT_TOKEN;
             return false;
         }
-        $email = $payload['email'];
-        $name = $payload['name'];
 
         if (self::isMailExists($email)) {
             self::startSession($email);
@@ -120,6 +121,7 @@ class GoogleAuth extends AccountManager
                 echo self::BANNED_ERROR;
                 return false;
             }
+
         } else {
             $register = new Register();
             if (!$register->registerWithGoogle($name, $email)) {
