@@ -5,13 +5,15 @@
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin; allow-popups; allow-popups-to-escape-sandbox">
+
   <link rel="stylesheet" href="/public/css/components.css" />
   <link rel="stylesheet" href="/public/css/account/form-card.css" />
   <link rel="stylesheet" href="/public/css/account/register.css" />
   <link rel="stylesheet" href="/public/css/account/password-recovery.css" />
 
   <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script> 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </head>

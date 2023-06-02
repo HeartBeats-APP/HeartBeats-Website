@@ -19,7 +19,7 @@ class account extends Controller
     {   
         $tokenID = $_POST['credential'] ?? null;
 
-        if (!$tokenID) {
+        if ($tokenID == null) {
             echo "<script>alert('No crendential received');</script>";
             $this->account();
             exit();

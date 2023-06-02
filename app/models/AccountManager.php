@@ -1,7 +1,5 @@
 <?php
 
-use Google\Auth\AccessToken;
-use Google\Auth\OAuth2;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -107,7 +105,7 @@ class GoogleAuth extends AccountManager
         $client = new Google_Client(['client_id' => $clientID]);
         $payload = $client->verifyIdToken($tokenID);
         if (!$payload) {
-            echo "<script>alert($clientID);</script>";
+            echo "<script>alert('Failed to verify Google token');</script>";
             return false;
         }
         $email = $payload['email'];
@@ -317,7 +315,7 @@ class Confirmation extends AccountManager
     public function isAccountConfirmed($mail)
     {
         $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
-        if ($verifCode['verifCode'] == 1) {
+        if ($verifCode['verifCode'] == 1 || $verifCode['verifCode'] == 2) {
             return true;
         }
         return false;

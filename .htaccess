@@ -3,6 +3,7 @@ RewriteEngine On
 
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "same-origin-allow-popups"
+    Header set Cross-Origin-Opener-Policy "same-origin; allow-popups; allow-popups-to-escape-sandbox"
 </IfModule>
 
 #Rewrite the root URL to the "public" subdirectory
