@@ -2,16 +2,25 @@
 
 class Legal extends Controller
 {
-    public function index($page = 'cgu')
+    public function index()
     {
         $this->header();
-        if ($page = 'cgu')
-        {
-            $this->view('legal/' . $page);
-
-        }
+        $this->view('legal/cgu');
         $this->footer();
     }
 
+    public function cgu()
+    {
+        $this->header();
+        $this->view('legal/cgu');
+        $this->footer();
+    }
+
+    public function privacy()
+    {
+        $this->header();
+        $this->view('legal/privacy');
+        $this->footer();
+    }
 
 }

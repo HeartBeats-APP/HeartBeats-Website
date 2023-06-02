@@ -1,9 +1,14 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes of inactivity
 session_start();
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
+require_once '../vendor/autoload.php';
 
 class AccountManager
 {
@@ -92,6 +97,43 @@ class AccountManager
     }
 }
 
+class GoogleAuth extends AccountManager
+{
+    public function promptAuth($tokenID)
+    {
+        $clientID = getenv('G_AUTH_ID');
+        $client = new Google_Client(['client_id' => $clientID]);
+        $payload = $client->verifyIdToken($tokenID);
+        if (!$payload) {
+            echo "<script>alert('Failed to verify Google token');</script>";
+            return false;
+        }
+        $email = $payload['email'];
+        $name = $payload['name'];
+
+        if (self::isMailExists($email)) {
+            self::startSession($email);
+            Moderation::unflagUser($email);
+
+            if (Moderation::isUserBanned($email)) {
+                self::destroySession();
+                echo self::BANNED_ERROR;
+                return false;
+            }
+        } else {
+            $register = new Register();
+            if (!$register->registerWithGoogle($name, $email)) {
+                self::destroySession();
+                echo "<script>alert('Failed to register with Google');</script>";
+                return false;
+            }
+            self::startSession($email);
+            Moderation::unflagUser($email);
+            return true;
+        }
+    }
+}
+
 class Login extends AccountManager
 {
     public function logUserIn($email, $entered_password)
@@ -149,6 +191,23 @@ class Register extends AccountManager
         }
 
         return self::GENERAL_ERROR;
+    }
+
+    public function registerWithGoogle($name, $email)
+    {
+        $email = strtolower($email);
+        $name = ucfirst($name);
+
+        $role = $this->getRole($email);
+        $password = bin2hex(random_bytes(random_int(10, 20)));
+        $this->registerInDatabase($name, $email, $password, $role);
+
+        database_query("UPDATE users SET verifCode = 2 WHERE mail = :mail", [':mail' => $email]); //verifCode = 2 means that the user has been verified by Google
+
+        if (self::isMailExists($email)) {
+            return true;
+        }
+        return false;
     }
 
     private function getRole($email)
@@ -256,7 +315,7 @@ class Confirmation extends AccountManager
     public function isAccountConfirmed($mail)
     {
         $verifCode = database_query("SELECT verifCode FROM users WHERE mail = :mail", [':mail' => $mail]);
-        if ($verifCode['verifCode'] == 1) {
+        if ($verifCode['verifCode'] == 1 || $verifCode['verifCode'] == 2) {
             return true;
         }
         return false;
@@ -276,10 +335,26 @@ class Confirmation extends AccountManager
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
 
-        if (mail($to, $subject, $message, $headers)) {
-            return "";
-        }
+        $mail = new PHPMailer(true);
 
-        return "Couldn't confirm your account, please try again later";
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->Username = getenv('MAIL_ACCOUNT');
+            $mail->Password = getenv('MAIL_PASSWORD');
+
+            $mail->setFrom(getenv('MAIL_ACCOUNT'), 'Heart Beats');
+            $mail->addAddress($to);
+            $mail->Subject = $subject;
+            $mail->msgHTML($message);
+
+            $mail->send();
+            return "";
+        } catch (Exception $e) {
+            return "Couldn't confirm your account, please try again later";
+        }
     }
 }

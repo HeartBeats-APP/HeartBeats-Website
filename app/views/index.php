@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="/public/css/onboarding.css" />
 
   <script type="module" src="/public/js/home/orb-animation.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 
 </head>
 
@@ -42,7 +44,7 @@
       </div>
     </section>
 
-    <section class="adaptive-sound  ">
+    <section class="adaptive-sound animate ">
       <div class="adaptive-sound-bg"></div>
       <div class="adaptive-sound-image-container">
         <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
@@ -60,7 +62,7 @@
       </div>
     </section>
 
-    <section class="">
+    <section class="animate">
       <div class="adaptive-sound-info-2">
         <h2>Cutting-edge sensors</h2>
         <h3>And so much more...</h3>
@@ -87,22 +89,22 @@
       </div>
     </section>
 
-    <section class="control-section ">
+    <section class="control-section animate">
       <div class="blue-security-bg"></div>
       <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
       <h3 class="control-title">You're in control.</h3>
       <h4 class="control-subtitle">Secure by Design.</h4>
       <div class="control-box">
         <h3 class="control-box-title">Encrypted database</h3>
-          <p>Your data is synced and securely stored on our side.</p>
+        <p>Your data is synced and securely stored on our side.</p>
       </div>
       <div class="control-box">
         <h3 class="control-box-title">On-device processing</h3>
-          <p>Sensible data never leaves your device and is deleted after a short time.</p>
+        <p>Sensible data never leaves your device and is deleted after a short time.</p>
       </div>
       <div class="control-box">
         <h3 class="control-box-title">Encapsulation</h3>
-          <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
+        <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
       </div>
     </section>
 
@@ -129,6 +131,8 @@
     }
     window.scrollTo(0, 0);
   };
+
+
 </script>
 
 </html>

@@ -12,7 +12,29 @@ class account extends Controller
     public function index()
     {
         $this->header();
-        $this->view('account/login');
+        $this->account();
+    }
+
+    public function googleAuth()
+    {   
+        $tokenID = $_POST['credential'] ?? null;
+
+        if ($tokenID == null) {
+            echo "<script>alert('No crendential received');</script>";
+            $this->account();
+            exit();
+        }
+        $googleAuth = new GoogleAuth();
+        $googleAuth->promptAuth($tokenID);
+        header('Location: /dashboard');
+    }
+
+    public function isLogedIn(){
+        if (AccountManager::isSessionActive()) {
+            echo true;
+        } else {
+            echo false;
+        }
     }
 
     public function login()
@@ -97,7 +119,7 @@ class account extends Controller
         $confirmation = new Confirmation;
         $confirmationResult = $confirmation->isAccountConfirmed($email);
 
-        if ($confirmationResult != 1) {
+        if ($confirmationResult != 1 && $confirmationResult != 2) {
             echo json_encode(array('result' => 'ConfirmationError', 'emailErrorMessage' => "Please confirm your account first", 'passwordErrorMessage' => ""));
             return;
         }
