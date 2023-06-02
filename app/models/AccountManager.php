@@ -107,7 +107,7 @@ class GoogleAuth extends AccountManager
         $client = new Google_Client(['client_id' => $clientID]);
         $payload = $client->verifyIdToken($tokenID);
         if (!$payload) {
-            echo "<script>alert('Failed to authenticate using Google');</script>";
+            echo "<script>alert($clientID);</script>";
             return false;
         }
         $email = $payload['email'];

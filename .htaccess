@@ -1,6 +1,10 @@
 Options -MultiViews
 RewriteEngine On
 
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "same-origin-allow-popups"
+</IfModule>
+
 #Rewrite the root URL to the "public" subdirectory
 RewriteRule ^$ public/ [L]
 
