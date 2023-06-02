@@ -14,7 +14,7 @@ const elements = contentWrapper.querySelectorAll(".animate");
 const options = {
   root: contentWrapper,
   rootMargin: "0px",
-  threshold: 0, // Adjust this threshold value as needed
+  threshold: 0.1, // Adjust this threshold value as needed
 };
 
 const observer = new IntersectionObserver(animateElements, options);

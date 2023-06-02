@@ -6,6 +6,7 @@
   <title>HeartBeats</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/public/css/home/homeStyle.css">
+  <link rel="stylesheet" href="/public/css/home/orb-styles.css">
   <link rel="stylesheet" href="/public/css/components.css" />
   <link rel="stylesheet" href="/public/css/onboarding.css" />
 
@@ -24,6 +25,7 @@
   <main>
     <div class="content-wrapper">
       <section class="intro animate">
+        <canvas class="orb-canvas"></canvas>
         <div class="pink-gradient-bg"></div>
         <h1>HeartBeats</h1>
         <h2>Music that adapts to you</h2>
@@ -113,6 +115,7 @@
     </div>
   </main>
 
+  <script src="/public/js/home/orb-animation.js"></script>
   <script src="/public/js/home/script.js"></script>
   <script src="/public/js/components/translation.js"></script>
 

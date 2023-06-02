@@ -385,6 +385,7 @@ body {
 
   .sensor-container {
     display: grid;
+    margin-top: 20rem;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 10px;
@@ -425,6 +426,10 @@ body {
     margin-left: -1rem;
     font-size: 1.5em;
   }
+
+  .control-section {
+    margin-top: 10rem;
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -453,6 +458,7 @@ body {
   .adaptive-sound-info-2 {
     margin-top: -2rem;
   }
+
   .pulse-content {
     margin: 0 3rem 0 3rem;
   }
