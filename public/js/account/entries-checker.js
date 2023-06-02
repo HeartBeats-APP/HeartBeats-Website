@@ -79,6 +79,7 @@ function createAccount() { /* AKA register */
             /* Update the page */
             if (this.responseText == true) {
                 localStorage.setItem('email', email);
+                document.getElementById("googleAuthButton").remove();
                 document.getElementById("title").innerHTML = "Check your inbox";
                 document.getElementById("subtitle").innerHTML = "An email will be sent to confirm your account";
                 document.getElementById("register-form").remove();

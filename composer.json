@@ -1,0 +1,75 @@
+{
+    "name": "heartbeats/app",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "HeartBeats Team",
+            "email": "heartbeats.fr@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url":  "https://packages.drupal.org/8"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "desandro/masonry",
+                "version": "3.3.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/desandro/masonry/archive/v3.3.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "desandro/imagesloaded",
+                "version": "3.1.8",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/desandro/imagesloaded/archive/v3.1.8.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "enyo/dropzone",
+                "version": "4.2.0",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/enyo/dropzone",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "modules/contrib/{$name}": [
+                "type:drupal-module"
+            ]
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.2",
+        "google/apiclient":"^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\heartbeats\\": "src/"
+        }
+    },
+    "config": {
+        "platform-check": false
+    }
+}

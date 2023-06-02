@@ -4,6 +4,7 @@
 <head>
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin; allow-popups; allow-popups-to-escape-sandbox">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/public/css/components.css" />
   <link rel="stylesheet" href="/public/css/account/form-card.css" />
@@ -26,10 +27,9 @@
           </div>
 
           <!-- Google Sign-In -->
-          <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8000" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true">
+          <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="use" data-ux_mode="popup" data-login_uri="/account/googleAuth" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true">
           </div>
-
-          <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="100">
+          <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black" data-text="continue_with" data-size="large" data-logo_alignment="left">
           </div>
 
           <div class="login-field">
@@ -62,21 +62,6 @@
   </div>
 
   <script src="/public/js/account/entries-checker.js"></script>
-  <script src="/public/js/components/translation.js"></script>
-  <!-- Initialize the Google Sign-In functionality -->
-  <script>
-    window.onload = function() {
-      google.accounts.id.initialize({
-        client_id: '407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com',
-        callback: handleCredentialResponse
-      });
-    };
-
-    function handleCredentialResponse(response) {
-      // Handle the response from Google Sign-In
-      console.log(response.credential);
-    }
-  </script>
 
 </body>
 
