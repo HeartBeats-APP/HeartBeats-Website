@@ -109,6 +109,8 @@ class GoogleAuth extends AccountManager
             ErrorsHandler::newError('GOOGLE auth : Wrong audience (' . $payload['aud'] . ')', 3, false);
             return false;
         }
+        echo "<script>alert('HERE');</script>";
+        
         if ($payload['iss'] != 'https://accounts.google.com') {
             $iss = $payload['iss'];
             echo "<script>alert('Wrong issuer' . $iss);</script>";

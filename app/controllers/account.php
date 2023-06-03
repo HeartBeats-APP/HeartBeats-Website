@@ -31,7 +31,6 @@ class account extends Controller
 
         $GoolgeAuth = new GoogleAuth;
         if (!$GoolgeAuth->isPayloadValid($payload)) {
-            echo "<script>alert('HERE');</script>";
             $this->account();
             exit();
         }
