@@ -4,6 +4,8 @@
 <head>
   <title>HeartBeats</title>
   <meta charset="UTF-8" />
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin; allow-popups; allow-popups-to-escape-sandbox">
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="/public/css/components.css" />
   <link rel="stylesheet" href="/public/css/account/form-card.css" />
