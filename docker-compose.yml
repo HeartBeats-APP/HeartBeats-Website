@@ -1,7 +1,7 @@
 version: '3.3'
 services:
-  db:
-    container_name: db
+  db-staging:
+    container_name: db-staging
     image: mariadb:10.11.3
     restart: always
     environment:
@@ -10,24 +10,24 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3300:3306"
     volumes:
       - ./dump:/docker-entrypoint-initdb.d
-      - db:/var/lib/mariadb/data
+      - db-staging:/var/lib/mariadb/data
 
-  website:
+  website-staging:
     image: php:8.0.3-apache
-    container_name: website
+    container_name: website-staging
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
     depends_on:
-      - db
+      - db-staging
     volumes:
       - .:/var/www/html/
     environment:
-      DB_HOST: db
+      DB_HOST: db-staging
       DB_NAME: ${DB_NAME}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -39,31 +39,30 @@ services:
       MAIL_ACCOUNT: ${MAIL_ACCOUNT}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
     ports:
-      - 8000:80
+      - 4200:80
 
-  phpmyadmin:
+  phpmyadmin-staging:
     image: phpmyadmin:latest
-    container_name: phpmyadmin
+    container_name: phpmyadmin-staging
     links:
-      - db
+      - db-staging
     environment:
-      PMA_HOST: db
+      PMA_HOST: db-staging
     restart: always
     ports:
-      - 8081:80
+      - 4201:80
 
-  composer:
+  composer-staging:
     restart: "no"
     image: composer:latest
-    container_name: composer
+    container_name: composer-staging
     volumes:
       - .:/app
       - ./composer.json:/app/composer.json
     working_dir: /app
     environment:
-    - COMPOSER_PROCESS_TIMEOUT=2000
+      - COMPOSER_PROCESS_TIMEOUT=2000
     command: install
 
 volumes:
-  db:
-  
+  db-staging:
