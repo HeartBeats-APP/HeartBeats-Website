@@ -127,7 +127,7 @@ class GoogleAuth extends AccountManager
             ErrorsHandler::newError('GOOGLE auth : Token expired' . $payload['exp'], 2, false);
             return false;
         }
-
+        echo "OK";
         return true;
     }
 
