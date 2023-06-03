@@ -16,5 +16,5 @@ jobs:
         run: |
           sudo apt-get install openssh-client -y
           sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no g8e@${{ secrets.SERVER_SSH }}
-          'cd app/staging/heartbeats-website && git pull'
+          'cd APP/STAGING/HeartBeats-Website && git pull'
 
