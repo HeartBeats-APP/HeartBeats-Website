@@ -20,13 +20,33 @@ class account extends Controller
         $tokenID = $_POST['credential'] ?? null;
 
         if ($tokenID == null) {
-            echo "<script>alert('No crendential received');</script>";
-            $this->account();
+            ErrorsHandler::newError("Google auth : no credentials received" . $_SERVER['PHP_SELF'], 1, false);
+            header("Location: /account/login");
             exit();
         }
-        $googleAuth = new GoogleAuth();
-        $googleAuth->promptAuth($tokenID);
-        header('Location: /dashboard');
+
+        $tokenParts = explode(".", $tokenID);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $payload = json_decode($tokenPayload, true);
+
+        $GoolgeAuth = new GoogleAuth;
+        if (!$GoolgeAuth->isPayloadValid($payload)) {
+            echo "<script>alert('Something went wrong while connecting with Google');</script>";
+            header("Location: /account/login");
+            exit();
+        }
+        
+        $result = $GoolgeAuth->setSession($payload['name'], $payload['email'], $payload['email_verified']);
+        if (!$result) {
+            ErrorsHandler::newError("Google auth : Something went wrong while sign in the user", 1, false);
+        }
+        
+        if (AccountManager::isAdmin()) {
+            header("Location: /account/admin");
+        } else {
+            header("Location: /account/user");
+        }
+
     }
 
     public function isLogedIn(){
