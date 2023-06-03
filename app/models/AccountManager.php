@@ -104,8 +104,9 @@ class GoogleAuth extends AccountManager
     public function isPayloadValid($payload)
     {
         $audience = $payload['aud'];
-        echo "<script>alert('$audience');</script>";
-        
+        $target_audience = getenv('G_AUTH_ID');
+        echo "<script>alert('$audience' . $target_audience);</script>";
+
         if ($payload['aud'] != getenv('G_AUTH_ID')) {
             $audience = $payload['aud'];
             echo "<script>alert('Wrong audience' . $audience);</script>";
