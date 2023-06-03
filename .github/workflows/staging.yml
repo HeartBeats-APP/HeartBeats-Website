@@ -12,11 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH 
+      - name: SSH Deployment
         run: |
           sudo apt-get install openssh-client -y
           sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no g8e@${{ secrets.SERVER_SSH }}
-
-      - name: Git Pull
-        run: ssh 'cd APP/STAGING/HeartBeats-Website && git pull'
+          'cd app/staging/heartbeats-website && git pull'
 
