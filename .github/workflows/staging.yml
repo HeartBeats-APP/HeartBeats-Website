@@ -1,0 +1,22 @@
+name: HEartBeats Staging
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH 
+        run: |
+          sudo apt-get install openssh-client -y
+          sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no g8e@${{ secrets.SERVER_SSH }}
+
+      - name: Git Pull
+        run: ssh 'cd APP/STAGING/HeartBeats-Website && git pull'
+
