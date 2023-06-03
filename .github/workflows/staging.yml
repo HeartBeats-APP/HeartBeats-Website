@@ -1,4 +1,4 @@
-name: HEartBeats Staging
+name: STAGING Dployment
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH Deployment
+      - name: SSH & Git Pull
         run: |
           sudo apt-get install openssh-client -y
           sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no g8e@${{ secrets.SERVER_SSH }} 'cd APP/STAGING/HeartBeats-Website && git pull'
