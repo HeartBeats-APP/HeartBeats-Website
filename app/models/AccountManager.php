@@ -19,6 +19,8 @@ class AccountManager
     protected const BANNED_ERROR = "Couldn't log you in :/";
     protected const ACCESS_DENIED_ERROR = "Access denied";
     protected const INCORRECT_TOKEN = "Couldn't verify the Google token";
+    protected const INCORRECT_ORIGIN = "Couldn't verify the origin of the request";
+
 
     public static function isSessionActive()
     {
@@ -99,41 +101,58 @@ class AccountManager
 
 class GoogleAuth extends AccountManager
 {
-    public function promptAuth($tokenID)
+    public function isPayloadValid($payload)
     {
-        $clientID = getenv('G_AUTH_ID');
-        $client = new Google_Client(['client_id' => $clientID]);
-        $payload = $client->verifyIdToken($tokenID);
-        $email = $payload['email'] ?? null;
-        $name = $payload['name'] ?? null;
-
-        if ($name == null || $email == null) {
-            echo self::INCORRECT_TOKEN;
+        if ($payload['aud'] != getenv('G_AUTH_ID')) {
+            ErrorsHandler::newError('GOOGLE auth : Wrong audience', 2, false);
+            return false;
+        }
+        if ($payload['iss'] != 'https://accounts.google.com') {
+            ErrorsHandler::newError('GOOGLE auth : Wrong issuer', 3, false);
             return false;
         }
 
-        if (self::isMailExists($email)) {
-            self::startSession($email);
-            Moderation::unflagUser($email);
+        if ($payload['sub'] == null || $payload['email'] == null || $payload['name'] == null) {
+            ErrorsHandler::newError('GOOGLE auth : Missing data', 2, false);
+            return false;
+        }
 
-            if (Moderation::isUserBanned($email)) {
-                self::destroySession();
-                echo self::BANNED_ERROR;
-                return false;
-            }
+        if ($payload['exp'] < time()) {
+            ErrorsHandler::newError('GOOGLE auth : Token expired', 2, false);
+            return false;
+        }
 
-        } else {
+        return true;
+    }
+
+    public function setSession($name, $email, $isMailVerified)
+    {
+
+        if (!$isMailVerified) {
+            echo "<script>alert('Your mail has to be verified by Google in order to use this service');</script>";
+            return false;
+        }
+
+        if (Moderation::isUserBanned($email)) {
+            ErrorsHandler::newError('GOOGLE auth : the following user is banned : ' . $email, 2, false);
+            self::destroySession();
+            return false;
+        }
+
+        if (!self::isMailExists($email)) {
             $register = new Register();
             if (!$register->registerWithGoogle($name, $email)) {
                 self::destroySession();
-                echo "<script>alert('Failed to register with Google');</script>";
+                ErrorsHandler::newError('GOOGLE auth : Couldn\'t register the user', 2, false);
                 return false;
             }
-            self::startSession($email);
-            Moderation::unflagUser($email);
-            return true;
         }
+
+        self::startSession($email);
+        Moderation::unflagUser($email);
+        return true;
     }
+
 }
 
 class Login extends AccountManager

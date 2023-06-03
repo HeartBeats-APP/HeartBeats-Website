@@ -19,14 +19,29 @@ class account extends Controller
     {   
         $tokenID = $_POST['credential'] ?? null;
 
-        if ($tokenID == null || $tokenID == "" || !isset($tokenID) || empty($tokenID)) {
+        if ($tokenID == null) {
             echo "<script>alert('No crendential received');</script>";
             $this->account();
             exit();
         }
-        $googleAuth = new GoogleAuth();
-        $googleAuth->promptAuth($tokenID);
-        header('Location: /dashboard');
+
+        $tokenParts = explode(".", $tokenID);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $payload = json_decode($tokenPayload, true);
+
+        $GoolgeAuth = new GoogleAuth;
+        if (!$GoolgeAuth->isPayloadValid($payload)) {
+            $this->account();
+            exit();
+        }
+        
+        $result = $GoolgeAuth->setSession($payload['name'], $payload['email'], $payload['email_verified']);
+        if (!$result) {
+            echo "<script>alert('Something went wrong while connecting with Google');</script>";
+            ErrorsHandler::newError("Something went wrong while connecting with Google" . $_SERVER['PHP_SELF'], 1, false);
+        }
+        $this->account();
+
     }
 
     public function isLogedIn(){
