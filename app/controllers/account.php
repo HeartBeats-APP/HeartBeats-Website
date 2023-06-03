@@ -29,6 +29,7 @@ class account extends Controller
         $tokenPayload = base64_decode($tokenParts[1]);
         $payload = json_decode($tokenPayload, true);
 
+        echo "<script>alert('OK');</script>";
         $GoolgeAuth = new GoogleAuth;
         if (!$GoolgeAuth->isPayloadValid($payload)) {
             $this->account();

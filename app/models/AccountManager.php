@@ -128,7 +128,6 @@ class GoogleAuth extends AccountManager
             return false;
         }
 
-        echo "<script>alert('OK');</script>";
         return true;
     }
 
