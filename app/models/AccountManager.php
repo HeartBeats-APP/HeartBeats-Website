@@ -104,11 +104,11 @@ class GoogleAuth extends AccountManager
     public function isPayloadValid($payload)
     {
         if ($payload['aud'] != getenv('G_AUTH_ID')) {
-            ErrorsHandler::newError('GOOGLE auth : Wrong audience', 2, false);
+            ErrorsHandler::newError('GOOGLE auth : Wrong audience (' . $payload['aud'] . ')', 3, false);
             return false;
         }
         if ($payload['iss'] != 'https://accounts.google.com') {
-            ErrorsHandler::newError('GOOGLE auth : Wrong issuer', 3, false);
+            ErrorsHandler::newError('GOOGLE auth : Wrong issuer (' . $payload['iss'] . ')', 3, false);
             return false;
         }
 
@@ -118,7 +118,7 @@ class GoogleAuth extends AccountManager
         }
 
         if ($payload['exp'] < time()) {
-            ErrorsHandler::newError('GOOGLE auth : Token expired', 2, false);
+            ErrorsHandler::newError('GOOGLE auth : Token expired' . $payload['exp'], 2, false);
             return false;
         }
 
