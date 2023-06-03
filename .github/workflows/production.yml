@@ -1,0 +1,19 @@
+name: PRODUCTION Dployment
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH & Git Pull
+        run: |
+          sudo apt-get install openssh-client -y
+          sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no g8e@${{ secrets.SERVER_SSH }} 'cd APP/SITE/HeartBeats-Website && git pull'
+
