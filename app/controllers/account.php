@@ -31,7 +31,7 @@ class account extends Controller
 
         $GoolgeAuth = new GoogleAuth;
         if (!$GoolgeAuth->isPayloadValid($payload)) {
-            $this->account();
+            header("Location: /account");
             exit();
         }
         
@@ -40,7 +40,12 @@ class account extends Controller
             echo "<script>alert('Something went wrong while connecting with Google');</script>";
             ErrorsHandler::newError("Something went wrong while connecting with Google" . $_SERVER['PHP_SELF'], 1, false);
         }
-        $this->account();
+        
+        if (AccountManager::isAdmin()) {
+            header("Location: /account/admin");
+        } else {
+            header("Location: /account/user");
+        }
 
     }
 
