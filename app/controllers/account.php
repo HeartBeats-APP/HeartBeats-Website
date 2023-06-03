@@ -20,8 +20,8 @@ class account extends Controller
         $tokenID = $_POST['credential'] ?? null;
 
         if ($tokenID == null) {
-            echo "<script>alert('No crendential received');</script>";
-            $this->account();
+            ErrorsHandler::newError("Google auth : no credentials received" . $_SERVER['PHP_SELF'], 1, false);
+            header("Location: /account/login");
             exit();
         }
 
@@ -31,14 +31,14 @@ class account extends Controller
 
         $GoolgeAuth = new GoogleAuth;
         if (!$GoolgeAuth->isPayloadValid($payload)) {
-            header("Location: /account");
+            echo "<script>alert('Something went wrong while connecting with Google');</script>";
+            header("Location: /account/login");
             exit();
         }
         
         $result = $GoolgeAuth->setSession($payload['name'], $payload['email'], $payload['email_verified']);
         if (!$result) {
-            echo "<script>alert('Something went wrong while connecting with Google');</script>";
-            ErrorsHandler::newError("Something went wrong while connecting with Google" . $_SERVER['PHP_SELF'], 1, false);
+            ErrorsHandler::newError("Google auth : Something went wrong while sign in the user", 1, false);
         }
         
         if (AccountManager::isAdmin()) {
