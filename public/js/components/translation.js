@@ -21,7 +21,7 @@ var translations = {
         hed_dash: 'Dashboard',
         hed_log: 'Login',
         hed_qna: 'Q&A',
-        hed_tra: 'FR',
+        hed_tra: '→ FR',
         qae_title: 'Q&A Editor',
         qae_cancel: 'Cancel',
         qae_save: 'Save',
@@ -124,7 +124,7 @@ var translations = {
         hed_dash: 'Tableau de bord',
         hed_log: 'Connexion',
         hed_qna: 'FAQ',
-        hed_tra: 'EN',
+        hed_tra: '→ EN',
         qae_title: 'Editeur de FAQ',
         qae_cancel: 'Annuler',
         qae_save: 'Enregistrer',
@@ -239,7 +239,6 @@ function switchLanguage() {
     localStorage.setItem('language', language);
     console.log("Language changed to " + language);
     document.documentElement.lang = language;
-    location.reload();
 }
 function updateText() {
     let lang = localStorage.getItem('language')
