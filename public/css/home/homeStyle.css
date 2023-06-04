@@ -131,11 +131,12 @@ body {
 
 .introducing p {
   margin-top: 15vh;
+  font-size: 2.5rem;
 }
 
 .introducing h3 {
   margin: 0;
-  font-size: 4rem;
+  font-size: 5rem;
 }
 
 .pulse-image {
@@ -183,7 +184,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: -15rem;
+  margin-top: -20rem;
   height: calc(125vh - 80px);
 }
 
@@ -351,6 +352,10 @@ body {
   z-index: 2;
 }
 
+.control-subtitle {
+  margin-bottom: 50px;
+}
+
 .control-box-container {
   display: flex;
   flex-direction: column;
@@ -392,6 +397,18 @@ body {
 
   .intro h2 {
     font-size: 1.5rem;
+  }
+
+  .pulse-image {
+    scale: 0.7;
+  }
+
+  .introducing p {
+    margin-top: 10rem;
+    font-size: 2rem;
+  }
+  .introducing h3 {
+    font-size: 4rem;
   }
 
   .sensor-container {
@@ -498,10 +515,10 @@ body {
   }
 
   .pulse-content {
-    margin-top: 23rem;
+    margin-top: 0rem;
   }
 
   .groundbreaking-part {
-    margin-top: 15rem;
+    margin-top: 2rem;
   }
 }
