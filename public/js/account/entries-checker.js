@@ -77,9 +77,8 @@ function createAccount() { /* AKA register */
         if (this.readyState == 4 && this.status == 200) {
 
             /* Update the page */
-            if (this.responseText == true) {
+            if (this.responseText == true || this.responseText == "true") {
                 localStorage.setItem('email', email);
-                document.getElementById("googleAuthButton").remove();
                 document.getElementById("title").innerHTML = "Check your inbox";
                 document.getElementById("subtitle").innerHTML = "An email will be sent to confirm your account";
                 document.getElementById("register-form").remove();
@@ -87,6 +86,7 @@ function createAccount() { /* AKA register */
                 document.getElementById("login-button").innerHTML = "Login";
                 document.getElementById("section-img").style.display = "none";
                 document.getElementById("email-animation").style.display = "flex";
+                document.getElementById("g_id_signin").remove();
             }
             else {
                 try {

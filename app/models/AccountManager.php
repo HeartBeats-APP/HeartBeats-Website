@@ -208,11 +208,7 @@ class Register extends AccountManager
         $role = $this->getRole($email);
         $this->registerInDatabase($name, $email, $entered_password, $role);
 
-        if (self::isMailExists($email)) {
-            return "";
-        }
-
-        return self::GENERAL_ERROR;
+        return "";
     }
 
     public function registerWithGoogle($name, $email)
