@@ -293,8 +293,13 @@ body {
   height: 20vw;
 }
 
-.sensor-box img {
+.sensor-box .sensor-icon {
   max-width: 7vw;
+  height: auto;
+}
+
+.temp-sensor-icon {
+  max-width: 4vw;
   height: auto;
 }
 
@@ -374,6 +379,12 @@ body {
   line-height: 1.5;
 }
 
+@media screen and (max-width: 450px) {
+  .sensor-box p {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .intro h1 {
     font-size: 4rem;
@@ -388,7 +399,7 @@ body {
     margin-top: 20rem;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-gap: 30px;
     justify-items: center;
     align-items: center;
   }
@@ -396,12 +407,17 @@ body {
   .sensor-box {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 40px;
-    width: 40vw;
-    height: 40vw;
+    width: 35vw;
+    height: 35vw;
   }
 
-  .sensor-box img {
+  .sensor-box .sensor-icon {
     max-width: 15vw;
+    height: auto;
+  }
+
+  .temp-sensor-icon {
+    max-width: 10vw;
     height: auto;
   }
 

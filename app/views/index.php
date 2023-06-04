@@ -80,7 +80,7 @@
             </div>
             <div class="sensor-box">
               <p>Air Temperature</p>
-              <img src="/public/png/temp-icon.png" alt="air temperature icon" class="sensor-icon">
+              <img src="/public/png/temp-icon.png" alt="air temperature icon" class="temp-sensor-icon">
             </div>
             <div class="sensor-box">
               <p>Ambient Noise</p>
