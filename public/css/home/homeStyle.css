@@ -173,7 +173,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 0vh;
+  margin-top: -5rem;
   height: calc(125vh - 80px);
 }
 
@@ -439,12 +439,17 @@ body {
     height: auto;
   }
 
+  .groundbreaking-part {
+    margin-top: 0rem;
+  }
+
   .adaptive-sound-info-2 {
     margin-top: 50rem;
+    margin-bottom: -30rem;
   }
 
   .control-section {
-    margin-top: -10vh;
+    margin-top: -30vh;
   }
 
   .sensor-box p {
@@ -517,9 +522,5 @@ body {
 
   .pulse-content {
     margin-top: 0rem;
-  }
-
-  .groundbreaking-part {
-    margin-top: 2rem;
   }
 }
