@@ -1,7 +1,7 @@
 version: '3.3'
 services:
-  db-staging:
-    container_name: db-staging
+  db:
+    container_name: db
     image: mariadb:10.11.3
     restart: always
     environment:
@@ -15,19 +15,19 @@ services:
       - ./dump:/docker-entrypoint-initdb.d
       - db-staging:/var/lib/mariadb/data
 
-  website-staging:
+  website:
     image: php:8.0.3-apache
-    container_name: website-staging
+    container_name: website
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
     depends_on:
-      - db-staging
+      - db
     volumes:
       - .:/var/www/html/
     environment:
-      DB_HOST: db-staging
+      DB_HOST: db
       DB_NAME: ${DB_NAME}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -41,21 +41,21 @@ services:
     ports:
       - 4200:80
 
-  phpmyadmin-staging:
+  phpmyadmin:
     image: phpmyadmin:latest
-    container_name: phpmyadmin-staging
+    container_name: phpmyadmin
     links:
-      - db-staging
+      - db
     environment:
-      PMA_HOST: db-staging
+      PMA_HOST: db
     restart: always
     ports:
       - 4201:80
 
-  composer-staging:
+  composer:
     restart: "no"
     image: composer:latest
-    container_name: composer-staging
+    container_name: composer
     volumes:
       - .:/app
       - ./composer.json:/app/composer.json
@@ -65,4 +65,4 @@ services:
     command: install
 
 volumes:
-  db-staging:
+  db:
