@@ -168,8 +168,8 @@ class account extends Controller
         
         $confirmation = new Confirmation;
         $token = $confirmation->createConfirmationCode($email);
-        $confirmation->sendConfirmationMail($email, $token);
-        
+        $confirmation->sendConfirmationMail($email, "0");
+
         $nameInput = new NameInput;
         $nameResult = $nameInput->validate($name);
         $emailInput = new EmailInput;
