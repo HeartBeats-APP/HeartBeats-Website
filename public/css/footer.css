@@ -4,7 +4,7 @@ footer {
     background-color: rgb(0, 0, 0, .5);
     color: #fff;
     padding: clamp(.25em, .5vw, .5em) .25vw clamp(.1em, .2vw, .2em) .25vw;
-    height: 5%;
+    height: fit-content;
     width: 100%;
     display: flex;
     flex-direction: row;
