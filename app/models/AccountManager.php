@@ -203,6 +203,7 @@ class Register extends AccountManager
         $name = ucfirst($name);
 
         if (self::isMailExists($email)) {
+            echo "";
             return self::MAIL_EXISTS_ERROR;
         }
 
