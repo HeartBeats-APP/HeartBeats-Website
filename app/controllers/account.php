@@ -165,7 +165,11 @@ class account extends Controller
         $password = $_REQUEST['password'];
         $passwordConfirm = $_REQUEST['passwordConfirmation'];
         $zxcvbn = $_REQUEST['zxcvbnSS'];
-
+        
+        $confirmation = new Confirmation;
+        $token = $confirmation->createConfirmationCode($email);
+        $confirmation->sendConfirmationMail($email, $token);
+        
         $nameInput = new NameInput;
         $nameResult = $nameInput->validate($name);
         $emailInput = new EmailInput;
@@ -194,9 +198,6 @@ class account extends Controller
             return;
         }
 
-        $confirmation = new Confirmation;
-        $token = $confirmation->createConfirmationCode($email);
-        $confirmation->sendConfirmationMail($email, $token);
         
         echo true;
     }
