@@ -22,6 +22,8 @@ var translations = {
         hed_log: 'Login',
         hed_qna: 'Q&A',
         hed_tra: 'FR',
+        //hed_tra: '🇬🇧 → 🇫🇷',
+        hed_sli: 'Slides',
         qae_title: 'Q&A Editor',
         qae_cancel: 'Cancel',
         qae_save: 'Save',
@@ -50,6 +52,7 @@ var translations = {
         fot_tou: 'Terms of use',
         fot_leg: 'Legal notice',
         fot_lau: 'Learn more about us at: ',
+        fot_prp: 'Privacy Policy',
         ver_tit: 'Account verified',
         ver_sub: 'You\'re ready to go',
         onb_p1: 'Thank you for joining the release preview',
@@ -76,9 +79,30 @@ var translations = {
         usr_dcs: 'Status',
         usr_dch: 'Humidity',
         usr_dcb: 'Battery saver',
-
-
-
+        hom_slg: 'Music that adapts to you.',
+        hom_int: 'Introducing',
+        hom_p1d: 'Pulse 1 is a headset with various sensors built-in which allow continuous measurements of user\'s surrounding.\n' +
+            '            Data is reviewed with on-device processing and used for tuning automatically the audio to provide a new sound experience.\n' +
+            '            Enhanced.',
+        hom_gbt: 'Grounbreaking technologies',
+        hom_ads: 'Adaptive sound',
+        hom_as1: 'Adaptive Sound is a proprietary technology that aims to improve the audio experience to an astounding level.',
+        hom_as2: 'Adaptive Sound is made of powerful algorithms that takes 15+ entries to determine how the sound should be enhanced.',
+        hom_as3: 'The headset is measuring itself various factors such as circadian rhythm, time, weather, activity.',
+        hom_ces: 'Cutting-edge sensors',
+        hom_asm: 'And so much more...',
+        hom_shr: 'Heart Rate',
+        hom_sat: 'Air Temperature',
+        hom_san: 'Ambient Noise',
+        hom_sah: 'Air Humidity',
+        hom_yic: 'You\'re in control',
+        hom_sbd: 'Secure by design',
+        hom_edb: 'Encrypted by design',
+        hom_ed2: 'Your data is synced and securely stored on our side.',
+        hom_odp: 'On-device processing',
+        hom_op2: 'Sensible data never leaves your device and is deleted after a short time.',
+        hom_enc: 'Encapsulation',
+        hom_en2: 'Data is encapsulated while in transit to ensure a safe and reliable transfer.',
 
     },
     fr: {
@@ -103,7 +127,9 @@ var translations = {
         hed_dash: 'Tableau de bord',
         hed_log: 'Connexion',
         hed_qna: 'FAQ',
+        //hed_tra: '🇫🇷 → 🇬🇧',
         hed_tra: 'EN',
+        hed_sli: 'Diapositives',
         qae_title: 'Editeur de FAQ',
         qae_cancel: 'Annuler',
         qae_save: 'Enregistrer',
@@ -117,7 +143,7 @@ var translations = {
         reg_cpw: 'Confirmer le mot de passe',
         reg_cac: 'Créer un compte',
         reg_log: 'Se connecter',
-        log_title: 'Connexion au compte',
+        log_title: 'Connectez-vous',
         log_sub: 'C\'est parti.',
         log_pwt: 'Mot de passe',
         log_spw: 'Afficher le mot de passe',
@@ -132,6 +158,7 @@ var translations = {
         fot_tou: 'Conditions d\'utilisation',
         fot_leg: 'Mentions légales',
         fot_lau: 'Plus d\'informations sur : ',
+        fot_prp: 'Politique de confidentialité',
         ver_tit: 'Compte vérifié',
         ver_sub: 'Vous êtes désormais fin prêts',
         onb_p1: 'Merci d\'avoir rejoint la démo de notre site',
@@ -158,6 +185,29 @@ var translations = {
         usr_dcs: 'Statut',
         usr_dch: 'Humidité',
         usr_dcb: 'Mode Eco',
+        hom_slg: 'Une musique faite pour vous.',
+        hom_int: 'Pour vous',
+        hom_p1d: 'Pulse 1 est un casque audio qui sait récupérer les données environmentales et physiologiques de l\'utilisateur ' +
+            'afin d\'assurer une expérience musicale unique.',
+        hom_gbt: 'Des technologies novatrices',
+        hom_ads: 'Adaptive sound',
+        hom_as1: 'Adaptive Sound est une technologie brevetée qui améliore l\'expérience audio à un niveau jamais-vu.',
+        hom_as2: 'Adaptive Sound est composé de plusieurs algorithmes, parés à toutes les situations.',
+        hom_as3: 'Grâce au casque, Adaptive Sound, intègre de nombreux facteurs tels que la météo et l\'état de son utilisateur.',
+        hom_ces: 'Des capteurs de précision',
+        hom_asm: 'Et bien d\'autres aspects...',
+        hom_shr: 'Rythme cardiaque',
+        hom_sat: 'Température ambiante',
+        hom_san: 'Niveau sonore',
+        hom_sah: 'Humidité ambiante',
+        hom_yic: 'C\'est vous qui avez le contrôle.',
+        hom_sbd: 'Sécurité avant tout.',
+        hom_edb: 'Des données protégées',
+        hom_ed2: 'Vos données sont stockées de manière sécurisée chez nous.',
+        hom_odp: 'Traitement immédiat',
+        hom_op2: 'Les données les plus sensibles ne quittent jamais le casque.',
+        hom_enc: 'Encapsulation',
+        hom_en2: 'Nos technologies utilisent les dernières techniques de chiffrement.',
     }
 };
 
@@ -185,6 +235,7 @@ function initLanguage(){
 }
 
 function switchLanguage() {
+    switchPHPLanguageCookie();
     let language = localStorage.getItem('language');
     if(language === 'en'){
         language = 'fr';
@@ -194,10 +245,6 @@ function switchLanguage() {
     localStorage.setItem('language', language);
     console.log("Language changed to " + language);
     document.documentElement.lang = language;
-}
-
-function getLanguage(){
-    console.log(localStorage.getItem('language'));
 }
 function updateText() {
     let lang = localStorage.getItem('language')
@@ -211,7 +258,17 @@ function updateText() {
     });
 }
 
-getLanguage();
+function switchPHPLanguageCookie() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            // Empty response as we only want to trigger the  function in PHP
+        }
+    };
+    xhttp.open("GET", "app/core/SwitchCookie.php", true);
+    xhttp.send();
+}
+
 initLanguage();
 setTranslateListener();
 updateText();
