@@ -5,6 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Moderation.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SearchEngine.php');
 
 class account extends Controller
 {
@@ -369,5 +370,22 @@ class account extends Controller
         $data = $databaseManager->getUpdatesInfo();
         $data['title'] = "Updates Center";
         return $data;
+    }
+
+    public function superSearch()
+    {
+        if (AccountManager::isSessionActive() && !(AccountManager::isAdmin())) {
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            exit();
+        }
+
+        $params = $_REQUEST['params'];
+
+        $searchEngine = new SearchEngine;
+        $result = $searchEngine->search($params);
+
+        echo json_encode($result);
+
     }
 }
