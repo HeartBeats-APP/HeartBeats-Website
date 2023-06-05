@@ -85,7 +85,7 @@ function toggleSearchExpand() {
 
   const search = document.getElementById("search")
   if (isFocused) {
-    console.log("focused");
+    search.classList.add("focused");
   } else {
     search.classList.remove("focused");
   }

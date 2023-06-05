@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="/public/css/onboarding.css" />
 
   <script type="module" src="/public/js/home/orb-animation.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </head>
 
