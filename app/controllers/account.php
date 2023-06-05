@@ -194,11 +194,11 @@ class account extends Controller
             return;
         }
 
-        echo true;
-
         $confirmation = new Confirmation;
         $token = $confirmation->createConfirmationCode($email);
         $confirmation->sendConfirmationMail($email, $token);
+        
+        echo true;
     }
 
     public function confirmAccount()

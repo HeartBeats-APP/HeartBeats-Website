@@ -359,6 +359,11 @@ class Confirmation extends AccountManager
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
 
         $mail = new PHPMailer(true);
+        $password = getEnv('MAIL_PASSWORD');
+        if (!$password)
+        {
+            echo "<script>alert('Failed to get mail infos :/');</script>";
+        }
 
         try {
             $mail->isSMTP();
@@ -366,10 +371,10 @@ class Confirmation extends AccountManager
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-            $mail->Username = getEnv('MAIL_ACCOUNT');
-            $mail->Password = getEnv('MAIL_PASSWORD');
+            $mail->Username = "noreply.heartbeats@gmail.com";
+            $mail->Password = $password;
 
-            $mail->setFrom(getEnv('MAIL_ACCOUNT'), 'Heart Beats');
+            $mail->setFrom("noreply.heartbeats@gmail.com", 'Heart Beats');
             $mail->addAddress($to);
             $mail->Subject = $subject;
             $mail->msgHTML($message);
@@ -378,6 +383,7 @@ class Confirmation extends AccountManager
             return "";
 
         } catch (Exception $e) {
+            echo "<script>alert('Couldn't confirm your account, please try again later');</script>";
             return "Couldn't confirm your account, please try again later";
         }
     }
