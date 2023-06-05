@@ -1,4 +1,7 @@
 <?php
+
+use Google\Service\Appengine\ErrorHandler;
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/InputValidator.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
@@ -373,19 +376,18 @@ class account extends Controller
     }
 
     public function superSearch()
-    {
+    {   
         if (AccountManager::isSessionActive() && !(AccountManager::isAdmin())) {
+            ErrorsHandler::newError("Unauthorized access to superSearch", 1, false);
             Moderation::flagUser(AccountManager::getMail());
             AccountManager::destroySession();
             exit();
         }
 
-        $params = $_REQUEST['params'];
-
+        $params = $_GET['params'];
         $searchEngine = new SearchEngine;
         $result = $searchEngine->search($params);
 
         echo json_encode($result);
-
     }
 }
