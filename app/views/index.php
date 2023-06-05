@@ -15,111 +15,109 @@
 
 </head>
 
-<body>
 
-  <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
-  <!-- Sign in with Google -->
-  <div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/dashboard" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true"></div>
-  
-  <main>
-    <div class="content-wrapper">
-      <section class="intro animate">
-        <canvas class="orb-canvas"></canvas>
-        <div class="pink-gradient-bg"></div>
-        <h1>HeartBeats</h1>
-        <h2>Music that adapts to you</h2>
-      </section>
+<iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
-      <section class="pulse  ">
-        <div class="introducing">
-          <p>Introducing</p>
-          <h3>Pulse 1</h3>
-          <img src="/public/png/headphone-facing-screen.png" alt="pulse 1" class="pulse-image">
+<!-- Sign in with Google -->
+<div id="g_id_onload" data-client_id="407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com" data-context="signin" data-login_uri="http://localhost/dashboard" data-auto_select="true" data-close_on_tap_outside="false" data-itp_support="true"></div>
+
+<main>
+  <div class="content-wrapper">
+    <section class="intro animate">
+      <canvas class="orb-canvas"></canvas>
+      <div class="pink-gradient-bg"></div>
+      <h1>HeartBeats</h1>
+      <h2>Music that adapts to you</h2>
+    </section>
+
+    <section class="pulse">
+      <div class="introducing">
+        <p>Introducing</p>
+        <h3>Pulse 1</h3>
+        <img src="/public/png/headphone-facing-screen.png" alt="pulse 1" class="pulse-image">
+      </div>
+    </section>
+
+    <section class="pulse-info">
+      <div class="pulse-content">
+        <p>Pulse 1 is a headset with various sensors built-in which allow continuous measurements of user's surrounding.
+          Data is reviewed with on-device processing and used for tuning automatically the audio to provide a new sound experience.
+          Enhanced.</p>
+      </div>
+    </section>
+
+    <section class="groundbreaking-part animate">
+      <div class="adaptive-sound-bg"></div>
+      <div class="adaptive-sound-image-container">
+        <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
+        <div class="extra-images">
+          <img src="/public/png/sound-wave.png" alt="sound wave" class="sound-wave-image">
+          <img src="/public/png/volume-control-icon.png" alt="volume control" class="volume-control-image">
         </div>
-      </section>
-
-      <section class="pulse-info  ">
-        <div class="pulse-content">
-          <p>Pulse 1 is a headset with various sensors built-in which allow continuous measurements of user's surrounding.
-            Data is reviewed with on-device processing and used for tuning automatically the audio to provide a new sound experience.
-            Enhanced.</p>
+      </div>
+      <div class="adaptive-sound-info">
+        <h1>Groundbreaking technologies</h1>
+        <h2>Adaptive Sound</h2>
+        <div class="adaptive-sound-content">
+          <p>Adaptive Sound is a proprietary technology that aims to improve the audio experience to an astounding level.</p>
+          <p>Adaptive Sound is made of powerful algorithms that takes 15+ entries to determine how the sound should be enhanced.</p>
+          <p>The headset is measuring itself various factors such as circadian rhythm, time, weather, activity.</p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="groundbreaking-part animate ">
-        <div class="adaptive-sound-bg"></div>
-        <div class="adaptive-sound-image-container">
-          <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
-          <div class="extra-images">
-            <img src="/public/png/sound-wave.png" alt="sound wave" class="sound-wave-image">
-            <img src="/public/png/volume-control-icon.png" alt="volume control" class="volume-control-image">
+    <section class="animate">
+      <div class="adaptive-sound-info-2">
+        <h2>Cutting-edge sensors</h2>
+        <h3>And so much more...</h3>
+      </div>
+      <div class="adaptive-sound">
+        <div class="sensor-container">
+          <div class="sensor-box">
+            <p>Heart Rate</p>
+            <img src="/public/png/bpm-icon.png" alt="heart rate icon" class="sensor-icon">
+          </div>
+          <div class="sensor-box">
+            <p>Air Temperature</p>
+            <img src="/public/png/temp-icon.png" alt="air temperature icon" class="temp-sensor-icon">
+          </div>
+          <div class="sensor-box">
+            <p>Ambient Noise</p>
+            <img src="/public/png/sound-icon.png" alt="ambient noise icon" class="sensor-icon">
+          </div>
+          <div class="sensor-box">
+            <p>Air Humidity</p>
+            <img src="/public/png/humidity-icon.png" alt="air humidity icon" class="sensor-icon">
           </div>
         </div>
-        <div class="adaptive-sound-info">
-          <h1>Groundbreaking technologies</h1>
-          <h2>Adaptive Sound</h2>
-          <div class="adaptive-sound-content">
-            <p>Adaptive Sound is a proprietary technology that aims to improve the audio experience to an astounding level.</p>
-            <p>Adaptive Sound is made of powerful algorithms that takes 15+ entries to determine how the sound should be enhanced.</p>
-            <p>The headset is measuring itself various factors such as circadian rhythm, time, weather, activity.</p>
-          </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="animate">
-        <div class="adaptive-sound-info-2">
-          <h2>Cutting-edge sensors</h2>
-          <h3>And so much more...</h3>
-        </div>
-        <div class="adaptive-sound">
-          <div class="sensor-container">
-            <div class="sensor-box">
-              <p>Heart Rate</p>
-              <img src="/public/png/bpm-icon.png" alt="heart rate icon" class="sensor-icon">
-            </div>
-            <div class="sensor-box">
-              <p>Air Temperature</p>
-              <img src="/public/png/temp-icon.png" alt="air temperature icon" class="temp-sensor-icon">
-            </div>
-            <div class="sensor-box">
-              <p>Ambient Noise</p>
-              <img src="/public/png/sound-icon.png" alt="ambient noise icon" class="sensor-icon">
-            </div>
-            <div class="sensor-box">
-              <p>Air Humidity</p>
-              <img src="/public/png/humidity-icon.png" alt="air humidity icon" class="sensor-icon">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="control-section animate">
-        <div class="blue-security-bg"></div>
-        <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
-        <h3 class="control-title">You're in control.</h3>
-        <h4 class="control-subtitle">Secure by Design.</h4>
-        <div class="control-box">
-          <h3 class="control-box-title">Encrypted database</h3>
-          <p>Your data is synced and securely stored on our side.</p>
-        </div>
-        <div class="control-box">
-          <h3 class="control-box-title">On-device processing</h3>
-          <p>Sensible data never leaves your device and is deleted after a short time.</p>
-        </div>
-        <div class="control-box">
-          <h3 class="control-box-title">Encapsulation</h3>
-          <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
-        </div>
-      </section>
-    </div>
-  </main>
+    <section class="control-section animate">
+      <div class="blue-security-bg"></div>
+      <img src="/public/png/11076-tnoinb3x-removebg-preview-1.png" alt="overlay" class="overlay-image">
+      <h3 class="control-title">You're in control.</h3>
+      <h4 class="control-subtitle">Secure by Design.</h4>
+      <div class="control-box">
+        <h3 class="control-box-title">Encrypted database</h3>
+        <p>Your data is synced and securely stored on our side.</p>
+      </div>
+      <div class="control-box">
+        <h3 class="control-box-title">On-device processing</h3>
+        <p>Sensible data never leaves your device and is deleted after a short time.</p>
+      </div>
+      <div class="control-box">
+        <h3 class="control-box-title">Encapsulation</h3>
+        <p>Data is encapsulated while in transit to ensure a safe and reliable transfer.</p>
+      </div>
+    </section>
+  </div>
+</main>
 
   <script src="/public/js/home/orb-animation.js"></script>
   <script src="/public/js/home/script.js"></script>
   <script src="/public/js/components/translation.js"></script>
-
-</body>
 
 <script>
   if (localStorage.getItem("onboarding") == "true") {
