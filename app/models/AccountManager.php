@@ -1,14 +1,19 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes of inactivity
 session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
-require_once '../vendor/autoload.php';
+require '../vendor/autoload.php';
+require '../vendor/phpmailer/phpmailer/src/Exception.php';
+require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
 
 class AccountManager
 {
@@ -18,7 +23,9 @@ class AccountManager
     protected const GENERAL_ERROR = "Something went wrong on our side, please try again later";
     protected const BANNED_ERROR = "Couldn't log you in :/";
     protected const ACCESS_DENIED_ERROR = "Access denied";
-    protected const INCORRECT_TOKEN = "Incorrect Token";
+    protected const INCORRECT_TOKEN = "Couldn't verify the Google token";
+    protected const INCORRECT_ORIGIN = "Couldn't verify the origin of the request";
+
 
     public static function isSessionActive()
     {
@@ -99,39 +106,59 @@ class AccountManager
 
 class GoogleAuth extends AccountManager
 {
-    public function promptAuth($tokenID)
+    public function isPayloadValid($payload)
     {
-        $clientID = getenv('G_AUTH_ID');
-        $client = new Google_Client(['client_id' => $clientID]);
-        $payload = $client->verifyIdToken($tokenID);
-        if (!$payload) {
-            echo "<script>alert('Failed to verify Google token');</script>";
+        if ($payload['aud'] != "407839619879-b18h6590qstnspu3ku9fs4nhbdhpjdds.apps.googleusercontent.com") {
+            ErrorsHandler::newError('Google auth : Wrong audience (' . $payload['aud'] . ')', 3, false);
             return false;
         }
-        $email = $payload['email'];
-        $name = $payload['name'];
 
-        if (self::isMailExists($email)) {
-            self::startSession($email);
-            Moderation::unflagUser($email);
+        if ($payload['iss'] != 'https://accounts.google.com') {
+            ErrorsHandler::newError('Google auth : Wrong issuer (' . $payload['iss'] . ')', 3, false);
+            return false;
+        }
 
-            if (Moderation::isUserBanned($email)) {
-                self::destroySession();
-                echo self::BANNED_ERROR;
-                return false;
-            }
-        } else {
+        if ($payload['sub'] == null || $payload['email'] == null || $payload['name'] == null) {
+            ErrorsHandler::newError('Google auth : Missing user data', 2, false);
+            return false;
+        }
+
+        if ($payload['exp'] < time()) {
+            ErrorsHandler::newError('Google auth : Token expired' + $payload['exp'], 2, false);
+            return false;
+        }
+
+        return true;
+    }
+
+    public function setSession($name, $email, $isMailVerified)
+    {
+
+        if (!$isMailVerified) {
+            echo "<script>alert('Your mail has to be verified by Google in order to use this service');</script>";
+            return false;
+        }
+
+        if (Moderation::isUserBanned($email)) {
+            ErrorsHandler::newError('GOOGLE auth : the following user is banned : ' . $email, 2, false);
+            self::destroySession();
+            return false;
+        }
+
+        if (!self::isMailExists($email)) {
             $register = new Register();
             if (!$register->registerWithGoogle($name, $email)) {
                 self::destroySession();
-                echo "<script>alert('Failed to register with Google');</script>";
+                ErrorsHandler::newError('GOOGLE auth : Couldn\'t register the user', 2, false);
                 return false;
             }
-            self::startSession($email);
-            Moderation::unflagUser($email);
-            return true;
         }
+
+        self::startSession($email);
+        Moderation::unflagUser($email);
+        return true;
     }
+
 }
 
 class Login extends AccountManager
@@ -176,6 +203,7 @@ class Register extends AccountManager
         $name = ucfirst($name);
 
         if (self::isMailExists($email)) {
+            echo "";
             return self::MAIL_EXISTS_ERROR;
         }
 
@@ -186,11 +214,7 @@ class Register extends AccountManager
         $role = $this->getRole($email);
         $this->registerInDatabase($name, $email, $entered_password, $role);
 
-        if (self::isMailExists($email)) {
-            return "";
-        }
-
-        return self::GENERAL_ERROR;
+        return "";
     }
 
     public function registerWithGoogle($name, $email)
@@ -336,6 +360,11 @@ class Confirmation extends AccountManager
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
 
         $mail = new PHPMailer(true);
+        $password = getEnv('MAIL_PASSWORD');
+        if (!$password)
+        {
+            echo "<script>alert('Failed to get mail infos :/');</script>";
+        }
 
         try {
             $mail->isSMTP();
@@ -343,17 +372,19 @@ class Confirmation extends AccountManager
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-            $mail->Username = getenv('MAIL_ACCOUNT');
-            $mail->Password = getenv('MAIL_PASSWORD');
+            $mail->Username = "noreply.heartbeats@gmail.com";
+            $mail->Password = $password;
 
-            $mail->setFrom(getenv('MAIL_ACCOUNT'), 'Heart Beats');
+            $mail->setFrom("noreply.heartbeats@gmail.com", 'Heart Beats');
             $mail->addAddress($to);
             $mail->Subject = $subject;
             $mail->msgHTML($message);
 
             $mail->send();
             return "";
+
         } catch (Exception $e) {
+            echo "<script>alert('Couldn't confirm your account, please try again later');</script>";
             return "Couldn't confirm your account, please try again later";
         }
     }

@@ -9,7 +9,7 @@
     </div>
 
     <div class="row legal">
-        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/privacy" lang-id="fot_prp">Privacy Policy</a>
         <a href="/legal/cgu" lang-id="fot_leg">Legal Notice</a>
     </div>
 
