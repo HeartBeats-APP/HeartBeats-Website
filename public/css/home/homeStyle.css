@@ -145,12 +145,12 @@
 }
 
 .pulse-content {
-  max-width: 800px;
+  max-width: 900px;
   text-align: center;
 }
 
 .pulse-content p {
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1.5;
   color: white;
 }
@@ -511,5 +511,9 @@
 
   .pulse-content {
     margin-top: 0rem;
+  }
+
+  .pulse-content p {
+    font-size: 1.5rem;
   }
 }
