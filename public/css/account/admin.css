@@ -1,138 +1,255 @@
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* Security Card ------------------------------------------------------------------------------------------------------------------------------------ */
 .security {
-    padding: 2.5vh clamp(.5em, 2vw, 2em) 3vh clamp(.5em, 2vw, 2em);
+  padding: 2.5vh clamp(0.5em, 2vw, 2em) 3vh clamp(0.5em, 2vw, 2em);
 }
 
 .security h2 {
-    margin-bottom: -1vh;
+  margin-bottom: -1vh;
 }
 
 .security h3 {
-    min-width: unset;
-    white-space: nowrap;
+  min-width: unset;
+  white-space: nowrap;
 }
 
 .details {
-    min-width: clamp(15em, 30vw, 30em);
+  min-width: clamp(15em, 30vw, 30em);
 }
 
 .card-column {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    height: 100%;
-    gap: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  height: 100%;
+  gap: 2vh;
 }
 
 /* Expandable Card ---------------------------------------------------------------------------------------------------------------------------------- */
 .expandable-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
-    width: 100%;
-    height: fit-content;
-    background: rgb(255, 255, 255, 0.25);
-    border-radius: 10px;
-    padding: 1% 2.5%;
-    gap: 2.5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: fit-content;
+  background: rgb(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 1% 2.5%;
+  gap: 2.5%;
 }
 
 .expandable-card:hover {
-    background: rgb(255, 255, 255, 0.15);
-    cursor: pointer;
-    transform: scale(1.02);
+  background: rgb(255, 255, 255, 0.15);
+  cursor: pointer;
+  transform: scale(1.02);
 }
 
 .expandable-card.large {
-    z-index: 500;
-    width: 50%;
-    min-height: 50%;
-    height: fit-content;
-    top: 30%;
-    left: 25%;
-    position: absolute;
+  z-index: 500;
+  width: 50%;
+  min-height: 50%;
+  height: fit-content;
+  top: 30%;
+  left: 25%;
+  position: absolute;
 }
 
 .expandable-card.large:hover {
-    transform: none;
-    cursor: default;
-    background-color: rgb(255, 255, 255, 0.25);
+  transform: none;
+  cursor: default;
+  background-color: rgb(255, 255, 255, 0.25);
 }
 
-.overlay-bg{
-    position: absolute;
-    z-index: 499;
-    width: 100%;
-    height: 100%;
-    background: rgb(0, 0, 0, 0.25);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(-25px);
-    top: 0;
-    left: 0;
+.overlay-bg {
+  position: absolute;
+  z-index: 499;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.25);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(-25px);
+  top: 0;
+  left: 0;
 }
 
 /* Security Details ---------------------------------------------------------------------------------------------------------------------------------- */
 
 #security-details {
-    width: 75%;
+  width: 75%;
 }
 
 #security-img {
-    width: 25%;
-    align-items: center;
-    justify-content: center;
-
+  width: 25%;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-column img {
-    width: clamp(1em, 15vw, 15em);
-    height: clamp(1em, 15vw, 15em);
+  width: clamp(1em, 15vw, 15em);
+  height: clamp(1em, 15vw, 15em);
 }
 
 .logs {
-    height: clamp(5em, 15vh, 10em);
-    margin-top: .5em;
-    border-radius: 10px;
-    border: white solid 2px;
-    overflow-y: auto;
-    padding-top: 1%;
+  height: clamp(5em, 15vh, 10em);
+  margin-top: 0.5em;
+  border-radius: 10px;
+  border: white solid 2px;
+  overflow-y: auto;
+  padding-top: 1%;
 }
 
 .log-card {
-    background: rgb(255, 255, 255, 0.25);
-    border-radius: 5px;
-    width: 98%;
-    margin-left: 1%;
-    padding: 1%;
-    font-size: clamp(.6em, 1vw, 1.2em);
+  background: rgb(255, 255, 255, 0.25);
+  border-radius: 5px;
+  width: 98%;
+  margin-left: 1%;
+  padding: 1%;
+  font-size: clamp(0.6em, 1vw, 1.2em);
 }
 
 .indicator {
-    width: clamp(1em, 1vw, 1.5em);
-    height: clamp(1em, 1vw, 1.5em);
-    border-radius: 50%;
+  width: clamp(1em, 1vw, 1.5em);
+  height: clamp(1em, 1vw, 1.5em);
+  border-radius: 50%;
 }
 
 .blue-bg {
-    background: var(--blue-gradient);
+  background: var(--blue-gradient);
 }
 
 .red-bg {
-    background: var(--main-gradient);
+  background: var(--main-gradient);
 }
 
 /* Rest of the page ---------------------------------------------------------------------------------------------------------------------------------- */
 
 #DebugModeSwitch {
-    margin-right: .5em;
+  margin-right: 0.5em;
 }
 
-input[type="checkbox"]:hover+label {
-    scale: 1.175;
-    cursor: pointer;
+input[type="checkbox"]:hover + label {
+  scale: 1.175;
+  cursor: pointer;
+}
+
+/* Search area --------------------------------------------------------------------------------------------------------------------------------------- */
+.search {
+  display: inline-block;
+  position: relative;
+  height: 35px;
+  width: 35px;
+  box-sizing: border-box;
+  margin: 0px 8px 7px 0px;
+  padding: 7px 9px 0px 9px;
+  border: 3px solid white;
+  border-radius: 25px;
+  transition: all 500ms cubic-bezier(0.075, 0.8, 0.165, 1);
+  cursor: text;
+}
+
+.search:after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 20px;
+  right: -5px;
+  top: 21px;
+  background: white;
+  border-radius: 3px;
+  transform: rotate(-45deg);
+  transition: all 300ms cubic-bezier(0.075, 0.8, 0.165, 1);
+}
+
+.search.active,
+.search:hover {
+    transform: scale(1.2);
+    cursor: text;
+}
+
+.focused {
+  width: clamp(20em, 35vw, 35em);
+  margin-right: 0px;
+}
+
+.focused:after {
+  height: 0px;
+}
+
+
+.search input {
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+  font-family: Helvetica;
+  font-size: 15px;
+  color: inherit;
+  background: transparent;
+  outline-width: 0px;
+}
+
+
+.searchArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: fit-content;
+  padding: 1% 2.5%;
+  gap: 2.5%;
+  margin-top: 2em;
+}
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+  margin-top: 1em;
+}
+
+.searchRow {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  gap: 1em;
+  background-color: rgb(255, 255, 255, 0.25);
+  width: 100%;
+  padding: 1em 1.5em;
+  border-radius: 10px;
+}
+
+.searchRow:hover {
+  background-color: rgb(255, 255, 255, 0.15);
+  cursor: pointer;
+  transform: scale(1.025);
+}
+
+.searchID {
+  width: 5%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchName {
+  width: 20%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchEmail {
+  width: 65%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchActions {
+  width: 10%;
 }

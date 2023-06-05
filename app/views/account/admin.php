@@ -28,6 +28,14 @@
                 <h5 lang-id="adm_dzs">Danger Zone 💀</h5>
             </div>
 
+            <div class="searchArea">
+                <label class="search" id="search" "inpt_search">
+                    <input id="inpt_search" type="text" oninput="superSearch()"/>
+                </label>
+                <div class="searchResults" id="searchResults">  
+                </div>
+            </div>
+
             <div class="card security">
                 <div id="security-details" class="card-column">
 
@@ -98,10 +106,17 @@
         </div>
     </div>
 
+    <script>
+        //listen for clicks and call function when clicked
+        document.addEventListener('click', function(event) {
+            toggleSearchExpand();
+        });
+    </script>
+
 </body>
 <script src="/public/js/account/user-account.js"></script>
-<script src="/public/js/account/admin.js"></script>
 <script src="/public/js/components/translation.js"></script>
+<script src="/public/js/account/admin.js"></script>
 <script>
     var data = <?php echo json_encode($data); ?>;
 
@@ -119,6 +134,16 @@
     } else {
         document.getElementById("updatesIndicator").classList.add("red-bg");
     }
+</script>
+<script>
+    $("#inpt_search").on('focus', function() {
+        $(this).parent('label').addClass('active');
+    });
+
+    $("#inpt_search").on('blur', function() {
+        if ($(this).val().length == 0)
+            $(this).parent('label').removeClass('active');
+    });
 </script>
 
 </html>
