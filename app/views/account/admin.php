@@ -32,7 +32,7 @@
                 <label class="search" id="search" "inpt_search">
                     <input id="inpt_search" type="text" oninput="superSearch()"/>
                 </label>
-                <div class="searchResults" id="searchResults">  
+                <div class="searchResults" id="searchResults">
                 </div>
             </div>
 
