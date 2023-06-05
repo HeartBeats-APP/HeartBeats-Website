@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<main>
     <div class="content-wrapper">
         <div class="background"></div>
         <div class="welcome-banner">
@@ -56,9 +56,9 @@
             </div>
         </div>
     </div>
+</main>
 
-    <script src="public/js/dashboard/dashboard-script.js"></script>
-    <script src="/public/js/components/translation.js"></script>
-</body>
+<script src="public/js/dashboard/dashboard-script.js"></script>
+<script src="/public/js/components/translation.js"></script>
 
 </html>
