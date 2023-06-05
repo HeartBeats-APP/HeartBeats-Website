@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/public/css/components.css" />
 <link rel="stylesheet" href="/public/css/header.css" />
 
@@ -27,7 +26,7 @@
 
             <div class="header-tab" onclick="window.location.href='/slides/'">
                 <img class="tab-icon" src="/public/svg/header/Slides.svg" width="50" height="50" alt="" />
-                <a>Slides</a>
+                <a lang-id="hed_sli">Slides</a>
             </div>  
 
             <div id="account-tab" class="header-tab" onclick="window.location.href='/account/<?php echo $AccountAction ?>'">
@@ -37,7 +36,8 @@
         </div>
 
         <div class="header-right">
-            <button id="language-button" class="third-button" onclick="window.location.href='/account/<?php echo $AccountAction ?>'"><?php echo $AccountText ?></button>
+            <button id="language-button" class="third-button" onclick="window.location.href='/account/<?php echo $AccountAction ?>'"><?php $AccountText;
+                echo $AccountText ?></button>
             <button id="translate-button" class="language-button" lang-id="hed_tra">En</button>
         </div>
     </div>
