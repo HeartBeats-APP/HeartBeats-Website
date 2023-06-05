@@ -1,14 +1,19 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes of inactivity
 session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
-require_once '../vendor/autoload.php';
+require '../vendor/autoload.php';
+require '../vendor/phpmailer/phpmailer/src/Exception.php';
+require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
 
 class AccountManager
 {
@@ -361,16 +366,17 @@ class Confirmation extends AccountManager
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-            $mail->Username = getenv('MAIL_ACCOUNT');
-            $mail->Password = getenv('MAIL_PASSWORD');
+            $mail->Username = getEnv('MAIL_ACCOUNT');
+            $mail->Password = getEnv('MAIL_PASSWORD');
 
-            $mail->setFrom(getenv('MAIL_ACCOUNT'), 'Heart Beats');
+            $mail->setFrom(getEnv('MAIL_ACCOUNT'), 'Heart Beats');
             $mail->addAddress($to);
             $mail->Subject = $subject;
             $mail->msgHTML($message);
 
             $mail->send();
             return "";
+
         } catch (Exception $e) {
             return "Couldn't confirm your account, please try again later";
         }
