@@ -1,14 +1,19 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 ini_set('session.gc_maxlifetime', 1800); // Session will expire after 30 minutes of inactivity
 session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require_once 'connect.php';
 require_once 'ErrorsHandler.php';
 require_once 'Moderation.php';
-require_once '../vendor/autoload.php';
+require '../vendor/autoload.php';
+require '../vendor/phpmailer/phpmailer/src/Exception.php';
+require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
 
 class AccountManager
 {
@@ -198,6 +203,7 @@ class Register extends AccountManager
         $name = ucfirst($name);
 
         if (self::isMailExists($email)) {
+            echo "";
             return self::MAIL_EXISTS_ERROR;
         }
 
@@ -208,11 +214,7 @@ class Register extends AccountManager
         $role = $this->getRole($email);
         $this->registerInDatabase($name, $email, $entered_password, $role);
 
-        if (self::isMailExists($email)) {
-            return "";
-        }
-
-        return self::GENERAL_ERROR;
+        return "";
     }
 
     public function registerWithGoogle($name, $email)
@@ -313,6 +315,17 @@ class debugMode extends AccountManager
     }
 }
 
+class Password extends AccountManager 
+{
+    public static function generateNew($email)
+    {
+        $newPassword = bin2hex(random_bytes(random_int(10, 20)));
+        $hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
+        database_query("UPDATE users SET `password` = :password WHERE mail = :mail", [':password' => $hashed_password, ':mail' => $email]);
+        return $newPassword;
+    }
+}
+
 class Confirmation extends AccountManager
 {
     public function createConfirmationCode($email)
@@ -357,7 +370,13 @@ class Confirmation extends AccountManager
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
 
+
         $mail = new PHPMailer(true);
+        $password = getEnv('MAIL_PASSWORD');
+        if (!$password)
+        {
+            echo "<script>alert('Failed to get mail infos :/');</script>";
+        }
 
         try {
             $mail->isSMTP();
@@ -365,18 +384,63 @@ class Confirmation extends AccountManager
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-            $mail->Username = getenv('MAIL_ACCOUNT');
-            $mail->Password = getenv('MAIL_PASSWORD');
+            $mail->Username = "noreply.heartbeats@gmail.com";
+            $mail->Password = $password;
 
-            $mail->setFrom(getenv('MAIL_ACCOUNT'), 'Heart Beats');
+            $mail->setFrom("noreply.heartbeats@gmail.com", 'Heart Beats');
             $mail->addAddress($to);
             $mail->Subject = $subject;
             $mail->msgHTML($message);
 
             $mail->send();
             return "";
+
         } catch (Exception $e) {
+            echo "<script>alert('Couldn't send new password');</script>";
             return "Couldn't confirm your account, please try again later";
         }
+    }
+
+    public function sendNewPassword($email, $newPassword)
+    {
+        $to = $email;
+        $subject = "You're new HeartBeats password";
+        $message = '<html><body>';
+        $message .= '<h1 style="text-align:center;">Your new password is : ' . $newPassword . '</h1>';
+        $message .= '</body></html>';
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
+
+        $mail = new PHPMailer(true);
+        
+        $password = getEnv('MAIL_PASSWORD');
+        if (!$password)
+        {
+            echo "<script>alert('Failed to get mail infos :/');</script>";
+        }
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->Username = "noreply.heartbeats@gmail.com";
+            $mail->Password = $password;
+
+            $mail->setFrom("noreply.heartbeats@gmail.com", 'Heart Beats');
+            $mail->addAddress($to);
+            $mail->Subject = $subject;
+            $mail->msgHTML($message);
+
+            $mail->send();
+            return "";
+
+        } catch (Exception $e) {
+            echo "<script>alert('Couldn't send the new password');</script>";
+            return "Couldn't confirm your account, please try again later";
+        }
+
     }
 }

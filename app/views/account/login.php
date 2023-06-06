@@ -61,6 +61,7 @@
   </div>
 
   <script src="/public/js/account/entries-checker.js"></script>
+  <script src="/public/js/components/translation.js"></script>
 
 </body>
 

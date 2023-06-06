@@ -9,6 +9,13 @@
     padding: 0;
 }
 
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  overflow: hidden;
+}
+
 .background {
     position: fixed;
     top: 0;
@@ -53,7 +60,7 @@ button:hover {
 }
 
 .welcome-banner {
-    margin-top: 5%;
+    margin-top: 8%;
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -68,12 +75,13 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: auto;
     width: 80%;
     border-radius: 40px;
     padding: 30px;
     text-align: center;
+    margin: auto;
     margin-top: 30px;
+    margin-bottom: 5rem;
 }
 
 .dashboard-box:nth-of-type(2) {

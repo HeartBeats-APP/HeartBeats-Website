@@ -11,13 +11,10 @@
   <link rel="stylesheet" href="/public/css/onboarding.css" />
 
   <script type="module" src="/public/js/home/orb-animation.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
+  
 </head>
 
-<body>
-
-  <iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
+<iframe id="onboarding" class="onboarding" src="/app/views/onboarding.php" frameborder="0" allowTransparency="true"></iframe>
 
   <main>
     <div class="content-wrapper">
@@ -28,7 +25,7 @@
         <h2>Music that adapts to you</h2>
       </section>
 
-      <section class="pulse  ">
+      <section class="pulse">
         <div class="introducing">
           <p>Introducing</p>
           <h3>Pulse 1</h3>
@@ -36,7 +33,7 @@
         </div>
       </section>
 
-      <section class="pulse-info  ">
+      <section class="pulse-info">
         <div class="pulse-content">
           <p>Pulse 1 is a headset with various sensors built-in which allow continuous measurements of user's surrounding.
             Data is reviewed with on-device processing and used for tuning automatically the audio to provide a new sound experience.
@@ -44,7 +41,7 @@
         </div>
       </section>
 
-      <section class="groundbreaking-part animate ">
+      <section class="groundbreaking-part animate">
         <div class="adaptive-sound-bg"></div>
         <div class="adaptive-sound-image-container">
           <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
@@ -77,7 +74,7 @@
             </div>
             <div class="sensor-box">
               <p>Air Temperature</p>
-              <img src="/public/png/temp-icon.png" alt="air temperature icon" class="sensor-icon">
+              <img src="/public/png/temp-icon.png" alt="air temperature icon" class="temp-sensor-icon">
             </div>
             <div class="sensor-box">
               <p>Ambient Noise</p>
@@ -115,8 +112,6 @@
   <script src="/public/js/home/orb-animation.js"></script>
   <script src="/public/js/home/script.js"></script>
   <script src="/public/js/components/translation.js"></script>
-
-</body>
 
 <script>
   if (localStorage.getItem("onboarding") == "true") {
