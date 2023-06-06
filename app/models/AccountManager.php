@@ -85,6 +85,12 @@ class AccountManager
         return $_SESSION['role'] == 'admin';
     }
 
+    public static function isThisUserAdmin($mail)
+    {
+        $result = database_query("SELECT `role` FROM users WHERE mail = :mail", [':mail' => $mail]);
+        return $result['role'] == 'admin';
+    }
+
     public static function getSessionData()
     {
         if (!self::isSessionActive()) {
@@ -101,6 +107,22 @@ class AccountManager
             return false;
         }
         return $_SESSION['email'];
+    }
+
+    public static function getMailFromID($id)
+    {
+        $result = database_query("SELECT mail FROM users WHERE id = :id", [':id' => $id]);
+        return $result['mail'];
+    }
+
+    public static function deleteUser($mail)
+    {
+        if (self::isThisUserAdmin($mail)) {
+            return false;
+        }
+
+        database_query("DELETE FROM users WHERE mail = :mail", [':mail' => $mail]);
+        return true;
     }
 }
 
