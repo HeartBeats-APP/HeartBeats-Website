@@ -45,10 +45,8 @@
         <div class="adaptive-sound-bg"></div>
         <div class="adaptive-sound-image-container">
           <img src="/public/png/headphone-1-ear.png" alt="adaptive sound" class="adaptive-sound-image">
-          <div class="extra-images">
-            <img src="/public/png/sound-wave.png" alt="sound wave" class="sound-wave-image">
-            <img src="/public/png/volume-control-icon.png" alt="volume control" class="volume-control-image">
-          </div>
+          <img src="/public/png/sound-wave.png" alt="sound wave" class="sound-wave-image">
+          <img src="/public/png/volume-control-icon.png" alt="volume control" class="volume-control-image">
         </div>
         <div class="adaptive-sound-info">
           <h1>Groundbreaking technologies</h1>
