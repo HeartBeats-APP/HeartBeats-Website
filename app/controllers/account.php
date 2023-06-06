@@ -279,10 +279,12 @@ class account extends Controller
         $password = Password::generateNew($email);
         $confirmation = new Confirmation;
         $result = $confirmation->sendNewPassword($email, $password);
-        if ($result == true) {
+        
+        if ($result == "" || $result == true) {
             echo 'true';
             return;
         }
+        
         echo 'false';
     }
 
