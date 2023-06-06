@@ -180,3 +180,7 @@ async function updateData() {
 }
 
 setInterval(updateData, 4000);
+
+window.addEventListener('resize', function() {
+  location.reload();
+});
