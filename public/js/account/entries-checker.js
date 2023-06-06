@@ -120,7 +120,7 @@ function recoverPassword() {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-            if (this.responseText == true) {
+            if (this.responseText == true || this.responseText == "true") {
 
                 // Update login text
                 document.getElementById("title").innerHTML = "Check your inbox";

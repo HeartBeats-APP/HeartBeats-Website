@@ -273,14 +273,14 @@ class account extends Controller
         }
 
         if (!AccountManager::isMailExists($email)) {
-            return true;
+            return 'true';
         }
 
         $password = Password::generateNew($email);
         $confirmation = new Confirmation;
         $confirmation->sendNewPassword($email, $password);
 
-        return true;
+        return 'true';
     }
 
     public function registerDevice()
