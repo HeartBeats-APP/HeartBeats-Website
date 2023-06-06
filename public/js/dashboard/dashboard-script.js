@@ -52,7 +52,7 @@ function createChart(chartId, label, data, maxScaleValue, colorCurve) {
   });
 }
 
-// Appeler la fonction pour créer les graphiques au chargement de la page
+// Appeler la fonction pour crÃ©er les graphiques au chargement de la page
 window.addEventListener("load", function () {
   getData();
   if (TemperatureSet.length < 15) {
@@ -65,13 +65,13 @@ window.addEventListener("load", function () {
 function createGraphs() {
   createChart(
     "temperature-chart",
-    "Température",
+    "TempÃ©rature",
     TemperatureSet,
     50,
     "255, 99, 132"
   );
 
-  createChart("humidity-chart", "Humidité", HumiditySet, 100, "54, 162, 235");
+  createChart("humidity-chart", "HumiditÃ©", HumiditySet, 100, "54, 162, 235");
 
   createChart(
     "sound-level-chart",
@@ -84,29 +84,29 @@ function createGraphs() {
   createChart("bpm-level-chart", "BPM", BpmLevelSet, 200, "75, 192, 192");
 }
 
-// Sélectionnez tous les éléments graph
+// SÃ©lectionnez tous les Ã©lÃ©ments graph
 const graphs = document.querySelectorAll(".graph");
 
-// Ajoutez un gestionnaire d'événement survol à chaque élément graph
+// Ajoutez un gestionnaire d'Ã©vÃ©nement survol Ã  chaque Ã©lÃ©ment graph
 graphs.forEach((graph) => {
   graph.addEventListener("mouseenter", () => {
-    // Ajoutez la classe "hover" à l'élément graph survolé
+    // Ajoutez la classe "hover" Ã  l'Ã©lÃ©ment graph survolÃ©
     graph.classList.add("hover");
   });
 
   graph.addEventListener("mouseleave", () => {
-    // Supprimez la classe "hover" de l'élément graph lorsque la souris quitte le graphique
+    // Supprimez la classe "hover" de l'Ã©lÃ©ment graph lorsque la souris quitte le graphique
     graph.classList.remove("hover");
   });
 
-  // Ajoutez un gestionnaire d'événement clic à chaque élément graph
+  // Ajoutez un gestionnaire d'Ã©vÃ©nement clic Ã  chaque Ã©lÃ©ment graph
   graph.addEventListener("click", () => {
-    // Supprimez la classe "clicked" de tous les éléments graph
+    // Supprimez la classe "clicked" de tous les Ã©lÃ©ments graph
     graphs.forEach((otherGraph) => {
       otherGraph.classList.remove("clicked");
     });
 
-    // Ajoutez la classe "clicked" à l'élément graph cliqué
+    // Ajoutez la classe "clicked" Ã  l'Ã©lÃ©ment graph cliquÃ©
     graph.classList.add("clicked");
 
     // Ajoutez ou supprimez la classe "clicked" du conteneur graph-container
@@ -115,9 +115,9 @@ graphs.forEach((graph) => {
   });
 });
 
-// Ajoutez un gestionnaire d'événement clic sur le document entier
+// Ajoutez un gestionnaire d'Ã©vÃ©nement clic sur le document entier
 document.addEventListener("click", (event) => {
-  // Vérifiez si l'élément cliqué est en dehors du graph-container et des graphiques agrandis
+  // VÃ©rifiez si l'Ã©lÃ©ment cliquÃ© est en dehors du graph-container et des graphiques agrandis
   const isOutsideGraphContainer = !event.target.closest(".graph-container");
   const isOutsideGraphs = !event.target.closest(".graph.clicked");
 
