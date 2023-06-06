@@ -321,7 +321,7 @@ class Password extends AccountManager
     {
         $newPassword = bin2hex(random_bytes(random_int(10, 20)));
         $hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
-        database_query("UPDATE users SET password = :password WHERE mail = :mail", [':password' => $hashed_password, ':mail' => $email]);
+        database_query("UPDATE users SET `password` = :password WHERE mail = :mail", [':password' => $hashed_password, ':mail' => $email]);
         return $newPassword;
     }
 }
@@ -404,7 +404,7 @@ class Confirmation extends AccountManager
     public function sendNewPassword($email, $newPassword)
     {
         $to = $email;
-        $subject = "Password Reset";
+        $subject = "You're new HeartBeats password";
         $message = '<html><body>';
         $message .= '<h1 style="text-align:center;">Your new password is : ' . $newPassword . '</h1>';
         $message .= '</body></html>';
@@ -413,6 +413,7 @@ class Confirmation extends AccountManager
         $headers .= "From: Your Name noreply@heart-beats.fr" . "\r\n";
 
         $mail = new PHPMailer(true);
+        
         $password = getEnv('MAIL_PASSWORD');
         if (!$password)
         {
@@ -437,7 +438,7 @@ class Confirmation extends AccountManager
             return "";
 
         } catch (Exception $e) {
-            echo "<script>alert('Couldn't confirm send the new password');</script>";
+            echo "<script>alert('Couldn't send the new password');</script>";
             return "Couldn't confirm your account, please try again later";
         }
 

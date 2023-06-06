@@ -20,7 +20,7 @@ class account extends Controller
     }
 
     public function googleAuth()
-    {   
+    {
         $tokenID = $_POST['credential'] ?? null;
 
         if ($tokenID == null) {
@@ -39,21 +39,21 @@ class account extends Controller
             header("Location: /account/login");
             exit();
         }
-        
+
         $result = $GoolgeAuth->setSession($payload['name'], $payload['email'], $payload['email_verified']);
         if (!$result) {
             ErrorsHandler::newError("Google auth : Something went wrong while sign in the user", 1, false);
         }
-        
+
         if (AccountManager::isAdmin()) {
             header("Location: /account/admin");
         } else {
             header("Location: /account/user");
         }
-
     }
 
-    public function isLogedIn(){
+    public function isLogedIn()
+    {
         if (AccountManager::isSessionActive()) {
             echo true;
         } else {
@@ -201,7 +201,7 @@ class account extends Controller
         $confirmation = new Confirmation;
         $token = $confirmation->createConfirmationCode($email);
         $confirmation->sendConfirmationMail($email, $token);
-        
+
         echo true;
     }
 
@@ -278,9 +278,12 @@ class account extends Controller
 
         $password = Password::generateNew($email);
         $confirmation = new Confirmation;
-        $confirmation->sendNewPassword($email, $password);
-
-        return 'true';
+        $result = $confirmation->sendNewPassword($email, $password);
+        if ($result == true) {
+            echo 'true';
+            return;
+        }
+        echo 'false';
     }
 
     public function registerDevice()
@@ -394,7 +397,7 @@ class account extends Controller
     }
 
     public function superSearch()
-    {   
+    {
         if (AccountManager::isSessionActive() && !(AccountManager::isAdmin())) {
             ErrorsHandler::newError("Unauthorized access to superSearch", 1, false);
             Moderation::flagUser(AccountManager::getMail());
