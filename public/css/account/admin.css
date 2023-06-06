@@ -166,7 +166,7 @@ input[type="checkbox"]:hover + label {
 
 .search.active,
 .search:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     cursor: text;
 }
 
