@@ -262,7 +262,25 @@ class account extends Controller
 
     public function getNewPassword()
     {
-        echo 'function not supported yet :/';
+        $email = $_REQUEST['email'];
+
+        $emailInput = new EmailInput;
+        $emailResult = $emailInput->validate($email);
+
+        if ($emailResult != "") {
+            echo "Invalid email";
+            return;
+        }
+
+        if (!AccountManager::isMailExists($email)) {
+            return true;
+        }
+
+        $password = Password::generateNew($email);
+        $confirmation = new Confirmation;
+        $confirmation->sendNewPassword($email, $password);
+
+        return true;
     }
 
     public function registerDevice()
