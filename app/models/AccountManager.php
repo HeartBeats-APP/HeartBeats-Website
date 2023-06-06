@@ -437,7 +437,7 @@ class Confirmation extends AccountManager
             return "";
 
         } catch (Exception $e) {
-            echo "<script>alert('Couldn't confirm your account, please try again later');</script>";
+            echo "<script>alert('Couldn't confirm send the new password');</script>";
             return "Couldn't confirm your account, please try again later";
         }
 
