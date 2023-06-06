@@ -28,13 +28,7 @@
                 <h5 lang-id="adm_dzs">Danger Zone 💀</h5>
             </div>
 
-            <div class="searchArea">
-                <label class="search" id="search" "inpt_search">
-                    <input id="inpt_search" type="text" oninput="superSearch()"/>
-                </label>
-                <div class="searchResults" id="searchResults">
-                </div>
-            </div>
+
 
             <div class="card security">
                 <div id="security-details" class="card-column">
