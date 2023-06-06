@@ -1,10 +1,14 @@
 <?php
+
+use Google\Service\Appengine\ErrorHandler;
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/InputValidator.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/DeviceManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Moderation.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SearchEngine.php');
 
 class account extends Controller
 {
@@ -16,7 +20,7 @@ class account extends Controller
     }
 
     public function googleAuth()
-    {   
+    {
         $tokenID = $_POST['credential'] ?? null;
 
         if ($tokenID == null) {
@@ -35,21 +39,21 @@ class account extends Controller
             header("Location: /account/login");
             exit();
         }
-        
+
         $result = $GoolgeAuth->setSession($payload['name'], $payload['email'], $payload['email_verified']);
         if (!$result) {
             ErrorsHandler::newError("Google auth : Something went wrong while sign in the user", 1, false);
         }
-        
+
         if (AccountManager::isAdmin()) {
             header("Location: /account/admin");
         } else {
             header("Location: /account/user");
         }
-
     }
 
-    public function isLogedIn(){
+    public function isLogedIn()
+    {
         if (AccountManager::isSessionActive()) {
             echo true;
         } else {
@@ -197,7 +201,7 @@ class account extends Controller
         $confirmation = new Confirmation;
         $token = $confirmation->createConfirmationCode($email);
         $confirmation->sendConfirmationMail($email, $token);
-        
+
         echo true;
     }
 
@@ -258,7 +262,30 @@ class account extends Controller
 
     public function getNewPassword()
     {
-        echo 'function not supported yet :/';
+        $email = $_REQUEST['email'];
+
+        $emailInput = new EmailInput;
+        $emailResult = $emailInput->validate($email);
+
+        if ($emailResult != "") {
+            echo "Invalid email";
+            return;
+        }
+
+        if (!AccountManager::isMailExists($email)) {
+            return 'true';
+        }
+
+        $password = Password::generateNew($email);
+        $confirmation = new Confirmation;
+        $result = $confirmation->sendNewPassword($email, $password);
+        
+        if ($result == "" || $result == true) {
+            echo 'true';
+            return;
+        }
+        
+        echo 'false';
     }
 
     public function registerDevice()
@@ -369,5 +396,21 @@ class account extends Controller
         $data = $databaseManager->getUpdatesInfo();
         $data['title'] = "Updates Center";
         return $data;
+    }
+
+    public function superSearch()
+    {
+        if (AccountManager::isSessionActive() && !(AccountManager::isAdmin())) {
+            ErrorsHandler::newError("Unauthorized access to superSearch", 1, false);
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            exit();
+        }
+
+        $params = $_GET['params'];
+        $searchEngine = new SearchEngine;
+        $result = $searchEngine->search($params);
+
+        echo json_encode($result);
     }
 }

@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="/public/css/account/form-card.css" />
     <link rel="stylesheet" href="/public/css/account/password-recovery.css" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script> 
 
 </head>
 
@@ -56,7 +55,7 @@
                     .email-animation {
                         display: none;
                     }
-                </style>
+                 </style>
                 <!-- Email animation ends here -->
 
                 <div id="buttons-area" class="buttons-area">
