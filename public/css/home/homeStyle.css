@@ -247,7 +247,7 @@
 .adaptive-sound-info-2 {
   width: 100%;
   text-align: center;
-  padding: 2rem;
+  padding: 5rem;
   margin-top: 10rem;
 }
 
@@ -403,7 +403,7 @@
 
   .sensor-container {
     display: grid;
-    margin-top: 22rem;
+    margin-top: 30rem;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 30px;
@@ -451,7 +451,6 @@
   }
 
   .adaptive-sound-info p {
-    margin-left: -1rem;
     font-size: 1.5em;
   }
 
@@ -462,7 +461,7 @@
 
 @media screen and (max-width: 1000px) {
   .overlay-image {
-    visibility: hidden;
+    display: none;
   }
 
   .sensor-box p {
@@ -475,12 +474,8 @@
     margin-top: -10rem;
   }
 
-  .adaptive-sound-content p {
-    margin-left: -8rem;
-  }
-
   .adaptive-sound-image-container {
-    visibility: hidden;
+    display: none;
   }
 
   .adaptive-sound-info-2 {
@@ -495,18 +490,16 @@
 @media screen and (max-width: 1200px) {
   .adaptive-sound-info h1 {
     font-size: 2rem;
-    margin-left: -7rem;
   }
 
   .adaptive-sound-info h2 {
     font-size: 1.5rem;
-    margin-left: -5rem;
   }
 }
 
 @media screen and (max-width: 1300px) {
-  .extra-images {
-    visibility: hidden;
+ .adaptive-sound-image-container {
+    display: none;
   }
 
   .pulse-content {
@@ -515,5 +508,48 @@
 
   .pulse-content p {
     font-size: 1.5rem;
+  }
+
+  .adaptive-sound-info {
+    width: 75%;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .adaptive-sound-image-container {
+    display: none;
+  }
+
+  .adaptive-sound-content {
+    max-width: 1000px;
+  }
+
+  .intro {
+    margin-top: 5rem;
+    margin-bottom: 15rem;
+  }
+
+  .introducing p {
+    margin-top: 10rem;
+  }
+
+  .pulse {
+    margin-bottom: 30rem;
+  }
+
+  .pulse-info {
+    margin-bottom: 30rem;
+  }
+
+  .groundbreaking-part {
+    margin-bottom: 30rem;
+  }
+
+  .adaptive-sound-info-2 {
+    margin-bottom: 30rem;
+  }
+
+  .sensor-container {
+    margin-bottom: 30rem;
   }
 }

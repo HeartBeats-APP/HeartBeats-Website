@@ -176,3 +176,27 @@ button:hover {
 .graph-container.clicked .graph:not(.clicked) {
   opacity: 0; /* Réduire l'opacité des autres graphiques */
 }
+
+@media (max-width: 767px) {
+  .graph.clicked,
+  .top-left.clicked,
+  .top-right.clicked,
+  .bottom-left.clicked,
+  .bottom-right.clicked {
+    transform: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .graph-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+  
+}

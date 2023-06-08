@@ -30,7 +30,7 @@
 
             <div class="searchArea">
                 <label class="search" id="search" "inpt_search">
-                    <input id="inpt_search" type="text" oninput="superSearch()"/>
+                    <input id="inpt_search" type="text" oninput="superSearch()" />
                 </label>
                 <div class="searchResults" id="searchResults">
                 </div>
@@ -111,7 +111,24 @@
         document.addEventListener('click', function(event) {
             toggleSearchExpand();
         });
+
+        // function to toggle fixed class on search bar
+        const search = document.getElementById('search');
+        const searchTop = search.offsetTop;
+
+        window.addEventListener('scroll', () => {
+            const searchBottom = searchTop + search.offsetHeight;
+            const isSearchInView = (searchTop >= window.pageYOffset + 100 && searchBottom <= (window.pageYOffset + window.innerHeight));
+
+            if (!isSearchInView) {
+                search.classList.add('fixed');
+            } else {
+                search.classList.remove('fixed');
+            }
+        });
     </script>
+
+
 
 </body>
 <script src="/public/js/account/user-account.js"></script>

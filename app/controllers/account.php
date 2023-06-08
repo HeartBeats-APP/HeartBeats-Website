@@ -400,7 +400,14 @@ class account extends Controller
 
     public function superSearch()
     {
-        if (AccountManager::isSessionActive() && !(AccountManager::isAdmin())) {
+        if (!AccountManager::isSessionActive()) {
+            ErrorsHandler::newError("Unauthorized access to superSearch", 1, false);
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            exit();
+        }
+
+        if (!(AccountManager::isAdmin())) {
             ErrorsHandler::newError("Unauthorized access to superSearch", 1, false);
             Moderation::flagUser(AccountManager::getMail());
             AccountManager::destroySession();
@@ -412,5 +419,64 @@ class account extends Controller
         $result = $searchEngine->search($params);
 
         echo json_encode($result);
+    }
+
+    public function userAction()
+    {   
+        $action = $_REQUEST['action'] ?? null;
+        $id = $_REQUEST['id'] ?? null;
+
+        if ($action == null || $id == null) {
+            ErrorsHandler::newError("Bad request in userAction:" .  $action . " with id: " .$id, 1, false);
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            exit();
+        }
+
+        if (!AccountManager::isSessionActive()) {
+            ErrorsHandler::newError("Unauthorized access to userAction", 1, false);
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            exit();
+        }
+
+        if (!(AccountManager::isAdmin())) {
+            ErrorsHandler::newError("Unauthorized access to userAction", 1, false);
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            exit();
+        }
+
+        $action = strtolower($action);
+        $userMail = AccountManager::getMailFromId($id);
+
+        switch($action)
+        {
+            case "ban":
+                Moderation::banUser($userMail);
+                echo "OK";
+                exit();
+            case "unban":
+                Moderation::unbanUser($userMail);
+                echo "OK";
+                exit();
+            case "delete":
+                $result = AccountManager::deleteUser($userMail);
+                if ($result == true) {
+                    echo "OK";
+                } else {
+                    echo "Failed to delete the following user: " . $userMail;
+                }
+                exit();
+            case "unflag":
+                Moderation::unflagUser($userMail);
+                echo "OK";
+                exit();
+            default:
+                ErrorsHandler::newError("Bad request in userAction:" .  $action, 1, false);
+                exit();
+        }
+
+        echo "Something went wrong";
     }
 }
