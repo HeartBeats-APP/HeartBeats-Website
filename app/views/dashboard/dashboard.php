@@ -26,8 +26,6 @@
                 <button class="play-button">Play</button>
                 <button class="pause-button">Pause</button>
                 <button class="next-button">Next</button>
-                <button class="like-button">Like</button>
-                <button class="dislike-button">Dislike</button>
             </div>
         </div>
 
