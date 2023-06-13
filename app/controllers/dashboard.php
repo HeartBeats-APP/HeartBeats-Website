@@ -19,9 +19,16 @@ class dashboard extends Controller
     public function getData()
     {
         $sensor = $_REQUEST['sensor'];
-        
-        $sensors = new SensorsManager();
-        $sensors->getLogs();
-        echo $sensors->getSensorData($sensor);
+        $refresh = $_REQUEST['refresh'];
+
+        $sensorsManager = new SensorsManager();
+        if ($refresh) {
+            $sensorsManager->getLogs();
+        }
+
+        if ($sensor) {
+            $sensorDatas = $sensorsManager->getSensorData($sensor);
+            echo $sensorDatas;
+        }
     }
 }

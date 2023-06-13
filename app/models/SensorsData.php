@@ -1,79 +1,59 @@
 <?php
 require_once "connect.php";
-require_once "ErrorsHandler.php";
 
 /**
- * The SensorsManager class retrieves data from ISEP server, processes the raw data received, and stores it in a local database.
- * This class is used to fetch logs, store sensor data, and get sensor data by type for further processing.
+ * Class SensorsManager
  *
- * Constants to change:
- *  TEAM_NUMBER : Identifies the team number associated with the data. (string)
- *  SENSORS_MAP : An associative array containing sensor types mapped to their respective sensor IDs. (array)
+ * This class manages sensor data fetching from ISEP server and accessing or storing the data in a database. Supports sensor types
+ * "sound", "bpm", "humidity" and "temperature".
  *
- * Methods:
- *  getLogs() : Fetches the logs from the ISEP server and processes them. (array)
- *  storeUsefullLogs($sensorID, $value, $date) : Stores a sensor entry in the database. (void)
- *  getSensorData($sensorType) : Returns JSON encoded array containing values of a specific sensor type. (string) * @throws Exception when invalid sensor type is provided.
+ * Main methods:
+ * - getLogs(): Fetches sensor data logs from ISEP server, processes them and inserts non-duplicate entries into the database.
+ * - getSensorData($sensorType): Returns an array of sensor data values for the given sensor type, sorted by date.
+ *
+ * Constants:
+ * - TEAM_NUMBER: Defines the team number that identifies the sensor data originating from this team.
+ * - SENSORS_MAP: Maps sensor types to their respective numerical IDs.
  */
-
-
 class SensorsManager
 {
     const TEAM_NUMBER = "0008";
     const SENSORS_MAP = ["sound" => 1, "bpm" => 2, "hum" => 3, "temp" => 4];
+    private $conn;
 
     public function getLogs()
     {
+
         try {
-            $ch = curl_init();
-            curl_setopt(
-                $ch,
-                CURLOPT_URL,
-                "http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=" . self::TEAM_NUMBER);
-            curl_setopt($ch, CURLOPT_HEADER, FALSE);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            $logs = curl_exec($ch);
-            curl_close($ch);
+            $logs = file_get_contents("http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=" . self::TEAM_NUMBER);
         } catch (Exception $e) {
-            ErrorsHandler::newError("Failed to fetch data from ISEP server : " . $e->getMessage() . ". Please check that ISEP correctly opened port 22 👀👀", 1, true);
+            echo "Failed to fetch data from ISEP server : " . $e->getMessage() . ". Please check that ISEP correctly opened port 22 👀👀", 1, true;
         }
 
-        echo 'logs';
-        var_dump($logs);
+        if (!$logs) {
+            echo "Failed to fetch data from ISEP server. Please check that ISEP correctly opened port 22 👀👀", 1, true;
+        }
 
-        $data_tab = str_split($logs, 33);
-        $trame = $data_tab[1];
-        $result = sscanf($trame, "%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
+        // The frame size is inconsistent, therefore the provided code from ISEP is not reliable. We need to identify the pattern where each frame begins with the number 1 followed by our team number. By utilizing this pattern, we can effectively locate the desired frame.
+        $pattern = '/1' . self::TEAM_NUMBER . '.*?(?=1' . self::TEAM_NUMBER . '|$)/s';
+        preg_match_all($pattern, $logs, $matches);
+        $foundFrames = $matches[0];
 
-        exit();
+        $this->openDbConnection();
+        foreach ($foundFrames as $frame) {
+            $sensorInfos = $this->processFrame($frame);
+            if ($sensorInfos) {
+                $this->insertInfosInDb($sensorInfos[0], $sensorInfos[1], $sensorInfos[2]);
+            }
+        }
+        $this->closeDbConnection();
 
-        $data = [
-            'frame' => $result[0], #type de trame : 1 = trame courante, 2 = trame rapide
-            'object' => $result[1], #numéro d'équipe
-            'type' => $result[2], #type de requète : 1 = récupérer la donnée d’un capteur, 2 = envoyer une commande à un effecteur
-            'sensorID' => $result[3], #type de capteur
-            'sensorNumber' => $result[4], #numéro du capteur : toujours 01
-            'value' => hexdec($result[5]), # valeur du capteur (convertie de hex a dec)
-            'frameID' => $result[6], #numero de la trame
-            'checksum' => $result[7], #checksum (useless)
-        ];
-
-        $dateString = $result[10] . "-" . $result[9] . "-" . $result[8] . " " . $result[11] . ":" . $result[12] . ":" . $result[13] . "GMT";
-        $date = date_create($dateString);
-        $data["date"] = $date;
-
-        $this->storeUsefullLogs($data["sensorID"], $data["value"], $data["date"]);
-        return $data;
-    }
-
-    private function storeUsefullLogs($sensorID, $value, $date)
-    {
-        database_query("INSERT INTO sensorsData (`sensorID`, `value`, `date`) VALUES ($sensorID, $value, '$date')");
     }
 
     public function getSensorData($sensorType)
     {
         if (!isset(self::SENSORS_MAP[$sensorType])) return json_encode("Invalid sensor type");
+
 
         $sensorID = self::SENSORS_MAP[$sensorType];
         $results = database_query("SELECT `value` FROM sensorsData WHERE `sensorID` = $sensorID ORDER BY `date` ASC");
@@ -83,6 +63,95 @@ class SensorsManager
             $values[] = $result['value'];
         }
         return json_encode($values);
+    }
+
+    private function processFrame($frame)
+    {
+        $data = sscanf($frame, "%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
+        $sensorValue = hexdec($data[5]);
+        $sensorID = $data[3];
+
+        if ($data[0] != "1" && $data[0] != "2") {
+            return null;
+        }
+
+        if ($data[1] != self::TEAM_NUMBER) {
+            return null;
+        }
+
+        if ($data[2] != "1") {
+            return null;
+        }
+
+        if ($this->isDateCorrect($data[8], $data[9], $data[10], $data[11], $data[12], $data[13])) {
+            $date = date_create($data[8] . "-" . $data[9] . "-" . $data[10] . " " . $data[11] . ":" . $data[12] . ":" . $data[13]);
+        } else {
+            $date = new DateTime();
+        }
+
+        if ($sensorValue <= 0) {
+            return null;
+        }
+
+        return [$sensorID, $sensorValue, $date];
+    }
+
+    private function insertInfosInDb($sensorID, $value, $date)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM sensorsData WHERE sensorID = :sensorID AND value = :value AND date = :date");
+        $stmt->bindParam(':sensorID', $sensorID, PDO::PARAM_INT);
+        $stmt->bindParam(':value', $value, PDO::PARAM_INT);
+        $stmt->bindParam(':date', $date->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 0) {
+            $stmt = $this->conn->prepare("INSERT INTO sensorsData (sensorID, value, date) VALUES (:sensorID, :value, :date)");
+            $stmt->bindParam(':sensorID', $sensorID, PDO::PARAM_INT);
+            $stmt->bindParam(':value', $value, PDO::PARAM_INT);
+            $stmt->bindParam(':date', $date->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+            $stmt->execute();
+        }
+    }
+
+    private function openDbConnection()
+    {
+        $host = getenv('DB_HOST');
+        $username = getenv('DB_USERNAME');
+        $password = getenv('DB_PASSWORD');
+        $dbname = getenv('DB_NAME');
+
+        try {
+            $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Database connexion failed :/ " . $e->getMessage());
+        }
+        $this->conn = $conn;
+    }
+
+    private function closeDbConnection()
+    {
+        $this->conn = null;
+    }
+
+    private function isDateCorrect($year, $month, $day, $hours, $min, $seconds)
+    {
+        // Check if any of the date/time values are null
+        if ($year === null || $month === null || $day === null || $hours === null || $min === null || $seconds === null) {
+            return false; // At least one value is null
+        }
+
+        // Check if the date is valid using checkdate()
+        if (!checkdate($month, $day, $year)) {
+            return false; // Invalid date
+        }
+
+        // Check if the time is valid
+        if ($hours < 0 || $hours > 23 || $min < 0 || $min > 59 || $seconds < 0 || $seconds > 59) {
+            return false; // Invalid time
+        }
+
+        return true; // Date is not null and correct
     }
 
 }

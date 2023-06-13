@@ -145,9 +145,10 @@ async function getSensorsData(sensor) {
                 try {
                     answer = JSON.parse(this.responseText);
                     console.log('%cJSON received!', 'color:green;background-color:#edfff0;');
-
+                    console.log(answer);
+                    
                 } catch (e) {
-                    alert(this.responseText);
+                    console.log(this.responseText)
                     serverConnection = false;
                     reject("Error while parsing JSON");
                 }
