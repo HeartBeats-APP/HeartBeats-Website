@@ -68,9 +68,15 @@ class SensorsManager
     public function sendFrame($frame)
     {
         try {
-            file_get_contents("http://projets-tomcat.isep.fr:8080/appService?ACTION=COMMAND&TEAM=" . self::TEAM_NUMBER . "&TRAME=" . $frame);
+             $result = file_get_contents("http://projets-tomcat.isep.fr:8080/appService?ACTION=COMMAND&TEAM=" . self::TEAM_NUMBER . "&TRAME=" . $frame);
         } catch (Exception $e) {
             echo "Failed to send data to ISEP server : " . $e->getMessage();
+            return false;
+        }
+        
+        $result = trim($result);
+        if ($result != "Commande envoyée") {
+            echo "Data was not processed by ISEP server : " . $result;
             return false;
         }
         return true;
@@ -84,7 +90,7 @@ class SensorsManager
         $sensorNumber = "00";
         $value = str_pad($action, 4, "0", STR_PAD_LEFT);
 
-        $frameNumber = database_query("SELECT `id` FROM `sensorsData` ORDER BY `id` DESC LIMIT 1")[0]['id'];
+        $frameNumber = database_query("SELECT `id` FROM `sensorsData` ORDER BY `id` DESC ")[0]['id'];
         $frameNumber = $frameNumber + 1;
         $frameNumber = str_pad($frameNumber, 4, "0", STR_PAD_LEFT);
 

@@ -17,7 +17,6 @@ function sendHeadsetMode() {
     }
   }
 
-  //create a new http request
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
@@ -25,17 +24,19 @@ function sendHeadsetMode() {
     true
   );
   xhr.onloadend = function () {
-    console.log(xhr.responseText);
     if (xhr.status == 200) {
       switch (xhr.responseText) {
         case "1":
           document.getElementById("radio1").checked = true;
+          logSuccess();
           break;
         case "2":
           document.getElementById("radio2").checked = true;
+          logSuccess();
           break;
         case "3":
           document.getElementById("radio3").checked = true;
+          logSuccess();
           break;
         default:
           alert("Error: " + xhr.responseText);
@@ -45,4 +46,11 @@ function sendHeadsetMode() {
     }
   };
   xhr.send();
+}
+
+function logSuccess() {
+  console.log(
+    "%c Command successfully sent ✅",
+    "background: #ebffe8; color: green"
+  );
 }

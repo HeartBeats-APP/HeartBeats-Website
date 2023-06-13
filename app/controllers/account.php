@@ -496,12 +496,9 @@ class account extends Controller
         $sensorsManager = new SensorsManager();
         $frame = $sensorsManager->createFrame($mode);
         $result = $sensorsManager->sendFrame($frame);
-        echo $frame ;
-        if (!$result) {
-            echo 0;
-            exit();
+        if ($result) {
+            echo $mode;
         }
 
-        echo $mode;
     }
 }
