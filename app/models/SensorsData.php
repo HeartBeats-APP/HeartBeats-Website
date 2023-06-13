@@ -1,4 +1,5 @@
 <?php
+require_once('connect.php');
 
 /**
  * Class SensorsManager
@@ -14,6 +15,7 @@
  * - TEAM_NUMBER: Defines the team number that identifies the sensor data originating from this team.
  * - SENSORS_MAP: Maps sensor types to their respective numerical IDs.
  */
+
 class SensorsManager
 {
     const TEAM_NUMBER = "0008";
@@ -26,11 +28,11 @@ class SensorsManager
         try {
             $logs = file_get_contents("http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=" . self::TEAM_NUMBER);
         } catch (Exception $e) {
-            echo "Failed to fetch data from ISEP server : " . $e->getMessage() . ". Please check that ISEP correctly opened port 22 👀👀", 1, true;
+            echo "Failed to fetch data from ISEP server : " . $e->getMessage() . ". Please check that ISEP correctly opened port 22 👀👀";
         }
 
         if (!$logs) {
-            echo "Failed to fetch data from ISEP server. Please check that ISEP correctly opened port 22 👀👀", 1, true;
+            echo "Failed to fetch data from ISEP server. Please check that ISEP correctly opened port 22 👀👀";
         }
 
         // The frame size is inconsistent, therefore the provided code from ISEP is not reliable. We need to identify the pattern where each frame begins with the number 1 followed by our team number. By utilizing this pattern, we can effectively locate the desired frame.
@@ -46,7 +48,6 @@ class SensorsManager
             }
         }
         $this->closeDbConnection();
-
     }
 
     public function getSensorData($sensorType)
@@ -62,6 +63,34 @@ class SensorsManager
             $values[] = $result['value'];
         }
         return json_encode($values);
+    }
+
+    public function sendFrame($frame)
+    {
+        try {
+            file_get_contents("http://projets-tomcat.isep.fr:8080/appService?ACTION=COMMAND&TEAM=" . self::TEAM_NUMBER . "&TRAME=" . $frame);
+        } catch (Exception $e) {
+            echo "Failed to send data to ISEP server : " . $e->getMessage();
+            return false;
+        }
+        return true;
+    }
+
+    public function createFrame($action)
+    {   
+        $frameType = "1";
+        $requestType = "2";
+        $sensorID = "0";
+        $sensorNumber = "00";
+        $value = str_pad($action, 4, "0", STR_PAD_LEFT);
+
+        $frameNumber = database_query("SELECT `id` FROM `sensorsData` ORDER BY `id` DESC LIMIT 1")[0]['id'];
+        $frameNumber = $frameNumber + 1;
+        $frameNumber = str_pad($frameNumber, 4, "0", STR_PAD_LEFT);
+
+        $checksum = "00";
+
+        return $frameType . self::TEAM_NUMBER . $requestType . $sensorID . $sensorNumber . $value . $frameNumber . $checksum;
     }
 
     private function processFrame($frame)
@@ -145,10 +174,9 @@ class SensorsManager
 
 
         if ($hours < 0 || $hours > 23 || $min < 0 || $min > 59 || $seconds < 0 || $seconds > 59) {
-            return false; 
+            return false;
         }
 
-        return true; 
+        return true;
     }
-
 }
