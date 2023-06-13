@@ -1,5 +1,4 @@
 <?php
-require_once "connect.php";
 
 /**
  * Class SensorsManager
@@ -136,22 +135,20 @@ class SensorsManager
 
     private function isDateCorrect($year, $month, $day, $hours, $min, $seconds)
     {
-        // Check if any of the date/time values are null
         if ($year === null || $month === null || $day === null || $hours === null || $min === null || $seconds === null) {
             return false; // At least one value is null
         }
 
-        // Check if the date is valid using checkdate()
         if (!checkdate($month, $day, $year)) {
             return false; // Invalid date
         }
 
-        // Check if the time is valid
+
         if ($hours < 0 || $hours > 23 || $min < 0 || $min > 59 || $seconds < 0 || $seconds > 59) {
-            return false; // Invalid time
+            return false; 
         }
 
-        return true; // Date is not null and correct
+        return true; 
     }
 
 }
