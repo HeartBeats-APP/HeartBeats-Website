@@ -120,7 +120,7 @@
                         </div>
                     </div>
 
-                    <div class="toggle-container">
+                    <div class="toggle-container" id="headsetMode" onclick="sendHeadsetMode()">
                         <input type="radio" id="radio1" name="toggle" value="1" style="--selected: 1">
                         <label for="radio1" lang-id="usr_dcb">Battery Saver</label>
                         <input type="radio" id="radio2" name="toggle" value="2" style="--selected: 2" checked>
@@ -132,10 +132,12 @@
                 </div>
             </div>
         </div>
+        
     </div>
-
+    
 </body>
 <script src="/public/js/account/user-account.js"></script>
+<script src="/public/js/account/user.js"></script>
 <script>
     var data = <?php echo json_encode($data); ?>;
 

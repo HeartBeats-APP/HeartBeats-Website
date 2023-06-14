@@ -56,7 +56,7 @@
     </div>
 </main>
 
-<script src="public/js/dashboard/dashboard-script.js"></script>
+<script src="/public/js/dashboard/dashboard-script.js"></script>
 <script src="/public/js/components/translation.js"></script>
 
 </html>

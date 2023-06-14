@@ -4,6 +4,7 @@ services:
     container_name: db-staging
     image: mariadb:10.11.3
     restart: always
+    command: [ "--max_connections=1000" ]
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
@@ -13,6 +14,7 @@ services:
       - "3300:3306"
     volumes:
       - ./dump:/docker-entrypoint-initdb.d
+      - ./config:/etc/mysql/conf.d/my.cnf
       - db-staging:/var/lib/mariadb/data
 
   website-staging:

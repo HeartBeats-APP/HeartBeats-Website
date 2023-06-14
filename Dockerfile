@@ -25,4 +25,4 @@ RUN service apache2 restart
 
 # Install curl libraries
 RUN apt-get install -y curl && apt-get clean -y
-RUN service apache2 restart🐋
+RUN service apache2 restart

@@ -248,7 +248,6 @@ function switchLanguage() {
 }
 function updateText() {
     let lang = localStorage.getItem('language')
-    console.log("Refreshing text to " + lang);
     const elements = document.querySelectorAll('[lang-id]');
     elements.forEach(element => {
         const key = element.getAttribute('lang-id');

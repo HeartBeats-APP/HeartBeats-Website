@@ -9,6 +9,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Moderation.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SearchEngine.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SensorsData.php');
 
 class account extends Controller
 {
@@ -478,5 +479,26 @@ class account extends Controller
         }
 
         echo "Something went wrong";
+    }
+    
+    public function toggleHeadsetMode()
+    {   
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            ErrorsHandler::newError("Unauthorized access to toggleHeadsetMode", 1, false);
+            Moderation::flagUser(AccountManager::getMail());
+            AccountManager::destroySession();
+            echo 0;
+            exit();
+        }
+
+        $mode = $_REQUEST['headsetMode'] ?? null;
+
+        $sensorsManager = new SensorsManager();
+        $frame = $sensorsManager->createFrame($mode);
+        $result = $sensorsManager->sendFrame($frame);
+        if ($result) {
+            echo $mode;
+        }
+
     }
 }
