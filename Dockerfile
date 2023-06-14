@@ -26,6 +26,3 @@ RUN service apache2 restart
 # Install curl libraries
 RUN apt-get install -y curl && apt-get clean -y
 RUN service apache2 restart
-
-FROM mariadb:10.11.3
-CMD [ "--max_connections=10000" ]
