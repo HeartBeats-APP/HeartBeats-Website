@@ -84,7 +84,7 @@
                     </div>
                     <div id="buttons-row" class="card-row">
                         <button onclick="deleteDevice()" id="remove-button" class="main-button" lang-id="usr_drm">Remove</button>
-                        <button class="secondary-button" lang-id="usr_dci">Copy Infos</button>
+                        <button class="secondary-button" onclick="refreshData()" lang-id="usr_dci">Refresh</button>
                     </div>
                 </div>
 

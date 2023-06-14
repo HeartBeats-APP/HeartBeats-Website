@@ -28,18 +28,18 @@ function sendHeadsetMode() {
       switch (xhr.responseText) {
         case "1":
           document.getElementById("radio1").checked = true;
-          logSuccess();
+          logSuccess("Command successfully sent");
           break;
         case "2":
           document.getElementById("radio2").checked = true;
-          logSuccess();
+          logSuccess("Command successfully sent");
           break;
         case "3":
           document.getElementById("radio3").checked = true;
-          logSuccess();
+          logSuccess("Command successfully sent");
           break;
         default:
-          alert("Error: " + xhr.responseText);
+          logError(xhr.responseText);
           document.getElementById("radio2").checked = true;
           break;
       }
@@ -48,9 +48,35 @@ function sendHeadsetMode() {
   xhr.send();
 }
 
-function logSuccess() {
+function refreshData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "POST",
+    "/account/refreshData?",
+    true
+  );
+  xhr.onloadend = function () {
+    if (xhr.status == 200) {
+      if (xhr.responseText == "OK") {
+        logSuccess("Data successfully refreshed");
+      } else {
+        logError(xhr.responseText);
+      }
+    }
+  };
+  xhr.send();
+}
+
+function logSuccess(message) {
   console.log(
-    "%c Command successfully sent ✅",
+    "%c ✅" + message ,
     "background: #ebffe8; color: green"
+  );
+}
+
+function logError(message) {
+  console.log(
+    "%c ❌" + message,
+    "background: #ffe8e8; color: red"
   );
 }

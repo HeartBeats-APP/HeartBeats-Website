@@ -9,7 +9,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/ErrorsHandler.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/QAManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/Moderation.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SearchEngine.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SensorsData.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SensorsManager.php');
 
 class account extends Controller
 {
@@ -499,6 +499,13 @@ class account extends Controller
         if ($result) {
             echo $mode;
         }
+    }
 
+    public function refreshData()
+    {
+        $sensorsManager = new SensorsManager();
+        $result = $sensorsManager->getLogs();
+
+        echo $result ;
     }
 }

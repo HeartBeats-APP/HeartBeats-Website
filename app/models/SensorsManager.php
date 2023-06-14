@@ -28,11 +28,11 @@ class SensorsManager
         try {
             $logs = file_get_contents("http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=" . self::TEAM_NUMBER);
         } catch (Exception $e) {
-            echo "Failed to fetch data from ISEP server : " . $e->getMessage() . ". Please check that ISEP correctly opened port 22 👀👀";
+            return "Failed to fetch data from ISEP server : " . $e->getMessage() . ". Please check that ISEP correctly opened port 22 👀👀";
         }
 
         if (!$logs) {
-            echo "Failed to fetch data from ISEP server. Please check that ISEP correctly opened port 22 👀👀";
+            return "Failed to fetch data from ISEP server. Please check that ISEP correctly opened port 22 👀👀";
         }
 
         // The frame size is inconsistent, therefore the provided code from ISEP is not reliable. We need to identify the pattern where each frame begins with the number 1 followed by our team number. By utilizing this pattern, we can effectively locate the desired frame.
@@ -48,6 +48,7 @@ class SensorsManager
             }
         }
         $this->closeDbConnection();
+        return "OK";
     }
 
     public function getSensorData($sensorType)
