@@ -52,7 +52,7 @@ function refreshData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    "/account/refreshData?",
+    "/account/refreshData",
     true
   );
   xhr.onloadend = function () {
@@ -62,6 +62,8 @@ function refreshData() {
       } else {
         logError(xhr.responseText);
       }
+    } else {
+      logError(xhr.responseText);
     }
   };
   xhr.send();
