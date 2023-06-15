@@ -484,10 +484,7 @@ class account extends Controller
     public function toggleHeadsetMode()
     {   
         if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
-            ErrorsHandler::newError("Unauthorized access to toggleHeadsetMode", 1, false);
-            Moderation::flagUser(AccountManager::getMail());
-            AccountManager::destroySession();
-            echo 0;
+            echo "You are not authorized to access this page";
             exit();
         }
 
@@ -503,6 +500,11 @@ class account extends Controller
 
     public function refreshData()
     {
+        if (!AccountManager::isSessionActive() || !AccountManager::isAdmin()) {
+            echo "You are not authorized to access this page";
+            exit();
+        }
+
         $sensorsManager = new SensorsManager();
         $result = $sensorsManager->getLogs();
 

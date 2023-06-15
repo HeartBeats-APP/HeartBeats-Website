@@ -50,11 +50,7 @@ function sendHeadsetMode() {
 
 function refreshData() {
   var xhr = new XMLHttpRequest();
-  xhr.open(
-    "POST",
-    "/account/refreshData",
-    true
-  );
+  xhr.open("POST", "/account/refreshData", true);
   xhr.onloadend = function () {
     if (xhr.status == 200) {
       if (xhr.responseText == "OK") {
@@ -70,15 +66,9 @@ function refreshData() {
 }
 
 function logSuccess(message) {
-  console.log(
-    "%c ✅" + message ,
-    "background: #ebffe8; color: green"
-  );
+  console.log("%c ✅" + message, "background: #ebffe8; color: green");
 }
 
 function logError(message) {
-  console.log(
-    "%c ❌" + message,
-    "background: #ffe8e8; color: red"
-  );
+  console.log("%c ❌" + message, "background: #ffe8e8; color: red");
 }
