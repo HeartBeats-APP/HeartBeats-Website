@@ -23,17 +23,9 @@
                 <div class="progress-bar"></div>
             </div>
             <div class="dashboard-controls">
-                <div>
-                    <button class="play-button">Play</button>
-                    <button class="pause-button">Pause</button>
-                </div>
-                <div>
-                    <button class="next-button">Next</button>
-                </div>
-                <div>
-                    <button class="like">Like</button>
-                    <button class="dislike">Dislike</button>
-                </div>
+                <button class="play-button">Play</button>
+                <button class="pause-button">Pause</button>
+                <button class="next-button">Next</button>
             </div>
         </div>
 
@@ -65,7 +57,6 @@
 </main>
 
 <script src="/public/js/dashboard/dashboard-script.js"></script>
-<script src="public/js/dashboard/opinion-script.js"></script>
 <script src="/public/js/components/translation.js"></script>
 
 </html>
