@@ -1,6 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/AccountManager.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SensorsData.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/app/models/SensorsManager.php');
 
 class dashboard extends Controller
 {
