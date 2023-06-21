@@ -88,7 +88,7 @@ class SensorsManager
         $frameType = "1";
         $requestType = "2";
         $sensorID = "0";
-        $sensorNumber = "00";
+        $sensorNumber = "01";
         $value = str_pad($action, 4, "0", STR_PAD_LEFT);
 
         $checksum = "11";
