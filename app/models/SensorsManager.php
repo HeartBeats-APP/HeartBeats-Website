@@ -18,7 +18,7 @@ require_once('connect.php');
 
 class SensorsManager
 {
-    const TEAM_NUMBER = "0008";
+    const TEAM_NUMBER = "GG8E";
     const SENSORS_MAP = ["sound" => 1, "bpm" => 2, "hum" => 3, "temp" => 4];
     private $conn;
 
