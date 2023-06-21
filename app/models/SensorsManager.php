@@ -91,13 +91,9 @@ class SensorsManager
         $sensorNumber = "00";
         $value = str_pad($action, 4, "0", STR_PAD_LEFT);
 
-        $frameNumber = database_query("SELECT `id` FROM `sensorsData` ORDER BY `id` DESC ")[0]['id'];
-        $frameNumber = $frameNumber + 1;
-        $frameNumber = str_pad($frameNumber, 4, "0", STR_PAD_LEFT);
+        $checksum = "11";
 
-        $checksum = "00";
-
-        return $frameType . self::TEAM_NUMBER . $requestType . $sensorID . $sensorNumber . $value . $frameNumber . $checksum;
+        return $frameType . self::TEAM_NUMBER . $requestType . $sensorID . $sensorNumber . $value . $checksum;
     }
 
     private function processFrame($frame)
