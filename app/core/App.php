@@ -40,7 +40,7 @@ class App
             $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
 
             //If the first element of the url is empty, remove it
-            if ($url[0] == 'public' || $url[0] == "" || $url[0] == "Public") {
+            if ($url[0] == 'public' || $url[0] == "" || $url[0] == "Public" || $url[0] == "env" || $url[0] == "Env") {
                 unset($url[0]);
             }
             return $url;

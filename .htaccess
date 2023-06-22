@@ -19,23 +19,3 @@ RewriteRule ^(.+)$ public/index.php?url=$1 [QSA,L]
     Order allow,deny
     Deny from all
 </Files>
-
-<Files docker-compose.yml>
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files Dockerfile>
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files composer.json>
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files composer.lock>
-    Order allow,deny
-    Deny from all
-</Files>
