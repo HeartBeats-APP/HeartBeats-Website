@@ -1,3 +1,4 @@
+Options -Indexes
 Options -MultiViews
 RewriteEngine On
 
@@ -8,8 +9,3 @@ RewriteRule ^$ public/ [L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ public/index.php?url=$1 [QSA,L]
-
-<Files .env>
-    Order allow,deny
-    Deny from all
-</Files>
