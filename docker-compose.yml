@@ -4,7 +4,7 @@ services:
     container_name: db-staging
     image: mariadb:10.11.3
     restart: always
-    command: [ "--max_connections=1000" ]
+    command: "--max_connections=1000"
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
@@ -65,9 +65,11 @@ services:
     command: install
 
   metabase-staging:
-    image: metabase/metabase
     container_name: metabase
-    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-metabase
+    restart: on-failure
     ports:
       - 4202:3000
     environment:
@@ -77,8 +79,10 @@ services:
       - MB_DB_USER=${DB_USERNAME}
       - MB_DB_PASS=${DB_PASSWORD}
       - MB_DB_HOST=db-staging
+      - MB_ADMIN_EMAIL=${MAIL_ACCOUNT}
+      - MB_ADMIN_PASSWORD=${MAIL_PASSWORD}
     volumes:
-      - db-staging:/var/lib/mariadb/data
+      - db-staging:/var/lib/mysql
     depends_on:
       - db-staging
     links:
