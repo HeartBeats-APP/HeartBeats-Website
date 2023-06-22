@@ -36,8 +36,6 @@ services:
       ENV_VERSION: ${ENV_VERSION}
       ADMIN_CREDENTIALS: ${ADMIN_CREDENTIALS}
       FORBIDDEN_NAMES: ${FORBIDDEN_NAMES}
-      G_AUTH_ID: ${G_AUTH_ID}
-      G_AUTH_SECRET: ${G_AUTH_SECRET}
       MAIL_ACCOUNT: ${MAIL_ACCOUNT}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
     ports:
@@ -65,6 +63,26 @@ services:
     environment:
       - COMPOSER_PROCESS_TIMEOUT=2000
     command: install
+
+  metabase-staging:
+    image: metabase/metabase
+    container_name: metabase
+    restart: always
+    ports:
+      - 4202:3000
+    environment:
+      - MB_DB_TYPE=mysql
+      - MB_DB_DBNAME=${DB_NAME}
+      - MB_DB_PORT=3306
+      - MB_DB_USER=${DB_USERNAME}
+      - MB_DB_PASS=${DB_PASSWORD}
+      - MB_DB_HOST=db-staging
+    volumes:
+      - db-staging:/var/lib/mariadb/data
+    depends_on:
+      - db-staging
+    links:
+      - db-staging
 
 volumes:
   db-staging:
