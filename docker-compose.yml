@@ -75,19 +75,18 @@ services:
     environment:
       - MB_DB_TYPE=mysql
       - MB_DB_DBNAME=${DB_NAME}
-      - MB_DB_PORT=3300
+      - MB_DB_PORT=3306
       - MB_DB_USER=${DB_USERNAME}
       - MB_DB_PASS=${DB_PASSWORD}
       - MB_DB_HOST=db-staging
+      - MB_DB_FILE=/metabase-data/metabase.db
       - MB_ADMIN_EMAIL=${MAIL_ACCOUNT}
       - MB_ADMIN_PASSWORD=${MAIL_PASSWORD}
     volumes:
-      - db-staging:/var/lib/mariadb/data
-      - ./dump:/docker-entrypoint-initdb.d
+      - metabase-data:/metabase-data
     depends_on:
-      - db-staging
-    links:
       - db-staging
 
 volumes:
   db-staging:
+  metabase-data:
