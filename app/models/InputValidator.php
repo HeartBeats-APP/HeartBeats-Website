@@ -81,7 +81,7 @@ class EmailInput extends InputValidator
 
 class PasswordInput extends InputValidator
 {
-    public function validate($input, $passwordScore = 5)
+    public function validate($input, $passwordScore)
     {
         if (self::isEmpty($input)) {
             return self::EMPTY_ERROR;
